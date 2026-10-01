@@ -34,7 +34,7 @@ public class LevelUIHandler : MonoBehaviour {
 
     void Awake()
     {
-        _player = Player.Instance;
+        _player = Game.Player;
     }
 
     void UpdateHealthBar(int current, int max) {

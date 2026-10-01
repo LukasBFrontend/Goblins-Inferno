@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d8c51e2ddab29c42814cb06ce7f69a3, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponPrefab: {fileID: 7504358521597736526, guid: 1324ddb25a537684abca2342d752cbab, type: 3}
+  weaponModelPrefab: {fileID: 34220917603275928, guid: fd9afbc0c66b82c49b6c1ac5022bf845, type: 3}
   weaponName: Sword
   weaponType: 0
   stats:

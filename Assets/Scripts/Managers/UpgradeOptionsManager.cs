@@ -48,8 +48,8 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
     {
         _currentOptions.Clear();
 
-        var characterStats = Player.Instance.Stats.CharacterModifiers.All();
-        var weaponsStats = Player.Instance.Stats.WeaponsModifiers;
+        var characterStats = Game.Player.Stats.CharacterModifiers.All();
+        var weaponsStats = Game.Player.Stats.WeaponsModifiers;
 
         foreach (var (weaponName, weaponStats) in weaponsStats)
         {

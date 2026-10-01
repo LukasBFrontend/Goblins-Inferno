@@ -10,20 +10,51 @@ public class Weapons : MonoBehaviour
     public HashSet<SO_WeaponData> AvailableWeapons => _availableWeapons;
     HashSet<SO_WeaponData> _availableWeapons;
     HashSet<SO_WeaponData> _unlockedWeapons;
-    Dictionary<string, GameObject> _weaponObjectLookup;
+    Dictionary<string, GameObject> _weaponObjectLookup = new();
+    float _lastAttackTime;
 
     void Awake()
     {
         _availableWeapons =  weaponsConfig.availableWeapons.ToHashSet();
         _unlockedWeapons = new (){ _availableWeapons.First() };
+        _lastAttackTime = 0;
     }
 
     void Start()
     {
         foreach(SO_WeaponData weapon in _unlockedWeapons)
         {
-            weapon.Spawn(weaponParent, this);
+           _weaponObjectLookup.Add(weapon.name, weapon.Spawn(weaponParent));
         }
+    }
+
+    void Update()
+    {
+        Attack();
+    }
+
+    void Attack()
+    {
+        if (Time.time <= Game.Player.Stats.AttackCooldown + _lastAttackTime)
+        {
+            return;
+        }
+
+        var closestEnemy = Utils.ClosestEnemy(Game.Player);
+
+        Vector3 attackDir = closestEnemy != null
+            ? Game.Player.DirectionTo(closestEnemy)
+            : Utils.RandomDirection()
+        ;
+
+        float rotation = Mathf.Atan2(attackDir.x, attackDir.z);
+        weaponParent.rotation = Quaternion.Euler(new (0, Mathf.Rad2Deg * rotation + 90 , 0));
+
+        foreach(var weapon in _unlockedWeapons)
+        {
+            weapon.Attack();
+        }
+        _lastAttackTime = Time.time;
     }
 
     public void Unlock(string weaponName)

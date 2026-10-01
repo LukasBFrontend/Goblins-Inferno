@@ -16,7 +16,7 @@ public class PlayingState : BaseState
 
     public override void UpdateState()
     {
-        Player.Instance.Movement.SetInput(_move.ReadValue<Vector2>());
+        Game.Player.Movement.SetInput(_move.ReadValue<Vector2>());
         CheckSwitchStates();
     }
 

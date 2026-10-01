@@ -15,6 +15,6 @@ public class WeaponUnlockOption : UpgradeOption
 
     public override void Select()
     {
-        Player.Instance.Weapons.Unlock(WeaponName);
+        Game.Player.Weapons.Unlock(WeaponName);
     }
 }

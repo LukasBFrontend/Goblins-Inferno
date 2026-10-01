@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GameInputActions : MonoBehaviour
+public class GameInputActions : Singleton<GameInputActions>
 {
     [SerializeField] InputActionReference move;
     [SerializeField] InputActionReference togglePause;

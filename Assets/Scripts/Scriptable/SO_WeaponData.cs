@@ -20,7 +20,7 @@ public struct WeaponStatsData
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Weapons/WeaponData")]
 public class SO_WeaponData : ScriptableObject
 {
-    [SerializeField] GameObject weaponPrefab;
+    [SerializeField] GameObject weaponModelPrefab;
     [SerializeField] string weaponName;
     [SerializeField] WeaponType weaponType;
     [SerializeField] WeaponStatsData stats;
@@ -30,47 +30,66 @@ public class SO_WeaponData : ScriptableObject
     [SerializeField] GameObject projectilePrefab;
     public string WeaponName => weaponName;
     public WeaponStatsData Stats => stats;
-    MonoBehaviour _activeMonoBehavior;
     List<Enemy> _targetsInRange;
-    float _lastAttackTime;
+    WeaponModel _weaponModel;
+
 
     /// <summary>
-    /// Instatiates the corresponding prefab and initializes the corresponding WeaponTargetManager component with the WeaponData.
+    /// Instatiates and initializes the weapon prefab.
     /// </summary>
     /// <param name="parent"></param>
     /// <param name="activeMonoBehavior"></param>
-    public void Spawn(Transform parent, MonoBehaviour activeMonoBehavior)
+    public GameObject Spawn(Transform parent)
     {
-        this._activeMonoBehavior = activeMonoBehavior;
-        _lastAttackTime = 0;
+        GameObject weaponObject = Instantiate(weaponModelPrefab);
+        weaponObject.transform.SetParent(parent);
+        weaponObject.transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
 
-        Initialize(parent);
+        _weaponModel = weaponObject.GetComponentsInChildren<WeaponModel>().First();
+        _weaponModel.Initialize(this);
+
+        return weaponObject;
     }
 
-    void Initialize(Transform parent)
-    {
-        GameObject _weaponModel = Instantiate(weaponPrefab);
-
-        _weaponModel.transform.SetParent(parent);
-        _weaponModel.transform.localPosition = Vector2.zero;
-        _weaponModel.transform.localRotation = Quaternion.identity;
-
-        WeaponTargetTracker targetTracker = _weaponModel.GetComponentsInChildren<WeaponTargetTracker>().First();
-        targetTracker.Initialize(this);
-    }
 
     /// <summary>
     /// Automatically attack all targets inside the weapon range if the weapon is not on cooldown. Meant to be used inside the Update method.
     /// </summary>
-    public void Attack(float playerAttackCooldown, Transform transformTarget, float attackAngle)
+    public void Attack()
     {
-        if (Time.time <= playerAttackCooldown + _lastAttackTime)
+        _weaponModel.StartCoroutine(AttackRoutine(Game.Player.Stats.AttackCooldown * .95f, stats.projectileCount.baseValue));
+    }
+
+    IEnumerator AttackRoutine(float duration, int projectileCount)
+    {
+        float elapsed = 0f;
+        float timestep = duration / projectileCount;
+        float animationDuration = timestep / 3f;
+
+        while (elapsed < duration)
         {
-            return;
+            _targetsInRange.RemoveAll(enemy => enemy == null);
+            List<Enemy> currentTargets = new(_targetsInRange);
+
+            if (weaponType == WeaponType.Area)
+            {
+                _weaponModel.StartAnimation(animationDuration);
+
+                yield return new WaitForSeconds(animationDuration / 2f);
+
+                Damage(currentTargets);
+
+                yield return new WaitForSeconds(timestep - animationDuration / 2f);
+            }
+            else if (weaponType == WeaponType.Projectile)
+            {
+                Shoot(currentTargets);
+
+                yield return new WaitForSeconds(timestep);
+            }
+
+            elapsed += timestep;
         }
-        transformTarget.localRotation = Quaternion.Euler(new (0, attackAngle , 0));
-        _lastAttackTime = Time.time;
-        _activeMonoBehavior.StartCoroutine(AttackRoutine(playerAttackCooldown, stats.projectileCount.baseValue));
     }
 
     public void EnterIntoRange(Enemy enemy)
@@ -81,30 +100,6 @@ public class SO_WeaponData : ScriptableObject
     public void ExitFromRange(Enemy enemy)
     {
         _targetsInRange.Remove(enemy);
-    }
-
-    IEnumerator AttackRoutine(float duration, int projectileCount)
-    {
-        float elapsed = 0f;
-        float timestep = duration / projectileCount;
-
-        while (elapsed < duration)
-        {
-            _targetsInRange.RemoveAll(enemy => enemy == null);
-            List<Enemy> currentTargets = new (_targetsInRange);
-
-            if (weaponType == WeaponType.Area)
-            {
-                Damage(currentTargets);
-            }
-            else if (weaponType == WeaponType.Projectile)
-            {
-                Shoot(currentTargets);
-            }
-
-            yield return new WaitForSeconds(timestep);
-            elapsed += timestep;
-        }
     }
 
     void Shoot(List<Enemy> enemies)
@@ -122,7 +117,7 @@ public class SO_WeaponData : ScriptableObject
     {
         foreach (Enemy enemy in enemies)
         {
-            enemy.Health.TakeDamage(stats.damage.baseValue);
+            enemy.Health.TakeDamage(stats.damage.baseValue * (int)Game.Player.Stats.CharacterModifiers.DamageMultiplier.Evaluate());
         }
     }
 }

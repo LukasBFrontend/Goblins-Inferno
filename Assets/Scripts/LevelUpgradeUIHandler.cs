@@ -32,16 +32,16 @@ public class LevelUpgradeUIHandler : MonoBehaviour {
 
     void OnUpgradeButtonOneClick()
     {
-        UpgradeOptionManager.Instance.SelectOptionOne();
+        Game.UpgradeOptionManager.SelectOptionOne();
     }
 
     void OnUpgradeButtonTwoClick()
     {
-        UpgradeOptionManager.Instance.SelectOptionTwo();
+        Game.UpgradeOptionManager.SelectOptionTwo();
     }
 
     void OnUpgradeButtonThreeClick()
     {
-        UpgradeOptionManager.Instance.SelectOptionThree();
+        Game.UpgradeOptionManager.SelectOptionThree();
     }
 }

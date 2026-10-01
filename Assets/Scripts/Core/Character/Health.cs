@@ -44,6 +44,22 @@ public class Health : MonoBehaviour
 
         StartCoroutine(AnimateMaterialRoutine());
     }
+    IEnumerator AnimateMaterialRoutine()
+    {
+        int i = 0;
+        int maxIterations = 2;
+
+        while (i < maxIterations)
+        {
+            if (this == null)
+            {
+                break;
+            }
+            _material.SetColor("_BaseColor", i % 2 == 1 ? originalColor : damageColor);
+            i++;
+            yield return new WaitForSeconds(.1f);
+        }
+    }
 
     /// <summary>
     /// Adds amount to character health up to MaxHealth
@@ -76,22 +92,5 @@ public class Health : MonoBehaviour
         _maxHealth = maxHealth;
 
         Heal(difference);
-    }
-
-    IEnumerator AnimateMaterialRoutine()
-    {
-        int i = 0;
-        int maxIterations = 4;
-        
-        while (i < maxIterations)
-        {
-            if (this == null)
-            {
-                break;
-            }
-            _material.SetColor("_BaseColor", i % 2 == 1 ? originalColor : damageColor);
-            i++;
-            yield return new WaitForSeconds(.125f);
-        }
     }
 }

@@ -1,22 +1,34 @@
+using System.Collections;
 using UnityEngine;
 
-public class WeaponTargetTracker : MonoBehaviour
+public class WeaponModel : MonoBehaviour
 {
     [Tooltip("Enemies inside the collider are considered within range of the tracker.")]
     [SerializeField] Collider collider;
-    [SerializeField] Transform transformTarget;
+    [SerializeField] MeshRenderer renderer;
+    public MeshRenderer Renderer => renderer;
     SO_WeaponData _weapon;
 
     public void Initialize(SO_WeaponData weapon)
     {
         _weapon = weapon;
+
+        if (renderer != null)
+        {
+            renderer.enabled = false;
+        }
     }
 
-    private void Update()
+    public void StartAnimation(float animationDuration)
     {
-        Vector3 closestDir = GameUtils.ClosestEnemyToPlayerDir(Player.Instance);
-        float attackAngle = Mathf.Rad2Deg * Mathf.Atan2(closestDir.x, closestDir.z );
-        _weapon.Attack(Player.Instance.Stats.AttackCooldown, transformTarget, attackAngle);
+        StartCoroutine(WeaponAnimationRoutine(animationDuration));
+    }
+
+    IEnumerator WeaponAnimationRoutine(float animationDuration)
+    {
+        renderer.enabled = true;
+        yield return new WaitForSeconds(animationDuration);
+        renderer.enabled = false;
     }
 
     private void Awake()

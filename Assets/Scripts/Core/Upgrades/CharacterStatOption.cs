@@ -17,7 +17,7 @@ public class CharacterStatOption : UpgradeOption
 
     public override void Select()
     {
-        Player player = Player.Instance;
+        Player player = Game.Player;
         Stat stat = player.Stats.CharacterModifiers.GetStat(_stat.Name);
         Debug.Log($"Stat '{stat.Name}' leveled up to {stat.LevelUp()}. New value: {stat.Evaluate()}");
     }

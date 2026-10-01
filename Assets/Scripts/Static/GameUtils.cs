@@ -3,25 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public static class GameUtils
+public static class Utils
 {
     /// <summary>
     /// Calculates the unit direction from the closest enemy to the player by comparing between the player and the list of enemies.
     /// </summary>
-    public static Vector3 ClosestEnemyToPlayerDir(Player player)
+    public static Enemy ClosestEnemy(Player player)
     {
-        if (player == null)
-        {
-            return Vector3.zero;
-        }
-
-        List<Enemy> enemies = Object.FindObjectsByType<Enemy>(FindObjectsInactive.Exclude).ToList();
         Vector3 playerPosition = player.transform.position;
+        List<Enemy> enemies = Object.FindObjectsByType<Enemy>(FindObjectsInactive.Exclude).ToList();
 
         if (enemies.Count == 0)
         {
-            float randomAngle = Random.Range(0f, 2 * Mathf.PI);
-            return new Vector3(Mathf.Cos(randomAngle), 0, Mathf.Sin(randomAngle));
+            return null;
         }
 
         enemies.Sort((enemy, prevEnemy) =>
@@ -36,21 +30,12 @@ public static class GameUtils
 
         Enemy closestEnemy = enemies[0];
 
-        return (closestEnemy.transform.position - playerPosition).normalized;
+        return closestEnemy;
     }
 
-    /// <summary>
-    /// Calculates the unit direction from the player to the enemy.
-    /// </summary>
-    public static Vector2 PlayerToEnemyDir(Player player, Enemy enemy)
+    public static Vector3 RandomDirection()
     {
-        if (player == null)
-        {
-            return Vector2.zero;
-        }
-
-        Vector2 position = enemy.Rigidbody.position;
-        Vector2 targetPosition = player.Rigidbody.position;
-        return (targetPosition - position).normalized;
+        float randomAngle = Random.Range(0f, 2 * Mathf.PI);
+        return new Vector3(Mathf.Cos(randomAngle), 0, Mathf.Sin(randomAngle)).normalized;
     }
 }

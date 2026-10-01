@@ -20,7 +20,7 @@ public class WeaponStatOption : UpgradeOption
 
     public override void Select()
     {
-        Player player = Player.Instance;
+        Player player = Game.Player;
         WeaponStats weaponStats = player.Stats.GetWeaponModifier(_weaponName);
         Stat stat = weaponStats.GetStat(_stat.Name);
         Debug.Log($"Stat '{stat.Name}' leveled up to {stat.LevelUp()}. New value: {stat.Evaluate()}");

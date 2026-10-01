@@ -14,7 +14,6 @@ public class Player : BaseCharacter
     [SerializeField] Movement movement;
     public Stats Stats => stats;
     public Weapons Weapons => weapons;
-    public static Player Instance => _instance;
     public Movement Movement => movement;
     public int Lvl => _lvl;
     public int Exp => _exp;
