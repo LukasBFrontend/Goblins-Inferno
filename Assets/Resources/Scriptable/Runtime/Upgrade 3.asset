@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99370e65974d8f34e91a37d414ee08c7, type: 3}
+  m_Name: Upgrade 3
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeChoiceData
+  upgradeType: 0
+  sprite: {fileID: 1338618465950266308, guid: 912d326a6bb64f047a24692cbbe53ffe, type: 3}
+  title: Damage
+  metaDescription: '[A description of the weapon/stat]'
+  scalingType: 1
+  statname: damage
+  statIncrease: 8
+  lvl: 2
+  defaultValues: {fileID: 11400000, guid: 7a6d49491258bb146a753dff596c6a7a, type: 2}

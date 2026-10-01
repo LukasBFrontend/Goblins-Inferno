@@ -1,0 +1,147 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Upgrade%20Button/upgradeButtonStyle.uss?fileID=7433441132597879392&amp;guid=2c23c507fc6f30948ab28f18b0433ce0&amp;type=3#upgradeButtonStyle"/>
+    <ui:Button name="UpgradeButton" class="upgradeButton">
+        <ui:Image source="project://database/Assets/Resources/placeholder_square.png?fileID=2800000&amp;guid=ee0c57da3cd509340a3c6efd39622932&amp;type=3#placeholder_square" name="UpgradeImage" class="upgradeImage">
+            <Bindings>
+                <ui:DataBinding property="source" data-source-path="sprite" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:Image>
+        <ui:VisualElement name="UpgradeTextContainer_CHARACTER" class="upgradeTextContainer" style="flex-grow: 1;">
+            <ui:Label name="UpgradeTitleLabel" text="Title" class="upgradeTitleLabel">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="title" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:Label>
+            <ui:VisualElement name="UpgradeDescriptionTextContainer_ADDATIVE" class="upgradeDescriptionTextContainer" style="flex-grow: 1;">
+                <ui:Label text="Increase" name="Increase"/>
+                <Bindings>
+                    <ui:DataBinding property="style.display" data-source-path="DisplayMultiplicativeStatType" binding-mode="ToTarget"/>
+                </Bindings>
+                <ui:Label text="[statname]" name="STATNAME" class="horizontalTextMargin emphasizedText" style="margin-right: 3px; margin-left: 3px;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="statname" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="by" name="by"/>
+                <ui:Label text="[increase]" name="STAT_INCREASE" class="horizontalTextMargin emphasizedText" style="margin-left: 3px;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="statIncrease" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="%" name="percent" class="emphasizedText"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="UpgradeDescriptionTextContainer_MULTIPLICATIVE" class="upgradeDescriptionTextContainer" style="flex-grow: 1; display: flex;">
+                <ui:Label text="Increase" name="Increase"/>
+                <ui:Label text="[statname]" name="STATNAME" class="horizontalTextMargin emphasizedText" style="margin-right: 3px; margin-left: 3px;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="statname" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="by" name="by" style="margin-right: 3px;"/>
+                <ui:Label text="+" name="plus" class="emphasizedText"/>
+                <ui:Label text="[increase]" name="STAT_INCREASE" class="horizontalTextMargin emphasizedText">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="statIncrease" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <Bindings>
+                    <ui:DataBinding property="style.display" data-source-path="DisplayAddativeStatType" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="UpgradeTextContainer_WEAPON" class="upgradeTextContainer" style="flex-grow: 1; display: none;">
+            <ui:Label name="UpgradeTitleLabel" text="Title" class="upgradeTitleLabel">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="title" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:Label>
+            <ui:VisualElement name="UpgradeDescriptionTextContainer_ADDATIVE" class="upgradeDescriptionTextContainer" style="flex-grow: 1;">
+                <ui:Label text="Increase" name="Increase"/>
+                <Bindings>
+                    <ui:DataBinding property="style.display" data-source-path="DisplayMultiplicativeStatType" binding-mode="ToTarget"/>
+                </Bindings>
+                <ui:Label text="[statname]" name="STATNAME" class="horizontalTextMargin emphasizedText" style="margin-right: 3px; margin-left: 3px;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="statname" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="by" name="by"/>
+                <ui:Label text="[increase]" name="STAT_INCREASE" class="horizontalTextMargin emphasizedText" style="margin-left: 3px;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="statIncrease" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="%" name="percent" class="emphasizedText"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="UpgradeDescriptionTextContainer_MULTIPLICATIVE" class="upgradeDescriptionTextContainer" style="flex-grow: 1; display: flex;">
+                <ui:Label text="Increase" name="Increase"/>
+                <ui:Label text="[statname]" name="STATNAME" class="horizontalTextMargin emphasizedText" style="margin-right: 3px; margin-left: 3px;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="statname" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="by" name="by" style="margin-right: 3px;"/>
+                <ui:Label text="+" name="plus" class="emphasizedText"/>
+                <ui:Label text="[increase]" name="STAT_INCREASE" class="horizontalTextMargin emphasizedText">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="statIncrease" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <Bindings>
+                    <ui:DataBinding property="style.display" data-source-path="DisplayAddativeStatType" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="UpgradeTextContainer_WEAPON_UNLOCK" class="upgradeTextContainer" style="flex-grow: 1; display: none;">
+            <ui:Label name="UpgradeTitleLabel" text="Title" class="upgradeTitleLabel">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="title" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:Label>
+            <ui:VisualElement name="UpgradeDescriptionTextContainer_ADDATIVE" class="upgradeDescriptionTextContainer" style="flex-grow: 1;">
+                <ui:Label text="Increase" name="Increase"/>
+                <Bindings>
+                    <ui:DataBinding property="style.display" data-source-path="DisplayMultiplicativeStatType" binding-mode="ToTarget"/>
+                </Bindings>
+                <ui:Label text="[statname]" name="STATNAME" class="horizontalTextMargin emphasizedText" style="margin-right: 3px; margin-left: 3px;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="statname" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="by" name="by"/>
+                <ui:Label text="[increase]" name="STAT_INCREASE" class="horizontalTextMargin emphasizedText" style="margin-left: 3px;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="statIncrease" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="%" name="percent" class="emphasizedText"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="UpgradeDescriptionTextContainer_MULTIPLICATIVE" class="upgradeDescriptionTextContainer" style="flex-grow: 1; display: flex;">
+                <ui:Label text="Increase" name="Increase"/>
+                <ui:Label text="[statname]" name="STATNAME" class="horizontalTextMargin emphasizedText" style="margin-right: 3px; margin-left: 3px;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="statname" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="by" name="by" style="margin-right: 3px;"/>
+                <ui:Label text="+" name="plus" class="emphasizedText"/>
+                <ui:Label text="[increase]" name="STAT_INCREASE" class="horizontalTextMargin emphasizedText">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="statIncrease" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <Bindings>
+                    <ui:DataBinding property="style.display" data-source-path="DisplayAddativeStatType" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="UpgradeLvlTextContainer" class="upgradeLvlTextContainer" style="flex-grow: 1;">
+            <ui:Label text="Lvl  " name="UpgradeLvlLabel" class="upgradeLvlLabel"/>
+            <ui:Label text="x" name="UpgradeLvlValue" class="upgradeLvlValue">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="lvl" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:Label>
+        </ui:VisualElement>
+    </ui:Button>
+</ui:UXML>

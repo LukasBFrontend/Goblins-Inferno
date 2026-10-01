@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99370e65974d8f34e91a37d414ee08c7, type: 3}
+  m_Name: Upgrade Default
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeChoiceData
+  contextType: 0
+  sprite: {fileID: 8312936430579362208, guid: ee0c57da3cd509340a3c6efd39622932, type: 3}
+  title: '[Upgrade Option]'
+  metaDescription: '[A description of the weapon/stat]'
+  scalingType: 0
+  statname: '[statname]'
+  statIncrease: 123
+  lvl: 123
+  defaultValues: {fileID: 0}

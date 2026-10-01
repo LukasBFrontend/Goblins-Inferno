@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="UpgradeButton" src="project://database/Assets/UI%20Toolkit/Upgrade%20Button/UpgradeButton.uxml?fileID=9197481963319205126&amp;guid=c09b3ca478fa25245ad9c1e8d318d5ac&amp;type=3#UpgradeButton"/>
+    <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=d061f6063ca2fab4d84bfa2407418e4e&amp;type=3#style"/>
+    <ui:ProgressBar value="100" title="100/100" name="HealthBar"/>
+    <ui:ProgressBar value="100" title="Lvl 1" name="ExpBar"/>
+    <ui:VisualElement name="OverlayContainer" class="overlayContainer" style="justify-content: center; align-items: center;">
+        <ui:VisualElement name="UpgradeMenu" style="flex-grow: 0; margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px; position: absolute; display: flex;">
+            <ui:Instance template="UpgradeButton" name="UpgradeButtonOne" data-source="project://database/Assets/Resources/Scriptable/Runtime/Upgrade%201.asset?fileID=11400000&amp;guid=f5ef43c874b823f4cb40e8d76d048b0a&amp;type=2#Upgrade 1"/>
+            <ui:Instance template="UpgradeButton" name="UpgradeButtonTwo" data-source="project://database/Assets/Resources/Scriptable/Runtime/Upgrade%202.asset?fileID=11400000&amp;guid=caa74c8aef6f23348973d39589b4fbd3&amp;type=2#Upgrade 2"/>
+            <ui:Instance template="UpgradeButton" name="UpgradeButtonThree" data-source="project://database/Assets/Resources/Scriptable/Runtime/Upgrade%203.asset?fileID=11400000&amp;guid=6bf788f0c4930c04bb1a355c9982b094&amp;type=2#Upgrade 3"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
