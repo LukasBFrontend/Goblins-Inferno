@@ -10,7 +10,13 @@ public class Movement : MonoBehaviour
     {
         Vector3 velocity = new Vector3(moveInput.x, 0f, moveInput.y) * baseMoveSpeed;
         _player.Rigidbody.linearVelocity = velocity;
-        animator.SetFloat("MoveSpeed", velocity.magnitude);
+
+        animator?.SetFloat("MoveSpeed", velocity.magnitude);
+        
+        if (moveInput.magnitude > .1f)
+        {
+            transform.localRotation = Quaternion.Euler(0, -90 - Mathf.Rad2Deg * Mathf.Atan2(moveInput.y, moveInput.x), 0);
+        }
     }
 
     void Awake()

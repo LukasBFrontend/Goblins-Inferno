@@ -1,19 +1,19 @@
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class LevelUpgradeUIHandler : MonoBehaviour {
-    [SerializeField] PanelRenderer panelRenderer;
+public class LevelUpgradeUIHandler : UIOverlay {
+
     Button _upgradeButtonOne, _upgradeButtonTwo, _upgradeButtonThree;
+    VisualElement _overlayContainer;
 
     void OnEnable()
     {
-        panelRenderer.RegisterUIReloadCallback(OnUIReload);
+        PanelRenderer.RegisterUIReloadCallback(OnUIReload);
     }
 
     void OnDisable()
     {
-        panelRenderer.UnregisterUIReloadCallback(OnUIReload);
+        PanelRenderer.UnregisterUIReloadCallback(OnUIReload);
         _upgradeButtonOne.clicked -= OnUpgradeButtonOneClick;
         _upgradeButtonTwo.clicked -= OnUpgradeButtonTwoClick;
         _upgradeButtonThree.clicked -= OnUpgradeButtonThreeClick;
@@ -21,6 +21,7 @@ public class LevelUpgradeUIHandler : MonoBehaviour {
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
     {
+        this.SetOverlayContainer(rootElement);
         _upgradeButtonOne = rootElement.Q<TemplateContainer>("UpgradeButtonOne").Q<Button>();
         _upgradeButtonTwo = rootElement.Q<TemplateContainer>("UpgradeButtonTwo").Q<Button>();
         _upgradeButtonThree = rootElement.Q<TemplateContainer>("UpgradeButtonThree").Q<Button>();

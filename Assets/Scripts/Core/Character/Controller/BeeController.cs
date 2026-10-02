@@ -18,7 +18,7 @@ public class BeeController : MonoBehaviour
 
     void Update()
     {
-        Vector2 dir = _enemy.DirectionTo(Game.Player);
+        Vector3 dir = _enemy.DirectionTo(Game.Player);
 
         _rigidbody.linearVelocity = dir * moveSpeed;
     }
