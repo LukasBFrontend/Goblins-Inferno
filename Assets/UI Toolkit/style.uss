@@ -42,3 +42,66 @@ Label {
     left: 0;
     background-color: rgba(39, 39, 39, 0.455);
 }
+
+.submenuContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.upperContainer {
+    height: 45%;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.lowerContainer {
+    flex-grow: 1;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.title {
+    font-size: 80px;
+    color: rgb(0, 0, 0);
+    -unity-text-align: upper-center;
+    margin-bottom: 40px;
+    -unity-font-definition: resource("Fonts/blackwood_castle/BLACC___");
+    text-shadow: 2px 2px 0 rgb(255, 255, 255);
+    letter-spacing: 2px;
+    -unity-text-outline-width: 0.75px;
+    -unity-text-outline-color: rgb(255, 255, 255);
+}
+
+.button {
+    margin-bottom: 30px;
+    width: 350px;
+    aspect-ratio: 3.5;
+    background-image: resource("Sprites/UI Button/button_stock");
+    background-color: rgba(0, 0, 0, 0.039);
+    color: rgba(255, 255, 255, 0.706);
+    font-size: 23px;
+    -unity-font-definition: resource("Fonts/blackwood_castle/BLACC___");
+    letter-spacing: 7px;
+    -unity-text-outline-width: 0.5px;
+    -unity-text-outline-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-cubic;
+}
+
+.button:hover {
+    color: rgb(255, 255, 255);
+    background-image: resource("Sprites/UI Button/button_stock_hover");
+    scale: 1.035 1.035;
+}
+
+.button:focus {
+    background-image: resource("Sprites/UI Button/button_stock_selected");
+    color: rgb(255, 255, 255);
+}

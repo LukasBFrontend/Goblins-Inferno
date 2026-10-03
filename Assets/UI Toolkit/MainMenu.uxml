@@ -1,0 +1,28 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=d061f6063ca2fab4d84bfa2407418e4e&amp;type=3#style"/>
+    <ui:VisualElement name="MainMenuContainer" style="flex-grow: 1;">
+        <ui:VisualElement name="StartMenuContainer" class="submenuContainer">
+            <ui:VisualElement name="UpperContainer" class="upperContainer">
+                <ui:Label text="GOBLINS INFERNO" name="TitleLabel" class="title"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="LowerContainer" class="lowerContainer">
+                <ui:Button text="START" name="StartButton" class="button"/>
+                <ui:Button text="OPTIONS" name="OptionsButton" class="button"/>
+                <ui:Button text="CREDITS" name="CreditsButton" class="button"/>
+                <ui:Button text="QUIT" name="QuitButton" class="button"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="CreditsMenuContainer" class="submenuContainer" style="visibility: hidden;">
+            <ui:VisualElement name="UpperContainer" class="upperContainer">
+                <ui:Label text="Credits" name="TitleLabel" class="title"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="LowerContainer" class="lowerContainer"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="OptionsMenuContainer" class="submenuContainer" style="visibility: hidden;">
+            <ui:VisualElement name="UpperContainer" class="upperContainer">
+                <ui:Label text="Options" name="TitleLabel" class="title"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="LowerContainer" class="lowerContainer"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

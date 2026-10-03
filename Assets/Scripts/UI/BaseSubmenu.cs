@@ -5,17 +5,22 @@ public abstract class BaseSubmenu : MonoBehaviour
 {
     VisualElement _menuContainer;
     public VisualElement Container => _menuContainer;
-    VisualElement _overlayContainer;
+    BaseMenu _baseMenu;
 
     protected void CloseOverlay()
     {
-        _overlayContainer.visible = false;
+        _baseMenu.OverlayContainer.visible = false;
         _menuContainer.visible = false;
     }
 
-    public void Initialize(VisualElement overlayContainer, VisualElement menuContainer)
+    protected void SwitchSubmenu<T>() where T: BaseSubmenu
     {
-        _overlayContainer = overlayContainer;
+        _baseMenu.ShowSubMenu<T>();
+    }
+
+    public void Initialize(BaseMenu baseMenu, VisualElement menuContainer)
+    {
+        _baseMenu = baseMenu;
         _menuContainer = menuContainer;
     }
 }

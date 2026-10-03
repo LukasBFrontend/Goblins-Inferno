@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1218385047617684678}
   - component: {fileID: 805074245506233799}
   m_Layer: 5
-  m_Name: UI
+  m_Name: Level UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,10 +107,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelPauseOverlay
   containerName: PauseOverlayContainer
-  levelUpgrade:
+  levelUpgradeData:
     menu: {fileID: 6659046050882650041}
     containerName: UpgradeMenuContainer
-  levelPause:
+  levelPauseData:
     menu: {fileID: 1218385047617684678}
     containerName: PauseMenuContainer
 --- !u!114 &6659046050882650041
