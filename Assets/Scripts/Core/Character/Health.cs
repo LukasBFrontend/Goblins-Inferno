@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof (BaseCharacter))]
 public class Health : MonoBehaviour
@@ -14,13 +15,18 @@ public class Health : MonoBehaviour
     public int Max => _maxHealth;
     int _maxHealth;
     BaseCharacter _character;
-    Material _material;
+    List<Material> _materialInstances;
 
     void Awake()
     {
         _maxHealth = health;
         _character = GetComponent<BaseCharacter>();
-        _material = _character.Renderer.materials[0];
+        _materialInstances = new();
+
+        foreach (var renderer in _character.Renderers)
+        {
+            _materialInstances.Add(renderer.materials[0]);
+        }
     }
 
     /// <summary>
@@ -55,7 +61,7 @@ public class Health : MonoBehaviour
             {
                 break;
             }
-            _material.SetColor("_BaseColor", i % 2 == 1 ? originalColor : damageColor);
+            _materialInstances.ForEach(material => material.SetColor("_BaseColor", i % 2 == 1 ? originalColor : damageColor)) ;
             i++;
             yield return new WaitForSeconds(.1f);
         }

@@ -1,19 +1,18 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class LevelUpgradeUIHandler : UIOverlay {
-
+[RequireComponent(typeof(PanelRenderer))]
+public class LevelUpgradeMenu : BaseSubmenu {
     Button _upgradeButtonOne, _upgradeButtonTwo, _upgradeButtonThree;
-    VisualElement _overlayContainer;
 
     void OnEnable()
     {
-        PanelRenderer.RegisterUIReloadCallback(OnUIReload);
+        GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
     }
 
     void OnDisable()
     {
-        PanelRenderer.UnregisterUIReloadCallback(OnUIReload);
+        GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
         _upgradeButtonOne.clicked -= OnUpgradeButtonOneClick;
         _upgradeButtonTwo.clicked -= OnUpgradeButtonTwoClick;
         _upgradeButtonThree.clicked -= OnUpgradeButtonThreeClick;
@@ -21,7 +20,6 @@ public class LevelUpgradeUIHandler : UIOverlay {
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
     {
-        this.SetOverlayContainer(rootElement);
         _upgradeButtonOne = rootElement.Q<TemplateContainer>("UpgradeButtonOne").Q<Button>();
         _upgradeButtonTwo = rootElement.Q<TemplateContainer>("UpgradeButtonTwo").Q<Button>();
         _upgradeButtonThree = rootElement.Q<TemplateContainer>("UpgradeButtonThree").Q<Button>();
@@ -34,15 +32,21 @@ public class LevelUpgradeUIHandler : UIOverlay {
     void OnUpgradeButtonOneClick()
     {
         Game.UpgradeOptionManager.SelectOptionOne();
+        GameEvents.RaiseGameResumed();
+        CloseOverlay();
     }
 
     void OnUpgradeButtonTwoClick()
     {
         Game.UpgradeOptionManager.SelectOptionTwo();
+        GameEvents.RaiseGameResumed();
+        CloseOverlay();
     }
 
     void OnUpgradeButtonThreeClick()
     {
         Game.UpgradeOptionManager.SelectOptionThree();
+        GameEvents.RaiseGameResumed();
+        CloseOverlay();
     }
 }

@@ -31,9 +31,19 @@ public abstract class BaseState
 
     protected void SwitchState(BaseState newState)
     {
-        if (Ctx.LogNewStateOnEnter)
+        if (Ctx.LogNewStateOnEnter && (_currentSuperState != null || _currentSubState != null))
         {
-            Debug.Log($"{Ctx.name} switched to a <b><color=white>new state</color></b>{(_currentSuperState != null ? $": {newState.GetType().Name} \n<b><color=white>super state:</color></b> <color=yellow>{_currentSuperState}</color>" : "")}");
+            string logString = $"{Ctx.name} switched to a <b><color=white>new state</color></b>: <color=yellow>{newState.GetType().Name}</color>";
+            if (_currentSuperState != null)
+            {
+                logString += $"\n<b><color=white>super state:</color></b> <color=yellow>{_currentSuperState}</color>";
+            }
+            else if (_currentSubState != null)
+            {
+                logString += $"\n<b><color=white>sub state:</color></b> <color=yellow>{_currentSubState}</color>";
+            }
+
+            Debug.Log(logString);
         }
 
         ExitState();

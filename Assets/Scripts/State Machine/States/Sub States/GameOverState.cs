@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class GameOverState : BaseState
 {
     public GameOverState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
@@ -9,12 +11,20 @@ public class GameOverState : BaseState
 
     }
 
+    void OnGameResumed()
+    {
+        SwitchState(Factory.Playing());
+    }
+
     public override void UpdateState()
     {
         CheckSwitchStates();
     }
 
-    public override void ExitState() { }
+    public override void ExitState()
+    {
+        GameEvents.GameResumed.RemoveListener(OnGameResumed);
+    }
 
     public override void CheckSwitchStates() { }
     public override void InitializeSubState() { }

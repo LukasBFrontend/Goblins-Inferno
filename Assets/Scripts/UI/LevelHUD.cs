@@ -1,14 +1,16 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class LevelUIHandler : MonoBehaviour {
-    [SerializeField] PanelRenderer panelRenderer;
+[RequireComponent(typeof(PanelRenderer))]
+public class LevelHUD : MonoBehaviour {
+    PanelRenderer _panelRenderer;
     ProgressBar _healthBar, _expBar;
     Player _player;
 
     void OnEnable()
     {
-        panelRenderer.RegisterUIReloadCallback(OnUIReload);
+        _panelRenderer = GetComponent<PanelRenderer>();
+        _panelRenderer.RegisterUIReloadCallback(OnUIReload);
         GameEvents.HealthChanged.AddListener(UpdateHealthBar);
         GameEvents.ExpChanged.AddListener(UpdateExpBar);
         GameEvents.LvlUpEvent.AddListener(UpdateLvlText);
@@ -16,7 +18,7 @@ public class LevelUIHandler : MonoBehaviour {
 
     void OnDisable()
     {
-        panelRenderer.UnregisterUIReloadCallback(OnUIReload);
+        _panelRenderer.UnregisterUIReloadCallback(OnUIReload);
         GameEvents.HealthChanged.RemoveListener(UpdateHealthBar);
         GameEvents.ExpChanged.RemoveListener(UpdateExpBar);
         GameEvents.LvlUpEvent.RemoveListener(UpdateLvlText);

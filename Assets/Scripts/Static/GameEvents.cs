@@ -5,6 +5,9 @@ public static class GameEvents
     // Scene
     public static UnityEvent LevelStarted = new();
     public static UnityEvent LevelQuit = new();
+    public static UnityEvent GamePaused = new();
+    public static UnityEvent GameResumed = new();
+    public static UnityEvent GameOverEvent =  new();
 
     // Level
     public static UnityEvent<int, int> HealthChanged = new();
@@ -19,6 +22,21 @@ public static class GameEvents
     public static void RaiseLevelQuit()
     {
         LevelQuit.Invoke();
+    }
+
+    public static void RaiseGamePaused()
+    {
+        GamePaused.Invoke();
+    }
+
+    public static void RaiseGameResumed()
+    {
+        GameResumed.Invoke();
+    }
+
+    public static void RaiseGameOverEvent()
+    {
+        GameOverEvent.Invoke();
     }
 
     public static void RaiseHealthChanged(int currentHealth, int maxHealth)
