@@ -34,6 +34,16 @@ public abstract class BaseMenu : MonoBehaviour
         _overlayContainer.visible = true;
     }
 
+    protected void HideMenu()
+    {
+        _overlayContainer.visible = false;
+
+        foreach (var menu in _submenus)
+        {
+            menu.Container.visible = false;
+        }
+    }
+
     public void ShowSubMenu<T>() where T: BaseSubmenu
     {
         foreach (var menu in _submenus)

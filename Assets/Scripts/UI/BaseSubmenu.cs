@@ -7,12 +7,6 @@ public abstract class BaseSubmenu : MonoBehaviour
     public VisualElement Container => _menuContainer;
     BaseMenu _baseMenu;
 
-    protected void CloseOverlay()
-    {
-        _baseMenu.OverlayContainer.visible = false;
-        _menuContainer.visible = false;
-    }
-
     protected void SwitchSubmenu<T>() where T: BaseSubmenu
     {
         _baseMenu.ShowSubMenu<T>();

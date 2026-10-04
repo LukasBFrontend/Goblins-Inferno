@@ -3,35 +3,35 @@ using UnityEngine.UIElements;
 
 [RequireComponent(typeof(PanelRenderer))]
 public class LevelHUD : MonoBehaviour {
-    PanelRenderer _panelRenderer;
     ProgressBar _healthBar, _expBar;
+    PanelRenderer _panelRenderer;
     Player _player;
 
     void OnEnable()
     {
         _panelRenderer = GetComponent<PanelRenderer>();
         _panelRenderer.RegisterUIReloadCallback(OnUIReload);
-        GameEvents.HealthChanged.AddListener(UpdateHealthBar);
-        GameEvents.ExpChanged.AddListener(UpdateExpBar);
-        GameEvents.LvlUpEvent.AddListener(UpdateLvlText);
+        GameEvents.HealthChanged.AddListener(OnHealthChanged);
+        GameEvents.ExpChanged.AddListener(OnExpChanged);
+        GameEvents.LvlUpEvent.AddListener(OnLvlUp);
     }
 
     void OnDisable()
     {
         _panelRenderer.UnregisterUIReloadCallback(OnUIReload);
-        GameEvents.HealthChanged.RemoveListener(UpdateHealthBar);
-        GameEvents.ExpChanged.RemoveListener(UpdateExpBar);
-        GameEvents.LvlUpEvent.RemoveListener(UpdateLvlText);
+        GameEvents.HealthChanged.RemoveListener(OnHealthChanged);
+        GameEvents.ExpChanged.RemoveListener(OnExpChanged);
+        GameEvents.LvlUpEvent.RemoveListener(OnLvlUp);
     }
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
     {
-        // Your UI initialization logic.
         _healthBar = rootElement.Q<ProgressBar>("HealthBar");
         _expBar = rootElement.Q<ProgressBar>("ExpBar");
-        UpdateHealthBar(_player.Health.Current, _player.Health.Max);
-        UpdateExpBar(_player.Exp, _player.ExpToLvlUp(_player.Lvl));
-        UpdateLvlText(0, _player.Lvl);
+
+        OnHealthChanged(_player.Health.Current, _player.Health.Max);
+        OnExpChanged(_player.Exp, _player.ExpToLvlUp(_player.Lvl));
+        OnLvlUp(0, _player.Lvl);
     }
 
     void Awake()
@@ -39,19 +39,19 @@ public class LevelHUD : MonoBehaviour {
         _player = Game.Player;
     }
 
-    void UpdateHealthBar(int current, int max) {
+    void OnHealthChanged(int current, int max) {
         _healthBar.highValue = max;
         _healthBar.value = current;
         _healthBar.title = $"{current}/{max}";
     }
 
-    void UpdateExpBar(int currentExp, int maxExp )
+    void OnExpChanged(int currentExp, int maxExp )
     {
         _expBar.highValue = maxExp;
         _expBar.value = currentExp;
     }
 
-    void UpdateLvlText(int oldLvl, int newLvl)
+    void OnLvlUp(int oldLvl, int newLvl)
     {
         _expBar.title = $"Lvl: {newLvl}";
     }

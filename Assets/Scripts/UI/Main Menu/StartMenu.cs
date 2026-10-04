@@ -6,19 +6,17 @@ using UnityEngine.UIElements;
 public class StartMenu : BaseSubmenu
 {
     Button _startButton, _optionsButton, _creditsButton, _quitButton;
+    PanelRenderer _panelRenderer;
 
     void OnEnable()
     {
-        GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
+        _panelRenderer = GetComponent<PanelRenderer>();
+        _panelRenderer.RegisterUIReloadCallback(OnUIReload);
     }
 
     void OnDisable()
     {
-        GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
-        _startButton.clicked -= OnStartButtonClicked;
-        _optionsButton.clicked -= OnOptionsButtonClicked;
-        _creditsButton.clicked -= OnCreditsButtonClicked;
-        _quitButton.clicked -= OnQuitButtonClicked;
+        _panelRenderer.UnregisterUIReloadCallback(OnUIReload);
     }
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
@@ -36,7 +34,7 @@ public class StartMenu : BaseSubmenu
 
     void OnStartButtonClicked()
     {
-        SceneManager.LoadScene(1);
+        GameEvents.RaiseLevelStarted();
     }
     void OnOptionsButtonClicked()
     {

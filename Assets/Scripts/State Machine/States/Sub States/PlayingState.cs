@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,35 +7,15 @@ public class PlayingState : BaseState
     InputAction _move;
     public PlayingState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
     {
-        // Initialization logic
-        GameEvents.LvlUpEvent.AddListener(OnLvlUp);
-        GameEvents.GamePaused.AddListener(OnGamePaused);
-        GameEvents.GameOverEvent.AddListener(OnGameOver);
         _move = Game.Input.Move;
+        RegisterCallbacks();
     }
     public override void EnterState()
     {
-        GameEvents.LvlUpEvent.AddListener(OnLvlUp);
-        GameEvents.GamePaused.AddListener(OnGamePaused);
-        GameEvents.GameOverEvent.AddListener(OnGameOver);
+        _move.Enable();
+        RegisterCallbacks();
 
         Time.timeScale = 1;
-        _move.Enable();
-    }
-
-    void OnLvlUp(int oldLvl, int newLvl)
-    {
-        SwitchState(Factory.Upgrade());
-    }
-
-    void OnGamePaused()
-    {
-        SwitchState(Factory.Paused());
-    }
-
-    void OnGameOver()
-    {
-        SwitchState(Factory.GameOver());
     }
 
     public override void UpdateState()
@@ -44,12 +25,40 @@ public class PlayingState : BaseState
     }
 
     public override void ExitState() {
-        GameEvents.LvlUpEvent.RemoveListener(OnLvlUp);
-        GameEvents.GamePaused.RemoveListener(OnGamePaused);
-        GameEvents.GameOverEvent.RemoveListener(OnGameOver);
+        _move.Disable();
+        UnregisterCallbacks();
 
         Time.timeScale = 0;
-        _move.Disable();
+    }
+
+    void RegisterCallbacks()
+    {
+        GameEvents.LvlUpEvent.AddListener(OnLvlUp);
+        GameEvents.GameOverEvent.AddListener(OnGameOver);
+        Game.Input.TogglePause.performed += OnTogglePausePerformed;
+    }
+
+    void UnregisterCallbacks()
+    {
+        GameEvents.LvlUpEvent.RemoveListener(OnLvlUp);
+        GameEvents.GameOverEvent.RemoveListener(OnGameOver);
+        Game.Input.TogglePause.performed -= OnTogglePausePerformed;
+    }
+
+    void OnLvlUp(int oldLvl, int newLvl)
+    {
+        SwitchState(Factory.Upgrade());
+    }
+
+    void OnGameOver()
+    {
+        SwitchState(Factory.GameOver());
+    }
+
+    void OnTogglePausePerformed(InputAction.CallbackContext callbackContext)
+    {
+        SwitchState(Factory.Paused());
+        GameEvents.RaiseGamePaused();
     }
 
     public override void CheckSwitchStates() { }

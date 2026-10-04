@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameInputActions
   move: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  togglePause: {fileID: 0}
+  togglePause: {fileID: -7544878490045679675, guid: 052faaac586de48259a63d0c4782560b, type: 3}

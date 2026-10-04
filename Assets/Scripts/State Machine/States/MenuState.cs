@@ -10,17 +10,18 @@ public class MainMenuState : BaseState
 
     public override void EnterState()
     {
+        if (Ctx.LogNewStateOnEnter)
+        {
+            Debug.Log($"{Ctx.name} entered <b><color=white>new state</color></b>: <color=yellow>{nameof(MainMenuState)}</color>");
+        }
+
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
             SceneManager.LoadScene(0);
         }
 
+        Time.timeScale = 1;
         GameEvents.LevelStarted.AddListener(OnLevelStarted);
-
-        if (Ctx.LogNewStateOnEnter)
-        {
-            Debug.Log($"{Ctx.name} entered <b><color=white>new state</color></b>: <color=yellow>{nameof(MainMenuState)}</color>");
-        }
     }
 
     void OnLevelStarted()

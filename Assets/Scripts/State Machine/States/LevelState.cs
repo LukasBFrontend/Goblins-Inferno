@@ -19,21 +19,22 @@ public class LevelState : BaseState
             SceneManager.LoadScene(1);
         }
 
-        GameEvents.LevelQuit.AddListener(OnLevelQuit);
         SetSubState(Factory.Playing());
+        GameEvents.LevelQuit.AddListener(OnLevelQuit);
     }
-
-    void OnLevelQuit()
-    {
-        SwitchState(Factory.MainMenu());
-    }
-
-    public override void UpdateState(){ }
 
     public override void ExitState()
     {
         GameEvents.LevelQuit.RemoveListener(OnLevelQuit);
     }
+
+    void OnLevelQuit()
+    {
+        SetSubState(null);
+        SwitchState(Factory.MainMenu());
+    }
+
+    public override void UpdateState(){ }
 
     public override void CheckSwitchStates() { }
     public override void InitializeSubState() { }

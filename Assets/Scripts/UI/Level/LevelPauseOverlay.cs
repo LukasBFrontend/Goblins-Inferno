@@ -18,6 +18,7 @@ public class LevelPauseOverlayHandler : BaseMenu
 
         GameEvents.LvlUpEvent.AddListener(OnLvlUp);
         GameEvents.GamePaused.AddListener(OnGamePaused);
+        GameEvents.GameResumed.AddListener(OnGameResumed);
     }
 
     void OnDisable()
@@ -26,6 +27,7 @@ public class LevelPauseOverlayHandler : BaseMenu
 
         GameEvents.LvlUpEvent.RemoveListener(OnLvlUp);
         GameEvents.GamePaused.RemoveListener(OnGamePaused);
+        GameEvents.GameResumed.RemoveListener(OnGameResumed);
     }
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
@@ -43,6 +45,11 @@ public class LevelPauseOverlayHandler : BaseMenu
     {
         ShowMenu();
         ShowSubMenu<LevelPauseMenu>();
+    }
+
+    void OnGameResumed()
+    {
+        HideMenu();
     }
 
 }

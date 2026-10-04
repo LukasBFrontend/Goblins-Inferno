@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PausedState : BaseState
 {
@@ -8,12 +9,7 @@ public class PausedState : BaseState
     }
     public override void EnterState()
     {
-        GameEvents.GameResumed.AddListener(OnGameResumed);
-    }
-
-    void OnGameResumed()
-    {
-        SwitchState(Factory.Playing());
+        RegisterCallbacks();
     }
 
     public override void UpdateState()
@@ -23,7 +19,29 @@ public class PausedState : BaseState
 
     public override void ExitState()
     {
+        UnregisterCallbacks();
+    }
+
+    void RegisterCallbacks()
+    {
+        Game.Input.TogglePause.performed += OnTogglePausePerformed;
+        GameEvents.GameResumed.AddListener(OnGameResumed);
+    }
+
+    void UnregisterCallbacks()
+    {
+        Game.Input.TogglePause.performed -= OnTogglePausePerformed;
         GameEvents.GameResumed.RemoveListener(OnGameResumed);
+    }
+
+    void OnTogglePausePerformed(InputAction.CallbackContext callbackContext)
+    {
+        GameEvents.RaiseGameResumed();
+    }
+
+    void OnGameResumed()
+    {
+        SwitchState(Factory.Playing());
     }
 
     public override void CheckSwitchStates() { }

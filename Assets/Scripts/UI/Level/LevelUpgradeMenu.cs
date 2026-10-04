@@ -4,18 +4,17 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(PanelRenderer))]
 public class LevelUpgradeMenu : BaseSubmenu {
     Button _upgradeButtonOne, _upgradeButtonTwo, _upgradeButtonThree;
+    PanelRenderer _panelRenderer;
 
     void OnEnable()
     {
-        GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
+        _panelRenderer = GetComponent<PanelRenderer>();
+        _panelRenderer.RegisterUIReloadCallback(OnUIReload);
     }
 
     void OnDisable()
     {
-        GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
-        _upgradeButtonOne.clicked -= OnUpgradeButtonOneClick;
-        _upgradeButtonTwo.clicked -= OnUpgradeButtonTwoClick;
-        _upgradeButtonThree.clicked -= OnUpgradeButtonThreeClick;
+        _panelRenderer.UnregisterUIReloadCallback(OnUIReload);
     }
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
@@ -33,20 +32,17 @@ public class LevelUpgradeMenu : BaseSubmenu {
     {
         Game.UpgradeOptionManager.SelectOptionOne();
         GameEvents.RaiseGameResumed();
-        CloseOverlay();
     }
 
     void OnUpgradeButtonTwoClick()
     {
         Game.UpgradeOptionManager.SelectOptionTwo();
         GameEvents.RaiseGameResumed();
-        CloseOverlay();
     }
 
     void OnUpgradeButtonThreeClick()
     {
         Game.UpgradeOptionManager.SelectOptionThree();
         GameEvents.RaiseGameResumed();
-        CloseOverlay();
     }
 }

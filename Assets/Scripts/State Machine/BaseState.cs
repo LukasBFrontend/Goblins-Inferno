@@ -67,6 +67,6 @@ public abstract class BaseState
     protected void SetSubState(BaseState newSubState)
     {
         _currentSubState = newSubState;
-        newSubState.SetSuperState(this);
+        newSubState?.SetSuperState(this);
     }
 }

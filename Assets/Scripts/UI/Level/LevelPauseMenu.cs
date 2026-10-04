@@ -4,43 +4,43 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(PanelRenderer))]
 public class LevelPauseMenu : BaseSubmenu {
     Button _resumeButton, _optionsButton, _quitButton;
+    PanelRenderer _panelRenderer;
 
     void OnEnable()
     {
-        GetComponent<PanelRenderer>().RegisterUIReloadCallback(OnUIReload);
+        _panelRenderer = GetComponent<PanelRenderer>();
+        _panelRenderer.RegisterUIReloadCallback(OnUIReload);
     }
 
     void OnDisable()
     {
-        GetComponent<PanelRenderer>().UnregisterUIReloadCallback(OnUIReload);
-        // _resumeButton.clicked -= OneResumeButtonClicked;
-        // _optionsButton.clicked -= OnOptionsButtonClicked;
-        // _quitButton.clicked -= OnQuitButtonClicked;
+        _panelRenderer.UnregisterUIReloadCallback(OnUIReload);
     }
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
     {
-        // _resumeButton = rootElement.Q<TemplateContainer>("ResumeButton").Q<Button>();
-        // _optionsButton = rootElement.Q<TemplateContainer>("OptionsButton").Q<Button>();
-        // _quitButton = rootElement.Q<TemplateContainer>("QuitButton").Q<Button>();
+        _resumeButton = rootElement.Q<Button>("ResumeButton");
+        _optionsButton = rootElement.Q<Button>("OptionsButton");
+        _quitButton = rootElement.Q<Button>("QuitButton");
 
-        // _resumeButton.clicked += OneResumeButtonClicked;
-        // _optionsButton += OnOptionsButtonClicked;
-        // _quitButton.clicked += OnQuitButtonClicked;
+        _resumeButton.clicked += OneResumeButtonClicked;
+        _optionsButton.clicked += OnOptionsButtonClicked;
+        _quitButton.clicked += OnQuitButtonClicked;
     }
 
     void OneResumeButtonClicked()
     {
-        Game.UpgradeOptionManager.SelectOptionOne();
+        GameEvents.RaiseGameResumed();
     }
 
     void OnOptionsButtonClicked()
     {
-        Game.UpgradeOptionManager.SelectOptionTwo();
+        throw new System.NotImplementedException("The options menu UI is not yet implemented.");
+        //SwitchSubmenu<OptionsMenu>();
     }
 
     void OnQuitButtonClicked()
     {
-        Game.UpgradeOptionManager.SelectOptionThree();
+        GameEvents.RaiseLevelQuit();
     }
 }
