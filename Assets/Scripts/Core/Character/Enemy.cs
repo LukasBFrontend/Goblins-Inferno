@@ -14,7 +14,7 @@ public sealed class Enemy : BaseCharacter
         yield return _waitForSeconds_5;
         _canAttack = true;
     }
-    void OnCollisionStay2D(Collision2D other)
+    void OnCollisionStay(Collision other)
     {
         if (!other.collider.TryGetComponent<Player>(out var player) || !_canAttack)
         {

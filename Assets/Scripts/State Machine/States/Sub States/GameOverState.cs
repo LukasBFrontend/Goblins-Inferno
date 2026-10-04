@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOverState : BaseState
 {
@@ -8,12 +9,7 @@ public class GameOverState : BaseState
     }
     public override void EnterState()
     {
-
-    }
-
-    void OnGameResumed()
-    {
-        SwitchState(Factory.Playing());
+        GameEvents.LevelStarted.AddListener(OnLevelStarted);
     }
 
     public override void UpdateState()
@@ -23,7 +19,13 @@ public class GameOverState : BaseState
 
     public override void ExitState()
     {
-        GameEvents.GameResumed.RemoveListener(OnGameResumed);
+        GameEvents.LevelStarted.RemoveListener(OnLevelStarted);
+    }
+
+    void OnLevelStarted()
+    {
+        SwitchState(Factory.Playing());
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public override void CheckSwitchStates() { }

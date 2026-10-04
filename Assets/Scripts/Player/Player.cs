@@ -56,7 +56,7 @@ public class Player : BaseCharacter
 
     public override void Die()
     {
-        SceneManager.LoadScene("Main");
+        GameEvents.RaiseGameOverEvent();
     }
 
     private void LvlUp()

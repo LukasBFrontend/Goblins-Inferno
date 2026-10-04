@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2695317385333586911}
   - component: {fileID: 6659046050882650041}
   - component: {fileID: 1218385047617684678}
+  - component: {fileID: 63262008303813156}
   - component: {fileID: 805074245506233799}
   m_Layer: 5
   m_Name: Level UI
@@ -113,6 +114,9 @@ MonoBehaviour:
   levelPauseData:
     menu: {fileID: 1218385047617684678}
     containerName: PauseMenuContainer
+  gameoverMenuData:
+    menu: {fileID: 63262008303813156}
+    containerName: GameoverMenuContainer
 --- !u!114 &6659046050882650041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +141,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff683f32185e2e8409b68d6110941a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelPauseMenu
+--- !u!114 &63262008303813156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456760527616442994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a8d07d27f8b9be428ac300e3181bca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOverMenu
 --- !u!114 &805074245506233799
 MonoBehaviour:
   m_ObjectHideFlags: 0

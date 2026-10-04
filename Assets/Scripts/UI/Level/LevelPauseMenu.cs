@@ -2,8 +2,9 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(PanelRenderer))]
-public class LevelPauseMenu : BaseSubmenu {
-    Button _resumeButton, _optionsButton, _quitButton;
+public class LevelPauseMenu : BaseSubmenu
+{
+    Button _resumeButton, _optionsButton;
     PanelRenderer _panelRenderer;
 
     void OnEnable()
@@ -21,11 +22,9 @@ public class LevelPauseMenu : BaseSubmenu {
     {
         _resumeButton = rootElement.Q<Button>("ResumeButton");
         _optionsButton = rootElement.Q<Button>("OptionsButton");
-        _quitButton = rootElement.Q<Button>("QuitButton");
 
         _resumeButton.clicked += OneResumeButtonClicked;
         _optionsButton.clicked += OnOptionsButtonClicked;
-        _quitButton.clicked += OnQuitButtonClicked;
     }
 
     void OneResumeButtonClicked()
@@ -37,10 +36,5 @@ public class LevelPauseMenu : BaseSubmenu {
     {
         throw new System.NotImplementedException("The options menu UI is not yet implemented.");
         //SwitchSubmenu<OptionsMenu>();
-    }
-
-    void OnQuitButtonClicked()
-    {
-        GameEvents.RaiseLevelQuit();
     }
 }
