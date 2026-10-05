@@ -6,18 +6,18 @@ TerrainLayer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Lava_And_Pavement_2
-  m_DiffuseTexture: {fileID: 2800000, guid: 6de5a9bbae327f948882bb47bd8ba940, type: 3}
-  m_NormalMapTexture: {fileID: 2800000, guid: ea3640b0da7d1c44ebb45b7c9dd93e7a, type: 3}
-  m_MaskMapTexture: {fileID: 2800000, guid: 63838fe271f49654a8dfae79c490be39, type: 3}
+  m_Name: Grass_37_2
+  m_DiffuseTexture: {fileID: 2800000, guid: 910e53a3219dd48409cf12706e756862, type: 3}
+  m_NormalMapTexture: {fileID: 2800000, guid: 19bdb1d041a89e044b2a3411604642ed, type: 3}
+  m_MaskMapTexture: {fileID: 2800000, guid: d313aa772df0ad049a31b49cd0dca36f, type: 3}
   m_TileSize: {x: 2, y: 2}
-  m_TileOffset: {x: 0, y: 0}
+  m_TileOffset: {x: 0.5, y: 0.5}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
   m_Metallic: 0
   m_Smoothness: 0
-  m_NormalScale: 1
+  m_NormalScale: 0.1
   m_DiffuseRemapMin: {x: 0, y: 0, z: 0, w: 0}
-  m_DiffuseRemapMax: {x: 0.5320754, y: 0.5320754, z: 0.5320754, w: 1}
+  m_DiffuseRemapMax: {x: 0.41662508, y: 0.5320754, z: 0.42556748, w: 1}
   m_MaskMapRemapMin: {x: 0, y: 0, z: 0, w: 0}
   m_MaskMapRemapMax: {x: 1, y: 1, z: 1, w: 1}
   m_SmoothnessSource: 1

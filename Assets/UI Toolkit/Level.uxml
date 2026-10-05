@@ -16,12 +16,6 @@
                 <ui:Button text="QUIT" name="QuitButton" class="button"/>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="UpgradeMenuContainer" class="submenuContainer" style="visibility: hidden;">
-            <ui:Label text="Level Up" name="LevelUpLabel" class="title"/>
-            <ui:Instance template="UpgradeButton" name="UpgradeButtonOne" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Upgrade%201.asset?fileID=11400000&amp;guid=f5ef43c874b823f4cb40e8d76d048b0a&amp;type=2#Upgrade 1"/>
-            <ui:Instance template="UpgradeButton" name="UpgradeButtonTwo" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Upgrade%202.asset?fileID=11400000&amp;guid=caa74c8aef6f23348973d39589b4fbd3&amp;type=2#Upgrade 2"/>
-            <ui:Instance template="UpgradeButton" name="UpgradeButtonThree" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Upgrade%203.asset?fileID=11400000&amp;guid=6bf788f0c4930c04bb1a355c9982b094&amp;type=2#Upgrade 3"/>
-        </ui:VisualElement>
         <ui:VisualElement name="GameoverMenuContainer" class="submenuContainer" style="visibility: hidden;">
             <ui:VisualElement name="UpperContainer" class="upperContainer">
                 <ui:Label text="Game Over" name="TitleLabel" class="title"/>
@@ -30,6 +24,12 @@
                 <ui:Button text="RETRY" name="RetryButton" class="button"/>
                 <ui:Button text="QUIT" name="QuitButton" class="button"/>
             </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="UpgradeMenuContainer" style="visibility: hidden;">
+            <ui:Label text="Level Up" name="LevelUpLabel" class="title"/>
+            <ui:Instance template="UpgradeButton" name="UpgradeButtonOne" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Upgrade%201.asset?fileID=11400000&amp;guid=f5ef43c874b823f4cb40e8d76d048b0a&amp;type=2#Upgrade 1"/>
+            <ui:Instance template="UpgradeButton" name="UpgradeButtonTwo" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Upgrade%202.asset?fileID=11400000&amp;guid=caa74c8aef6f23348973d39589b4fbd3&amp;type=2#Upgrade 2"/>
+            <ui:Instance template="UpgradeButton" name="UpgradeButtonThree" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Upgrade%203.asset?fileID=11400000&amp;guid=6bf788f0c4930c04bb1a355c9982b094&amp;type=2#Upgrade 3"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

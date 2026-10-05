@@ -2,20 +2,24 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D rigidbody;
-    [SerializeField] ProjectileTargetTracker targetTracker;
     [SerializeField] SO_ProjectileData projectileData;
+    [SerializeField] bool logOnTargetHit;
+    BaseCharacter _target;
 
-    public void Initialize(BaseCharacter target)
+    public void SetTarget(BaseCharacter target)
     {
+        _target = target;
+
         switch (projectileData.arcMode)
         {
-            case ProjectileArcMode.Simple:
-                StartCoroutine(FollowSimpleRoutine(target));
+            case ProjectileArcMode.None:
+                StartCoroutine(MoveRoutine(target));
+                break;
+            case ProjectileArcMode.Track:
+                StartCoroutine(TrackRoutine(target));
                 break;
             case ProjectileArcMode.Boomerang:
                 StartCoroutine(BoomerangRoutine(target));
@@ -26,11 +30,32 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    IEnumerator FollowSimpleRoutine(BaseCharacter target)
+    IEnumerator MoveRoutine(BaseCharacter target)
     {
-        while (Vector2.Distance(target.transform.position, transform.position) > projectileData.targetReachedThreshold)
+        Vector3 direction = PointToTarget(target);
+        float elapsed = 0f;
+
+
+        while (elapsed < projectileData.lifeTime)
         {
-            rigidbody.linearVelocity = Vector2.MoveTowards(transform.position, target.transform.position, projectileData.initialVelocity * Time.deltaTime);
+            float step = projectileData.initialVelocity * Time.deltaTime;
+            transform.position += direction * step;
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(gameObject);
+    }
+
+    IEnumerator TrackRoutine(BaseCharacter target)
+    {
+        while (Vector3.Distance(target.ColliderCenter, transform.position) > projectileData.targetReachedThreshold)
+        {
+            PointToTarget(target);
+
+            float step = projectileData.initialVelocity * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, target.ColliderCenter, step);
             yield return null;
         }
     }
@@ -42,5 +67,28 @@ public class Projectile : MonoBehaviour
     IEnumerator BounceRoutine(BaseCharacter target)
     {
         throw new NotImplementedException();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (!other.TryGetComponent<BaseCharacter>(out var character) || character != _target)
+        {
+            return;
+        }
+
+        if (logOnTargetHit)
+        {
+            Debug.Log($"Projectile <color=white>{name}</color> found its target {_target.name}");
+        }
+    }
+
+    Vector3 PointToTarget(BaseCharacter target)
+    {
+        Vector3 direction = (target.ColliderCenter - transform.position).normalized;
+        direction.y = 0;
+
+        transform.rotation = Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan2(direction.x, direction.z), 0);
+
+        return direction;
     }
 }

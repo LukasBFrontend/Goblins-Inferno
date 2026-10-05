@@ -2,7 +2,8 @@ using UnityEngine;
 
 public enum ProjectileArcMode
 {
-    Simple,
+    None,
+    Track,
     Bounce,
     Boomerang,
 }
@@ -15,4 +16,5 @@ public class SO_ProjectileData : ScriptableObject
     public ProjectileArcMode arcMode;
     [Range(0f, .2f)]
     public float targetReachedThreshold;
+    public float lifeTime = 5f;
 }

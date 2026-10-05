@@ -12,7 +12,7 @@ public abstract class BaseCharacter : MonoBehaviour
     public MeshRenderer[] Renderers => _renderers ??= renderGroup.GetComponentsInChildren<MeshRenderer>().Where(renderer => renderer.gameObject.activeSelf == true).ToArray();
     public GameObject RenderGroup => renderGroup;
     public Rigidbody Rigidbody => rigidbody;
-    public Collider Collider => collider;
+    public Vector3 ColliderCenter => collider.bounds.center;
     public Health Health => health;
     public abstract void Die();
     MeshRenderer[] _renderers;
@@ -22,5 +22,13 @@ public abstract class BaseCharacter : MonoBehaviour
         Vector3 position = rigidbody.position;
         Vector3 targetPosition = character.Rigidbody.position;
         return (targetPosition - position).normalized;
+    }
+
+    public float DistanceTo(BaseCharacter character)
+    {
+        Vector3 position = rigidbody.position;
+        Vector3 targetPosition = character.Rigidbody.position;
+
+        return Vector3.Distance(position, targetPosition);
     }
 }

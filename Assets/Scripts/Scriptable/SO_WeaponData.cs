@@ -109,7 +109,7 @@ public class SO_WeaponData : ScriptableObject
             GameObject projectileObject = Instantiate(projectilePrefab);
             Projectile projectile = projectileObject.GetComponent<Projectile>();
 
-            projectile.Initialize(enemy);
+            projectile.SetTarget(enemy);
         }
     }
 
