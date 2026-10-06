@@ -17,4 +17,4 @@ MonoBehaviour:
     dropChance: 100
     itemsToTakeRange:
       lower: 1
-      upper: 10
+      upper: 2

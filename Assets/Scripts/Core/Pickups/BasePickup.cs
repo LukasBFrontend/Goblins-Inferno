@@ -14,10 +14,10 @@ public abstract class BasePickup : MonoBehaviour
             return;
         }
 
-        StartCoroutine(DriftRoutine(pickups));
+        StartCoroutine(ItemDriftRoutine(pickups));
     }
 
-IEnumerator DriftRoutine(List<BasePickup> pickups)
+IEnumerator ItemDriftRoutine(List<BasePickup> pickups)
 {
     const float TIMEOUT = 1f;
     float nearestDistanceSquared = 0f;

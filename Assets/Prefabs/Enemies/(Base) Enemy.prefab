@@ -132,8 +132,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6549165088060388711}
   - component: {fileID: 1459486930531620886}
+  - component: {fileID: 3490434929943945283}
   - component: {fileID: 4821332615545964327}
-  - component: {fileID: 5839612487670695719}
   - component: {fileID: 1059929720129743303}
   - component: {fileID: 4501246944948846756}
   - component: {fileID: 8292207059351111743}
@@ -185,6 +185,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &3490434929943945283
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9066773723532610583}
+  m_Material: {fileID: 13400000, guid: 7fc5e8a53a76aca488669df50ecb9c6e, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &4821332615545964327
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -211,28 +234,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
---- !u!65 &5839612487670695719
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9066773723532610583}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_CollisionDetection: 1
 --- !u!114 &1059929720129743303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +250,7 @@ MonoBehaviour:
   renderGroup: {fileID: 6837856444100700954}
   animator: {fileID: 1459486930531620886}
   rigidbody: {fileID: 4821332615545964327}
-  collider: {fileID: 5839612487670695719}
+  collider: {fileID: 3490434929943945283}
   health: {fileID: 8292207059351111743}
   loot: {fileID: 7695627580935869272}
 --- !u!114 &4501246944948846756
@@ -263,9 +265,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9055ba3e0fc66e8478e7e1f7449b2318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
   baseMoveSpeed: 4
   stopAt: 0.5
   stopDistance: 0.1
+  personalSpace: 2
 --- !u!114 &8292207059351111743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,7 +331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5654760809426586751, guid: 05376efaf9011f84da473fada26d8476, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.001
+      value: 0.002
       objectReference: {fileID: 0}
     - target: {fileID: 5654760809426586751, guid: 05376efaf9011f84da473fada26d8476, type: 3}
       propertyPath: m_LocalPosition.z
@@ -362,6 +368,10 @@ PrefabInstance:
     - target: {fileID: 5830939983102530030, guid: 05376efaf9011f84da473fada26d8476, type: 3}
       propertyPath: m_Name
       value: Spot Shadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830939983102530030, guid: 05376efaf9011f84da473fada26d8476, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

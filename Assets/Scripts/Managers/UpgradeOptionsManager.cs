@@ -56,13 +56,19 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
             // If weapon is lvl 0 create weapon unlock option and continue
             foreach (var stat in weaponStats.All())
             {
-                _currentOptions.Add(new WeaponStatOption(weaponName, stat));
+                if (stat.IncludeAsUpgradeOption)
+                {
+                    _currentOptions.Add(new WeaponStatOption(weaponName, stat));
+                }
             }
         }
 
         foreach (var stat in characterStats)
         {
-            _currentOptions.Add(new CharacterStatOption(stat));
+            if (stat.IncludeAsUpgradeOption)
+            {
+                _currentOptions.Add(new CharacterStatOption(stat));
+            }
         }
     }
 }

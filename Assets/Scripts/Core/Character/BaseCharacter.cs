@@ -13,6 +13,7 @@ public abstract class BaseCharacter : MonoBehaviour
     public GameObject RenderGroup => renderGroup;
     public Animator Animator => animator;
     public Rigidbody Rigidbody => rigidbody;
+    public Collider Collider => collider;
     public Vector3 ColliderCenter => collider.bounds.center;
     public Health Health => health;
 

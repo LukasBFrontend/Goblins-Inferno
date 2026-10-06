@@ -7,7 +7,9 @@ public abstract class Stat
     public string Name => _name;
     public string ShortName => _shortName;
     public float PerLevelIncrease => _perLevelIncrease;
+    public bool IncludeAsUpgradeOption => _includeAsUpgradeOption;
     protected Sprite _sprite;
+    protected bool _includeAsUpgradeOption;
     protected string _name;
     protected string _shortName;
     protected int _lvl;
@@ -45,6 +47,7 @@ public class AdditiveStat : Stat
         _shortName = statData.shortName;
         _baseValue = statData.baseValue;
         _perLevelIncrease = statData.flatScaling;
+        _includeAsUpgradeOption = statData.includeAsUpgradeOption;
     }
 
     public override float Evaluate()
@@ -58,8 +61,6 @@ public class AdditiveStat : Stat
 /// </summary>
 public sealed class MultiplicativeStat : Stat
 {
-
-
     public MultiplicativeStat(MultiplicativeStatData statData)
     {
         _lvl = 0;
@@ -67,6 +68,7 @@ public sealed class MultiplicativeStat : Stat
         _name = statData.name;
         _shortName = statData.shortName;
         _perLevelIncrease = statData.multiplierScaling;
+        _includeAsUpgradeOption = statData.includeAsUpgradeOption;
     }
 
     /// <summary>

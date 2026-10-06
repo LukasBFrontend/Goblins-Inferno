@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class StatData
 {
-    public bool IncludeAsUpgradeOption;
+    public bool includeAsUpgradeOption;
     [Header("Meta")]
     public Sprite UISprite;
     public string name;

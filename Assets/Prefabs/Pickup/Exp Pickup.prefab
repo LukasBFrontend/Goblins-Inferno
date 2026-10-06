@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExpPickup
   driftRange: 0.5
   driftSpeed: 2
-  value: 10
+  value: 40
 --- !u!1001 &8783977001265809011
 PrefabInstance:
   m_ObjectHideFlags: 0
