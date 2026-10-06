@@ -148,4 +148,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   projectileData: {fileID: 11400000, guid: 1bbd11033325720468e29d0a7817ba15, type: 2}
-  logOnTargetHit: 0
+  logOnTargetHit: 1

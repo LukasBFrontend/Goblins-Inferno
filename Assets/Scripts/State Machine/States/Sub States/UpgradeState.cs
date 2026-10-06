@@ -9,6 +9,7 @@ public class UpgradeState : BaseState
     public override void EnterState()
     {
         GameEvents.GameResumed.AddListener(OnGameResumed);
+        Time.timeScale = 0;
     }
 
     void OnGameResumed()

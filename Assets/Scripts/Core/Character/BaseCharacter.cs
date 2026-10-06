@@ -1,21 +1,22 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Health))]
 public abstract class BaseCharacter : MonoBehaviour
 {
     [SerializeField] GameObject renderGroup;
+    [SerializeField] Animator animator;
     [SerializeField] Rigidbody rigidbody;
     [SerializeField] Collider collider;
     [SerializeField] Health health;
-    public MeshRenderer[] Renderers => _renderers ??= renderGroup.GetComponentsInChildren<MeshRenderer>().Where(renderer => renderer.gameObject.activeSelf == true).ToArray();
+
+    public Renderer[] Renderers => _renderers ??= renderGroup.GetComponentsInChildren<Renderer>().Where(renderer => renderer.gameObject.activeSelf == true).ToArray();
     public GameObject RenderGroup => renderGroup;
+    public Animator Animator => animator;
     public Rigidbody Rigidbody => rigidbody;
     public Vector3 ColliderCenter => collider.bounds.center;
     public Health Health => health;
-    public abstract void Die();
-    MeshRenderer[] _renderers;
+
+    Renderer[] _renderers;
 
     public Vector3 DirectionTo(BaseCharacter character)
     {
@@ -31,4 +32,6 @@ public abstract class BaseCharacter : MonoBehaviour
 
         return Vector3.Distance(position, targetPosition);
     }
+
+    public abstract void Die();
 }

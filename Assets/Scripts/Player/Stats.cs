@@ -10,9 +10,12 @@ public class Stats : MonoBehaviour
 {
     [SerializeField] SO_WeaponsConfig weaponsConfig;
     [SerializeField] SO_CharacterStatsConfig playerStatsConfig;
-    public CharacterStats CharacterModifiers => _characterStats;
-    public Dictionary<string, WeaponStats> WeaponsModifiers => _weaponsStatsLookUp;
-    public float AttackCooldown =>  1 / _characterStats.AttackSpeedMultiplier.Evaluate();
+
+    public CharacterStats Character => _characterStats;
+    public Dictionary<string, WeaponStats> Weapons => _weaponsStatsLookUp;
+    public float AttackCooldown =>  _characterStats.Cooldown.BaseValue / _characterStats.AttackSpeedMultiplier.Evaluate();
+    public float MovementSpeed => _characterStats.MovementSpeed.BaseValue * _characterStats.MoveSpeedMultiplier.Evaluate();
+
     CharacterStats _characterStats;
     Dictionary<string, WeaponStats> _weaponsStatsLookUp;
 
@@ -28,7 +31,7 @@ public class Stats : MonoBehaviour
         return weaponStats;
     }
 
-    private void Awake()
+    void Awake()
     {
         _characterStats = new CharacterStats(playerStatsConfig);
 

@@ -10,11 +10,7 @@ public class PausedState : BaseState
     public override void EnterState()
     {
         RegisterCallbacks();
-    }
-
-    public override void UpdateState()
-    {
-        CheckSwitchStates();
+        Time.timeScale = 0;
     }
 
     public override void ExitState()
@@ -44,6 +40,7 @@ public class PausedState : BaseState
         SwitchState(Factory.Playing());
     }
 
+    public override void UpdateState() { }
     public override void CheckSwitchStates() { }
     public override void InitializeSubState() { }
 }

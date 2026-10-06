@@ -1,33 +1,35 @@
 using UnityEngine;
-using UnityEngine.Events;
-using System;
 using System.Collections;
 using System.Collections.Generic;
+
+[System.Serializable]
+struct StatsConfig
+{
+    [Header("Overrides base health if set")]
+    public SO_CharacterStatsConfig characterStatsConfig;
+}
 
 [RequireComponent(typeof (BaseCharacter))]
 public class Health : MonoBehaviour
 {
-    [SerializeField] Color originalColor;
-    [SerializeField] Color damageColor;
     [Range(0, 100)]
-    [SerializeField] int health;
-    public int Current => health;
+    [SerializeField] int baseHealth = 50;
+    [SerializeField] StatsConfig statsConfig;
+    [Header("Animation")]
+    [SerializeField] string propertyName = "_EmissionColor";
+    [ColorUsage(false, true)]
+    [SerializeField] Color originalColor;
+    [ColorUsage(false, true)]
+    [SerializeField] Color damageColor;
+
+    public int Current => _currentHealth;
     public int Max => _maxHealth;
+
+    int _currentHealth;
     int _maxHealth;
     BaseCharacter _character;
     List<Material> _materialInstances;
 
-    void Awake()
-    {
-        _maxHealth = health;
-        _character = GetComponent<BaseCharacter>();
-        _materialInstances = new();
-
-        foreach (var renderer in _character.Renderers)
-        {
-            _materialInstances.Add(renderer.materials[0]);
-        }
-    }
 
     /// <summary>
     /// Subtracts amount from the character health. If it reaches zero, invokes Die().
@@ -35,51 +37,20 @@ public class Health : MonoBehaviour
     /// <param name="amount"></param>
     public void TakeDamage(int amount)
     {
-        health -= amount;
-        health = Mathf.Clamp(health, 0, _maxHealth);
+        _currentHealth -= amount;
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
 
         if (_character is Player)
         {
-            GameEvents.RaiseHealthChanged(health, _maxHealth);
+            GameEvents.RaiseHealthChanged(_currentHealth, _maxHealth);
         }
 
-        if (health <= 0)
+        if (_currentHealth <= 0)
         {
             _character.Die();
         }
 
         StartCoroutine(AnimateMaterialRoutine());
-    }
-    IEnumerator AnimateMaterialRoutine()
-    {
-        int i = 0;
-        int maxIterations = 2;
-
-        while (i < maxIterations)
-        {
-            if (this == null)
-            {
-                break;
-            }
-            _materialInstances.ForEach(material => material.SetColor("_BaseColor", i % 2 == 1 ? originalColor : damageColor)) ;
-            i++;
-            yield return new WaitForSeconds(.1f);
-        }
-    }
-
-    /// <summary>
-    /// Adds amount to character health up to MaxHealth
-    /// </summary>
-    /// <param name="amount"></param>
-    void Heal(int amount)
-    {
-        if (amount <= 0)
-        {
-            Debug.LogWarning($"Tried invoking method <b><color=white>{nameof(Heal)}()</color></b> of <b>{name}</b> with a non-positive value.");
-            return;
-        }
-
-        health = Mathf.Clamp(health + amount, 0, _maxHealth);
     }
 
     /// <summary>
@@ -98,5 +69,61 @@ public class Health : MonoBehaviour
         _maxHealth = maxHealth;
 
         Heal(difference);
+    }
+
+    void Awake()
+    {
+        var stats = statsConfig.characterStatsConfig;
+
+        if (stats != null)
+        {
+            _maxHealth = (int)stats.maxHealth.baseValue;
+        }
+        else
+        {
+            _maxHealth = baseHealth;
+        }
+
+        _currentHealth = _maxHealth;
+
+        _character = GetComponent<BaseCharacter>();
+        _materialInstances = new();
+
+        foreach (var renderer in _character.Renderers)
+        {
+            _materialInstances.Add(renderer.materials[0]);
+        }
+    }
+
+    IEnumerator AnimateMaterialRoutine()
+    {
+        int i = 0;
+        int maxIterations = 2;
+
+        while (i < maxIterations)
+        {
+            if (this == null)
+            {
+                break;
+            }
+            _materialInstances.ForEach(material => material.SetColor(propertyName, i % 2 == 1 ? originalColor : damageColor)) ;
+            i++;
+            yield return new WaitForSeconds(.1f);
+        }
+    }
+
+    /// <summary>
+    /// Adds amount to character health up to MaxHealth
+    /// </summary>
+    /// <param name="amount"></param>
+    void Heal(int amount)
+    {
+        if (amount <= 0)
+        {
+            Debug.LogWarning($"Tried invoking method <b><color=white>{nameof(Heal)}()</color></b> of <b>{name}</b> with a non-positive value.");
+            return;
+        }
+
+        _currentHealth = Mathf.Clamp(_currentHealth + amount, 0, _maxHealth);
     }
 }

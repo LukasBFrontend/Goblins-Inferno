@@ -8,10 +8,12 @@ public class Projectile : MonoBehaviour
     [SerializeField] SO_ProjectileData projectileData;
     [SerializeField] bool logOnTargetHit;
     BaseCharacter _target;
+    int _damage;
 
-    public void SetTarget(BaseCharacter target)
+    public void SetTarget(BaseCharacter target, int damage)
     {
         _target = target;
+        _damage = damage;
 
         switch (projectileData.arcMode)
         {
@@ -75,6 +77,9 @@ public class Projectile : MonoBehaviour
         {
             return;
         }
+
+        _target.Health.TakeDamage(_damage);
+        Destroy(gameObject);
 
         if (logOnTargetHit)
         {

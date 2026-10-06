@@ -15,14 +15,14 @@ public class MultiplicativeStatData : StatData
 {
     [Header("Scaling")]
     [Tooltip("By how many percentiles should the stat scale per level?")]
-    [Range(5, 25)] public int multiplierScaling;
+    [Range(0, 30)] public int multiplierScaling = 15;
 }
 
 [System.Serializable]
 public class AdditiveStatData : StatData
 {
     [Header("Scaling")]
-    public int baseValue;
+    public float baseValue;
     [Tooltip("By what flat amount should the stat increase per level?")]
-    public int flatScaling;
+    public float flatScaling;
 }

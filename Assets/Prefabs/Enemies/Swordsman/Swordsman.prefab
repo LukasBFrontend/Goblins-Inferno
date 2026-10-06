@@ -254,13 +254,13 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7695627580935869272, guid: d5d8371c68ab79649941755b979ea139, type: 3}
+      propertyPath: enemyDropData
+      value: 
+      objectReference: {fileID: 11400000, guid: 71819cf32b9640948a5a0224bd777067, type: 2}
     - target: {fileID: 7809970834786577134, guid: d5d8371c68ab79649941755b979ea139, type: 3}
       propertyPath: m_Layer
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8292207059351111743, guid: d5d8371c68ab79649941755b979ea139, type: 3}
-      propertyPath: health
-      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 9066773723532610583, guid: d5d8371c68ab79649941755b979ea139, type: 3}
       propertyPath: m_Name
@@ -298,7 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5008d98316fa940a7f1ae80ad55c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordsmanController
-  baseMoveSpeed: 4.5
 --- !u!4 &5609653695537929309 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 732139133539721669, guid: d5d8371c68ab79649941755b979ea139, type: 3}

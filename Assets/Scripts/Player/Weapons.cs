@@ -28,12 +28,7 @@ public class Weapons : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        Attack();
-    }
-
-    void Attack()
+    public void Attack()
     {
         if (Time.time <= Game.Player.Stats.AttackCooldown + _lastAttackTime)
         {

@@ -10,6 +10,9 @@ public class GameOverState : BaseState
     public override void EnterState()
     {
         GameEvents.LevelStarted.AddListener(OnLevelStarted);
+
+        Time.timeScale = 0.5f;
+        Game.Player.Rigidbody.linearVelocity = Vector3.zero;
     }
 
     public override void UpdateState()

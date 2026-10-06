@@ -4,15 +4,13 @@ using UnityEngine.InputSystem;
 
 public class PlayingState : BaseState
 {
-    InputAction _move;
     public PlayingState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
     {
-        _move = Game.Input.Move;
         RegisterCallbacks();
     }
     public override void EnterState()
     {
-        _move.Enable();
+        Game.Input.Move.Enable();
         RegisterCallbacks();
 
         Time.timeScale = 1;
@@ -20,15 +18,14 @@ public class PlayingState : BaseState
 
     public override void UpdateState()
     {
-        Game.Player.Movement.SetInput(_move.ReadValue<Vector2>());
+        Game.Player.Movement.SetInput(Game.Input.Move.ReadValue<Vector2>());
+        Game.Player.Weapons.Attack();
         CheckSwitchStates();
     }
 
     public override void ExitState() {
-        _move.Disable();
+        Game.Input.Move.Disable();
         UnregisterCallbacks();
-
-        Time.timeScale = 0;
     }
 
     void RegisterCallbacks()
@@ -57,8 +54,8 @@ public class PlayingState : BaseState
 
     void OnTogglePausePerformed(InputAction.CallbackContext callbackContext)
     {
-        SwitchState(Factory.Paused());
         GameEvents.RaiseGamePaused();
+        SwitchState(Factory.Paused());
     }
 
     public override void CheckSwitchStates() { }

@@ -57,6 +57,7 @@ public class Player : BaseCharacter
     public override void Die()
     {
         GameEvents.RaiseGameOverEvent();
+        Animator.SetBool("IsDead", true);
     }
 
     private void LvlUp()

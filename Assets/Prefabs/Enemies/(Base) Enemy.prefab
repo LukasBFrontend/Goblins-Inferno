@@ -131,11 +131,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6549165088060388711}
+  - component: {fileID: 1459486930531620886}
   - component: {fileID: 4821332615545964327}
   - component: {fileID: 5839612487670695719}
   - component: {fileID: 1059929720129743303}
+  - component: {fileID: 4501246944948846756}
   - component: {fileID: 8292207059351111743}
-  - component: {fileID: 1459486930531620886}
+  - component: {fileID: 7695627580935869272}
+  - component: {fileID: 8590140145642448910}
   m_Layer: 6
   m_Name: (Base) Enemy
   m_TagString: Untagged
@@ -160,6 +163,28 @@ Transform:
   - {fileID: 8008875280186407571}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1459486930531620886
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9066773723532610583}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!54 &4821332615545964327
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -221,11 +246,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   renderGroup: {fileID: 6837856444100700954}
+  animator: {fileID: 1459486930531620886}
   rigidbody: {fileID: 4821332615545964327}
   collider: {fileID: 5839612487670695719}
   health: {fileID: 8292207059351111743}
-  animator: {fileID: 1459486930531620886}
-  contactDamage: 20
+  loot: {fileID: 7695627580935869272}
+--- !u!114 &4501246944948846756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9066773723532610583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9055ba3e0fc66e8478e7e1f7449b2318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  baseMoveSpeed: 4
+  stopAt: 0.5
+  stopDistance: 0.1
 --- !u!114 &8292207059351111743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,31 +278,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed425e3b9bcf7e4f8319a9974fcfe1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  originalColor: {r: 1, g: 1, b: 1, a: 0}
-  damageColor: {r: 1, g: 0, b: 0, a: 0}
-  health: 100
---- !u!95 &1459486930531620886
-Animator:
-  serializedVersion: 7
+  baseHealth: 50
+  statsConfig:
+    characterStatsConfig: {fileID: 0}
+  propertyName: _EmissionColor
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  damageColor: {r: 0.50000006, g: 0.50000006, b: 0.50000006, a: 0}
+--- !u!114 &7695627580935869272
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9066773723532610583}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e767d529d5b8d74d846361d8b6d21a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyLoot
+  enemyDropData: {fileID: 0}
+--- !u!114 &8590140145642448910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9066773723532610583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec055527938765d46be0580c3b581d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ContactDamage
+  contactDamage: 20
+  cooldown: 1
 --- !u!1001 &2403940734857574124
 PrefabInstance:
   m_ObjectHideFlags: 0

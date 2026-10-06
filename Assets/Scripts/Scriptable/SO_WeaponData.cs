@@ -57,7 +57,7 @@ public class SO_WeaponData : ScriptableObject
     /// </summary>
     public void Attack()
     {
-        _weaponModel.StartCoroutine(AttackRoutine(Game.Player.Stats.AttackCooldown * .95f, stats.projectileCount.baseValue));
+        _weaponModel.StartCoroutine(AttackRoutine(Game.Player.Stats.AttackCooldown * .95f, (int)stats.projectileCount.baseValue));
     }
 
     IEnumerator AttackRoutine(float duration, int projectileCount)
@@ -104,20 +104,28 @@ public class SO_WeaponData : ScriptableObject
 
     void Shoot(List<Enemy> enemies)
     {
+        var characterStats = Game.Player.Stats.Character;
+        float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
+
         foreach (Enemy enemy in enemies)
         {
             GameObject projectileObject = Instantiate(projectilePrefab);
             Projectile projectile = projectileObject.GetComponent<Projectile>();
 
-            projectile.SetTarget(enemy);
+            int damage = (int)(stats.damage.baseValue * damageMultiplier);
+
+            projectile.SetTarget(enemy, damage);
         }
     }
 
     void Damage(List<Enemy> enemies)
     {
+        var characterStats = Game.Player.Stats.Character;
+        float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
+
         foreach (Enemy enemy in enemies)
         {
-            enemy.Health.TakeDamage(stats.damage.baseValue * (int)Game.Player.Stats.CharacterModifiers.DamageMultiplier.Evaluate());
+            enemy.Health.TakeDamage((int)(stats.damage.baseValue * damageMultiplier));
         }
     }
 }

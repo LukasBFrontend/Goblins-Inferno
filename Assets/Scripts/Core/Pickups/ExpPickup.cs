@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ExpPickup : MonoBehaviour
+public class ExpPickup : BasePickup
 {
 
     [Range(5, 200)]
@@ -14,5 +14,10 @@ public class ExpPickup : MonoBehaviour
         }
         player.GainExp(value);
         Destroy(gameObject);
+    }
+
+    void Update()
+    {
+
     }
 }

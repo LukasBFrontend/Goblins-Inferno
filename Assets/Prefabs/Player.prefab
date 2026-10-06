@@ -26,7 +26,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 852272174062642382}
@@ -256,6 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   renderGroup: {fileID: 3755163794439866512}
+  animator: {fileID: 8758642839557183916}
   rigidbody: {fileID: 8422129899962068725}
   collider: {fileID: 2638709353195784427}
   health: {fileID: 9179350344686818751}
@@ -274,9 +275,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed425e3b9bcf7e4f8319a9974fcfe1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
+  baseHealth: 0
+  statsConfig:
+    characterStatsConfig: {fileID: 11400000, guid: dc350bdc372d2a94b8356d73f6598b9b, type: 2}
+  propertyName: _EmissionColor
   originalColor: {r: 0, g: 0, b: 0, a: 0}
-  damageColor: {r: 1, g: 0, b: 0, a: 0}
-  health: 100
+  damageColor: {r: 0.070128806, g: 0.070128806, b: 0.070128806, a: 0}
 --- !u!114 &361925515447440459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,8 +321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dac2f41cf2289244a1cf8412594c044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
-  baseMoveSpeed: 7
-  animator: {fileID: 8758642839557183916}
 --- !u!1001 &1020363209591170012
 PrefabInstance:
   m_ObjectHideFlags: 0
