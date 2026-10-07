@@ -51,6 +51,11 @@ IEnumerator ItemDriftRoutine(List<BasePickup> pickups)
             }
         }
 
+        if (closest == null)
+        {
+            yield break;
+        }
+
         Vector3 delta = nearestDistanceSquared > 0.0005f
             ? transform.position - closest.transform.position
             : initialDirection

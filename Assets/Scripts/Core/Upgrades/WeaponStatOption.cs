@@ -23,6 +23,7 @@ public class WeaponStatOption : UpgradeOption
         Player player = Game.Player;
         WeaponStats weaponStats = player.Stats.GetWeaponModifier(_weaponName);
         Stat stat = weaponStats.GetStat(_stat.Name);
-        Debug.Log($"Stat <color=magenta>{stat.Name}</color> leveled up to <color=white>{stat.LevelUp()}</color>. New evaluated value: <color=white>{stat.Evaluate()}</color>");
+        stat.LevelUp();
+        Debug.Log($"Stat <color=magenta>{stat.Name}</color> leveled up to <color=white>{stat.Lvl}</color>. New evaluated value: <color=white>{stat.Evaluate()}</color>");
     }
 }

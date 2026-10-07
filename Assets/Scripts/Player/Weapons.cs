@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
 [DisallowMultipleComponent]
+
+[RequireComponent(typeof(Player))]
 public class Weapons : MonoBehaviour
 {
     [SerializeField] SO_WeaponsConfig weaponsConfig;
@@ -12,9 +13,11 @@ public class Weapons : MonoBehaviour
     HashSet<SO_WeaponData> _unlockedWeapons;
     Dictionary<string, GameObject> _weaponObjectLookup = new();
     float _lastAttackTime;
+    Player _wielder;
 
     void Awake()
     {
+        _wielder = GetComponent<Player>();
         _availableWeapons =  weaponsConfig.availableWeapons.ToHashSet();
         _unlockedWeapons = new (){ _availableWeapons.First() };
         _lastAttackTime = 0;
@@ -24,7 +27,7 @@ public class Weapons : MonoBehaviour
     {
         foreach(SO_WeaponData weapon in _unlockedWeapons)
         {
-           _weaponObjectLookup.Add(weapon.name, weapon.Spawn(weaponParent));
+           _weaponObjectLookup.Add(weapon.name, weapon.Spawn(_wielder, weaponParent));
         }
     }
 

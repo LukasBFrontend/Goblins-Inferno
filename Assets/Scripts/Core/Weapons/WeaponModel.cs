@@ -46,7 +46,7 @@ public class WeaponModel : MonoBehaviour
             return;
         }
 
-        _weapon.EnterIntoRange(enemy);
+        _weapon.EnterIntoMeleeRange(enemy);
     }
 
     private void OnTriggerExit(Collider other)
@@ -56,6 +56,7 @@ public class WeaponModel : MonoBehaviour
             return;
         }
 
-        _weapon.ExitFromRange(enemy);
+        _weapon.ExitFromMeleeRange(enemy);
+        Invoke(nameof(_weapon.ExitFromMeleeRange),  .5f);
     }
 }

@@ -30,8 +30,9 @@ public class SO_WeaponData : ScriptableObject
     [SerializeField] GameObject projectilePrefab;
     public string WeaponName => weaponName;
     public WeaponStatsData Stats => stats;
-    List<Enemy> _targetsInRange;
+    List<Enemy> _enemiesInRange;
     WeaponModel _weaponModel;
+    Player _wielder;
 
 
     /// <summary>
@@ -39,12 +40,13 @@ public class SO_WeaponData : ScriptableObject
     /// </summary>
     /// <param name="parent"></param>
     /// <param name="activeMonoBehavior"></param>
-    public GameObject Spawn(Transform parent)
+    public GameObject Spawn(Player wielder, Transform parent)
     {
         GameObject weaponObject = Instantiate(weaponModelPrefab);
         weaponObject.transform.SetParent(parent);
         weaponObject.transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
 
+        _wielder = wielder;
         _weaponModel = weaponObject.GetComponentsInChildren<WeaponModel>().First();
         _weaponModel.Initialize(this);
 
@@ -57,65 +59,99 @@ public class SO_WeaponData : ScriptableObject
     /// </summary>
     public void Attack()
     {
-        _weaponModel.StartCoroutine(AttackRoutine(Game.Player.Stats.AttackCooldown * .95f, (int)stats.projectileCount.baseValue));
+        _weaponModel.StartCoroutine(AttackRoutine(Game.Player.Stats.AttackCooldown * .95f, (int)_wielder.Stats.GetWeaponModifier(weaponName).ProjectileCount.Evaluate()));
     }
 
     IEnumerator AttackRoutine(float duration, int projectileCount)
     {
-        float elapsed = 0f;
-        float timestep = duration / projectileCount;
-        float animationDuration = timestep / 3f;
+        float timeBetweenAttacks = duration / projectileCount;
+        float attackAnimationDuration = timeBetweenAttacks / 3f;
 
-        while (elapsed < duration)
+        for (int attack = 0; attack < projectileCount; attack++)
         {
-            _targetsInRange.RemoveAll(enemy => enemy == null);
-            List<Enemy> currentTargets = new(_targetsInRange);
+            HashSet<Enemy> damagedThisAttack = new();
 
             if (weaponType == WeaponType.Area)
             {
-                _weaponModel.StartAnimation(animationDuration);
+                _weaponModel.StartAnimation(attackAnimationDuration);
 
-                yield return new WaitForSeconds(animationDuration / 2f);
+                float animationElapsed = 0f;
 
-                Damage(currentTargets);
+                while (animationElapsed < attackAnimationDuration)
+                {
+                    _enemiesInRange.RemoveAll(enemy => enemy == null);
 
-                yield return new WaitForSeconds(timestep - animationDuration / 2f);
+                    foreach (Enemy enemy in _enemiesInRange)
+                    {
+                        if (damagedThisAttack.Add(enemy))
+                            Damage(new List<Enemy> { enemy });
+                    }
+
+                    yield return null;
+                    animationElapsed += Time.deltaTime;
+                }
+
+                float remainingTime = timeBetweenAttacks - attackAnimationDuration;
+
+                if (remainingTime > 0f)
+                {
+                    yield return new WaitForSeconds(remainingTime);
+                }
+
+                continue;
             }
-            else if (weaponType == WeaponType.Projectile)
+            else if(weaponType == WeaponType.Projectile)
             {
-                Shoot(currentTargets);
+                _enemiesInRange.RemoveAll(enemy => enemy == null);
 
-                yield return new WaitForSeconds(timestep);
+                Shoot();
+
+                yield return new WaitForSeconds(timeBetweenAttacks);
             }
 
-            elapsed += timestep;
         }
     }
 
-    public void EnterIntoRange(Enemy enemy)
+    public void EnterIntoMeleeRange(Enemy enemy)
     {
-        _targetsInRange.Add(enemy);
+        _enemiesInRange.Add(enemy);
     }
 
-    public void ExitFromRange(Enemy enemy)
+    public void ExitFromMeleeRange(Enemy enemy)
     {
-        _targetsInRange.Remove(enemy);
+        _enemiesInRange.Remove(enemy);
     }
 
-    void Shoot(List<Enemy> enemies)
+    void Shoot()
     {
         var characterStats = Game.Player.Stats.Character;
         float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
 
-        foreach (Enemy enemy in enemies)
+
+        GameObject projectileObject = Instantiate(projectilePrefab);
+        Projectile projectile = projectileObject.GetComponent<Projectile>();
+
+        Collider[] hits = Physics.OverlapSphere(_wielder.transform.position, projectile.Data.range);
+        List<Enemy> enemiesInRange = new();
+
+        foreach(var hit in hits)
         {
-            GameObject projectileObject = Instantiate(projectilePrefab);
-            Projectile projectile = projectileObject.GetComponent<Projectile>();
+            if (!hit.TryGetComponent<Enemy>(out var enemy))
+            {
+                continue;
+            }
 
-            int damage = (int)(stats.damage.baseValue * damageMultiplier);
-
-            projectile.SetTarget(enemy, damage);
+            enemiesInRange.Add(enemy);
         }
+
+        Enemy random = enemiesInRange.Count >= 1
+            ? enemiesInRange[Random.Range(0, enemiesInRange.Count)]
+            : null
+        ;
+
+        int damage = (int)(stats.damage.baseValue * damageMultiplier);
+
+        projectile.Initialize(_wielder, random, damage);
     }
 
     void Damage(List<Enemy> enemies)

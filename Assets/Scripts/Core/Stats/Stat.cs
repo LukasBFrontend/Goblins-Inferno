@@ -52,7 +52,7 @@ public class AdditiveStat : Stat
 
     public override float Evaluate()
     {
-        return  _baseValue + (_lvl + 1) * _perLevelIncrease;
+        return  _baseValue + _lvl * _perLevelIncrease;
     }
 }
 

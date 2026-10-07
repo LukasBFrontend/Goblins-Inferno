@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class ArcherAttacks : MonoBehaviour
 {
     [Header("Shoot Arrow")]
@@ -7,6 +8,12 @@ public class ArcherAttacks : MonoBehaviour
     [SerializeField] Transform leftArrowSpawnPoint;
     [SerializeField] Transform rightArrowSpawnPoint;
     [SerializeField] int damage;
+    Enemy _archer;
+
+    void Awake()
+    {
+        _archer = GetComponent<Enemy>();
+    }
 
     public void ShootArrowLeft()
     {
@@ -23,6 +30,6 @@ public class ArcherAttacks : MonoBehaviour
         GameObject ArrowInstance = Instantiate(ArrowPrefab, origin.position, Quaternion.identity);
 
         Projectile projectile = ArrowInstance.GetComponent<Projectile>();
-        projectile.SetTarget(Game.Player, damage);
+        projectile.Initialize(_archer, Game.Player, damage);
     }
 }

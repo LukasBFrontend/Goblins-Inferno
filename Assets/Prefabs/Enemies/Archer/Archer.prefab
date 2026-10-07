@@ -287,6 +287,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7695627580935869272, guid: d5d8371c68ab79649941755b979ea139, type: 3}
+      propertyPath: enemyDropData
+      value: 
+      objectReference: {fileID: 11400000, guid: 71819cf32b9640948a5a0224bd777067, type: 2}
     - target: {fileID: 7809970834786577134, guid: d5d8371c68ab79649941755b979ea139, type: 3}
       propertyPath: m_Layer
       value: 6
