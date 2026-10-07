@@ -29,8 +29,8 @@ public class SO_EnemyDropData : ScriptableObject
         foreach (var dropPool in dropPoolDatas)
         {
             float random = Random.Range(0, 100);
-            int min = dropPool.itemsToTakeRange.lower;
-            int max = dropPool.itemsToTakeRange.upper + 1;
+            int min = dropPool.itemsToTakeRange.lower - 1;
+            int max = dropPool.itemsToTakeRange.upper;
 
             if (random < dropPool.dropChance)
             {
