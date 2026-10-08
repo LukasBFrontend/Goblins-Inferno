@@ -50,6 +50,8 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
 
         var characterStats = Game.Player.Stats.Character.All();
         var weaponsStats = Game.Player.Stats.Weapons;
+        var availableWeapons = Game.Player.Weapons.Available;
+        var unlockedWeapons = Game.Player.Weapons.Unlocked;
 
         foreach (var (weaponName, weaponStats) in weaponsStats)
         {

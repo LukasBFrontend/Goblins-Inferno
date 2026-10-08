@@ -169,6 +169,10 @@ MonoBehaviour:
   rigidbody: {fileID: 8422129899962068725}
   collider: {fileID: 2638709353195784427}
   health: {fileID: 9179350344686818751}
+  avatars:
+    defaultAvatar: {fileID: 9000000, guid: 99ba10d9babc3c44bb73c379035ab563, type: 2}
+    archerAvatar: {fileID: 0}
+    knightAvatar: {fileID: 0}
   stats: {fileID: 361925515447440459}
   weapons: {fileID: 6066673827380938656}
   movement: {fileID: 4222031955162507236}

@@ -8,7 +8,8 @@ public class Weapons : MonoBehaviour
 {
     [SerializeField] SO_WeaponsConfig weaponsConfig;
     [SerializeField] Transform weaponParent;
-    public HashSet<SO_WeaponData> AvailableWeapons => _availableWeapons;
+    public HashSet<SO_WeaponData> Available => _availableWeapons;
+    public HashSet<SO_WeaponData> Unlocked => _unlockedWeapons;
     HashSet<SO_WeaponData> _availableWeapons;
     HashSet<SO_WeaponData> _unlockedWeapons;
     Dictionary<string, GameObject> _weaponObjectLookup = new();

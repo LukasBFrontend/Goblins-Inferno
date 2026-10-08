@@ -1,5 +1,12 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
+[System.Serializable]
+public struct Avatars
+{
+    public Avatar defaultAvatar;
+    public Avatar archerAvatar;
+    public Avatar knightAvatar;
+}
 
 /// <summary>
 /// The main player interface.
@@ -9,6 +16,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Movement))]
 public class Player : BaseCharacter
 {
+    [SerializeField] Avatars avatars;
     [SerializeField] Stats stats;
     [SerializeField] Weapons weapons;
     [SerializeField] Movement movement;
@@ -20,6 +28,32 @@ public class Player : BaseCharacter
     int _lvl = 1;
     int _exp = 0;
     static Player _instance;
+
+    public void SetAvatar(AvatarVariant variant)
+    {
+        Animator.avatar = variant switch
+        {
+            AvatarVariant.Archer => avatars.archerAvatar,
+            AvatarVariant.Knight => avatars.knightAvatar,
+            _ => avatars.defaultAvatar,
+        };
+    }
+
+    public AvatarVariant Avatar()
+    {
+        Avatar avatar = Animator.avatar;
+
+        if (avatar == avatars.archerAvatar)
+        {
+            return AvatarVariant.Archer;
+        }
+        else if (avatar == avatars.knightAvatar)
+        {
+            return AvatarVariant.Knight;
+        }
+        
+        return AvatarVariant.Default;
+    }
 
     /// <summary>
     /// Calculates total exp required to lvl up from the current lvl to the next.
@@ -76,5 +110,6 @@ public class Player : BaseCharacter
         }
 
         _instance = this;
+        SetAvatar(Game.StartAvatar);
     }
 }
