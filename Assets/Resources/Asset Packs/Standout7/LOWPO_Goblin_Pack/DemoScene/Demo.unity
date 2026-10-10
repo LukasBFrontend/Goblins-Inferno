@@ -1371,6 +1371,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1209196061}
     m_Modifications:
+    - target: {fileID: 1931775161929639330, guid: e25c207e48915d0418e8991b762ec3f0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6160765540388724694, guid: e25c207e48915d0418e8991b762ec3f0, type: 3}
       propertyPath: m_Name
       value: PFB_Goblin_Archer

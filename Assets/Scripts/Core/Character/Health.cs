@@ -12,7 +12,6 @@ struct StatsConfig
 [RequireComponent(typeof (BaseCharacter))]
 public class Health : MonoBehaviour
 {
-    [Range(0, 100)]
     [SerializeField] int baseHealth = 50;
     [SerializeField] StatsConfig statsConfig;
     [Header("Animation")]
@@ -73,20 +72,32 @@ public class Health : MonoBehaviour
 
     void Awake()
     {
+        _maxHealth = statsConfig.characterStatsConfig != null
+            ? (int)statsConfig.characterStatsConfig.maxHealth.baseValue
+            : baseHealth
+        ;
+
+        _currentHealth = _maxHealth;
+        _character = GetComponent<BaseCharacter>();
+    }
+
+    void Start()
+    {
+        GetMaterialRefs();
+    }
+
+    void OnValidate()
+    {
         var stats = statsConfig.characterStatsConfig;
 
         if (stats != null)
         {
-            _maxHealth = (int)stats.maxHealth.baseValue;
+            baseHealth = (int)stats.maxHealth.baseValue;
         }
-        else
-        {
-            _maxHealth = baseHealth;
-        }
+    }
 
-        _currentHealth = _maxHealth;
-
-        _character = GetComponent<BaseCharacter>();
+    void GetMaterialRefs()
+    {
         _materialInstances = new();
 
         foreach (var renderer in _character.Renderers)

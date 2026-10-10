@@ -3,6 +3,13 @@
     <ui:VisualElement name="MainMenuContainer" style="flex-grow: 1;">
         <ui:VisualElement name="StartMenuContainer" class="submenuContainer" style="visibility: visible;">
             <ui:VisualElement name="UpperContainer" class="upperContainer">
+                <ui:VisualElement style="flex-grow: 1; width: 100%; align-items: center; justify-content: flex-end;">
+                    <ui:Image source="project://database/Assets/Resources/Sprites/Knight%20Icon/knight.png?fileID=2800000&amp;guid=8e97d4e009670b24d98d3cc8b28f177e&amp;type=3#knight" class="titleIcon" style="translate: -1px 0;"/>
+                    <ui:Image source="project://database/Assets/Resources/Sprites/Knight%20Icon/knight.png?fileID=2800000&amp;guid=8e97d4e009670b24d98d3cc8b28f177e&amp;type=3#knight" class="titleIcon" style="translate: 1px 0;"/>
+                    <ui:Image source="project://database/Assets/Resources/Sprites/Knight%20Icon/knight.png?fileID=2800000&amp;guid=8e97d4e009670b24d98d3cc8b28f177e&amp;type=3#knight" class="titleIcon" style="translate: 0 -1px;"/>
+                    <ui:Image source="project://database/Assets/Resources/Sprites/Knight%20Icon/knight.png?fileID=2800000&amp;guid=8e97d4e009670b24d98d3cc8b28f177e&amp;type=3#knight" class="titleIcon" style="translate: 0 3px;"/>
+                    <ui:Image source="project://database/Assets/Resources/Sprites/Knight%20Icon/knight.png?fileID=2800000&amp;guid=8e97d4e009670b24d98d3cc8b28f177e&amp;type=3#knight" tint-color="rgb(0, 0, 0)" class="titleIcon"/>
+                </ui:VisualElement>
                 <ui:Label text="GOBLINS INFERNO" name="TitleLabel" class="title"/>
             </ui:VisualElement>
             <ui:VisualElement name="LowerContainer" class="lowerContainer">

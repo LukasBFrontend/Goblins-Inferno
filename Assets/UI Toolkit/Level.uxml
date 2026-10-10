@@ -1,9 +1,15 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="UpgradeButton" src="project://database/Assets/UI%20Toolkit/Upgrade%20Button/UpgradeButton.uxml?fileID=9197481963319205126&amp;guid=c09b3ca478fa25245ad9c1e8d318d5ac&amp;type=3#UpgradeButton"/>
     <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=d061f6063ca2fab4d84bfa2407418e4e&amp;type=3#style"/>
-    <ui:VisualElement name="HUDContainer" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;">
-        <ui:ProgressBar value="100" title="100/100" name="HealthBar"/>
+    <ui:VisualElement name="HUDContainer">
         <ui:ProgressBar value="0" title="Lvl 1" name="ExpBar"/>
+        <ui:VisualElement name="InfoContainer">
+            <ui:ProgressBar value="100" title="100/100" name="HealthBar"/>
+            <ui:VisualElement name="ScoreContainer">
+                <ui:Label text="SCORE" name="ScoreLabel"/>
+                <ui:Label text="0" name="ScoreText"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="PauseOverlayContainer" class="overlayContainer" style="justify-content: center; align-items: center; visibility: hidden;">
         <ui:VisualElement name="PauseMenuContainer" class="submenuContainer" style="visibility: hidden;">

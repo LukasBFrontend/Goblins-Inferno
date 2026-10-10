@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
 
         if (moveInput.magnitude > .1f)
         {
-            _player.RenderGroup.transform.localRotation = Quaternion.Euler(0, -90 - Mathf.Rad2Deg * Mathf.Atan2(moveInput.y, moveInput.x), 0);
+            _player.RenderTransform.localRotation = Quaternion.Euler(0, -90 - Mathf.Rad2Deg * Mathf.Atan2(moveInput.y, moveInput.x), 0);
         }
     }
 

@@ -1,12 +1,22 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+struct ParticleSystemVariables
+{
+    public ParticleSystemControls controls;
+    [Range(0f, 1f)]
+    public float tryRegisterHitsAt;
+}
+
 public class Projectile : MonoBehaviour
 {
     [SerializeField] SO_ProjectileData projectileData;
+    [Header("Optional")]
     [SerializeField] ProjectileTargetTracker targetTracker;
+    [SerializeField] ParticleSystemVariables particleSystem;
     [SerializeField] bool logOnTargetHit;
     public SO_ProjectileData Data => projectileData;
     BaseCharacter _sender;
@@ -28,8 +38,12 @@ public class Projectile : MonoBehaviour
         switch (projectileData.arcMode)
         {
             case ProjectileArcMode.None:
+                _hitEverything = false;
+                StartCoroutine(WaitForTargetRoutine(sender, initialTarget));
+                break;
+            case ProjectileArcMode.HitMiss:
                 _hitEverything = true;
-                StartCoroutine(MoveStraightRoutine(initialTarget));
+                StartCoroutine(HitMissRoutine(initialTarget));
                 break;
             case ProjectileArcMode.Boomerang:
                 _hitEverything = true;
@@ -40,11 +54,51 @@ public class Projectile : MonoBehaviour
                 StartCoroutine(BounceRoutine(sender, initialTarget));
                 break;
             default:
-                throw new NotImplementedException();
+                throw new System.NotImplementedException();
         }
     }
 
-    IEnumerator MoveStraightRoutine(BaseCharacter target)
+    IEnumerator WaitForTargetRoutine(BaseCharacter sender, BaseCharacter target)
+    {
+        targetTracker.Initialize(sender, target);
+        float elapsed = 0f;
+        float duration = particleSystem.controls.EffectiveDuration;
+        bool hasAttempedHits = false;
+
+        while (elapsed < duration)
+        {
+            float elapsedRelative = elapsed / duration;
+
+            if (elapsedRelative >= particleSystem.tryRegisterHitsAt && !hasAttempedHits)
+            {
+                HitTargetWithinRange(target);
+
+                hasAttempedHits = true;
+            }
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // elapsedRelative is unlikely to land at exactly 1f.
+        if (!hasAttempedHits)
+        {
+            HitTargetWithinRange(target);
+        }
+
+
+        Destroy(gameObject);
+    }
+
+    void HitTargetWithinRange(BaseCharacter target)
+    {
+        if (targetTracker.IsCharacterWithinRange(target))
+        {
+            RegisterHit(target);
+        }
+    }
+
+    IEnumerator HitMissRoutine(BaseCharacter target)
     {
         if (targetTracker)
         {
@@ -76,7 +130,7 @@ public class Projectile : MonoBehaviour
         targetTracker.Initialize(sender, initialTarget);
         float threshold = projectileData.targetReachedThreshold;
 
-        while (!targetTracker.HasReachedTarget(threshold))
+        while (!targetTracker.IsTargetPositionReached(threshold))
         {
             MoveTowardsTarget();
             yield return null;
@@ -86,7 +140,7 @@ public class Projectile : MonoBehaviour
         Vector3 fallbackPosition = _sender.ColliderCenter;
         targetTracker.SetNewTarget(_sender, fallbackPosition);
 
-        while (!targetTracker.HasReachedTarget(threshold))
+        while (!targetTracker.IsTargetPositionReached(threshold))
         {
             MoveTowardsTarget();
             yield return null;
@@ -98,7 +152,7 @@ public class Projectile : MonoBehaviour
     IEnumerator BounceRoutine(BaseCharacter sender, BaseCharacter initialTarget)
     {
         targetTracker.Initialize(sender, initialTarget);
-        throw new NotImplementedException();
+        throw new System.NotImplementedException();
     }
 
     void MoveTowardsTarget()
@@ -118,6 +172,14 @@ public class Projectile : MonoBehaviour
         }
 
         RegisterHit(character);
+    }
+
+    void OnValidate()
+    {
+        if (projectileData.arcMode == ProjectileArcMode.None && particleSystem.controls == null)
+        {
+            Debug.LogWarning($"{nameof(Projectile)} <b><color=white>{name}</color></b> with '{nameof(projectileData)} = {nameof(ProjectileArcMode.None)}' is missing field <b><color=white>{nameof(ParticleSystemControls)}</color></b>");
+        }
     }
 
     void RegisterHit(BaseCharacter character)

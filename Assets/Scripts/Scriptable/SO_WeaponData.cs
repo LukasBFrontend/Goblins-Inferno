@@ -24,6 +24,7 @@ public class SO_WeaponData : ScriptableObject
     [SerializeField] string weaponName;
     [SerializeField] WeaponType weaponType;
     [SerializeField] WeaponStatsData stats;
+    [SerializeField] GameObject hitVFX;
     [Tooltip("A weapontype of 'Area' will damage enemies directly while a weapontype of 'Projectile' will attempt to spawn projectiles")]
     [SerializeField] LayerMask hitMask;
     [Header("Only required for projectile weapons")]
@@ -74,7 +75,6 @@ public class SO_WeaponData : ScriptableObject
             if (weaponType == WeaponType.Area)
             {
                 _weaponModel.StartAnimation(attackAnimationDuration);
-
                 float animationElapsed = 0f;
 
                 while (animationElapsed < attackAnimationDuration)
@@ -84,7 +84,9 @@ public class SO_WeaponData : ScriptableObject
                     foreach (Enemy enemy in _enemiesInRange)
                     {
                         if (damagedThisAttack.Add(enemy))
-                            Damage(new List<Enemy> { enemy });
+                        {
+                            Damage(enemy);
+                        }
                     }
 
                     yield return null;
@@ -108,7 +110,6 @@ public class SO_WeaponData : ScriptableObject
 
                 yield return new WaitForSeconds(timeBetweenAttacks);
             }
-
         }
     }
 
@@ -126,7 +127,6 @@ public class SO_WeaponData : ScriptableObject
     {
         var characterStats = Game.Player.Stats.Character;
         float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
-
 
         GameObject projectileObject = Instantiate(projectilePrefab);
         Projectile projectile = projectileObject.GetComponent<Projectile>();
@@ -154,14 +154,16 @@ public class SO_WeaponData : ScriptableObject
         projectile.Initialize(_wielder, random, damage);
     }
 
-    void Damage(List<Enemy> enemies)
+    void Damage(Enemy enemy)
     {
         var characterStats = Game.Player.Stats.Character;
         float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
 
-        foreach (Enemy enemy in enemies)
+        if (hitVFX)
         {
-            enemy.Health.TakeDamage((int)(stats.damage.baseValue * damageMultiplier));
+            Instantiate(hitVFX, enemy.transform.position + new Vector3(0, 1, -1f), Quaternion.identity);
         }
+
+        enemy.Health.TakeDamage((int)(stats.damage.baseValue * damageMultiplier));
     }
 }

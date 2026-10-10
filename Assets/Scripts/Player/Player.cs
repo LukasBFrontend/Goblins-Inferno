@@ -1,11 +1,12 @@
 using UnityEngine;
+using System.Linq;
 
 [System.Serializable]
 public struct Avatars
 {
-    public Avatar defaultAvatar;
-    public Avatar archerAvatar;
-    public Avatar knightAvatar;
+    public GameObject defaultAvatar;
+    public GameObject archerAvatar;
+    public GameObject knightAvatar;
 }
 
 /// <summary>
@@ -31,12 +32,19 @@ public class Player : BaseCharacter
 
     public void SetAvatar(AvatarVariant variant)
     {
-        Animator.avatar = variant switch
+        GameObject avatar = variant switch
         {
             AvatarVariant.Archer => avatars.archerAvatar,
             AvatarVariant.Knight => avatars.knightAvatar,
             _ => avatars.defaultAvatar,
         };
+
+        while (RenderTransform.childCount > 0) {
+            DestroyImmediate(RenderTransform.GetChild(0).gameObject);
+        }
+
+        Instantiate(avatar, RenderTransform.transform);
+        Animator.Rebind();
     }
 
     public AvatarVariant Avatar()
@@ -51,7 +59,7 @@ public class Player : BaseCharacter
         {
             return AvatarVariant.Knight;
         }
-        
+
         return AvatarVariant.Default;
     }
 

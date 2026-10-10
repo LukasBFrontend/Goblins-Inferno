@@ -22,14 +22,16 @@ public class Weapons : MonoBehaviour
         _availableWeapons =  weaponsConfig.availableWeapons.ToHashSet();
         _unlockedWeapons = new (){ _availableWeapons.First() };
         _lastAttackTime = 0;
-    }
 
-    void Start()
-    {
         foreach(SO_WeaponData weapon in _unlockedWeapons)
         {
            _weaponObjectLookup.Add(weapon.name, weapon.Spawn(_wielder, weaponParent));
         }
+    }
+
+    void Start()
+    {
+
     }
 
     public void Attack()

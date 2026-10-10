@@ -6,7 +6,10 @@ public class ProjectileTargetTracker : MonoBehaviour
 {
     [Tooltip("Enemies inside the collider are considered within range of the tracker.")]
     [SerializeField] SphereCollider collider;
+    [Tooltip("A cheesy way to trigger validation in order to set collider radius to projectileData.range.")]
     [SerializeField] Projectile projectile;
+    [Space()]
+    [SerializeField] bool triggerValidate;
     [Header("Runtime filled")]
     [SerializeField] List<BaseCharacter> charactersInRange = new();
     BaseCharacter _sender;
@@ -33,9 +36,14 @@ public class ProjectileTargetTracker : MonoBehaviour
         _fallbackPosition = fallbackPosition;
     }
 
-    public bool HasReachedTarget(float threshold)
+    public bool IsTargetPositionReached(float threshold)
     {
         return Vector3.Distance(TargetPosition, transform.position) < threshold;
+    }
+
+    public bool IsCharacterWithinRange(BaseCharacter target)
+    {
+        return charactersInRange.Contains(target);
     }
 
     Vector3 RandomMaxRange(float range)
@@ -44,7 +52,7 @@ public class ProjectileTargetTracker : MonoBehaviour
         return new Vector3(random.x, 0f, random.y) * range;
     }
 
-    public BaseCharacter ClosestBaseCharacterInRange()
+    BaseCharacter ClosestBaseCharacterInRange()
     {
         BaseCharacter closest = null;
         float closestDistance = float.MaxValue;
@@ -88,7 +96,7 @@ public class ProjectileTargetTracker : MonoBehaviour
         collider.radius = projectile.Data.range;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!other.TryGetComponent<BaseCharacter>(out var character) || character == _sender)
         {
@@ -98,7 +106,7 @@ public class ProjectileTargetTracker : MonoBehaviour
         charactersInRange.Add(character);
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit(Collider other)
     {
         if (!other.TryGetComponent<BaseCharacter>(out var character) || character == _sender || !charactersInRange.Contains(character))
         {

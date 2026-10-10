@@ -3,14 +3,14 @@ using UnityEngine;
 
 public abstract class BaseCharacter : MonoBehaviour
 {
-    [SerializeField] GameObject renderGroup;
+    [SerializeField] Transform renderTransform;
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody rigidbody;
     [SerializeField] Collider collider;
     [SerializeField] Health health;
 
-    public Renderer[] Renderers => _renderers ??= renderGroup.GetComponentsInChildren<Renderer>().Where(renderer => renderer.gameObject.activeSelf == true).ToArray();
-    public GameObject RenderGroup => renderGroup;
+    public Renderer[] Renderers => _renderers ??= renderTransform.GetComponentsInChildren<Renderer>().Where(renderer => renderer.gameObject.activeSelf == true).ToArray();
+    public Transform RenderTransform => renderTransform;
     public Animator Animator => animator;
     public Rigidbody Rigidbody => rigidbody;
     public Collider Collider => collider;

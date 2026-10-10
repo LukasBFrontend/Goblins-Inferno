@@ -1,7 +1,8 @@
-
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public static class Utils
 {
@@ -37,5 +38,18 @@ public static class Utils
     {
         float randomAngle = Random.Range(0f, 2 * Mathf.PI);
         return new Vector3(Mathf.Cos(randomAngle), 0, Mathf.Sin(randomAngle)).normalized;
+    }
+
+    public static T[] CombineReferences<T>(bool filterNulls, T[] original,  params T[] extra)
+    {
+        if (!filterNulls)
+        {
+            return original.Concat(extra).ToArray();
+        }
+
+        return original.Concat(extra)
+            .Where(x => x != null)
+            .ToArray()
+        ;
     }
 }

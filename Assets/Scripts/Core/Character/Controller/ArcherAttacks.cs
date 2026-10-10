@@ -4,7 +4,7 @@ using UnityEngine;
 public class ArcherAttacks : MonoBehaviour
 {
     [Header("Shoot Arrow")]
-    [SerializeField] GameObject ArrowPrefab;
+    [SerializeField] GameObject arrowPrefab;
     [SerializeField] Transform leftArrowSpawnPoint;
     [SerializeField] Transform rightArrowSpawnPoint;
     [SerializeField] int damage;
@@ -27,9 +27,9 @@ public class ArcherAttacks : MonoBehaviour
 
     void ShootArrow(Transform origin)
     {
-        GameObject ArrowInstance = Instantiate(ArrowPrefab, origin.position, Quaternion.identity);
+        GameObject arrowInstance = Instantiate(arrowPrefab, origin.position, Quaternion.identity);
 
-        Projectile projectile = ArrowInstance.GetComponent<Projectile>();
+        Projectile projectile = arrowInstance.GetComponent<Projectile>();
         projectile.Initialize(_archer, Game.Player, damage);
     }
 }

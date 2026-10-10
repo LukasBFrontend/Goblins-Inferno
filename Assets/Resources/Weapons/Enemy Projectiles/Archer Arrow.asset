@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Archer Arrow
   m_EditorClassIdentifier: Assembly-CSharp::SO_ProjectileData
   initialVelocity: 12
-  arcMode: 0
+  arcMode: 1
   targetReachedThreshold: 0
   lifeTime: 5
+  range: 10

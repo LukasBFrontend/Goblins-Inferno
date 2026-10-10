@@ -40,12 +40,19 @@ public static class GameSaveState
 
     static bool PathExists()
     {
-        FileAttributes attributes = File.GetAttributes(LocalPath);
+        try
+        {
+            FileAttributes attributes = File.GetAttributes(LocalPath);
 
-        return attributes == FileAttributes.Directory
-            ? Directory.Exists(LocalPath)
-            : File.Exists(LocalPath)
-        ;
+            return attributes == FileAttributes.Directory
+                ? Directory.Exists(LocalPath)
+                : File.Exists(LocalPath)
+            ;
+        }
+        catch (FileNotFoundException)
+        {
+            return false;
+        }
     }
 
     static void CreateDefault()

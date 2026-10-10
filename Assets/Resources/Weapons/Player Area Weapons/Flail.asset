@@ -30,6 +30,7 @@ MonoBehaviour:
       shortName: projectile count
       baseValue: 1
       flatScaling: 1
+  hitVFX: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913, type: 3}
   hitMask:
     serializedVersion: 2
     m_Bits: 0

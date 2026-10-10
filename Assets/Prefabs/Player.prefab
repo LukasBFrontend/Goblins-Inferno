@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3611300893393948059}
+  - component: {fileID: 2318356956457011289}
   m_Layer: 6
   m_Name: Render
   m_TagString: Untagged
@@ -32,6 +33,28 @@ Transform:
   - {fileID: 2730634250139543764}
   m_Father: {fileID: 7331569848556587097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2318356956457011289
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755163794439866512}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 99ba10d9babc3c44bb73c379035ab563, type: 2}
+  m_Controller: {fileID: 9100000, guid: e05b3d5513bbaea4abe36d80f7e3d23b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6552408087261346785
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,15 +187,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc764b9638e496346903202cab484d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  renderGroup: {fileID: 3755163794439866512}
-  animator: {fileID: 2398004631046827124}
+  renderTransform: {fileID: 3611300893393948059}
+  animator: {fileID: 2318356956457011289}
   rigidbody: {fileID: 8422129899962068725}
   collider: {fileID: 2638709353195784427}
   health: {fileID: 9179350344686818751}
   avatars:
-    defaultAvatar: {fileID: 9000000, guid: 99ba10d9babc3c44bb73c379035ab563, type: 2}
-    archerAvatar: {fileID: 0}
-    knightAvatar: {fileID: 0}
+    defaultAvatar: {fileID: 1902838328966055547, guid: 044a6c749f52fff4fa7f6eee255d74f6, type: 3}
+    archerAvatar: {fileID: 6160765540388724694, guid: e25c207e48915d0418e8991b762ec3f0, type: 3}
+    knightAvatar: {fileID: 750889050397554082, guid: 82e92d24e92763d46892c18d9721ad78, type: 3}
   stats: {fileID: 361925515447440459}
   weapons: {fileID: 6066673827380938656}
   movement: {fileID: 4222031955162507236}
@@ -188,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed425e3b9bcf7e4f8319a9974fcfe1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  baseHealth: 0
+  baseHealth: 100
   statsConfig:
     characterStatsConfig: {fileID: 11400000, guid: dc350bdc372d2a94b8356d73f6598b9b, type: 2}
   propertyName: _EmissionColor
@@ -294,6 +317,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1549704670063745121, guid: 044a6c749f52fff4fa7f6eee255d74f6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1902838328966055547, guid: 044a6c749f52fff4fa7f6eee255d74f6, type: 3}
       propertyPath: m_Name
       value: PFB_Basic_Goblin
@@ -303,11 +330,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 044a6c749f52fff4fa7f6eee255d74f6, type: 3}
---- !u!95 &2398004631046827124 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1549704670063745121, guid: 044a6c749f52fff4fa7f6eee255d74f6, type: 3}
-  m_PrefabInstance: {fileID: 3802943188954543125}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2730634250139543764 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1235092185367796929, guid: 044a6c749f52fff4fa7f6eee255d74f6, type: 3}

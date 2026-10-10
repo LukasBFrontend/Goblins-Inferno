@@ -82,7 +82,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13246ba7e653f0944a58ff8011acabeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  projectileData: {fileID: 11400000, guid: 889a796e9f28c7c4cbdb9f0f5e2d3346, type: 2}
+  projectileData: {fileID: 11400000, guid: 7f49d33a020a33649ad9ebef5795f100, type: 2}
   targetTracker: {fileID: 3555430341570801904}
+  particleSystemControls: {fileID: 0}
   logOnTargetHit: 1
 --- !u!1 &6803297574947771493
 GameObject:
@@ -245,7 +246,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3555430341570801904
 MonoBehaviour:
@@ -261,4 +262,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileTargetTracker
   collider: {fileID: 8166896396699391582}
   projectile: {fileID: 1771649944702901548}
-  enemiesInRange: []
+  triggerValidate: 0
+  charactersInRange: []

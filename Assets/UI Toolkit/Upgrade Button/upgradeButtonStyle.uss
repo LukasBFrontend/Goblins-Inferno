@@ -1,8 +1,8 @@
 :root {
     --horizontal-text-margin: 2.5;
+    -unity-font-definition: resource("Fonts/skeleboom");
+    color: rgb(255, 255, 255);
 }
-
-
 
 Label {
     margin-top: 0;
@@ -15,39 +15,38 @@ Label {
     padding-left: 0;
 }
 
-.upgradeButton {
-    width: auto;
-    height: 80px;
-    aspect-ratio: 5;
-    flex-direction: row;
-    padding-top: 8px;
-    padding-right: 8px;
-    padding-bottom: 8px;
-    padding-left: 8px;
-}
-
 .upgradeImage {
     aspect-ratio: 1;
     height: 100%;
 }
 
+.rightContainer {
+    margin-left: 12px;
+}
+
+.metaContainer {
+    flex-direction: row;
+    flex-grow: 0;
+    margin-bottom: 6px;
+}
+
 .upgradeTextContainer {
     -unity-text-align: upper-left;
-    margin-top: 0;
-    margin-right: 16px;
-    margin-bottom: 0;
-    margin-left: 16px;
+    flex-grow: 1;
 }
 
 .upgradeTitleLabel {
     -unity-font-style: bold;
     font-size: 20px;
+    -unity-text-align: upper-left;
+    margin-left: -2px;
 }
 
 .upgradeLvlTextContainer {
     flex-direction: row;
     justify-content: flex-end;
     -unity-text-align: upper-right;
+    flex-grow: 1;
 }
 
 .upgradeLvlLabel {
@@ -57,11 +56,61 @@ Label {
 .upgradeLvlValue {
 }
 
+.textContainer {
+    flex-grow: 1;
+    font-size: 13px;
+}
+
 .upgradeDescriptionTextContainer {
     flex-direction: row;
+    letter-spacing: -3px;
 }
 
 .emphasizedText {
     -unity-font-style: bold;
-    color: rgb(53, 53, 53);
+    color: rgb(255, 224, 0);
+}
+
+.upgradeButton {
+    margin-bottom: 30px;
+    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
+    background-color: rgb(0, 0, 0);
+    color: rgba(255, 255, 255, 0.902);
+    -unity-font-definition: resource("Fonts/skeleboom");
+    letter-spacing: 7px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-cubic;
+    -unity-slice-left: 32;
+    -unity-slice-top: 32;
+    -unity-slice-right: 32;
+    -unity-slice-bottom: 32;
+    -unity-background-image-tint-color: rgba(63, 130, 81, 0.902);
+    -unity-slice-scale: 1.25px;
+    -unity-slice-type: tiled;
+    aspect-ratio: 4;
+    height: 100px;
+    flex-direction: row;
+    padding-top: 14px;
+    padding-right: 28px;
+    padding-bottom: 14px;
+    padding-left: 28px;
+}
+
+.upgradeButton:hover {
+    color: rgb(255, 255, 255);
+    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-005#panel-005");
+    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
+    scale: 1.05 1.05;
+    background-color: rgb(255, 255, 255);
+}
+
+.upgradeButton:focus {
+    color: rgb(255, 255, 255);
+    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-005#panel-005");
+    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
+    background-color: rgb(255, 255, 255);
 }

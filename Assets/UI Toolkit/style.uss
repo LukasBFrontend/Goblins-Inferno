@@ -1,4 +1,6 @@
 :root {
+    -unity-font-definition: resource("Fonts/skeleboom");
+    font-size: 16px;
 }
 
 Label {
@@ -12,16 +14,96 @@ Label {
     padding-left: 0;
 }
 
-.unity-progress-bar__progress {
-    background-color: rgb(255, 0, 0);
+.unity-progress-bar {
+    color: rgb(255, 255, 255);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 6px;
+    margin-left: 0;
+}
+
+.unity-progress-bar__container {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgba(0, 0, 0, 0.196);
+    border-right-color: rgba(0, 0, 0, 0.196);
+    border-top-color: rgba(0, 0, 0, 0.196);
+    border-bottom-color: rgba(0, 0, 0, 0.196);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
 }
 
 .unity-progress-bar__background {
-    background-color: rgb(21, 19, 29);
+    background-color: rgba(0, 0, 0, 0.392);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
 }
 
-.unity-progress-bar {
+.unity-progress-bar__progress {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.unity-progress-bar__title {
+    padding-top: 0;
+    font-size: 20px;
+}
+
+#HUDContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 6px;
+    padding-right: 6px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+}
+
+#InfoContainer {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#ScoreContainer {
     color: rgb(255, 255, 255);
+    height: 100%;
+    -unity-text-align: middle-right;
+    flex-grow: 0;
+    flex-direction: column;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.706);
+    font-size: 20px;
+}
+
+#ScoreText {
+    width: 100px;
+    font-size: 24px;
+}
+
+#HealthBar {
+    width: 300px;
+}
+
+#HealthBar > #unity-progress-bar > .unity-progress-bar__background > .unity-progress-bar__progress {
+    width: 300px;
+    background-color: rgb(163, 50, 50);
 }
 
 #ExpBar > #unity-progress-bar {
@@ -31,7 +113,7 @@ Label {
 }
 
 #ExpBar > #unity-progress-bar > .unity-progress-bar__background > .unity-progress-bar__progress {
-    background-color: rgb(113, 109, 255);
+    background-color: rgb(61, 168, 215);
 }
 
 .overlayContainer {
@@ -75,33 +157,48 @@ Label {
     -unity-text-outline-color: rgb(255, 255, 255);
 }
 
+.titleIcon {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+}
+
 .button {
     margin-bottom: 30px;
     width: 350px;
-    aspect-ratio: 3.5;
-    background-image: resource("Sprites/UI Button/button_stock");
-    background-color: rgba(0, 0, 0, 0.039);
-    color: rgba(255, 255, 255, 0.706);
-    font-size: 23px;
-    -unity-font-definition: resource("Fonts/blackwood_castle/BLACC___");
+    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
+    background-color: rgb(0, 0, 0);
+    color: rgba(255, 255, 255, 0.902);
+    font-size: 26px;
+    -unity-font-definition: resource("Fonts/skeleboom");
     letter-spacing: 7px;
-    -unity-text-outline-width: 0.5px;
-    -unity-text-outline-color: rgba(0, 0, 0, 0);
     border-top-width: 0;
     border-right-width: 0;
     border-bottom-width: 0;
     border-left-width: 0;
     transition-duration: 0.2s;
     transition-timing-function: ease-out-cubic;
+    -unity-slice-left: 32;
+    -unity-slice-top: 32;
+    -unity-slice-right: 32;
+    -unity-slice-bottom: 32;
+    -unity-background-image-tint-color: rgba(63, 63, 63, 0.902);
+    -unity-slice-scale: 1.25px;
+    -unity-slice-type: tiled;
+    aspect-ratio: 4;
 }
 
 .button:hover {
     color: rgb(255, 255, 255);
-    background-image: resource("Sprites/UI Button/button_stock_hover");
-    scale: 1.035 1.035;
+    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-005#panel-005");
+    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
+    scale: 1.05 1.05;
+    background-color: rgb(255, 255, 255);
 }
 
 .button:focus {
-    background-image: resource("Sprites/UI Button/button_stock_selected");
     color: rgb(255, 255, 255);
+    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-005#panel-005");
+    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
+    background-color: rgb(255, 255, 255);
 }

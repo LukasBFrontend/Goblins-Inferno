@@ -84,6 +84,10 @@ PrefabInstance:
       value: Mercenary_Bow
       objectReference: {fileID: 0}
     - target: {fileID: 8852469722404809889, guid: 1acd9f800599ef448998e25fa85ac444, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8852469722404809889, guid: 1acd9f800599ef448998e25fa85ac444, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 7d61ef72ae57a9e47a6ab4dd2ccfccc0, type: 2}

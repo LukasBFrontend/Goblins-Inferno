@@ -3,7 +3,7 @@ using UnityEngine;
 public enum ProjectileArcMode
 {
     None,
-    Track,
+    HitMiss,
     Bounce,
     Boomerang,
 }
@@ -11,11 +11,12 @@ public enum ProjectileArcMode
 [CreateAssetMenu(fileName = "ProjectileData", menuName = "Weapons/ProjectileData")]
 public class SO_ProjectileData : ScriptableObject
 {
-    [Range(.1f, 200f)]
-    public float initialVelocity;
     public ProjectileArcMode arcMode;
-    [Range(0f, .2f)]
-    public float targetReachedThreshold;
     public float lifeTime = 5f;
     public float range = 10f;
+    [Header("Optional")]
+    [Range(0f, 200f)]
+    public float initialVelocity;
+    [Range(0f, .2f)]
+    public float targetReachedThreshold;
 }

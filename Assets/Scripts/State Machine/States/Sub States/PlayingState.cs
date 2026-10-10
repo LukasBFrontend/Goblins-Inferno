@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +13,8 @@ public class PlayingState : BaseState
         RegisterCallbacks();
 
         Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public override void UpdateState()
@@ -26,6 +27,8 @@ public class PlayingState : BaseState
     public override void ExitState() {
         Game.Input.Move.Disable();
         UnregisterCallbacks();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     void RegisterCallbacks()

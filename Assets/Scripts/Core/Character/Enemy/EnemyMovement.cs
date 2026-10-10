@@ -66,7 +66,7 @@ public class EnemyMovement : MonoBehaviour
 
     void SetRotationDirection(Vector3 direction)
     {
-        _enemy.RenderGroup.transform.localRotation = Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan2(direction.x, direction.z), 0);
+        _enemy.RenderTransform.localRotation = Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan2(direction.x, direction.z), 0);
     }
 
     void CalculateNudgeSignal(float distance)

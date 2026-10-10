@@ -154,6 +154,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2072697661693931563, guid: 2231e242ec531e44caa03826addc9302, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262451177815033057, guid: 2231e242ec531e44caa03826addc9302, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -9200223872325275739, guid: 05224ec7e4d85c14dbf345dd08810e67, type: 3}
     - target: {fileID: 8039000062513504489, guid: 2231e242ec531e44caa03826addc9302, type: 3}
       propertyPath: endScale.x
       value: 1.1

@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5200fab10a5f97648b080ac74096c3a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StateMachine
-  logNewStateOnEnter: 1
+  logNewStateOnEnter: 0
