@@ -4,10 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class ProjectileTargetTracker : MonoBehaviour
 {
+    [SerializeField] Projectile projectile;
     [Tooltip("Enemies inside the collider are considered within range of the tracker.")]
     [SerializeField] SphereCollider collider;
     [Tooltip("A cheesy way to trigger validation in order to set collider radius to projectileData.range.")]
-    [SerializeField] Projectile projectile;
     [Space()]
     [SerializeField] bool triggerValidate;
     [Header("Runtime filled")]

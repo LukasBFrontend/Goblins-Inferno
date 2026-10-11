@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -20,150 +17,25 @@ public struct WeaponStatsData
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Weapons/WeaponData")]
 public class SO_WeaponData : ScriptableObject
 {
-    [SerializeField] GameObject weaponModelPrefab;
-    [SerializeField] string weaponName;
-    [SerializeField] WeaponType weaponType;
-    [SerializeField] WeaponStatsData stats;
-    [SerializeField] GameObject hitVFX;
+    public GameObject weaponPrefab;
+    public string weaponName;
+    public WeaponType weaponType;
+    public WeaponStatsData stats;
+    public GameObject hitVFX;
     [Tooltip("A weapontype of 'Area' will damage enemies directly while a weapontype of 'Projectile' will attempt to spawn projectiles")]
-    [SerializeField] LayerMask hitMask;
+    public LayerMask hitMask;
     [Header("Only required for projectile weapons")]
-    [SerializeField] GameObject projectilePrefab;
+    public GameObject projectilePrefab;
     public string WeaponName => weaponName;
     public WeaponStatsData Stats => stats;
-    List<Enemy> _enemiesInRange;
-    WeaponModel _weaponModel;
-    Player _wielder;
 
-
-    /// <summary>
-    /// Instatiates and initializes the weapon prefab.
-    /// </summary>
-    /// <param name="parent"></param>
-    /// <param name="activeMonoBehavior"></param>
-    public GameObject Spawn(Player wielder, Transform parent)
+    public Weapon Spawn(Transform weaponParent, Player wielder)
     {
-        GameObject weaponObject = Instantiate(weaponModelPrefab);
-        weaponObject.transform.SetParent(parent);
-        weaponObject.transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
+        Weapon weapon = Instantiate(weaponPrefab).GetComponent<Weapon>();
+        weapon.transform.SetParent(weaponParent);
+        weapon.transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
+        weapon.Initialize(wielder);
 
-        _wielder = wielder;
-        _weaponModel = weaponObject.GetComponentsInChildren<WeaponModel>().First();
-        _weaponModel.Initialize(this);
-
-        return weaponObject;
-    }
-
-
-    /// <summary>
-    /// Automatically attack all targets inside the weapon range if the weapon is not on cooldown. Meant to be used inside the Update method.
-    /// </summary>
-    public void Attack()
-    {
-        _weaponModel.StartCoroutine(AttackRoutine(Game.Player.Stats.AttackCooldown * .95f, (int)_wielder.Stats.GetWeaponModifier(weaponName).ProjectileCount.Evaluate()));
-    }
-
-    IEnumerator AttackRoutine(float duration, int projectileCount)
-    {
-        float timeBetweenAttacks = duration / projectileCount;
-        float attackAnimationDuration = timeBetweenAttacks / 3f;
-
-        for (int attack = 0; attack < projectileCount; attack++)
-        {
-            HashSet<Enemy> damagedThisAttack = new();
-
-            if (weaponType == WeaponType.Area)
-            {
-                _weaponModel.StartAnimation(attackAnimationDuration);
-                float animationElapsed = 0f;
-
-                while (animationElapsed < attackAnimationDuration)
-                {
-                    _enemiesInRange.RemoveAll(enemy => enemy == null);
-
-                    foreach (Enemy enemy in _enemiesInRange)
-                    {
-                        if (damagedThisAttack.Add(enemy))
-                        {
-                            Damage(enemy);
-                        }
-                    }
-
-                    yield return null;
-                    animationElapsed += Time.deltaTime;
-                }
-
-                float remainingTime = timeBetweenAttacks - attackAnimationDuration;
-
-                if (remainingTime > 0f)
-                {
-                    yield return new WaitForSeconds(remainingTime);
-                }
-
-                continue;
-            }
-            else if(weaponType == WeaponType.Projectile)
-            {
-                _enemiesInRange.RemoveAll(enemy => enemy == null);
-
-                Shoot();
-
-                yield return new WaitForSeconds(timeBetweenAttacks);
-            }
-        }
-    }
-
-    public void EnterIntoMeleeRange(Enemy enemy)
-    {
-        _enemiesInRange.Add(enemy);
-    }
-
-    public void ExitFromMeleeRange(Enemy enemy)
-    {
-        _enemiesInRange.Remove(enemy);
-    }
-
-    void Shoot()
-    {
-        var characterStats = Game.Player.Stats.Character;
-        float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
-
-        GameObject projectileObject = Instantiate(projectilePrefab);
-        Projectile projectile = projectileObject.GetComponent<Projectile>();
-
-        Collider[] hits = Physics.OverlapSphere(_wielder.transform.position, projectile.Data.range);
-        List<Enemy> enemiesInRange = new();
-
-        foreach(var hit in hits)
-        {
-            if (!hit.TryGetComponent<Enemy>(out var enemy))
-            {
-                continue;
-            }
-
-            enemiesInRange.Add(enemy);
-        }
-
-        Enemy random = enemiesInRange.Count >= 1
-            ? enemiesInRange[Random.Range(0, enemiesInRange.Count)]
-            : null
-        ;
-
-        int damage = (int)(stats.damage.baseValue * damageMultiplier);
-
-        projectile.Initialize(_wielder, random, damage);
-    }
-
-    void Damage(Enemy enemy)
-    {
-        var characterStats = Game.Player.Stats.Character;
-        float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
-
-        if (hitVFX)
-        {
-            Instantiate(hitVFX, enemy.transform.position + new Vector3(0, 1, -1f), Quaternion.identity);
-        }
-
-        enemy.Health.TakeDamage((int)(stats.damage.baseValue * damageMultiplier));
+        return weapon;
     }
 }

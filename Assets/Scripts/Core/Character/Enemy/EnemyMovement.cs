@@ -78,7 +78,7 @@ public class EnemyMovement : MonoBehaviour
 
         foreach (var collider in nearbyEnemyColliders)
         {
-            if (!collider.TryGetComponent<Enemy>(out var enemy) || enemy == _enemy)
+            if (!collider.TryGetComponent<BaseCharacter>(out var enemy) || enemy == _enemy)
             {
                 continue;
             }
