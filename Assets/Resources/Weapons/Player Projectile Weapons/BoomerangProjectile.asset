@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2fa4616f1fbeb42a96f08f8b1efbf8, type: 3}
   m_Name: BoomerangProjectile
   m_EditorClassIdentifier: Assembly-CSharp::SO_ProjectileData
-  initialVelocity: 20
-  arcMode: 2
-  targetReachedThreshold: 0.15
+  arcMode: 3
   lifeTime: 5
-  range: 5
+  range: 8
+  initialVelocity: 15
+  targetReachedThreshold: 0.15

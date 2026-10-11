@@ -6,6 +6,7 @@ public class Weapon :  MonoBehaviour
 {
     [SerializeField] SO_WeaponData data;
     [SerializeField] WeaponTargetTracker targetTracker;
+    [Header("Optional")]
     [SerializeField] ParticleSystemControls particleSystem;
     Player _wielder;
 
@@ -36,7 +37,7 @@ public class Weapon :  MonoBehaviour
 
             if (data.weaponType == WeaponType.Area)
             {
-                PlayVFX(attackAnimationDuration);
+                PlayWeaponVFX(attackAnimationDuration);
                 float animationElapsed = 0f;
 
                 while (animationElapsed < attackAnimationDuration)
@@ -47,7 +48,7 @@ public class Weapon :  MonoBehaviour
                     {
                         if (damagedThisAttack.Add(enemy))
                         {
-                            Damage(enemy);
+                            RegisterHit(enemy);
                         }
                     }
 
@@ -80,11 +81,12 @@ public class Weapon :  MonoBehaviour
         var characterStats = Game.Player.Stats.Character;
         float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
 
-        GameObject projectileObject = Instantiate(data.projectilePrefab);
+        GameObject projectileObject = Instantiate(data.projectilePrefab, _wielder.transform.position, Quaternion.identity);
         Projectile projectile = projectileObject.GetComponent<Projectile>();
 
+        var enemiesInRange = targetTracker.EnemiesInRange;
+        /*
         Collider[] hits = Physics.OverlapSphere(_wielder.transform.position, projectile.Data.range);
-        List<BaseCharacter> enemiesInRange = new();
 
         foreach(var hit in hits)
         {
@@ -95,7 +97,7 @@ public class Weapon :  MonoBehaviour
 
             enemiesInRange.Add(enemy);
         }
-
+        */
         BaseCharacter random = enemiesInRange.Count >= 1
             ? enemiesInRange[Random.Range(0, enemiesInRange.Count)]
             : null
@@ -106,7 +108,7 @@ public class Weapon :  MonoBehaviour
         projectile.Initialize(_wielder, random, damage);
     }
 
-    void Damage(Enemy enemy)
+    void RegisterHit(Enemy enemy)
     {
         var characterStats = Game.Player.Stats.Character;
         float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
@@ -119,7 +121,7 @@ public class Weapon :  MonoBehaviour
         enemy.Health.TakeDamage((int)(data.stats.damage.baseValue * damageMultiplier));
     }
 
-    void PlayVFX(float animationDuration)
+    void PlayWeaponVFX(float animationDuration)
     {
         if (particleSystem.EffectiveDuration != animationDuration)
         {

@@ -114,6 +114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18e29fc0ab19a846918292fa5dabb9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponTargetTracker
-  weapon: {fileID: 0}
+  weapon: {fileID: 5506155961710438720}
   collider: {fileID: 1744984943742170311}
   enemiesInRange: []

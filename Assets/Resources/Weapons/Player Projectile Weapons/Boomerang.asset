@@ -12,10 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d8c51e2ddab29c42814cb06ce7f69a3, type: 3}
   m_Name: Boomerang
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponModelPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 8592821208549640686, guid: 9bc0f6bacc684a74d9d1bae3224e01b2, type: 3}
   weaponName: Boomerang
   weaponType: 1
   stats:
+    baseSize:
+      includeAsUpgradeOption: 0
+      UISprite: {fileID: 0}
+      name: 
+      shortName: 
+      baseValue: 0
+      flatScaling: 0
     damage:
       includeAsUpgradeOption: 1
       UISprite: {fileID: 21300000, guid: c1c38b15562539d4fb59ee473de89842, type: 3}
@@ -30,6 +37,13 @@ MonoBehaviour:
       shortName: projectiles
       baseValue: 1
       flatScaling: 3
+    size:
+      includeAsUpgradeOption: 0
+      UISprite: {fileID: 0}
+      name: 
+      shortName: 
+      multiplierScaling: 15
+  hitVFX: {fileID: 271054424957760564, guid: 1468eeb0963ddad41909c04ad8af0aee, type: 3}
   hitMask:
     serializedVersion: 2
     m_Bits: 0

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WeaponsConfig
   m_EditorClassIdentifier: Assembly-CSharp::WeaponsConfig
   availableWeapons:
-  - {fileID: 11400000, guid: 87fbfe24d94c682488d732765671b60c, type: 2}
   - {fileID: 11400000, guid: d4e414540fcd348449dbf4159a8ab910, type: 2}
+  - {fileID: 11400000, guid: 87fbfe24d94c682488d732765671b60c, type: 2}

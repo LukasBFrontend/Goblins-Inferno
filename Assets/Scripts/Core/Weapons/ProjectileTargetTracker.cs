@@ -49,7 +49,7 @@ public class ProjectileTargetTracker : MonoBehaviour
     Vector3 RandomMaxRange(float range)
     {
         Vector2 random = Random.insideUnitCircle.normalized;
-        return new Vector3(random.x, 0f, random.y) * range;
+        return transform.position + new Vector3(random.x, 0f, random.y) * range;
     }
 
     BaseCharacter ClosestBaseCharacterInRange()

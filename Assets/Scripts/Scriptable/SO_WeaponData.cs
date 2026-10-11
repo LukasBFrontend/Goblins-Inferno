@@ -10,8 +10,11 @@ public enum WeaponType
 [System.Serializable]
 public struct WeaponStatsData
 {
+    [Tooltip("Equivalent to the base range of the weapon. Can be the same as or different to the projectile range.")]
+    public AdditiveStatData baseSize;
     public AdditiveStatData damage;
     public AdditiveStatData projectileCount;
+    public MultiplicativeStatData size;
 }
 
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Weapons/WeaponData")]
