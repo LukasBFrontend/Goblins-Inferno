@@ -17,7 +17,7 @@ public class ProjectileTargetTracker : MonoBehaviour
     BaseCharacter _targetCurrent;
     Vector3 _fallbackPosition;
     public Vector3 TargetPosition => _targetCurrent != null ? _targetCurrent.ColliderCenter : _fallbackPosition;
-    public BaseCharacter[] CharactersInRange => charactersInRange.Where(character => character != _sender && character != null).ToArray();
+    public BaseCharacter[] CharactersInRange => charactersInRange.Where(character => character != null).ToArray();
 
     public void Initialize(BaseCharacter sender, BaseCharacter initialTarget)
     {

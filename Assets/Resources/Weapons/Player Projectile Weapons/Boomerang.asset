@@ -15,6 +15,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 8592821208549640686, guid: 9bc0f6bacc684a74d9d1bae3224e01b2, type: 3}
   weaponName: Boomerang
   weaponType: 1
+  sprite: {fileID: 21300000, guid: c1c38b15562539d4fb59ee473de89842, type: 3}
   stats:
     baseSize:
       includeAsUpgradeOption: 0

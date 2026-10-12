@@ -9,6 +9,10 @@ public class Weapon :  MonoBehaviour
     [Header("Optional")]
     [SerializeField] ParticleSystemControls particleSystem;
     [SerializeField] float projectileOriginY;
+
+    public string Name => data.weaponName;
+    public SO_WeaponData Data => data;
+
     Player _wielder;
 
     public void Initialize(Player wielder)
@@ -88,19 +92,7 @@ public class Weapon :  MonoBehaviour
         Projectile projectile = projectileObject.GetComponent<Projectile>();
 
         var enemiesInRange = targetTracker.EnemiesInRange;
-        /*
-        Collider[] hits = Physics.OverlapSphere(_wielder.transform.position, projectile.Data.range);
 
-        foreach(var hit in hits)
-        {
-            if (!hit.TryGetComponent<BaseCharacter>(out var enemy))
-            {
-                continue;
-            }
-
-            enemiesInRange.Add(enemy);
-        }
-        */
         BaseCharacter random = enemiesInRange.Count >= 1
             ? enemiesInRange[Random.Range(0, enemiesInRange.Count)]
             : null

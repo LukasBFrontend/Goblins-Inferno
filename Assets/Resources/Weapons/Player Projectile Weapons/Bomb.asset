@@ -15,6 +15,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 6585759604352037730, guid: 1790dda91af932d44a2dc91cde6865ab, type: 3}
   weaponName: Bomb
   weaponType: 1
+  sprite: {fileID: 21300000, guid: f7560c1ee6232dc4f95e7d7c3a43710a, type: 3}
   stats:
     baseSize:
       includeAsUpgradeOption: 0

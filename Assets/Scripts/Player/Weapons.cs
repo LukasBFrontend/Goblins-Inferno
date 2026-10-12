@@ -8,9 +8,10 @@ public class Weapons : MonoBehaviour
 {
     [SerializeField] SO_WeaponsConfig weaponsConfig;
     [SerializeField] Transform weaponParent;
-    public List<SO_WeaponData> Available => weaponsConfig.availableWeapons;
+    public HashSet<Weapon> Available => _availableWeapons;
     public HashSet<Weapon> Unlocked => _unlockedWeapons;
     HashSet<Weapon> _unlockedWeapons;
+    HashSet<Weapon> _availableWeapons;
     float _lastAttackTime;
     Player _wielder;
 
@@ -18,9 +19,16 @@ public class Weapons : MonoBehaviour
     {
         _wielder = GetComponent<Player>();
 
-        _unlockedWeapons = new (){
-            Available.First().Spawn(weaponParent, _wielder)
-        };
+
+        _availableWeapons = new();
+
+        foreach(var weaponData in weaponsConfig.availableWeapons)
+        {
+            _availableWeapons.Add(
+                weaponData.Spawn(weaponParent, _wielder)
+            );
+        }
+        _unlockedWeapons = new (){ _availableWeapons.First() };
 
         _lastAttackTime = 0;
     }
@@ -51,15 +59,13 @@ public class Weapons : MonoBehaviour
 
     public void Unlock(string weaponName)
     {
-        SO_WeaponData weaponData = Available.First(weapon => weapon.WeaponName == weaponName);
+        Weapon weapon = Available.First(weapon => weapon.Name == weaponName);
 
-        if (weaponData == null)
+        if (weapon == null)
         {
             throw new System.Exception($"Weapon '{weaponName}' is not in the list of available weapons");
         }
 
-        _unlockedWeapons.Add(
-            weaponData.Spawn(weaponParent, _wielder)
-        );
+        _unlockedWeapons.Add(weapon);
     }
 }

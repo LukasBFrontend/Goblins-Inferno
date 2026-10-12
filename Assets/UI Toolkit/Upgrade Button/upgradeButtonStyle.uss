@@ -73,8 +73,6 @@ Label {
 
 .upgradeButton {
     margin-bottom: 30px;
-    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
-    background-color: rgb(0, 0, 0);
     color: rgba(255, 255, 255, 0.902);
     -unity-font-definition: resource("Fonts/skeleboom");
     letter-spacing: 7px;
@@ -84,13 +82,6 @@ Label {
     border-left-width: 0;
     transition-duration: 0.2s;
     transition-timing-function: ease-out-cubic;
-    -unity-slice-left: 32;
-    -unity-slice-top: 32;
-    -unity-slice-right: 32;
-    -unity-slice-bottom: 32;
-    -unity-background-image-tint-color: rgba(63, 130, 81, 0.902);
-    -unity-slice-scale: 1.25px;
-    -unity-slice-type: tiled;
     aspect-ratio: 4;
     height: 100px;
     flex-direction: row;
@@ -102,15 +93,49 @@ Label {
 
 .upgradeButton:hover {
     color: rgb(255, 255, 255);
-    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-005#panel-005");
-    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
     scale: 1.05 1.05;
+}
+
+.upgradeButton:hover > .upgradeButtonBackground {
     background-color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
+    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-005#panel-005");
 }
 
 .upgradeButton:focus {
     color: rgb(255, 255, 255);
-    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-005#panel-005");
-    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
+}
+
+.upgradeButton:hover > .upgradeButtonBackground {
     background-color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
+    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-005#panel-005");
+}
+
+.upgradeButtonBackground {
+    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
+    -unity-slice-left: 32;
+    -unity-slice-top: 32;
+    -unity-slice-right: 32;
+    -unity-slice-bottom: 32;
+    -unity-slice-scale: 1.25px;
+    background-color: rgb(0, 0, 0);
+}
+
+.upgradeBackgroundStat {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    -unity-background-image-tint-color: rgba(63, 130, 81, 0.902);
+}
+
+.upgradeBackgroundWeaponUnlock {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    -unity-background-image-tint-color: rgba(63, 59, 80, 0.902);
 }

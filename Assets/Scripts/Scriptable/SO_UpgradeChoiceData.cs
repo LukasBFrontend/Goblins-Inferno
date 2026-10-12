@@ -16,6 +16,9 @@ public enum UpgradeType
     WeaponStat,
 }
 
+/// <summary>
+/// Holds data required to display and select upgrade options. Instance property values will change at runtime.
+/// </summary>
 [CreateAssetMenu(fileName = "UpgradeChoiceData", menuName = "Runtime/UpgradeChoiceData")]
 public class SO_UpgradeOptionData : ScriptableObject
 {
@@ -39,9 +42,10 @@ public class SO_UpgradeOptionData : ScriptableObject
     [CreateProperty]
     public StyleEnum<DisplayStyle> DisplayMultiplicativeStatType => scalingType == StatScalingType.Multiplicative ? DisplayStyle.Flex : DisplayStyle.None;
 
-    // Upgrade type (Character / Weapon / WeaponUnlock)
-    public StyleEnum<DisplayStyle> DisplayCharacter => upgradeType == UpgradeType.CharacterStat ? DisplayStyle.Flex : DisplayStyle.None;
-    public StyleEnum<DisplayStyle> DisplayWeapon => upgradeType == UpgradeType.WeaponStat ? DisplayStyle.Flex : DisplayStyle.None;
+    // Upgrade type (Stat / WeaponUnlock)
+    [CreateProperty]
+    public StyleEnum<DisplayStyle> DisplayStat => upgradeType == UpgradeType.CharacterStat || upgradeType == UpgradeType.WeaponStat ? DisplayStyle.Flex : DisplayStyle.None;
+    [CreateProperty]
     public StyleEnum<DisplayStyle> DisplayWeaponUnlock => upgradeType == UpgradeType.WeaponUnlock ? DisplayStyle.Flex : DisplayStyle.None;
 
     public void SetValues(CharacterStatOption optionRef)
@@ -69,6 +73,7 @@ public class SO_UpgradeOptionData : ScriptableObject
 
         upgradeType = UpgradeType.WeaponUnlock;
         title = optionRef.WeaponName;
+        sprite = optionRef.Sprite;
         lvl = 1;
     }
 

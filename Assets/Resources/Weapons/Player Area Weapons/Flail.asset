@@ -15,7 +15,15 @@ MonoBehaviour:
   weaponPrefab: {fileID: 34220917603275928, guid: fd9afbc0c66b82c49b6c1ac5022bf845, type: 3}
   weaponName: Flail
   weaponType: 0
+  sprite: {fileID: 21300000, guid: 746bd06602d72174da44b9e40f6b07c1, type: 3}
   stats:
+    baseSize:
+      includeAsUpgradeOption: 0
+      UISprite: {fileID: 0}
+      name: 
+      shortName: 
+      baseValue: 0
+      flatScaling: 0
     damage:
       includeAsUpgradeOption: 1
       UISprite: {fileID: 21300000, guid: 746bd06602d72174da44b9e40f6b07c1, type: 3}
@@ -30,6 +38,12 @@ MonoBehaviour:
       shortName: projectile count
       baseValue: 1
       flatScaling: 1
+    size:
+      includeAsUpgradeOption: 0
+      UISprite: {fileID: 0}
+      name: 
+      shortName: 
+      multiplierScaling: 15
   hitVFX: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913, type: 3}
   hitMask:
     serializedVersion: 2

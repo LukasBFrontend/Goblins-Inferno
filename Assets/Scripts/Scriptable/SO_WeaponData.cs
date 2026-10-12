@@ -23,6 +23,7 @@ public class SO_WeaponData : ScriptableObject
     public GameObject weaponPrefab;
     public string weaponName;
     public WeaponType weaponType;
+    public Sprite sprite;
     public WeaponStatsData stats;
     public GameObject hitVFX;
     [Tooltip("A weapontype of 'Area' will damage enemies directly while a weapontype of 'Projectile' will attempt to spawn projectiles")]
