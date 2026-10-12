@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -16,18 +17,19 @@ public class ProjectileTargetTracker : MonoBehaviour
     BaseCharacter _targetCurrent;
     Vector3 _fallbackPosition;
     public Vector3 TargetPosition => _targetCurrent != null ? _targetCurrent.ColliderCenter : _fallbackPosition;
+    public BaseCharacter[] CharactersInRange => charactersInRange.Where(character => character != _sender && character != null).ToArray();
 
     public void Initialize(BaseCharacter sender, BaseCharacter initialTarget)
     {
         _sender = sender;
         _targetCurrent = initialTarget;
-        _fallbackPosition = RandomMaxRange(projectile.Data.range);
+        _fallbackPosition = Projectile.RandomMaxRange(transform, projectile.Data.range);
     }
 
     public void Initialize(BaseCharacter sender)
     {
         _sender = sender;
-        _fallbackPosition = RandomMaxRange(projectile.Data.range);
+        _fallbackPosition = Projectile.RandomMaxRange(transform, projectile.Data.range);
     }
 
     public void SetNewTarget(BaseCharacter target, Vector3 fallbackPosition)
@@ -44,12 +46,6 @@ public class ProjectileTargetTracker : MonoBehaviour
     public bool IsCharacterWithinRange(BaseCharacter target)
     {
         return charactersInRange.Contains(target);
-    }
-
-    Vector3 RandomMaxRange(float range)
-    {
-        Vector2 random = Random.insideUnitCircle.normalized;
-        return transform.position + new Vector3(random.x, 0f, random.y) * range;
     }
 
     BaseCharacter ClosestBaseCharacterInRange()

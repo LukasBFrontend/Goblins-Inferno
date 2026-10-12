@@ -20,6 +20,8 @@ public class CharacterStatOption : UpgradeOption
         Player player = Game.Player;
         Stat stat = player.Stats.Character.GetStat(_stat.Name);
         stat.LevelUp();
+
+        // TODO: Remove this
         Debug.Log($"Stat <color=magenta>{stat.Name}</color> leveled up to <color=white>{stat.Lvl}</color>. New evaluated value: <color=white>{stat.Evaluate()}</color>");
     }
 }

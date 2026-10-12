@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 732139133539721669}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 8292207059351111743}
   - component: {fileID: 7695627580935869272}
   - component: {fileID: 8590140145642448910}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: (Base) Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,6 +265,10 @@ PrefabInstance:
     - target: {fileID: 5830939983102530030, guid: 05376efaf9011f84da473fada26d8476, type: 3}
       propertyPath: m_Name
       value: Spot Shadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830939983102530030, guid: 05376efaf9011f84da473fada26d8476, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5830939983102530030, guid: 05376efaf9011f84da473fada26d8476, type: 3}
       propertyPath: m_IsActive

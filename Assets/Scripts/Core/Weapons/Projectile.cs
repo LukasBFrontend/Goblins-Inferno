@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -11,12 +12,15 @@ struct ParticleSystemVariables
     public float tryRegisterHitsAt;
 }
 
+// TODO: Use layermask
 public class Projectile : MonoBehaviour
 {
     [SerializeField] SO_ProjectileData projectileData;
     [Header("Optional")]
     [SerializeField] ProjectileTargetTracker targetTracker;
     [SerializeField] ParticleSystemVariables particleSystem;
+    [Header("Physics")]
+    [SerializeField] Rigidbody rigidbody;
     [SerializeField] bool logOnTargetHit;
     public SO_ProjectileData Data => projectileData;
     BaseCharacter _sender;
@@ -25,7 +29,7 @@ public class Projectile : MonoBehaviour
     List<BaseCharacter> _charactersHit = new();
 
     /// <summary>
-    /// Manually sets the target character and initiates the projectile arc.
+    /// Manually sets the target character of the projectile and initiates the projectile arc.
     /// </summary>
     /// <param name="initialTarget"></param>
     /// <param name="damage"></param>
@@ -35,11 +39,12 @@ public class Projectile : MonoBehaviour
         _sender = sender;
         _damage = damage;
 
+        // TODO: Add damage on contact ass a field in SO_Projectile_Data
         switch (projectileData.arcMode)
         {
             case ProjectileArcMode.None:
                 _hitEverything = false;
-                StartCoroutine(WaitForTargetRoutine(sender, initialTarget));
+                StartCoroutine(StaticAnimationRoutine(sender, initialTarget));
                 break;
             case ProjectileArcMode.HitMiss:
                 _hitEverything = true;
@@ -49,16 +54,22 @@ public class Projectile : MonoBehaviour
                 _hitEverything = true;
                 StartCoroutine(BoomerangRoutine(sender, initialTarget));
                 break;
-            case ProjectileArcMode.Bounce:
+            case ProjectileArcMode.Physics:
                 _hitEverything = false;
-                StartCoroutine(BounceRoutine(sender, initialTarget));
+                StartCoroutine(BombRoutine(sender, initialTarget));
                 break;
             default:
                 throw new System.NotImplementedException();
         }
     }
 
-    IEnumerator WaitForTargetRoutine(BaseCharacter sender, BaseCharacter target)
+    public static Vector3 RandomMaxRange(Transform transform, float range)
+    {
+        Vector2 random = Random.insideUnitCircle.normalized;
+        return transform.position + new Vector3(random.x, 0f, random.y) * range;
+    }
+
+    IEnumerator StaticAnimationRoutine(BaseCharacter sender, BaseCharacter target)
     {
         targetTracker.Initialize(sender, target);
         float elapsed = 0f;
@@ -71,7 +82,7 @@ public class Projectile : MonoBehaviour
 
             if (elapsedRelative >= particleSystem.tryRegisterHitsAt && !hasAttempedHits)
             {
-                HitTargetWithinRange(target);
+                HitTargetIfWithinRange(target);
 
                 hasAttempedHits = true;
             }
@@ -83,19 +94,58 @@ public class Projectile : MonoBehaviour
         // elapsedRelative is unlikely to land at exactly 1f.
         if (!hasAttempedHits)
         {
-            HitTargetWithinRange(target);
+            HitTargetIfWithinRange(target);
         }
 
 
         Destroy(gameObject);
     }
 
-    void HitTargetWithinRange(BaseCharacter target)
+    void HitTargetsWithinRange()
+    {
+        foreach (var character in targetTracker.CharactersInRange)
+        {
+            RegisterHit(character);
+        }
+    }
+
+    // StaticAnimationRoutine but with physics. TODO: Divide functionality into components.
+    IEnumerator BombRoutine(BaseCharacter sender, BaseCharacter target)
+    {
+        targetTracker.Initialize(sender);
+        
+        Vector3 direction = PointToPosition(target != null 
+            ? target.ColliderCenter 
+            : RandomMaxRange(transform, Data.range)
+        );
+        direction.y = .5f; // Throw at a 45 degree angle.
+
+        rigidbody.AddForce(direction * projectileData.initialVelocity, ForceMode.Impulse);
+
+        float duration = projectileData.lifeTime;
+        yield return new WaitForSeconds(duration);
+
+        if (gameObject == null)
+        {
+            yield break;
+        }
+        
+        ExplodeBomb();
+    }
+
+    void HitTargetIfWithinRange(BaseCharacter target)
     {
         if (targetTracker.IsCharacterWithinRange(target))
         {
             RegisterHit(target);
         }
+    }
+
+    void ExplodeBomb()
+    {
+        Instantiate(projectileData.onDestroyVFX, transform.position, Quaternion.identity);
+        HitTargetsWithinRange();
+        Destroy(gameObject);        
     }
 
     IEnumerator HitMissRoutine(BaseCharacter target)
@@ -106,7 +156,11 @@ public class Projectile : MonoBehaviour
         }
 
         float elapsed = 0f;
-        Vector3 direction = PointToPosition(target.ColliderCenter);
+
+        Vector3 direction = PointToPosition(target != null 
+            ? target.ColliderCenter 
+            : RandomMaxRange(transform, Data.range)
+        );
 
         while (elapsed < projectileData.lifeTime)
         {
@@ -149,12 +203,6 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator BounceRoutine(BaseCharacter sender, BaseCharacter initialTarget)
-    {
-        targetTracker.Initialize(sender, initialTarget);
-        throw new System.NotImplementedException();
-    }
-
     void MoveTowardsTarget()
     {
         Vector3 targetPosition = targetTracker.TargetPosition;
@@ -174,11 +222,26 @@ public class Projectile : MonoBehaviour
         RegisterHit(character);
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!projectileData.destroyOnContact || !collision.collider.TryGetComponent<BaseCharacter>(out var character))
+        {
+            return;
+        }
+
+        ExplodeBomb();
+    }
+
     void OnValidate()
     {
         if (projectileData.arcMode == ProjectileArcMode.None && particleSystem.controls == null)
         {
             Debug.LogWarning($"{nameof(Projectile)} <b><color=white>{name}</color></b> with '{nameof(projectileData)} = {nameof(ProjectileArcMode.None)}' is missing field <b><color=white>{nameof(ParticleSystemControls)}</color></b>");
+        }
+
+        if (projectileData.arcMode == ProjectileArcMode.Physics && rigidbody == null)
+        {
+            Debug.LogWarning($"Bomb projectile is missing particleSystemControls or rigidbody");
         }
     }
 

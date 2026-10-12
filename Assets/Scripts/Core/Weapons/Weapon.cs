@@ -8,6 +8,7 @@ public class Weapon :  MonoBehaviour
     [SerializeField] WeaponTargetTracker targetTracker;
     [Header("Optional")]
     [SerializeField] ParticleSystemControls particleSystem;
+    [SerializeField] float projectileOriginY;
     Player _wielder;
 
     public void Initialize(Player wielder)
@@ -81,7 +82,9 @@ public class Weapon :  MonoBehaviour
         var characterStats = Game.Player.Stats.Character;
         float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
 
-        GameObject projectileObject = Instantiate(data.projectilePrefab, _wielder.transform.position, Quaternion.identity);
+        Vector3 transformOrigin = new(_wielder.transform.position.x, projectileOriginY, _wielder.transform.position.z);
+
+        GameObject projectileObject = Instantiate(data.projectilePrefab, transformOrigin, Quaternion.identity);
         Projectile projectile = projectileObject.GetComponent<Projectile>();
 
         var enemiesInRange = targetTracker.EnemiesInRange;

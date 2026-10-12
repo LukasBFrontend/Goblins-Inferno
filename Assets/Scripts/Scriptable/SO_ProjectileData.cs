@@ -4,7 +4,7 @@ public enum ProjectileArcMode
 {
     None,
     HitMiss,
-    Bounce,
+    Physics, // Currently specific to bomb weapon.
     Boomerang,
 }
 
@@ -19,4 +19,6 @@ public class SO_ProjectileData : ScriptableObject
     public float initialVelocity;
     [Range(0f, .2f)]
     public float targetReachedThreshold;
+    public bool destroyOnContact;
+    public GameObject onDestroyVFX;
 }

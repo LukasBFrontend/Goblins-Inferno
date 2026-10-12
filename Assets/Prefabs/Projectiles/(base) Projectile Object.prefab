@@ -106,7 +106,7 @@ MonoBehaviour:
   particleSystem:
     controls: {fileID: 0}
     tryRegisterHitsAt: 0
-  logOnTargetHit: 1
+  logOnTargetHit: 0
 --- !u!1 &7899806756747332281
 GameObject:
   m_ObjectHideFlags: 0
