@@ -30,19 +30,19 @@ public class LevelUpgradeMenu : BaseSubmenu {
 
     void OnUpgradeButtonOneClick()
     {
-        Game.UpgradeOptionManager.SelectOptionOne();
+        Game.UpgradeOption.SelectOptionOne();
         GameEvents.RaiseGameResumed();
     }
 
     void OnUpgradeButtonTwoClick()
     {
-        Game.UpgradeOptionManager.SelectOptionTwo();
+        Game.UpgradeOption.SelectOptionTwo();
         GameEvents.RaiseGameResumed();
     }
 
     void OnUpgradeButtonThreeClick()
     {
-        Game.UpgradeOptionManager.SelectOptionThree();
+        Game.UpgradeOption.SelectOptionThree();
         GameEvents.RaiseGameResumed();
     }
 }

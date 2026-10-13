@@ -7,40 +7,38 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
     public IPoolable Spawn(PoolableData data, Vector3 position, Quaternion rotation)
     {
+        IPoolable result;
+
         if (!_poolableObjectLookup.TryGetValue(data.id, out var pool))
         {
-            pool = new List<IPoolable>();
-            _poolableObjectLookup.Add(data.id, pool);
+            _poolableObjectLookup.Add(data.id, new());
         }
-
-        IPoolable poolable;
 
         if (pool.Count > 0)
         {
-            poolable = pool[0];
+            result = pool[0];
             pool.RemoveAt(0);
 
-            poolable.SetPosition(position);
-            poolable.GameObject.transform.rotation = rotation;
+            result.GameObject.transform.SetPositionAndRotation(position, rotation);
         }
         else
         {
             GameObject obj = Instantiate(data.prefab, position, rotation);
-            poolable = obj.GetComponent<IPoolable>();
+            result = obj.GetComponent<IPoolable>();
 
-            if (poolable == null)
+            if (result == null)
             {
                 Debug.LogError(
-                    $"Prefab '{data.prefab.name}' does not implement IPoolable."
+                    $"Prefab <color=white>'{data.prefab.name}'</color> does not implement IPoolable."
                 );
                 return null;
             }
         }
 
-        poolable.PoolId = data.id;
-        poolable.GameObject.SetActive(true);
+        result.Id = data.id;
+        result.GameObject.SetActive(true);
 
-        return poolable;
+        return result;
     }
 
     public void Return(IPoolable poolable)
@@ -48,15 +46,13 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         poolable.Reset();
         poolable.GameObject.SetActive(false);
 
-        _poolableObjectLookup[poolable.PoolId].Add(poolable);
+        _poolableObjectLookup[poolable.Id].Add(poolable);
     }
 }
 
 public interface IPoolable
 {
-    string PoolId { get; set; }
+    string Id { get; set; }
     GameObject GameObject { get; }
-    void SetPosition(Vector3 newPosition);
-    void ReturnToPool();
     void Reset();
 }

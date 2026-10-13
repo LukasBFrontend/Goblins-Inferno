@@ -9,7 +9,7 @@ public class UpgradeState : BaseState
     public override void EnterState()
     {
         GameEvents.GameResumed.AddListener(OnGameResumed);
-        Game.UpgradeOptionManager.AssignRandom();
+        Game.UpgradeOption.AssignRandom();
         Time.timeScale = 0;
     }
 

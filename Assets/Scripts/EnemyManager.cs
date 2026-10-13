@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -11,7 +10,6 @@ public class EnemyManager : MonoBehaviour
     {
         StartCoroutine(EnemySpawnRoutine());
     }
-
 
     IEnumerator EnemySpawnRoutine()
     {
@@ -26,7 +24,7 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (var enemyPoolData in enemyPoolData.list)
         {
-            Game.ObjectPoolManager.Spawn(enemyPoolData, new (Random.Range(-10f, 10f), 0 , Random.Range(-10f, 10f)), Quaternion.identity);
+            Game.ObjectPool.Spawn(enemyPoolData, new (Random.Range(-10f, 10f), 0 , Random.Range(-10f, 10f)), Quaternion.identity);
         }
     }
 }
