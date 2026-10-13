@@ -5,9 +5,9 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     readonly Dictionary<string, List<IPoolable>> _poolableObjectLookup = new();
 
-    public IPoolable Spawn(PoolableData data, Vector3 position, Quaternion rotation)
+    public T Spawn<T>(PoolableData data, Vector3 position, Quaternion rotation) where T : MonoBehaviour, IPoolable
     {
-        IPoolable result;
+        T result;
 
         if (!_poolableObjectLookup.TryGetValue(data.id, out var pool))
         {
@@ -16,15 +16,15 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
         if (pool.Count > 0)
         {
-            result = pool[0];
+            result = (T)pool[0];
             pool.RemoveAt(0);
 
-            result.GameObject.transform.SetPositionAndRotation(position, rotation);
+            result.gameObject.transform.SetPositionAndRotation(position, rotation);
         }
         else
         {
             GameObject obj = Instantiate(data.prefab, position, rotation);
-            result = obj.GetComponent<IPoolable>();
+            result = obj.GetComponent<T>();
 
             if (result == null)
             {
@@ -36,15 +36,15 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         }
 
         result.Id = data.id;
-        result.GameObject.SetActive(true);
+        result.gameObject.SetActive(true);
 
         return result;
     }
 
-    public void Return(IPoolable poolable)
+    public void Return<T>(T poolable) where T : MonoBehaviour, IPoolable
     {
         poolable.Reset();
-        poolable.GameObject.SetActive(false);
+        poolable.gameObject.SetActive(false);
 
         _poolableObjectLookup[poolable.Id].Add(poolable);
     }
@@ -53,6 +53,5 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 public interface IPoolable
 {
     string Id { get; set; }
-    GameObject GameObject { get; }
     void Reset();
 }

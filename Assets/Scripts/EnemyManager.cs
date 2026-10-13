@@ -24,7 +24,7 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (var enemyPoolData in enemyPoolData.list)
         {
-            Game.ObjectPool.Spawn(enemyPoolData, new (Random.Range(-10f, 10f), 0 , Random.Range(-10f, 10f)), Quaternion.identity);
+            Game.ObjectPool.Spawn<Enemy>(enemyPoolData, new (Random.Range(-10f, 10f), 0 , Random.Range(-10f, 10f)), Quaternion.identity);
         }
     }
 }
