@@ -4,14 +4,16 @@ public static class Game
 {
     static GameInputActions _input;
     static UpgradeOptionManager _upgradeOptionManager;
+    static ObjectPoolManager _objectPoolManager;
     static Player _player;
-    
+
     static AvatarVariant _startAvatar;
     static float _score;
     static float _highScore;
 
     public static GameInputActions Input => GetSafe(_input);
     public static UpgradeOptionManager UpgradeOptionManager => GetSafe(_upgradeOptionManager);
+    public static ObjectPoolManager ObjectPoolManager => GetSafe(_objectPoolManager);
     public static Player Player => GetSafe(_player);
 
     public static AvatarVariant StartAvatar => _startAvatar;

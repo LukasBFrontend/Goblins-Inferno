@@ -47,9 +47,12 @@ public class Health : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _character.Die();
+            return;
         }
-
-        StartCoroutine(AnimateMaterialRoutine());
+        else if (gameObject.activeSelf)
+        {
+            StartCoroutine(AnimateMaterialRoutine());
+        }
     }
 
     /// <summary>
@@ -68,6 +71,11 @@ public class Health : MonoBehaviour
         _maxHealth = maxHealth;
 
         Heal(difference);
+    }
+
+    public void Reset()
+    {
+        _currentHealth = _maxHealth;
     }
 
     void Awake()

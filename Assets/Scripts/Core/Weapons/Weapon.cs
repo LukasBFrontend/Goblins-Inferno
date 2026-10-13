@@ -47,7 +47,7 @@ public class Weapon :  MonoBehaviour
 
                 while (animationElapsed < attackAnimationDuration)
                 {
-                    targetTracker.EnemiesInRange.RemoveAll(enemy => enemy == null);
+                    targetTracker.EnemiesInRange.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeSelf);
 
                     foreach (Enemy enemy in targetTracker.EnemiesInRange)
                     {
@@ -72,7 +72,7 @@ public class Weapon :  MonoBehaviour
             }
             else if(data.weaponType == WeaponType.Projectile)
             {
-                targetTracker.EnemiesInRange.RemoveAll(enemy => enemy == null);
+                targetTracker.EnemiesInRange.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeSelf);
 
                 Shoot();
 

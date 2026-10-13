@@ -113,9 +113,9 @@ public class Projectile : MonoBehaviour
     IEnumerator BombRoutine(BaseCharacter sender, BaseCharacter target)
     {
         targetTracker.Initialize(sender);
-        
-        Vector3 direction = PointToPosition(target != null 
-            ? target.ColliderCenter 
+
+        Vector3 direction = PointToPosition(target != null
+            ? target.ColliderCenter
             : RandomMaxRange(transform, Data.range)
         );
         direction.y = .5f; // Throw at a 45 degree angle.
@@ -129,7 +129,7 @@ public class Projectile : MonoBehaviour
         {
             yield break;
         }
-        
+
         ExplodeBomb();
     }
 
@@ -145,7 +145,7 @@ public class Projectile : MonoBehaviour
     {
         Instantiate(projectileData.onDestroyVFX, transform.position, Quaternion.identity);
         HitTargetsWithinRange();
-        Destroy(gameObject);        
+        Destroy(gameObject);
     }
 
     IEnumerator HitMissRoutine(BaseCharacter target)
@@ -157,8 +157,8 @@ public class Projectile : MonoBehaviour
 
         float elapsed = 0f;
 
-        Vector3 direction = PointToPosition(target != null 
-            ? target.ColliderCenter 
+        Vector3 direction = PointToPosition(target != null
+            ? target.ColliderCenter
             : RandomMaxRange(transform, Data.range)
         );
 

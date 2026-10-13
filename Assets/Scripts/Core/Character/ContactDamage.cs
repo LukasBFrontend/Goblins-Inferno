@@ -30,7 +30,7 @@ public class ContactDamage : MonoBehaviour
 
     IEnumerator ContactDamageRoutine(Player player)
     {
-        if (!_canAttack)
+        if (!_canAttack || !gameObject.activeSelf)
         {
             yield break;
         }
