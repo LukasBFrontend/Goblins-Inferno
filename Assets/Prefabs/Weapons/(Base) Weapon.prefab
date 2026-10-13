@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 0.5, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1420829013364936072}
@@ -48,6 +48,7 @@ MonoBehaviour:
   data: {fileID: 0}
   targetTracker: {fileID: 2676864261282442045}
   particleSystem: {fileID: 0}
+  projectileOriginY: 0
 --- !u!1 &4208634787337258331
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +101,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2.2
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2676864261282442045
 MonoBehaviour:

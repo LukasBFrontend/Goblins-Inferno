@@ -15,10 +15,16 @@ MonoBehaviour:
   list:
   - id: swordsman
     prefab: {fileID: 4189416725670998415, guid: 3ae9b688c6c6bb94a92dab4ac9a0a579, type: 3}
-    poolSize: 20
+    enemiesToSpawnRange:
+      lower: 3
+      upper: 5
   - id: wizard
     prefab: {fileID: 6982063490355154211, guid: 92cd47c4af604294d81466a98cc98033, type: 3}
-    poolSize: 20
+    enemiesToSpawnRange:
+      lower: 1
+      upper: 2
   - id: archer
     prefab: {fileID: 7348977928065779791, guid: 788aa06843d99c44ba06a5b89e69da82, type: 3}
-    poolSize: 20
+    enemiesToSpawnRange:
+      lower: 0
+      upper: 2

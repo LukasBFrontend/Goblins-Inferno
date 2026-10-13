@@ -23,13 +23,13 @@ public class ProjectileTargetTracker : MonoBehaviour
     {
         _sender = sender;
         _targetCurrent = initialTarget;
-        _fallbackPosition = Projectile.RandomMaxRange(transform, projectile.Data.range);
+        _fallbackPosition = Projectile.RandomMaxRange(transform, projectile.Data.newTargetRange);
     }
 
     public void Initialize(BaseCharacter sender)
     {
         _sender = sender;
-        _fallbackPosition = Projectile.RandomMaxRange(transform, projectile.Data.range);
+        _fallbackPosition = Projectile.RandomMaxRange(transform, projectile.Data.newTargetRange);
     }
 
     public void SetNewTarget(BaseCharacter target, Vector3 fallbackPosition)
@@ -89,7 +89,7 @@ public class ProjectileTargetTracker : MonoBehaviour
             return;
         }
 
-        collider.radius = projectile.Data.range;
+        collider.radius = projectile.Data.newTargetRange;
     }
 
     private void OnTriggerEnter(Collider other)

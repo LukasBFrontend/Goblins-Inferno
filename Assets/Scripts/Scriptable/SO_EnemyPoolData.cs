@@ -12,5 +12,5 @@ public struct PoolableData
 {
     public string id;
     public GameObject prefab;
-    public int poolSize;
+    public Range enemiesToSpawnRange;
 }

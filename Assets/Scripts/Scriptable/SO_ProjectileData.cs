@@ -13,12 +13,12 @@ public class SO_ProjectileData : ScriptableObject
 {
     public ProjectileArcMode arcMode;
     public float lifeTime = 5f;
-    public float range = 10f;
+    public float newTargetRange = 10f; // Replace use with weaponstat size + sizemultiplier.
+    public bool destroyOnContact;
     [Header("Optional")]
     [Range(0f, 200f)]
     public float initialVelocity;
     [Range(0f, .2f)]
     public float targetReachedThreshold;
-    public bool destroyOnContact;
     public GameObject onDestroyVFX;
 }

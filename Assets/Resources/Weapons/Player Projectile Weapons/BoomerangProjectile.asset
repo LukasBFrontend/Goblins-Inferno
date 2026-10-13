@@ -15,5 +15,7 @@ MonoBehaviour:
   arcMode: 3
   lifeTime: 5
   range: 8
+  destroyOnContact: 0
   initialVelocity: 15
-  targetReachedThreshold: 0.15
+  targetReachedThreshold: 0.015
+  onDestroyVFX: {fileID: 0}

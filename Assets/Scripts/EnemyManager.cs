@@ -4,7 +4,8 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] SO_EnemyPoolData enemyPoolData;
-    [SerializeField] float enemySpawnInterval = 20f;
+    [SerializeField] float spawnDistance = 10f;
+    [SerializeField] float enemySpawnInterval = 10f;
 
     void Start()
     {
@@ -24,7 +25,16 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (var enemyPoolData in enemyPoolData.list)
         {
-            Game.ObjectPool.Spawn<Enemy>(enemyPoolData, new (Random.Range(-10f, 10f), 0 , Random.Range(-10f, 10f)), Quaternion.identity);
+            Range range = enemyPoolData.enemiesToSpawnRange;
+            int spawnAmount = Random.Range(range.lower - 1, range.upper);
+
+
+            for (int i = 0; i < spawnAmount; i++)
+            {
+                Vector3 spawnPoint = Game.Player.transform.position + Utils.RandomDirection() * spawnDistance;
+
+                Game.ObjectPool.Spawn<Enemy>(enemyPoolData, spawnPoint, Quaternion.identity);
+            }
         }
     }
 }

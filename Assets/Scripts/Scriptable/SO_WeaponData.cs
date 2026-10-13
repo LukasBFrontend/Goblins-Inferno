@@ -30,6 +30,7 @@ public class SO_WeaponData : ScriptableObject
     public LayerMask hitMask;
     [Header("Only required for projectile weapons")]
     public GameObject projectilePrefab;
+    public bool parentProjectiles;
     public string WeaponName => weaponName;
     public WeaponStatsData Stats => stats;
 

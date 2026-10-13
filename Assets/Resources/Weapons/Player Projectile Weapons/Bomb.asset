@@ -19,20 +19,20 @@ MonoBehaviour:
   stats:
     baseSize:
       includeAsUpgradeOption: 0
-      UISprite: {fileID: 0}
-      name: 
-      shortName: 
-      baseValue: 0
+      UISprite: {fileID: 21300000, guid: f7560c1ee6232dc4f95e7d7c3a43710a, type: 3}
+      name: Bomb Base Range
+      shortName: base range
+      baseValue: 6
       flatScaling: 0
     damage:
-      includeAsUpgradeOption: 0
+      includeAsUpgradeOption: 1
       UISprite: {fileID: 21300000, guid: f7560c1ee6232dc4f95e7d7c3a43710a, type: 3}
       name: Bomb Damage
       shortName: damage
-      baseValue: 20
-      flatScaling: 5
+      baseValue: 30
+      flatScaling: 15
     projectileCount:
-      includeAsUpgradeOption: 0
+      includeAsUpgradeOption: 1
       UISprite: {fileID: 21300000, guid: f7560c1ee6232dc4f95e7d7c3a43710a, type: 3}
       name: Bomb Projectiles
       shortName: projectiles
@@ -40,9 +40,9 @@ MonoBehaviour:
       flatScaling: 1
     size:
       includeAsUpgradeOption: 0
-      UISprite: {fileID: 0}
-      name: 
-      shortName: 
+      UISprite: {fileID: 21300000, guid: f7560c1ee6232dc4f95e7d7c3a43710a, type: 3}
+      name: Bomb Range
+      shortName: range
       multiplierScaling: 15
   hitVFX: {fileID: 0}
   hitMask:

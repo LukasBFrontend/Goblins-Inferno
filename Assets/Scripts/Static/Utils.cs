@@ -9,10 +9,10 @@ public static class Utils
     /// <summary>
     /// Calculates the unit direction from the closest enemy to the player by comparing between the player and the list of enemies.
     /// </summary>
-    public static BaseCharacter ClosestEnemy(Player player)
+    public static Enemy ClosestEnemy(Player player)
     {
         Vector3 playerPosition = player.transform.position;
-        List<BaseCharacter> enemies = Object.FindObjectsByType<BaseCharacter>(FindObjectsInactive.Exclude).ToList();
+        List<Enemy> enemies = Object.FindObjectsByType<Enemy>(FindObjectsInactive.Exclude).ToList();
 
         if (enemies.Count == 0)
         {
@@ -29,7 +29,7 @@ public static class Utils
             : 1;
         });
 
-        BaseCharacter closestEnemy = enemies[0];
+        Enemy closestEnemy = enemies[0];
 
         return closestEnemy;
     }

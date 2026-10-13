@@ -25,10 +25,27 @@ public class Weapon :  MonoBehaviour
     /// </summary>
     public void Attack()
     {
+        WeaponStats currentStats = _wielder.Stats.GetWeaponModifier(data.weaponName);
+
+        float weaponSize = currentStats.BaseSize.Evaluate() * currentStats.SizeMultiplier.Evaluate();
+        float projectileCount = currentStats.ProjectileCount.Evaluate();
+
+        targetTracker.SetScale(weaponSize);
+
         StartCoroutine(AttackRoutine(
             Game.Player.Stats.AttackCooldown * .95f,
-            (int)_wielder.Stats.GetWeaponModifier(data.weaponName).ProjectileCount.Evaluate()
+            (int)projectileCount
         ));
+    }
+
+    void OnValidate()
+    {
+        if (data == null)
+        {
+            return;
+        }
+        float baseWeaponSize = data.stats.baseSize.baseValue;
+        targetTracker.SetScale(baseWeaponSize);
     }
 
     IEnumerator AttackRoutine(float duration, int projectileCount)
@@ -89,6 +106,7 @@ public class Weapon :  MonoBehaviour
         Vector3 transformOrigin = new(_wielder.transform.position.x, projectileOriginY, _wielder.transform.position.z);
 
         GameObject projectileObject = Instantiate(data.projectilePrefab, transformOrigin, Quaternion.identity);
+
         Projectile projectile = projectileObject.GetComponent<Projectile>();
 
         var enemiesInRange = targetTracker.EnemiesInRange;

@@ -121,8 +121,9 @@ public class Health : MonoBehaviour
 
         while (i < maxIterations)
         {
-            if (this == null)
+            if (!gameObject.activeSelf)
             {
+                _materialInstances.ForEach(material => material.SetColor(propertyName, originalColor));
                 break;
             }
             _materialInstances.ForEach(material => material.SetColor(propertyName, i % 2 == 1 ? originalColor : damageColor)) ;

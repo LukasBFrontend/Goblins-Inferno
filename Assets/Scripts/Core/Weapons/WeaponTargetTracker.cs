@@ -10,7 +10,12 @@ public class WeaponTargetTracker : MonoBehaviour
     [SerializeField] List<Enemy> enemiesInRange = new();
     public List<Enemy> EnemiesInRange => enemiesInRange;
 
-    private void OnTriggerEnter(Collider other)
+    public void SetScale(float radius)
+    {
+        transform.localScale = new(radius, radius, radius);
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         if (!other.TryGetComponent<Enemy>(out var enemy))
         {
@@ -20,7 +25,7 @@ public class WeaponTargetTracker : MonoBehaviour
         enemiesInRange.Add(enemy);
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (!other.TryGetComponent<Enemy>(out var enemy))
         {

@@ -19,18 +19,18 @@ MonoBehaviour:
   stats:
     baseSize:
       includeAsUpgradeOption: 0
-      UISprite: {fileID: 0}
-      name: 
-      shortName: 
-      baseValue: 0
+      UISprite: {fileID: 21300000, guid: 746bd06602d72174da44b9e40f6b07c1, type: 3}
+      name: Flail Base Size
+      shortName: base size
+      baseValue: 2
       flatScaling: 0
     damage:
       includeAsUpgradeOption: 1
       UISprite: {fileID: 21300000, guid: 746bd06602d72174da44b9e40f6b07c1, type: 3}
       name: Flail Damage
       shortName: damage
-      baseValue: 10
-      flatScaling: 1
+      baseValue: 25
+      flatScaling: 10
     projectileCount:
       includeAsUpgradeOption: 1
       UISprite: {fileID: 21300000, guid: 746bd06602d72174da44b9e40f6b07c1, type: 3}
@@ -39,10 +39,10 @@ MonoBehaviour:
       baseValue: 1
       flatScaling: 1
     size:
-      includeAsUpgradeOption: 0
-      UISprite: {fileID: 0}
-      name: 
-      shortName: 
+      includeAsUpgradeOption: 1
+      UISprite: {fileID: 21300000, guid: 746bd06602d72174da44b9e40f6b07c1, type: 3}
+      name: Flail Size
+      shortName: size
       multiplierScaling: 15
   hitVFX: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913, type: 3}
   hitMask:

@@ -116,7 +116,7 @@ public class Projectile : MonoBehaviour
 
         Vector3 direction = PointToPosition(target != null
             ? target.ColliderCenter
-            : RandomMaxRange(transform, Data.range)
+            : RandomMaxRange(transform, Data.newTargetRange)
         );
         direction.y = .5f; // Throw at a 45 degree angle.
 
@@ -159,7 +159,7 @@ public class Projectile : MonoBehaviour
 
         Vector3 direction = PointToPosition(target != null
             ? target.ColliderCenter
-            : RandomMaxRange(transform, Data.range)
+            : RandomMaxRange(transform, Data.newTargetRange)
         );
 
         while (elapsed < projectileData.lifeTime)

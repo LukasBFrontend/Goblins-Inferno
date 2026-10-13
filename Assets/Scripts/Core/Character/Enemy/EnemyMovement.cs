@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float baseMoveSpeed = 4;
     [SerializeField] float stopAt = 10f;
     [SerializeField] float stopDistance = 1f;
+    [SerializeField] float kitingDistance = 0f;
     [SerializeField] float personalSpace = 2f;
     Rigidbody _rigidbody;
     Enemy _enemy;
@@ -40,7 +41,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
         CalculateNudgeSignal(personalSpace);
-        TrackPlayer(stopAt, stopDistance);
+        TrackPlayer(stopAt, stopDistance, kitingDistance);
     }
 
     void OnGameOver()
@@ -49,13 +50,18 @@ public class EnemyMovement : MonoBehaviour
         _rigidbody.linearVelocity = Vector3.zero;
     }
 
-    void TrackPlayer(float distanceAway, float stopDistance)
+    void TrackPlayer(float distanceAway, float stopDistance, float kitingDistance)
     {
         Vector3 direction = _enemy.DirectionTo(Game.Player);
 
         float distanceToPlayer = _enemy.DistanceTo(Game.Player);
 
         float t = (distanceToPlayer - distanceAway) / stopDistance;
+        if (distanceToPlayer < kitingDistance)
+        {
+            direction *= -1;
+            t = 1;
+        }
         float adjustedMoveSpeed = Mathf.Lerp(0f, baseMoveSpeed, t);
 
         _rigidbody.linearVelocity = (direction  + _nudgeSignal) * adjustedMoveSpeed;

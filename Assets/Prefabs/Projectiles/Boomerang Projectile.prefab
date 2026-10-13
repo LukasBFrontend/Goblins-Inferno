@@ -273,6 +273,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1771649944702901548, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: rigidbody
+      value: 
+      objectReference: {fileID: 2234535837425708082}
+    - target: {fileID: 1771649944702901548, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       propertyPath: projectileData
       value: 
       objectReference: {fileID: 11400000, guid: 889a796e9f28c7c4cbdb9f0f5e2d3346, type: 2}
@@ -282,7 +286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8166896396699391582, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       propertyPath: m_Radius
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -294,6 +298,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2189071166492074030}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3034866633386620098, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 2234535837425708082}
     - targetCorrespondingSourceObject: {fileID: 2051434200979898748, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4284320191114734174}
@@ -330,3 +337,35 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &7842263552249521582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3034866633386620098, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+  m_PrefabInstance: {fileID: 5101261408589484396}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &2234535837425708082
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842263552249521582}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 0

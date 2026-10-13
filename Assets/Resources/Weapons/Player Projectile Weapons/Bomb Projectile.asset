@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_ProjectileData
   arcMode: 2
   lifeTime: 3
-  range: 3
+  range: 6
+  destroyOnContact: 0
   initialVelocity: 5
   targetReachedThreshold: 0.015
   onDestroyVFX: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}

@@ -4033,6 +4033,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
   enemyPoolData: {fileID: 11400000, guid: e7f48288bf3bb9740868965852057c35, type: 2}
+  spawnDistance: 10
+  enemySpawnInterval: 10
 --- !u!4 &1336010343
 Transform:
   m_ObjectHideFlags: 0

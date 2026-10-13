@@ -11,7 +11,8 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
         if (!_poolableObjectLookup.TryGetValue(data.id, out var pool))
         {
-            _poolableObjectLookup.Add(data.id, new());
+            pool = new List<IPoolable>();
+            _poolableObjectLookup.Add(data.id, pool);
         }
 
         if (pool.Count > 0)
