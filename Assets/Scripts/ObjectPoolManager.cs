@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPoolManager : Singleton<ObjectPoolManager>
+public class ObjectPoolManager : MonoBehaviour
 {
     readonly Dictionary<string, List<IPoolable>> _poolableObjectLookup = new();
+    static ObjectPoolManager _instance;
 
     public T Spawn<T>(PoolableData data, Vector3 position, Quaternion rotation) where T : MonoBehaviour, IPoolable
     {
@@ -48,6 +50,17 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         poolable.gameObject.SetActive(false);
 
         _poolableObjectLookup[poolable.Id].Add(poolable);
+    }
+
+    void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        _instance = this;
     }
 }
 

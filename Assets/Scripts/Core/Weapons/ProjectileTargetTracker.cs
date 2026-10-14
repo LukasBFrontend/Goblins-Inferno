@@ -89,7 +89,8 @@ public class ProjectileTargetTracker : MonoBehaviour
             return;
         }
 
-        collider.radius = projectile.Data.newTargetRange;
+        float scale = projectile.Data.newTargetRange;
+        collider.transform.localScale = new(scale, scale, scale);
     }
 
     private void OnTriggerEnter(Collider other)
