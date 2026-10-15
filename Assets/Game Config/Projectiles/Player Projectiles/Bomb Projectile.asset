@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2fa4616f1fbeb42a96f08f8b1efbf8, type: 3}
   m_Name: Bomb Projectile
   m_EditorClassIdentifier: Assembly-CSharp::SO_ProjectileData
-  initialVelocity: 5
+  initialVelocity: 4.25
   arcMode: 2
   destroyOnContact: 1
   lifeTime: 3
   onDestroyVFX: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
   targetReachedThreshold: 0.015
-  newTargetRange: 5
+  newTargetRange: 4
   targetsLayerMask:
     serializedVersion: 2
     m_Bits: 192

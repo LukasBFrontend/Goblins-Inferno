@@ -218,7 +218,7 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if ((data.targetsLayerMask & (1 << other.gameObject.layer)) == 0 || !other.TryGetComponent<BaseCharacter>(out var character) || character == _sender)
+        if (!_hitEverything || (data.targetsLayerMask & (1 << other.gameObject.layer)) == 0 || !other.TryGetComponent<BaseCharacter>(out var character) || character == _sender)
         {
             return;
         }

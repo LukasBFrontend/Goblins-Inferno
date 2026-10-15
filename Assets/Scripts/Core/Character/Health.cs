@@ -89,6 +89,7 @@ public class Health : MonoBehaviour
     public void Reset()
     {
         _currentHealth = _maxHealth;
+        _materialInstances.ForEach(material => material.SetColor(propertyName, originalColor));
     }
 
     public void SetInvincibilityFrames(float delay, float seconds)
@@ -142,7 +143,7 @@ public class Health : MonoBehaviour
             if (!gameObject.activeSelf)
             {
                 _materialInstances.ForEach(material => material.SetColor(propertyName, originalColor));
-                break;
+                yield break;
             }
             _materialInstances.ForEach(material => material.SetColor(propertyName, i % 2 == 1 ? originalColor : damageColor)) ;
             i++;
