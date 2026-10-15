@@ -71,14 +71,14 @@ public class Health : MonoBehaviour
     {
         if (maxHealth <= _maxHealth)
         {
-            Debug.LogWarning($"Tried invoking method <b><color=white>{nameof(Heal)}()</color></b> of <b>{name}</b> with value = {maxHealth} which is lower than current MaxHealth = {_maxHealth}.");
+            Debug.LogWarning($"Tried invoking method <b><color=white>{nameof(Restore)}()</color></b> of <b>{name}</b> with value = {maxHealth} which is lower than current MaxHealth = {_maxHealth}.");
             return;
         }
 
         int difference = maxHealth - _maxHealth;
         _maxHealth = maxHealth;
 
-        Heal(difference);
+        Restore(difference);
 
         if (_character is Player)
         {
@@ -162,14 +162,15 @@ public class Health : MonoBehaviour
     /// Adds amount to character health up to MaxHealth
     /// </summary>
     /// <param name="amount"></param>
-    void Heal(int amount)
+    public void Restore(int amount)
     {
         if (amount <= 0)
         {
-            Debug.LogWarning($"Tried invoking method <b><color=white>{nameof(Heal)}()</color></b> of <b>{name}</b> with a non-positive value.");
+            Debug.LogWarning($"Tried invoking method <b><color=white>{nameof(Restore)}()</color></b> of <b>{name}</b> with a non-positive value.");
             return;
         }
 
         _currentHealth = Mathf.Clamp(_currentHealth + amount, 0, _maxHealth);
+        GameEvents.RaiseHealthChanged(_currentHealth, _maxHealth);
     }
 }

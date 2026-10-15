@@ -17,6 +17,7 @@ public class EnemyMovement : MonoBehaviour
     Enemy _enemy;
     bool _isActive;
     bool _enemyIsStationary => _enemy.Rigidbody.linearVelocity.magnitude < 0.1;
+    bool _isRunningAway;
     Vector3 _nudgeSignal;
 
     public void Nudge(Vector3 signal)
@@ -55,18 +56,23 @@ public class EnemyMovement : MonoBehaviour
         Vector3 direction = _enemy.DirectionTo(Game.Player);
 
         float distanceToPlayer = _enemy.DistanceTo(Game.Player);
-
         float t = (distanceToPlayer - distanceAway) / stopDistance;
-        if (distanceToPlayer < kitingDistance)
+
+        if (distanceToPlayer < kitingDistance && !_isRunningAway)
+        {
+            StartCoroutine(RunAwayRoutine(.5f));
+        }
+        else if (_isRunningAway)
         {
             direction *= -1;
             t = 1;
         }
+
         float adjustedMoveSpeed = Mathf.Lerp(0f, baseMoveSpeed, t);
 
         _rigidbody.linearVelocity = (direction  + _nudgeSignal) * adjustedMoveSpeed;
 
-        _enemy.Animator.SetBool("IsStationary", _enemyIsStationary);
+        _enemy.Animator.SetBool("IsStationary", _enemyIsStationary && !_isRunningAway);
         SetRotationDirection(direction);
     }
 
@@ -107,5 +113,12 @@ public class EnemyMovement : MonoBehaviour
         strength = Mathf.SmoothStep(0f, 1f, strength);
 
         _nudgeSignal = delta.normalized * strength;
+    }
+
+    IEnumerator RunAwayRoutine(float seconds)
+    {
+        _isRunningAway = true;
+        yield return new WaitForSeconds(seconds);
+        _isRunningAway = false;
     }
 }

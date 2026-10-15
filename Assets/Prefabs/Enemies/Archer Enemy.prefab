@@ -244,6 +244,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4501246944948846756, guid: d5d8371c68ab79649941755b979ea139, type: 3}
+      propertyPath: personalSpace
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501246944948846756, guid: d5d8371c68ab79649941755b979ea139, type: 3}
       propertyPath: kitingDistance
       value: 7
       objectReference: {fileID: 0}

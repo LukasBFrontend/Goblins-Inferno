@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4aa41438e47297341b2e0b0a59f03245, type: 3}
-  m_Name: ExpDropPool
+  m_Name: PowerupDropPool
   m_EditorClassIdentifier: Assembly-CSharp::SO_ItemDropPool
   itemDrops:
-  - prefab: {fileID: 6936433703980196973, guid: febb39565df48434286e222b633257f7, type: 3}
+  - prefab: {fileID: 8573654059955536675, guid: 55788ca1b6b9e0d4f916f48febf50a3a, type: 3}
     poolQuantity: 10

@@ -6,6 +6,12 @@ public class PlayingState : BaseState
     public PlayingState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
     {
         RegisterCallbacks();
+        Game.Input.Move.Enable();
+        Game.Input.Jump.Enable();
+
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     public override void EnterState()
     {
