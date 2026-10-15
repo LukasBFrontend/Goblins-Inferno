@@ -21,4 +21,4 @@ MonoBehaviour:
   newTargetRange: 4
   targetsLayerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 128

@@ -34,7 +34,7 @@ public class StartMenu : BaseSubmenu
 
     void OnStartButtonClicked()
     {
-        GameEvents.RaiseLevelStarted();
+        GameEvents.RaiseLevelLoaded();
     }
     void OnOptionsButtonClicked()
     {

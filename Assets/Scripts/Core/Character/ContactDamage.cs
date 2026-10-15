@@ -21,7 +21,7 @@ public class ContactDamage : MonoBehaviour
 
     void OnCollisionStay(Collision other)
     {
-        if (!_isActive || !other.collider.TryGetComponent<Player>(out var player))
+        if (!gameObject.activeSelf || !_isActive || !other.collider.TryGetComponent<Player>(out var player))
         {
             return;
         }

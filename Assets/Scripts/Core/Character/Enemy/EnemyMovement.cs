@@ -62,7 +62,7 @@ public class EnemyMovement : MonoBehaviour
         {
             StartCoroutine(RunAwayRoutine(.5f));
         }
-        else if (_isRunningAway)
+        else if (distanceToPlayer < stopDistance && _isRunningAway)
         {
             direction *= -1;
             t = 1;
@@ -72,7 +72,7 @@ public class EnemyMovement : MonoBehaviour
 
         _rigidbody.linearVelocity = (direction  + _nudgeSignal) * adjustedMoveSpeed;
 
-        _enemy.Animator.SetBool("IsStationary", _enemyIsStationary && !_isRunningAway);
+        _enemy.Animator.SetBool("IsStationary", _enemyIsStationary);
         SetRotationDirection(direction);
     }
 

@@ -22,7 +22,8 @@ public class MainMenuState : BaseState
 
         GameSaveState.Load();
         Time.timeScale = 1;
-        GameEvents.LevelStarted.AddListener(OnLevelStarted);
+        GameEvents.LevelLoaded.AddListener(OnLevelStarted);
+        GameEvents.RaiseMainMenuLoaded();
     }
 
     void OnLevelStarted()
@@ -34,7 +35,7 @@ public class MainMenuState : BaseState
 
     public override void ExitState()
     {
-        GameEvents.LevelStarted.RemoveListener(OnLevelStarted);
+        GameEvents.LevelLoaded.RemoveListener(OnLevelStarted);
     }
 
     public override void CheckSwitchStates() { }

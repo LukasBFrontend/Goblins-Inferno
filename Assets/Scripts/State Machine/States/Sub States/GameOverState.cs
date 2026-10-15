@@ -9,7 +9,7 @@ public class GameOverState : BaseState
     }
     public override void EnterState()
     {
-        GameEvents.LevelStarted.AddListener(OnLevelStarted);
+        GameEvents.LevelLoaded.AddListener(OnLevelStarted);
 
         Time.timeScale = 0.5f;
         Game.Player.Rigidbody.linearVelocity = Vector3.zero;
@@ -22,7 +22,7 @@ public class GameOverState : BaseState
 
     public override void ExitState()
     {
-        GameEvents.LevelStarted.RemoveListener(OnLevelStarted);
+        GameEvents.LevelLoaded.RemoveListener(OnLevelStarted);
     }
 
     void OnLevelStarted()

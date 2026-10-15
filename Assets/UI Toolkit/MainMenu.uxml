@@ -4,7 +4,7 @@
         <ui:VisualElement name="HeaderContainer" style="flex-direction: row; font-size: 32px; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px;">
             <ui:VisualElement name="LeftContainer" style="flex-grow: 1; flex-direction: row;">
                 <ui:Label text="HIGHSCORE:" name="HighscoreLabel" class="highscoreLabel"/>
-                <ui:Label text="2310" name="HighscoreText" class="highscoreText"/>
+                <ui:Label text="0" name="HighscoreText" class="highscoreText"/>
             </ui:VisualElement>
             <ui:VisualElement name="RightContainer" style="flex-grow: 1; flex-direction: row; justify-content: flex-end;">
                 <ui:Label text="DEVELOPED BY: LUKAS BRAKENHIELM" name="AuthorLabel" class="highscoreLabel" style="font-size: 26px;"/>

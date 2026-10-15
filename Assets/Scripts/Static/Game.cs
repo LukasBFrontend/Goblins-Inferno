@@ -20,7 +20,7 @@ public static class Game
 
     public static AvatarVariant StartAvatar => _startAvatar;
     public static int Score => _score;
-    public static float HighScore => _highScore;
+    public static int HighScore => _highScore;
 
     public static void AddPoints(int points)
     {
@@ -28,7 +28,7 @@ public static class Game
 
         if (points > _highScore)
         {
-            _highScore = points;
+            _highScore = _score;
         }
 
         GameEvents.RaiseScoreChanged(_score);
