@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,17 +13,17 @@ struct ParticleSystemVariables
     public float tryRegisterHitsAt;
 }
 
-// TODO: Use layermask
+// TODO: Seperate different projectile behaviors into components
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] SO_ProjectileData projectileData;
+    [SerializeField] SO_ProjectileData data;
     [Header("Optional")]
     [SerializeField] ProjectileTargetTracker targetTracker;
     [SerializeField] ParticleSystemVariables particleSystem;
     [Header("Physics")]
     [SerializeField] Rigidbody rigidbody;
     [SerializeField] bool logOnTargetHit;
-    public SO_ProjectileData Data => projectileData;
+    public SO_ProjectileData Data => data;
     BaseCharacter _sender;
     int _damage;
     bool _hitEverything;
@@ -40,11 +41,11 @@ public class Projectile : MonoBehaviour
         _damage = damage;
 
         // TODO: Add damage on contact ass a field in SO_Projectile_Data
-        switch (projectileData.arcMode)
+        switch (data.arcMode)
         {
             case ProjectileArcMode.None:
                 _hitEverything = false;
-                StartCoroutine(StaticAnimationRoutine(sender, initialTarget));
+                StartCoroutine(StaticAnimationRoutine(initialTarget));
                 break;
             case ProjectileArcMode.HitMiss:
                 _hitEverything = true;
@@ -52,11 +53,11 @@ public class Projectile : MonoBehaviour
                 break;
             case ProjectileArcMode.Boomerang:
                 _hitEverything = true;
-                StartCoroutine(BoomerangRoutine(sender, initialTarget));
+                StartCoroutine(BoomerangRoutine(initialTarget));
                 break;
             case ProjectileArcMode.Physics:
                 _hitEverything = false;
-                StartCoroutine(BombRoutine(sender, initialTarget));
+                StartCoroutine(BombRoutine(initialTarget));
                 break;
             default:
                 throw new System.NotImplementedException();
@@ -69,9 +70,9 @@ public class Projectile : MonoBehaviour
         return transform.position + new Vector3(random.x, 0f, random.y) * range;
     }
 
-    IEnumerator StaticAnimationRoutine(BaseCharacter sender, BaseCharacter target)
+    IEnumerator StaticAnimationRoutine(BaseCharacter target)
     {
-        targetTracker.Initialize(sender, target);
+        targetTracker.Initialize(target);
         float elapsed = 0f;
         float duration = particleSystem.controls.EffectiveDuration;
         bool hasAttempedHits = false;
@@ -103,26 +104,25 @@ public class Projectile : MonoBehaviour
 
     void HitTargetsWithinRange()
     {
-        foreach (var character in targetTracker.CharactersInRange)
+        foreach (var character in targetTracker.InRange(data.newTargetRange, data.targetsLayerMask))
         {
             RegisterHit(character);
         }
     }
 
-    // StaticAnimationRoutine but with physics. TODO: Divide functionality into components.
-    IEnumerator BombRoutine(BaseCharacter sender, BaseCharacter target)
+    IEnumerator BombRoutine(BaseCharacter target)
     {
-        targetTracker.Initialize(sender);
+        targetTracker.Initialize();
 
         Vector3 direction = PointToPosition(target != null
             ? target.ColliderCenter
             : RandomMaxRange(transform, Data.newTargetRange)
         );
-        direction.y = .5f; // Throw at a 45 degree angle.
+        direction.y = .5f; // Throw at an upwards angle.
 
-        rigidbody.AddForce(direction * projectileData.initialVelocity, ForceMode.Impulse);
+        rigidbody.AddForce(direction * data.initialVelocity, ForceMode.Impulse);
 
-        float duration = projectileData.lifeTime;
+        float duration = data.lifeTime;
         yield return new WaitForSeconds(duration);
 
         if (gameObject == null)
@@ -130,21 +130,25 @@ public class Projectile : MonoBehaviour
             yield break;
         }
 
-        ExplodeBomb();
+        DestroyProjectile();
     }
 
     void HitTargetIfWithinRange(BaseCharacter target)
     {
-        if (targetTracker.IsCharacterWithinRange(target))
+        if (targetTracker.InRange(data.newTargetRange, data.targetsLayerMask).Contains(target))
         {
             RegisterHit(target);
         }
     }
 
-    void ExplodeBomb()
+    void DestroyProjectile()
     {
-        Instantiate(projectileData.onDestroyVFX, transform.position, Quaternion.identity);
-        HitTargetsWithinRange();
+        if (data.arcMode == ProjectileArcMode.Physics) // Is bomb.
+        {
+            HitTargetsWithinRange();
+        }
+
+        Instantiate(data.onDestroyVFX, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
@@ -162,14 +166,14 @@ public class Projectile : MonoBehaviour
             : RandomMaxRange(transform, Data.newTargetRange)
         );
 
-        while (elapsed < projectileData.lifeTime)
+        while (elapsed < data.lifeTime)
         {
             if (_charactersHit.Count >= 1)
             {
                 break;
             }
 
-            float step = projectileData.initialVelocity * Time.deltaTime;
+            float step = data.initialVelocity * Time.deltaTime;
             transform.position += direction * step;
 
             elapsed += Time.deltaTime;
@@ -179,10 +183,10 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator BoomerangRoutine(BaseCharacter sender, BaseCharacter initialTarget)
+    IEnumerator BoomerangRoutine(BaseCharacter initialTarget)
     {
-        targetTracker.Initialize(sender, initialTarget);
-        float threshold = projectileData.targetReachedThreshold;
+        targetTracker.Initialize(initialTarget);
+        float threshold = data.targetReachedThreshold;
 
         while (!targetTracker.IsTargetPositionReached(threshold))
         {
@@ -208,13 +212,13 @@ public class Projectile : MonoBehaviour
         Vector3 targetPosition = targetTracker.TargetPosition;
         PointToPosition(targetPosition);
 
-        float step = projectileData.initialVelocity * Time.deltaTime;
+        float step = data.initialVelocity * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (!_hitEverything || !other.TryGetComponent<BaseCharacter>(out var character) || character == _sender)
+        if ((data.targetsLayerMask & (1 << other.gameObject.layer)) == 0 || !other.TryGetComponent<BaseCharacter>(out var character) || character == _sender)
         {
             return;
         }
@@ -224,22 +228,22 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!projectileData.destroyOnContact || !collision.collider.TryGetComponent<BaseCharacter>(out var character))
+        if (!data.destroyOnContact || (data.targetsLayerMask & (1 << collision.gameObject.layer)) == 0)
         {
             return;
         }
 
-        ExplodeBomb();
+        DestroyProjectile();
     }
 
     void OnValidate()
     {
-        if (projectileData.arcMode == ProjectileArcMode.None && particleSystem.controls == null)
+        if (data.arcMode == ProjectileArcMode.None && particleSystem.controls == null)
         {
-            Debug.LogWarning($"{nameof(Projectile)} <b><color=white>{name}</color></b> with '{nameof(projectileData)} = {nameof(ProjectileArcMode.None)}' is missing field <b><color=white>{nameof(ParticleSystemControls)}</color></b>");
+            Debug.LogWarning($"{nameof(Projectile)} <b><color=white>{name}</color></b> with '{nameof(data)} = {nameof(ProjectileArcMode.None)}' is missing field <b><color=white>{nameof(ParticleSystemControls)}</color></b>");
         }
 
-        if (projectileData.arcMode == ProjectileArcMode.Physics && rigidbody == null)
+        if (data.arcMode == ProjectileArcMode.Physics && rigidbody == null)
         {
             Debug.LogWarning($"Bomb projectile is missing particleSystemControls or rigidbody");
         }

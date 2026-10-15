@@ -273,6 +273,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1771649944702901548, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 889a796e9f28c7c4cbdb9f0f5e2d3346, type: 2}
+    - target: {fileID: 1771649944702901548, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 2234535837425708082}
@@ -280,6 +284,18 @@ PrefabInstance:
       propertyPath: projectileData
       value: 
       objectReference: {fileID: 11400000, guid: 889a796e9f28c7c4cbdb9f0f5e2d3346, type: 2}
+    - target: {fileID: 2364059758966569387, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364059758966569387, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364059758966569387, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3034866633386620098, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       propertyPath: m_Name
       value: Boomerang Projectile

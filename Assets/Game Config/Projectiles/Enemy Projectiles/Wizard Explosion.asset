@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec2fa4616f1fbeb42a96f08f8b1efbf8, type: 3}
-  m_Name: Bomb Projectile
+  m_Name: Wizard Explosion
   m_EditorClassIdentifier: Assembly-CSharp::SO_ProjectileData
-  arcMode: 2
-  lifeTime: 3
-  range: 6
+  initialVelocity: 0.1
+  arcMode: 0
   destroyOnContact: 0
-  initialVelocity: 5
-  targetReachedThreshold: 0.015
-  onDestroyVFX: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
+  lifeTime: 5
+  onDestroyVFX: {fileID: 0}
+  targetReachedThreshold: 0
+  newTargetRange: 4
+  targetsLayerMask:
+    serializedVersion: 2
+    m_Bits: 64

@@ -12,6 +12,7 @@ public static class GameEvents
     // Level
     public static UnityEvent<int, int> HealthChanged = new();
     public static UnityEvent<int, int> ExpChanged = new();
+    public static UnityEvent<int> ScoreChanged = new();
     public static UnityEvent<int, int> LvlUpEvent = new();
 
     public static void RaiseLevelStarted()
@@ -47,6 +48,11 @@ public static class GameEvents
     public static void RaiseExpChanged(int exp, int requiredExp)
     {
         ExpChanged?.Invoke(exp, requiredExp);
+    }
+
+    public static void RaiseScoreChanged(int newScore)
+    {
+        ScoreChanged?.Invoke(newScore);
     }
 
     public static void RaiseLvlUpEvent(int oldLvl, int newLvl)

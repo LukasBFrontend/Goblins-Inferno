@@ -60,7 +60,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false,
@@ -429,6 +429,17 @@
                 },
                 {
                     "name": "",
+                    "id": "0bd9345c-bce4-40bb-8008-5bdc76d34ac5",
+                    "path": "<Joystick>/{SecondaryAction}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1534dc16-a6aa-499d-9c3a-22b47347b52a",
                     "path": "<Keyboard>/1",
                     "interactions": "",
@@ -507,7 +518,18 @@
                 {
                     "name": "",
                     "id": "105c44a1-bf24-4830-8ef1-9a3b1482d6bc",
-                    "path": "<Gamepad>/select",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb55b609-2a2e-4a4b-b475-924e3de9a899",
+                    "path": "<Joystick>/{Cancel}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -28,14 +28,20 @@ public class Health : MonoBehaviour
     int _maxHealth;
     BaseCharacter _character;
     List<Material> _materialInstances;
+    bool _isInvincibilityFrame;
 
 
     /// <summary>
     /// Subtracts amount from the character health. If it reaches zero, invokes Die().
     /// </summary>
     /// <param name="amount"></param>
-    public void TakeDamage(int amount)
+    public int TakeDamage(int amount)
     {
+        if (_isInvincibilityFrame)
+        {
+            return 0;
+        }
+
         _currentHealth -= amount;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
 
@@ -44,15 +50,17 @@ public class Health : MonoBehaviour
             GameEvents.RaiseHealthChanged(_currentHealth, _maxHealth);
         }
 
-        if (_currentHealth <= 0)
+        if (_currentHealth == 0)
         {
             _character.Die();
-            return;
+            return 0;
         }
         else if (gameObject.activeSelf)
         {
             StartCoroutine(AnimateMaterialRoutine());
         }
+
+        return _currentHealth;
     }
 
     /// <summary>
@@ -71,11 +79,21 @@ public class Health : MonoBehaviour
         _maxHealth = maxHealth;
 
         Heal(difference);
+
+        if (_character is Player)
+        {
+            GameEvents.RaiseHealthChanged(_currentHealth, _maxHealth);
+        }
     }
 
     public void Reset()
     {
         _currentHealth = _maxHealth;
+    }
+
+    public void SetInvincibilityFrames(float delay, float seconds)
+    {
+        StartCoroutine(InvincibilityRoutine(delay, seconds));
     }
 
     void Awake()
@@ -130,6 +148,14 @@ public class Health : MonoBehaviour
             i++;
             yield return new WaitForSeconds(.1f);
         }
+    }
+
+    IEnumerator InvincibilityRoutine(float delay, float seconds)
+    {
+        yield return new WaitForSeconds(delay);
+        _isInvincibilityFrame = true;
+        yield return new WaitForSeconds(seconds);
+        _isInvincibilityFrame = false;
     }
 
     /// <summary>

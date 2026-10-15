@@ -6,6 +6,7 @@ public class LevelState : BaseState
     public LevelState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
     {
         IsRootState = true;
+        SetSubState(Factory.Playing());
     }
     public override void EnterState()
     {
@@ -13,13 +14,13 @@ public class LevelState : BaseState
         {
             Debug.Log($"{Ctx.name} entered <b><color=white>new state</color></b>: <color=yellow>{nameof(LevelState)}</color> \n<b><color=white>substate</color></b>: <color=yellow>{Factory.Playing().GetType().Name}</color>");
         }
+        SetSubState(Factory.Playing());
 
         if (SceneManager.GetActiveScene().buildIndex != 1)
         {
             SceneManager.LoadScene(1);
         }
 
-        SetSubState(Factory.Playing());
         GameEvents.LevelQuit.AddListener(OnLevelQuit);
     }
 

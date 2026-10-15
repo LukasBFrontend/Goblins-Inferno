@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(PanelRenderer))]
 public class LevelHUD : MonoBehaviour {
     ProgressBar _healthBar, _expBar;
+    Label _scoreText;
     PanelRenderer _panelRenderer;
     Player _player;
 
@@ -13,6 +14,7 @@ public class LevelHUD : MonoBehaviour {
         _panelRenderer.RegisterUIReloadCallback(OnUIReload);
         GameEvents.HealthChanged.AddListener(OnHealthChanged);
         GameEvents.ExpChanged.AddListener(OnExpChanged);
+        GameEvents.ScoreChanged.AddListener(OnScoreChanged);
         GameEvents.LvlUpEvent.AddListener(OnLvlUp);
     }
 
@@ -21,6 +23,7 @@ public class LevelHUD : MonoBehaviour {
         _panelRenderer.UnregisterUIReloadCallback(OnUIReload);
         GameEvents.HealthChanged.RemoveListener(OnHealthChanged);
         GameEvents.ExpChanged.RemoveListener(OnExpChanged);
+        GameEvents.ScoreChanged.RemoveListener(OnScoreChanged);
         GameEvents.LvlUpEvent.RemoveListener(OnLvlUp);
     }
 
@@ -28,9 +31,11 @@ public class LevelHUD : MonoBehaviour {
     {
         _healthBar = rootElement.Q<ProgressBar>("HealthBar");
         _expBar = rootElement.Q<ProgressBar>("ExpBar");
+        _scoreText = rootElement.Q<Label>("ScoreText");
 
         OnHealthChanged(_player.Health.Current, _player.Health.Max);
         OnExpChanged(_player.Exp, _player.ExpToLvlUp(_player.Lvl));
+        OnScoreChanged(0);
         OnLvlUp(0, _player.Lvl);
     }
 
@@ -49,6 +54,11 @@ public class LevelHUD : MonoBehaviour {
     {
         _expBar.highValue = maxExp;
         _expBar.value = currentExp;
+    }
+
+    void OnScoreChanged(int newScore)
+    {
+        _scoreText.text = newScore.ToString();
     }
 
     void OnLvlUp(int oldLvl, int newLvl)

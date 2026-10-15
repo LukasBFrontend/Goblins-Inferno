@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec2fa4616f1fbeb42a96f08f8b1efbf8, type: 3}
-  m_Name: BoomerangProjectile
+  m_Name: Bomb Projectile
   m_EditorClassIdentifier: Assembly-CSharp::SO_ProjectileData
-  arcMode: 3
-  lifeTime: 5
-  range: 8
-  destroyOnContact: 0
-  initialVelocity: 15
+  initialVelocity: 5
+  arcMode: 2
+  destroyOnContact: 1
+  lifeTime: 3
+  onDestroyVFX: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
   targetReachedThreshold: 0.015
-  onDestroyVFX: {fileID: 0}
+  newTargetRange: 5
+  targetsLayerMask:
+    serializedVersion: 2
+    m_Bits: 192

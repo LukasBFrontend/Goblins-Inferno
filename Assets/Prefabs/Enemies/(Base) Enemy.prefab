@@ -41,13 +41,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6549165088060388711}
   - component: {fileID: 8452717341750524482}
-  - component: {fileID: 3490434929943945283}
   - component: {fileID: 4821332615545964327}
+  - component: {fileID: 3490434929943945283}
   - component: {fileID: 1059929720129743303}
-  - component: {fileID: 4501246944948846756}
-  - component: {fileID: 8292207059351111743}
   - component: {fileID: 7695627580935869272}
   - component: {fileID: 8590140145642448910}
+  - component: {fileID: 4501246944948846756}
+  - component: {fileID: 8292207059351111743}
   m_Layer: 7
   m_Name: (Base) Enemy
   m_TagString: Untagged
@@ -94,29 +94,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!136 &3490434929943945283
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9066773723532610583}
-  m_Material: {fileID: 13400000, guid: 7fc5e8a53a76aca488669df50ecb9c6e, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &4821332615545964327
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -144,6 +121,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 1
+--- !u!136 &3490434929943945283
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9066773723532610583}
+  m_Material: {fileID: 13400000, guid: 7fc5e8a53a76aca488669df50ecb9c6e, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1059929720129743303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,43 +162,6 @@ MonoBehaviour:
   collider: {fileID: 3490434929943945283}
   health: {fileID: 8292207059351111743}
   loot: {fileID: 7695627580935869272}
---- !u!114 &4501246944948846756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9066773723532610583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9055ba3e0fc66e8478e7e1f7449b2318, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  baseMoveSpeed: 4
-  stopAt: 0.5
-  stopDistance: 0.1
-  personalSpace: 2
---- !u!114 &8292207059351111743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9066773723532610583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ed425e3b9bcf7e4f8319a9974fcfe1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  baseHealth: 50
-  statsConfig:
-    characterStatsConfig: {fileID: 0}
-  propertyName: _EmissionColor
-  originalColor: {r: 0, g: 0, b: 0, a: 0}
-  damageColor: {r: 0.50000006, g: 0.50000006, b: 0.50000006, a: 0}
 --- !u!114 &7695627580935869272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +189,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContactDamage
   contactDamage: 20
   cooldown: 1
+--- !u!114 &4501246944948846756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9066773723532610583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9055ba3e0fc66e8478e7e1f7449b2318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  baseMoveSpeed: 4
+  stopAt: 0.5
+  stopDistance: 0.1
+  kitingDistance: 0
+  personalSpace: 2
+--- !u!114 &8292207059351111743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9066773723532610583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed425e3b9bcf7e4f8319a9974fcfe1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  baseHealth: 75
+  statsConfig:
+    characterStatsConfig: {fileID: 0}
+  propertyName: _EmissionColor
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  damageColor: {r: 0.50000006, g: 0.50000006, b: 0.50000006, a: 0}
 --- !u!1001 &2403940734857574124
 PrefabInstance:
   m_ObjectHideFlags: 0

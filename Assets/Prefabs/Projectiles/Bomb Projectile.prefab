@@ -48,6 +48,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1657381282341612735, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: m_Height
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 1657381282341612735, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: m_Radius
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 1657381282341612735, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1657381282341612735, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1657381282341612735, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 375
+      objectReference: {fileID: 0}
+    - target: {fileID: 1657381282341612735, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 136
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771649944702901548, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 1cc0eadf8ff371a45b3ecc2af86a6c10, type: 2}
     - target: {fileID: 1771649944702901548, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       propertyPath: rigidbody
       value: 
@@ -60,12 +88,23 @@ PrefabInstance:
       propertyPath: projectileData
       value: 
       objectReference: {fileID: 11400000, guid: 1cc0eadf8ff371a45b3ecc2af86a6c10, type: 2}
+    - target: {fileID: 2364059758966569387, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364059758966569387, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364059758966569387, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3034866633386620098, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       propertyPath: m_Name
       value: Bomb Projectile
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1657381282341612735, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4723535945511862186, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
@@ -78,9 +117,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3034866633386620098, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       insertIndex: 1
       addedObject: {fileID: 895077172936894795}
-    - targetCorrespondingSourceObject: {fileID: 3034866633386620098, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 482656007034225604}
   m_SourcePrefab: {fileID: 100100000, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
 --- !u!1 &3965348730678136075 stripped
 GameObject:
@@ -114,27 +150,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &482656007034225604
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3965348730678136075}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 136
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 375
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.375
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &6671205834504652387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4723535945511862186, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}

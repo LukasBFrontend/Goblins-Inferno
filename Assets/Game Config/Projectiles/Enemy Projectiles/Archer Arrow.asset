@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec2fa4616f1fbeb42a96f08f8b1efbf8, type: 3}
-  m_Name: Wizard Explosion
+  m_Name: Archer Arrow
   m_EditorClassIdentifier: Assembly-CSharp::SO_ProjectileData
-  arcMode: 0
-  lifeTime: 5
-  newTargetRange: 4
+  initialVelocity: 12
+  arcMode: 1
   destroyOnContact: 0
-  initialVelocity: 0.1
-  targetReachedThreshold: 0
+  lifeTime: 5
   onDestroyVFX: {fileID: 0}
+  targetReachedThreshold: 0
+  newTargetRange: 10
+  targetsLayerMask:
+    serializedVersion: 2
+    m_Bits: 64

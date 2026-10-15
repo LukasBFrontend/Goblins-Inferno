@@ -21,6 +21,15 @@ public class CharacterStatOption : UpgradeOption
         Stat stat = player.Stats.Character.GetStat(_stat.Name);
         stat.LevelUp();
 
+        Stat maxHealth = player.Stats.Character.MaxHealth;
+        Stat healthMultiplier = player.Stats.Character.HealthMultiplier;
+
+        if (stat == maxHealth || stat == healthMultiplier)
+        {
+            int newMaxHealth = (int)(maxHealth.Evaluate() * healthMultiplier.Evaluate());
+            player.Health.SetMaxHealth(newMaxHealth);
+        }
+
         // TODO: Remove this
         Debug.Log($"Stat <color=magenta>{stat.Name}</color> leveled up to <color=white>{stat.Lvl}</color>. New evaluated value: <color=white>{stat.Evaluate()}</color>");
     }

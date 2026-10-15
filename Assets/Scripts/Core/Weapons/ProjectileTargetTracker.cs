@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,30 +7,44 @@ using UnityEngine;
 public class ProjectileTargetTracker : MonoBehaviour
 {
     [SerializeField] Projectile projectile;
-    [Tooltip("Enemies inside the collider are considered within range of the tracker.")]
-    [SerializeField] SphereCollider collider;
-    [Tooltip("A cheesy way to trigger validation in order to set collider radius to projectileData.range.")]
     [Space()]
+    [Tooltip("A cheesy way to trigger validation in order to set collider radius to projectileData.range.")]
     [SerializeField] bool triggerValidate;
-    [Header("Runtime filled")]
-    [SerializeField] List<BaseCharacter> charactersInRange = new();
-    BaseCharacter _sender;
     BaseCharacter _targetCurrent;
     Vector3 _fallbackPosition;
     public Vector3 TargetPosition => _targetCurrent != null ? _targetCurrent.ColliderCenter : _fallbackPosition;
-    public BaseCharacter[] CharactersInRange => charactersInRange.Where(character => character != null).ToArray();
 
-    public void Initialize(BaseCharacter sender, BaseCharacter initialTarget)
+    public void Initialize(BaseCharacter initialTarget)
     {
-        _sender = sender;
         _targetCurrent = initialTarget;
         _fallbackPosition = Projectile.RandomMaxRange(transform, projectile.Data.newTargetRange);
     }
 
-    public void Initialize(BaseCharacter sender)
+    public void Initialize()
     {
-        _sender = sender;
         _fallbackPosition = Projectile.RandomMaxRange(transform, projectile.Data.newTargetRange);
+    }
+
+    public BaseCharacter[] InRange(float range, LayerMask layerMask)
+    {
+        Collider[] colliders = Physics.OverlapSphere(
+            transform.position,
+            range,
+            layerMask
+        );
+
+        List<BaseCharacter> results = new();
+
+        foreach (var collider in colliders)
+        {
+            if (!collider.TryGetComponent(out BaseCharacter character))
+            {
+                continue;
+            }
+            results.Add(character);
+        }
+
+        return results.ToArray();
     }
 
     public void SetNewTarget(BaseCharacter target, Vector3 fallbackPosition)
@@ -43,22 +58,15 @@ public class ProjectileTargetTracker : MonoBehaviour
         return Vector3.Distance(TargetPosition, transform.position) < threshold;
     }
 
-    public bool IsCharacterWithinRange(BaseCharacter target)
-    {
-        return charactersInRange.Contains(target);
-    }
-
-    BaseCharacter ClosestBaseCharacterInRange()
+    BaseCharacter ClosestInRange(float range, LayerMask layerMask)
     {
         BaseCharacter closest = null;
         float closestDistance = float.MaxValue;
-        bool dirty = false;
 
-        foreach (var character in charactersInRange)
+        foreach (var character in InRange(range, layerMask))
         {
-            if (character == null)
+            if (character == null || !character.gameObject.activeSelf)
             {
-                dirty = true;
                 continue;
             }
 
@@ -73,11 +81,6 @@ public class ProjectileTargetTracker : MonoBehaviour
             }
         }
 
-        if (dirty)
-        {
-            charactersInRange.RemoveAll(character => character == null);
-        }
-
         return closest;
     }
 
@@ -90,26 +93,6 @@ public class ProjectileTargetTracker : MonoBehaviour
         }
 
         float scale = projectile.Data.newTargetRange;
-        collider.transform.localScale = new(scale, scale, scale);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.TryGetComponent<BaseCharacter>(out var character) || character == _sender)
-        {
-            return;
-        }
-
-        charactersInRange.Add(character);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (!other.TryGetComponent<BaseCharacter>(out var character) || character == _sender || !charactersInRange.Contains(character))
-        {
-            return;
-        }
-
-        charactersInRange.Remove(character);
+        transform.localScale = new(scale, scale, scale);
     }
 }

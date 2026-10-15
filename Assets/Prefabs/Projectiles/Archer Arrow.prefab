@@ -147,6 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13246ba7e653f0944a58ff8011acabeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  projectileData: {fileID: 11400000, guid: 1bbd11033325720468e29d0a7817ba15, type: 2}
+  data: {fileID: 11400000, guid: 1bbd11033325720468e29d0a7817ba15, type: 2}
   targetTracker: {fileID: 0}
+  particleSystem:
+    controls: {fileID: 0}
+    tryRegisterHitsAt: 0
+  rigidbody: {fileID: 0}
   logOnTargetHit: 0

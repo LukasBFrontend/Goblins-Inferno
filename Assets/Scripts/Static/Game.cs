@@ -4,33 +4,37 @@ public static class Game
 {
     static GameInputActions _input;
     static UpgradeOptionManager _upgradeOptionManager;
-    static ObjectPoolManager _objectPoolManager;
+    static ObjectPooler _objectPoolManager;
+    static EnemySpawner _enemySpawner;
     static Player _player;
 
     static AvatarVariant _startAvatar;
-    static float _score;
-    static float _highScore;
+    static int _score;
+    static int _highScore;
 
     public static GameInputActions Input => GetSafe(_input);
     public static UpgradeOptionManager UpgradeOption => GetSafe(_upgradeOptionManager);
-    public static ObjectPoolManager ObjectPool => GetSafe(_objectPoolManager);
+    public static ObjectPooler ObjectPool => GetSafe(_objectPoolManager);
+    public static EnemySpawner EnemySpawner => GetSafe(_enemySpawner);
     public static Player Player => GetSafe(_player);
 
     public static AvatarVariant StartAvatar => _startAvatar;
-    public static float Score => _score;
+    public static int Score => _score;
     public static float HighScore => _highScore;
 
-    public static void SetScore(float score)
+    public static void AddPoints(int points)
     {
-        _score = score;
+        _score += points;
 
-        if (score > _highScore)
+        if (points > _highScore)
         {
-            _highScore = score;
+            _highScore = points;
         }
+
+        GameEvents.RaiseScoreChanged(_score);
     }
 
-    public static void SetStartHighScore(float score)
+    public static void SetStartHighScore(int score)
     {
         _highScore = score;
     }

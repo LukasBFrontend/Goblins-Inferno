@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPoolManager : MonoBehaviour
+public class ObjectPooler : MonoBehaviour
 {
     readonly Dictionary<string, List<IPoolable>> _poolableObjectLookup = new();
-    static ObjectPoolManager _instance;
+    static ObjectPooler _instance;
 
     public T Spawn<T>(PoolableData data, Vector3 position, Quaternion rotation) where T : MonoBehaviour, IPoolable
     {

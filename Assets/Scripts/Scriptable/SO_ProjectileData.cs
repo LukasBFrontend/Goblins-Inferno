@@ -11,14 +11,18 @@ public enum ProjectileArcMode
 [CreateAssetMenu(fileName = "ProjectileData", menuName = "Weapons/ProjectileData")]
 public class SO_ProjectileData : ScriptableObject
 {
-    public ProjectileArcMode arcMode;
-    public float lifeTime = 5f;
-    public float newTargetRange = 10f; // Replace use with weaponstat size + sizemultiplier.
-    public bool destroyOnContact;
-    [Header("Optional")]
+    [Header("Trajectory")]
     [Range(0f, 200f)]
     public float initialVelocity;
+    public ProjectileArcMode arcMode;
+    [Header("Lifecycle")]
+    public bool destroyOnContact;
+    public float lifeTime = 5f;
+    public GameObject onDestroyVFX;
+    [Header("Targeting")]
     [Range(0f, .2f)]
     public float targetReachedThreshold;
-    public GameObject onDestroyVFX;
+    public float newTargetRange = 10f; // Replace use with weaponstat size + sizemultiplier.
+    public LayerMask targetsLayerMask;
+
 }

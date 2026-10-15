@@ -30,7 +30,7 @@ public class Weapon :  MonoBehaviour
         float weaponSize = currentStats.BaseSize.Evaluate() * currentStats.SizeMultiplier.Evaluate();
         float projectileCount = currentStats.ProjectileCount.Evaluate();
 
-        targetTracker.SetScale(weaponSize);
+        targetTracker.SetAttackSize(weaponSize);
 
         StartCoroutine(AttackRoutine(
             Game.Player.Stats.AttackCooldown * .95f,
@@ -45,7 +45,7 @@ public class Weapon :  MonoBehaviour
             return;
         }
         float baseWeaponSize = data.stats.baseSize.baseValue;
-        targetTracker.SetScale(baseWeaponSize);
+        targetTracker.SetAttackSize(baseWeaponSize);
     }
 
     IEnumerator AttackRoutine(float duration, int projectileCount)
@@ -64,8 +64,6 @@ public class Weapon :  MonoBehaviour
 
                 while (animationElapsed < attackAnimationDuration)
                 {
-                    targetTracker.EnemiesInRange.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeSelf);
-
                     foreach (Enemy enemy in targetTracker.EnemiesInRange)
                     {
                         if (damagedThisAttack.Add(enemy))
@@ -90,7 +88,6 @@ public class Weapon :  MonoBehaviour
             else if(data.weaponType == WeaponType.Projectile)
             {
                 targetTracker.EnemiesInRange.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeSelf);
-
                 Shoot();
 
                 yield return new WaitForSeconds(timeBetweenAttacks);
@@ -123,15 +120,19 @@ public class Weapon :  MonoBehaviour
 
     void RegisterHit(Enemy enemy)
     {
-        var characterStats = Game.Player.Stats.Character;
-        float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
-
         if (data.hitVFX)
         {
             Instantiate(data.hitVFX, enemy.transform.position + new Vector3(0, 1, -1f), Quaternion.identity);
         }
 
-        enemy.Health.TakeDamage((int)(data.stats.damage.baseValue * damageMultiplier));
+        var characterStats = Game.Player.Stats.Character;
+        int damage = (int)(data.stats.damage.baseValue * characterStats.DamageMultiplier.Evaluate());
+
+        int enemyHp = enemy.Health.TakeDamage(damage);
+        if (enemyHp == 0)
+        {
+            targetTracker.MarkDirty();
+        }
     }
 
     void PlayWeaponVFX(float animationDuration)

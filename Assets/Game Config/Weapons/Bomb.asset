@@ -29,10 +29,10 @@ MonoBehaviour:
       UISprite: {fileID: 21300000, guid: f7560c1ee6232dc4f95e7d7c3a43710a, type: 3}
       name: Bomb Damage
       shortName: damage
-      baseValue: 30
-      flatScaling: 15
+      baseValue: 25
+      flatScaling: 5
     projectileCount:
-      includeAsUpgradeOption: 1
+      includeAsUpgradeOption: 0
       UISprite: {fileID: 21300000, guid: f7560c1ee6232dc4f95e7d7c3a43710a, type: 3}
       name: Bomb Projectiles
       shortName: projectiles
@@ -47,5 +47,6 @@ MonoBehaviour:
   hitVFX: {fileID: 0}
   hitMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 192
   projectilePrefab: {fileID: 3965348730678136075, guid: c1d1b07f1f6ca7a45bac60a2e26d8c0e, type: 3}
+  parentProjectiles: 0

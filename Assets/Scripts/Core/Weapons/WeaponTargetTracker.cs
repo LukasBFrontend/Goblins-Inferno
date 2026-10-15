@@ -9,10 +9,27 @@ public class WeaponTargetTracker : MonoBehaviour
     [Header("Runtime filled")]
     [SerializeField] List<Enemy> enemiesInRange = new();
     public List<Enemy> EnemiesInRange => enemiesInRange;
+    bool _dirty;
 
-    public void SetScale(float radius)
+    public void MarkDirty()
+    {
+        _dirty = true;
+    }
+
+    public void SetAttackSize(float radius)
     {
         transform.localScale = new(radius, radius, radius);
+    }
+
+    void Update()
+    {
+        if (!_dirty)
+        {
+            return;
+        }
+
+        enemiesInRange.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeSelf);
+        _dirty = false;
     }
 
     void OnTriggerEnter(Collider other)
