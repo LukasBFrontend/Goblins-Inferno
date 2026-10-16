@@ -2,7 +2,6 @@ using UnityEngine.Events;
 
 public static class GameEvents
 {
-    public static UnityEvent MainMenuLoaded = new();
     public static UnityEvent LevelLoaded = new();
     public static UnityEvent LevelQuit = new();
     public static UnityEvent GamePaused = new();
@@ -14,34 +13,29 @@ public static class GameEvents
     public static UnityEvent<int> ScoreChanged = new();
     public static UnityEvent<int, int> LvlUpEvent = new();
 
-    public static void RaiseMainMenuLoaded()
-    {
-        MainMenuLoaded.Invoke();
-    }
-
     public static void RaiseLevelLoaded()
     {
-        LevelLoaded.Invoke();
+        LevelLoaded?.Invoke();
     }
 
     public static void RaiseLevelQuit()
     {
-        LevelQuit.Invoke();
+        LevelQuit?.Invoke();
     }
 
     public static void RaiseGamePaused()
     {
-        GamePaused.Invoke();
+        GamePaused?.Invoke();
     }
 
     public static void RaiseGameResumed()
     {
-        GameResumed.Invoke();
+        GameResumed?.Invoke();
     }
 
     public static void RaiseGameOverEvent()
     {
-        GameOverEvent.Invoke();
+        GameOverEvent?.Invoke();
     }
 
     public static void RaiseHealthChanged(int currentHealth, int maxHealth)
