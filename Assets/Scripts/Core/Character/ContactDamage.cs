@@ -8,6 +8,7 @@ public class ContactDamage : MonoBehaviour
     [SerializeField] int contactDamage = 20;
     [Range(0, 2)]
     [SerializeField] float cooldown = 1;
+    
     WaitForSeconds _waitForSeconds;
     bool _canAttack = true;
     bool _isActive;

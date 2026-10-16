@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Linq;
 
 [System.Serializable]
 public struct Avatars
@@ -21,14 +20,16 @@ public class Player : BaseCharacter
     [SerializeField] Stats stats;
     [SerializeField] Weapons weapons;
     [SerializeField] Movement movement;
+
+    int _lvl = 1;
+    int _exp = 0;
+    static Player _instance;
+
     public Stats Stats => stats;
     public Weapons Weapons => weapons;
     public Movement Movement => movement;
     public int Lvl => _lvl;
     public int Exp => _exp;
-    int _lvl = 1;
-    int _exp = 0;
-    static Player _instance;
 
     public void SetAvatar(AvatarVariant variant)
     {
@@ -69,7 +70,7 @@ public class Player : BaseCharacter
     /// <returns>The exp</returns>
     public int ExpToLvlUp(int lvl)
     {
-        return 100 + (lvl - 1) * 10;
+        return 70 + (lvl - 1) * 12;
     }
 
     /// <summary>

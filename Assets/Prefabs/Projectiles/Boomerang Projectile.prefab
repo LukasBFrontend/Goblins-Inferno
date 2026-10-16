@@ -215,6 +215,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5067b8e1bfa3b2145b2a50ff4ef23110, type: 3}
+--- !u!23 &1020637594738793281 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 5067b8e1bfa3b2145b2a50ff4ef23110, type: 3}
+  m_PrefabInstance: {fileID: 1867760046418560965}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2189071166492074030 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5067b8e1bfa3b2145b2a50ff4ef23110, type: 3}
@@ -276,6 +281,10 @@ PrefabInstance:
       propertyPath: data
       value: 
       objectReference: {fileID: 11400000, guid: 889a796e9f28c7c4cbdb9f0f5e2d3346, type: 2}
+    - target: {fileID: 1771649944702901548, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 1020637594738793281}
     - target: {fileID: 1771649944702901548, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       propertyPath: rigidbody
       value: 

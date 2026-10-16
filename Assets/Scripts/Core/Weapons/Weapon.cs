@@ -64,6 +64,10 @@ public class Weapon :  MonoBehaviour
 
                 while (animationElapsed < attackAnimationDuration)
                 {
+                    targetTracker.EnemiesInRange.RemoveAll(
+                        enemy => enemy == null || !enemy.gameObject.activeSelf
+                    );
+                    
                     foreach (Enemy enemy in targetTracker.EnemiesInRange)
                     {
                         if (damagedThisAttack.Add(enemy))
@@ -80,17 +84,32 @@ public class Weapon :  MonoBehaviour
 
                 if (remainingTime > 0f)
                 {
-                    yield return new WaitForSeconds(remainingTime);
+                    float elapsed = 0f;
+
+                    while (elapsed < remainingTime)
+                    {
+                        yield return null;
+                        elapsed += Time.deltaTime;
+                    }
                 }
 
                 continue;
             }
-            else if(data.weaponType == WeaponType.Projectile)
+            else if (data.weaponType == WeaponType.Projectile)
             {
-                targetTracker.EnemiesInRange.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeSelf);
+                targetTracker.EnemiesInRange.RemoveAll(
+                    enemy => enemy == null || !enemy.gameObject.activeSelf
+                );
+
                 Shoot();
 
-                yield return new WaitForSeconds(timeBetweenAttacks);
+                float elapsed = 0f;
+
+                while (elapsed < timeBetweenAttacks)
+                {
+                    yield return null;
+                    elapsed += Time.deltaTime;
+                }
             }
         }
     }

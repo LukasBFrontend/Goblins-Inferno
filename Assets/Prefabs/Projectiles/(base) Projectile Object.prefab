@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   data: {fileID: 11400000, guid: 7f49d33a020a33649ad9ebef5795f100, type: 2}
+  render: {fileID: 2051434200979898748}
   targetTracker: {fileID: 3555430341570801904}
   particleSystem:
     controls: {fileID: 0}

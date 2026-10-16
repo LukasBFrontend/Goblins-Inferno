@@ -21,15 +21,15 @@ public class Health : MonoBehaviour
     [ColorUsage(false, true)]
     [SerializeField] Color damageColor;
 
-    public int Current => _currentHealth;
-    public int Max => _maxHealth;
-
+    static WaitForSeconds _waitForSeconds_1 = new WaitForSeconds(.1f);
     int _currentHealth;
     int _maxHealth;
     BaseCharacter _character;
-    List<Material> _materialInstances;
+    List<Material> _materialInstances = new();
     bool _isInvincibilityFrame;
 
+    public int Current => _currentHealth;
+    public int Max => _maxHealth;
 
     /// <summary>
     /// Subtracts amount from the character health. If it reaches zero, invokes Die().
@@ -125,7 +125,7 @@ public class Health : MonoBehaviour
 
     void GetMaterialRefs()
     {
-        _materialInstances = new();
+        _materialInstances.Clear();
 
         foreach (var renderer in _character.Renderers)
         {
@@ -147,7 +147,7 @@ public class Health : MonoBehaviour
             }
             _materialInstances.ForEach(material => material.SetColor(propertyName, i % 2 == 1 ? originalColor : damageColor)) ;
             i++;
-            yield return new WaitForSeconds(.1f);
+            yield return _waitForSeconds_1;
         }
     }
 

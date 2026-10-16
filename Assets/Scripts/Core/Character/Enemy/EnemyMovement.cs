@@ -1,11 +1,9 @@
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Enemy))]
 public class EnemyMovement : MonoBehaviour
 {
-
     [SerializeField] LayerMask enemyLayer;
     [Range(0f, 8f)]
     [SerializeField] float baseMoveSpeed = 4;
@@ -13,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float stopDistance = 1f;
     [SerializeField] float kitingDistance = 0f;
     [SerializeField] float personalSpace = 2f;
+    
     Rigidbody _rigidbody;
     Enemy _enemy;
     bool _isActive;

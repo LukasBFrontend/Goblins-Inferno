@@ -7,6 +7,7 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
     [SerializeField] SO_UpgradeOptionData optionOneData;
     [SerializeField] SO_UpgradeOptionData optionTwoData;
     [SerializeField] SO_UpgradeOptionData optionThreeData;
+    
     List<UpgradeOption> _currentOptions = new();
 
     public void AssignRandom()

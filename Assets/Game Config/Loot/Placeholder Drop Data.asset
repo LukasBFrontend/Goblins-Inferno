@@ -16,10 +16,10 @@ MonoBehaviour:
   - itemPool: {fileID: 11400000, guid: b9a9b8ebf17bf324dba351a546a11dc9, type: 2}
     dropChance: 100
     itemsToTakeRange:
-      lower: 2
-      upper: 2
+      lower: 1
+      upper: 1
   - itemPool: {fileID: 11400000, guid: f06dc74ff948bd54d94d64c940e69cb0, type: 2}
-    dropChance: 100
+    dropChance: 20
     itemsToTakeRange:
       lower: 1
       upper: 1

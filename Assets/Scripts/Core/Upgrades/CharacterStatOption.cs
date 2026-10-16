@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class CharacterStatOption : UpgradeOption
 {
-    public Stat Stat => _stat;
     Stat _stat;
+    
+    public Stat Stat => _stat;
 
     public CharacterStatOption(Stat stat)
     {

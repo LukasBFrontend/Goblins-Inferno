@@ -148,9 +148,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   data: {fileID: 11400000, guid: 1bbd11033325720468e29d0a7817ba15, type: 2}
+  renderer: {fileID: 5953930777997480576}
   targetTracker: {fileID: 0}
   particleSystem:
     controls: {fileID: 0}
     tryRegisterHitsAt: 0
   rigidbody: {fileID: 0}
   logOnTargetHit: 0
+--- !u!23 &5953930777997480576 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 4df86790845c77e4a82e6177fabbff25, type: 3}
+  m_PrefabInstance: {fileID: 4999287913086488068}
+  m_PrefabAsset: {fileID: 0}

@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class WeaponUnlockOption : UpgradeOption
 {
-    public string WeaponName => _weaponName;
-    public Sprite Sprite => _sprite;
     string _weaponName;
     Sprite _sprite;
+    
+    public string WeaponName => _weaponName;
+    public Sprite Sprite => _sprite;
 
     public WeaponUnlockOption(string weaponName, Sprite sprite)
     {

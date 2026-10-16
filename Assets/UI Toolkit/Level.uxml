@@ -3,11 +3,21 @@
     <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=d061f6063ca2fab4d84bfa2407418e4e&amp;type=3#style"/>
     <ui:VisualElement name="HUDContainer">
         <ui:ProgressBar value="0" title="Lvl 1" name="ExpBar"/>
-        <ui:VisualElement name="InfoContainer">
+        <ui:VisualElement name="TopContainer" class="hudBar">
             <ui:ProgressBar value="100" title="100/100" name="HealthBar"/>
-            <ui:VisualElement name="ScoreContainer">
+            <ui:VisualElement name="ScoreContainer" class="infoContainer">
                 <ui:Label text="SCORE" name="ScoreLabel"/>
-                <ui:Label text="0" name="ScoreText"/>
+                <ui:Label text="0" name="ScoreText" class="infoText"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="BottomContainer" class="hudBar">
+            <ui:VisualElement name="ControllsContainer" class="infoContainer centerText">
+                <ui:Label text="(P)" name="Label"/>
+                <ui:Label text="PAUSE" name="Text" focusable="true" class="infoText"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="ControllsContainer" class="infoContainer centerText">
+                <ui:Label text="(SPACE)" name="Label"/>
+                <ui:Label text="ROLL" name="Text" class="infoText"/>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

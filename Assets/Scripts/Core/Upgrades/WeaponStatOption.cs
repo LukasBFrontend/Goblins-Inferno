@@ -1,11 +1,10 @@
-using UnityEngine;
-
 public class WeaponStatOption : UpgradeOption
 {
-    public string WeaponName => _weaponName;
-    public Stat Stat => _stat;
     string _weaponName;
     Stat _stat;
+    
+    public string WeaponName => _weaponName;
+    public Stat Stat => _stat;
 
     public WeaponStatOption(string weaponName, Stat stat)
     {
@@ -24,8 +23,5 @@ public class WeaponStatOption : UpgradeOption
         WeaponStats weaponStats = player.Stats.GetWeaponModifier(_weaponName);
         Stat stat = weaponStats.GetStat(_stat.Name);
         stat.LevelUp();
-
-        // TODO: Remove this
-        Debug.Log($"Stat <color=magenta>{stat.Name}</color> leveled up to <color=white>{stat.Lvl}</color>. New evaluated value: <color=white>{stat.Evaluate()}</color>");
     }
 }

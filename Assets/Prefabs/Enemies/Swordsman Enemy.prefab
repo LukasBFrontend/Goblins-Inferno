@@ -292,28 +292,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732139133539721669, guid: d5d8371c68ab79649941755b979ea139, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5592737413738146839}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9066773723532610583, guid: d5d8371c68ab79649941755b979ea139, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3885704205430495374}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d8371c68ab79649941755b979ea139, type: 3}
---- !u!1 &4189416725670998415 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9066773723532610583, guid: d5d8371c68ab79649941755b979ea139, type: 3}
-  m_PrefabInstance: {fileID: 5183760789583101336}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3885704205430495374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4189416725670998415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf5008d98316fa940a7f1ae80ad55c7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SwordsmanController
 --- !u!4 &5609653695537929309 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 732139133539721669, guid: d5d8371c68ab79649941755b979ea139, type: 3}

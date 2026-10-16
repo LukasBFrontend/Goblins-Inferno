@@ -34,17 +34,18 @@ public class SO_UpgradeOptionData : ScriptableObject
     public int lvl;
     [Header("Default value")]
     [SerializeField] SO_UpgradeOptionData defaultValues;
+
     UpgradeOption _upgradeOptionRef;
 
-    // Scaling type (Additive / Multiplicative)
     [CreateProperty]
     public StyleEnum<DisplayStyle> DisplayAddativeStatType => scalingType == StatScalingType.Additive ? DisplayStyle.Flex : DisplayStyle.None;
+
     [CreateProperty]
     public StyleEnum<DisplayStyle> DisplayMultiplicativeStatType => scalingType == StatScalingType.Multiplicative ? DisplayStyle.Flex : DisplayStyle.None;
 
-    // Upgrade type (Stat / WeaponUnlock)
     [CreateProperty]
     public StyleEnum<DisplayStyle> DisplayStat => upgradeType == UpgradeType.CharacterStat || upgradeType == UpgradeType.WeaponStat ? DisplayStyle.Flex : DisplayStyle.None;
+    
     [CreateProperty]
     public StyleEnum<DisplayStyle> DisplayWeaponUnlock => upgradeType == UpgradeType.WeaponUnlock ? DisplayStyle.Flex : DisplayStyle.None;
 

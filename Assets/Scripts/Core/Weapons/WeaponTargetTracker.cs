@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +7,10 @@ public class WeaponTargetTracker : MonoBehaviour
     [SerializeField] SphereCollider collider;
     [Header("Runtime filled")]
     [SerializeField] List<Enemy> enemiesInRange = new();
-    public List<Enemy> EnemiesInRange => enemiesInRange;
+    
     bool _dirty;
+    
+    public List<Enemy> EnemiesInRange => enemiesInRange;
 
     public void MarkDirty()
     {

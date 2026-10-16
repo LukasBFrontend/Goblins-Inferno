@@ -34,7 +34,6 @@ public class LevelPauseMenu : BaseSubmenu
 
     void OnOptionsButtonClicked()
     {
-        throw new System.NotImplementedException("The options menu UI is not yet implemented.");
         //SwitchSubmenu<OptionsMenu>();
     }
 }

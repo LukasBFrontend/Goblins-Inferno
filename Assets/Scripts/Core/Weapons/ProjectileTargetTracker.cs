@@ -7,8 +7,10 @@ public class ProjectileTargetTracker : MonoBehaviour
     [Space()]
     [Tooltip("A cheesy way to trigger validation in order to set collider radius to projectileData.range.")]
     [SerializeField] bool triggerValidate;
+
     BaseCharacter _targetCurrent;
     Vector3 _fallbackPosition;
+    
     public Vector3 TargetPosition => _targetCurrent != null ? _targetCurrent.ColliderCenter : _fallbackPosition;
 
     public void Initialize(BaseCharacter initialTarget)
@@ -24,17 +26,14 @@ public class ProjectileTargetTracker : MonoBehaviour
 
     public BaseCharacter[] InRange(float range, LayerMask layerMask)
     {
-        Collider[] colliders = Physics.OverlapSphere(
-            transform.position,
-            range,
-            layerMask
-        );
+        Collider[] hitColliders = new Collider[6];
+        int numColliders = Physics.OverlapSphereNonAlloc(transform.position, range, hitColliders, layerMask);
 
         List<BaseCharacter> results = new();
 
-        foreach (var collider in colliders)
+        for (int i = 0; i < numColliders; i++)
         {
-            if (!collider.TryGetComponent(out BaseCharacter character))
+            if (!hitColliders[i].TryGetComponent(out BaseCharacter character))
             {
                 continue;
             }

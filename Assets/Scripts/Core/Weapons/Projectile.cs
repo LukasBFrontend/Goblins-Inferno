@@ -17,20 +17,22 @@ struct ParticleSystemVariables
 public class Projectile : MonoBehaviour, IPoolable
 {
     [SerializeField] SO_ProjectileData data;
+    [SerializeField] GameObject render;
     [Header("Optional")]
     [SerializeField] ProjectileTargetTracker targetTracker;
     [SerializeField] ParticleSystemVariables particleSystem;
     [Header("Physics")]
     [SerializeField] Rigidbody rigidbody;
     [SerializeField] bool logOnTargetHit;
-    public SO_ProjectileData Data => data;
-
-    public string PoolableId { get; set; }
 
     BaseCharacter _sender;
     int _damage;
     bool _hitEverything;
     List<BaseCharacter> _charactersHit = new();
+    WaitForSeconds _bombWaitForSeconds;
+
+    public SO_ProjectileData Data => data;
+    public string PoolableId { get; set; }
 
     /// <summary>
     /// Manually sets the target character of the projectile and initiates the projectile arc.
@@ -125,15 +127,9 @@ public class Projectile : MonoBehaviour, IPoolable
 
         rigidbody.AddForce(direction * data.initialVelocity, ForceMode.Impulse);
 
-        float duration = data.lifeTime;
-        yield return new WaitForSeconds(duration);
+        yield return _bombWaitForSeconds;
 
-        if (gameObject == null)
-        {
-            yield break;
-        }
-
-        DestroyProjectile();
+        StartCoroutine(BombExplosionRoutine());
     }
 
     void HitTargetIfWithinRange(BaseCharacter target)
@@ -144,13 +140,14 @@ public class Projectile : MonoBehaviour, IPoolable
         }
     }
 
-    void DestroyProjectile()
+    IEnumerator BombExplosionRoutine()
     {
-        if (data.arcMode == ProjectileArcMode.Physics) // Is bomb.
+        if (gameObject == null)
         {
-            HitTargetsWithinRange();
+            yield break;
         }
 
+        HitTargetsWithinRange();
         Instantiate(data.onDestroyVFX, transform.position, Quaternion.identity);
         Game.ObjectPool.Return(this);
     }
@@ -236,7 +233,7 @@ public class Projectile : MonoBehaviour, IPoolable
             return;
         }
 
-        DestroyProjectile();
+        StartCoroutine(BombExplosionRoutine());
     }
 
     void OnValidate()
@@ -250,6 +247,11 @@ public class Projectile : MonoBehaviour, IPoolable
         {
             Debug.LogWarning($"Bomb projectile is missing particleSystemControls or rigidbody");
         }
+    }
+
+    void OnEnable()
+    {
+        _bombWaitForSeconds = new(data.lifeTime);
     }
 
     void RegisterHit(BaseCharacter character)
@@ -275,9 +277,26 @@ public class Projectile : MonoBehaviour, IPoolable
 
     public void Reset()
     {
+        transform.rotation = Quaternion.identity;
+
         _sender = null;
         _damage = 0;
         _hitEverything = false;
         _charactersHit.Clear();
+        
+        
+        if (rigidbody)
+        {
+            rigidbody.linearVelocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+        }
+        if (particleSystem.controls)
+        {
+            particleSystem.controls.Stop();
+        }
+        if (render)
+        {
+            render.SetActive(true);
+        }
     }
 }

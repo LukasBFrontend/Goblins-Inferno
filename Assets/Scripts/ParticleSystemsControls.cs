@@ -28,6 +28,14 @@ public class ParticleSystemControls : MonoBehaviour
         }
     }
 
+    public void Stop()
+    {
+        foreach (var particleSystem in _particleSystems)
+        {
+            particleSystem.Stop();
+        }
+    }
+
     void Awake()
     {
         _particleSystems = Utils.CombineReferences(
@@ -72,17 +80,6 @@ public class ParticleSystemControls : MonoBehaviour
         }
 
         return longest;
-    }
-
-    void SetLooping(bool looping)
-    {
-        this.looping = looping;
-
-        foreach (var particleSystem in _particleSystems)
-        {
-            var main = particleSystem.main;
-            main.loop = looping;
-        }
     }
 
     void SetSimulationSpeed(float factor)

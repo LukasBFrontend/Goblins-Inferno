@@ -1,25 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] SO_EnemyWaveConfig data;
-    float elapsed = 0f;
-    int waveIndex = 0;
     
+    float _elapsed = 0f;
+    int _waveIndex = 0;
 
     public void Run()
     {
-        elapsed += Time.deltaTime;
+        _elapsed += Time.deltaTime;
 
-        if (elapsed < waveIndex * data.waveInterval)
+        if (_elapsed < _waveIndex * data.waveInterval)
         {
             return;
         }
 
-        SpawnEnemies(elapsed);
-        waveIndex++;
+        SpawnEnemies(_elapsed);
+        _waveIndex++;
     }
 
     public int CalculateSpawnAmount(float elapsedTime)
@@ -27,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
         float elapsedNormalized = elapsedTime / 60f;
         int waveSizeIncrease = (int)(elapsedNormalized * data.waveSizePerMinute);
 
-        return data.baseWaveSize + waveSizeIncrease;
+        return Mathf.Clamp(data.baseWaveSize + waveSizeIncrease, 1, data.maxWaveSize);
     }
 
     public void SpawnEnemies(float elapsedTime)

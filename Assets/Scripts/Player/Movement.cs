@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
         Vector3 direction = _lastMoveInput * _player.Stats.MovementSpeed;
 
         float animationDuration = _player.Animator.GetCurrentAnimatorStateInfo(0).length;
-        _player.Health.SetInvincibilityFrames(animationDuration * .125f, .35f);
+        //_player.Health.SetInvincibilityFrames(animationDuration * .125f, .35f); Should cache WaitForSeconds.
 
         float elapsed = 0f;
         float duration = animationDuration * 0.85f;

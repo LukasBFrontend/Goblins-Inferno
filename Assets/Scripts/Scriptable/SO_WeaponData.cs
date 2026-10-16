@@ -31,6 +31,7 @@ public class SO_WeaponData : ScriptableObject
     [Header("Only required for projectile weapons")]
     public PoolableData projectile;
     public bool parentProjectiles;
+    
     public string WeaponName => weaponName;
     public WeaponStatsData Stats => stats;
 

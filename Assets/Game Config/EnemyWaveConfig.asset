@@ -13,25 +13,26 @@ MonoBehaviour:
   m_Name: EnemyWaveConfig
   m_EditorClassIdentifier: Assembly-CSharp::SO_EnemyPoolData
   spawnDistance: 15
-  baseWaveSize: 3
-  waveSizePerMinute: 3
-  waveInterval: 10
+  baseWaveSize: 4
+  waveSizePerMinute: 2
+  maxWaveSize: 8
+  waveInterval: 15
   enemySpawnData:
   - poolableData:
       id: Swordsman
       prefab: {fileID: 4189416725670998415, guid: 3ae9b688c6c6bb94a92dab4ac9a0a579, type: 3}
     spawnBias:
-      lower: 5
-      upper: 7
+      lower: 4
+      upper: 6
   - poolableData:
       id: Archer
       prefab: {fileID: 7348977928065779791, guid: 788aa06843d99c44ba06a5b89e69da82, type: 3}
     spawnBias:
-      lower: 2
-      upper: 3
+      lower: 1
+      upper: 2
   - poolableData:
       id: Wizard
       prefab: {fileID: 6982063490355154211, guid: 92cd47c4af604294d81466a98cc98033, type: 3}
     spawnBias:
-      lower: 0
-      upper: 4
+      lower: 1
+      upper: 3

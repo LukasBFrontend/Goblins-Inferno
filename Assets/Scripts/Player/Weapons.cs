@@ -1,19 +1,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-[DisallowMultipleComponent]
 
+[DisallowMultipleComponent]
 [RequireComponent(typeof(Player))]
 public class Weapons : MonoBehaviour
 {
     [SerializeField] SO_WeaponsConfig weaponsConfig;
     [SerializeField] Transform weaponParent;
-    public HashSet<Weapon> Available => _availableWeapons;
-    public HashSet<Weapon> Unlocked => _unlockedWeapons;
+    
     HashSet<Weapon> _unlockedWeapons;
     HashSet<Weapon> _availableWeapons;
     float _lastAttackTime;
     Player _wielder;
+
+    public HashSet<Weapon> Available => _availableWeapons;
+    public HashSet<Weapon> Unlocked => _unlockedWeapons;
 
     void Awake()
     {
