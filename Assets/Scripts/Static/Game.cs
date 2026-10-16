@@ -4,7 +4,7 @@ public static class Game
 {
     static GameInputActions _input;
     static UpgradeOptionManager _upgradeOptionManager;
-    static ObjectPooler _objectPoolManager;
+    static ObjectPooler _objectPooler;
     static EnemySpawner _enemySpawner;
     static Player _player;
 
@@ -12,11 +12,11 @@ public static class Game
     static int _score;
     static int _highScore;
 
-    public static GameInputActions Input => GetSafe(_input);
-    public static UpgradeOptionManager UpgradeOption => GetSafe(_upgradeOptionManager);
-    public static ObjectPooler ObjectPool => GetSafe(_objectPoolManager);
-    public static EnemySpawner EnemySpawner => GetSafe(_enemySpawner);
-    public static Player Player => GetSafe(_player);
+    public static GameInputActions Input => GetSafely(_input);
+    public static UpgradeOptionManager UpgradeOptions => GetSafely(_upgradeOptionManager);
+    public static ObjectPooler ObjectPooler => GetSafely(_objectPooler);
+    public static EnemySpawner EnemySpawner => GetSafely(_enemySpawner);
+    public static Player Player => GetSafely(_player);
 
     public static AvatarVariant StartAvatar => _startAvatar;
     public static int Score => _score;
@@ -44,7 +44,7 @@ public static class Game
         _startAvatar = variant;
     }
 
-    static T GetSafe<T>(T type) where T: MonoBehaviour
+    static T GetSafely<T>(T type) where T: MonoBehaviour
     {
         type ??= Object.FindAnyObjectByType<T>();
 

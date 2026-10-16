@@ -21,7 +21,6 @@ public class MainMenuState : BaseState
             SceneManager.LoadScene(0);
         }
 
-        GameSaveState.Load();
         Time.timeScale = 1;
         GameEvents.LevelLoaded.AddListener(OnLevelStarted);
         GameEvents.RaiseMainMenuLoaded();

@@ -70,7 +70,7 @@ public class Player : BaseCharacter
     /// <returns>The exp</returns>
     public int ExpToLvlUp(int lvl)
     {
-        return 70 + (lvl - 1) * 12;
+        return 70 + (lvl - 1) * 15;
     }
 
     /// <summary>
@@ -103,13 +103,6 @@ public class Player : BaseCharacter
         Animator.SetBool("IsDead", true);
     }
 
-    private void LvlUp()
-    {
-        int oldLvl = _lvl;
-        _lvl++;
-        GameEvents.RaiseLvlUpEvent(oldLvl, _lvl);
-    }
-
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -120,5 +113,12 @@ public class Player : BaseCharacter
 
         _instance = this;
         SetAvatar(Game.StartAvatar);
+    }
+
+    void LvlUp()
+    {
+        int oldLvl = _lvl;
+        _lvl++;
+        GameEvents.RaiseLvlUpEvent(oldLvl, _lvl);
     }
 }

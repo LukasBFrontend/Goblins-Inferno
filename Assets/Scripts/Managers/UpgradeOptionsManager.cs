@@ -7,7 +7,7 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
     [SerializeField] SO_UpgradeOptionData optionOneData;
     [SerializeField] SO_UpgradeOptionData optionTwoData;
     [SerializeField] SO_UpgradeOptionData optionThreeData;
-    
+
     List<UpgradeOption> _currentOptions = new();
 
     public void AssignRandom()
@@ -49,22 +49,22 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
     {
         _currentOptions.Clear();
 
-        var characterStats = Game.Player.Stats.Character.All();
-        var weaponsStats = Game.Player.Stats.Weapons;
-        var availableWeapons = Game.Player.Weapons.Available;
-        var unlockedWeapons = Game.Player.Weapons.Unlocked;
+        Stat[] characterStats = Game.Player.Stats.Character.All();
+        Dictionary<string, WeaponStats> weaponsStats = Game.Player.Stats.Weapons;
+        HashSet<Weapon> availableWeapons = Game.Player.Weapons.Available;
+        HashSet<Weapon> unlockedWeapons = Game.Player.Weapons.Unlocked;
 
-        foreach (var (weaponName, weaponStats) in weaponsStats)
+        foreach ((string weaponName, WeaponStats weaponStats) in weaponsStats)
         {
             if (!unlockedWeapons.Any(weapon => weapon.Name == weaponName))
             {
-                var weapon = availableWeapons.First(weapon => weapon.Name == weaponName);
+                Weapon weapon = availableWeapons.First(weapon => weapon.Name == weaponName);
                 _currentOptions.Add(new WeaponUnlockOption(weaponName, weapon.Data.sprite));
 
                 continue;
             }
 
-            foreach (var stat in weaponStats.All())
+            foreach (Stat stat in weaponStats.All())
             {
                 if (stat.IncludeAsUpgradeOption)
                 {
@@ -73,7 +73,7 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
             }
         }
 
-        foreach (var stat in characterStats)
+        foreach (Stat stat in characterStats)
         {
             if (stat.IncludeAsUpgradeOption)
             {

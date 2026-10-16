@@ -4,6 +4,7 @@ public class Enemy : BaseCharacter, IPoolable
 {
     [SerializeField] EnemyLoot loot;
     [SerializeField] int scoreValue = 100;
+
     public string PoolableId { get; set; }
 
     public override void Die()
@@ -13,7 +14,7 @@ public class Enemy : BaseCharacter, IPoolable
             loot.Drop();
         }
 
-        Game.ObjectPool.Return(this);
+        Game.ObjectPooler.Return(this);
         Game.AddPoints(scoreValue);
     }
 

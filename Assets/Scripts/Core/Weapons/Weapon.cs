@@ -67,7 +67,7 @@ public class Weapon :  MonoBehaviour
                     targetTracker.EnemiesInRange.RemoveAll(
                         enemy => enemy == null || !enemy.gameObject.activeSelf
                     );
-                    
+
                     foreach (Enemy enemy in targetTracker.EnemiesInRange)
                     {
                         if (damagedThisAttack.Add(enemy))
@@ -116,14 +116,14 @@ public class Weapon :  MonoBehaviour
 
     void Shoot()
     {
-        var characterStats = Game.Player.Stats.Character;
+        CharacterStats characterStats = Game.Player.Stats.Character;
         float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
 
         Vector3 transformOrigin = new(_wielder.transform.position.x, projectileOriginY, _wielder.transform.position.z);
 
-        Projectile projectile = Game.ObjectPool.Spawn<Projectile>(data.projectile, transformOrigin, Quaternion.identity);
+        Projectile projectile = Game.ObjectPooler.Spawn<Projectile>(data.projectile, transformOrigin, Quaternion.identity);
 
-        var enemiesInRange = targetTracker.EnemiesInRange;
+        List<Enemy> enemiesInRange = targetTracker.EnemiesInRange;
 
         BaseCharacter random = enemiesInRange.Count >= 1
             ? enemiesInRange[Random.Range(0, enemiesInRange.Count)]
@@ -142,10 +142,11 @@ public class Weapon :  MonoBehaviour
             Instantiate(data.hitVFX, enemy.transform.position + new Vector3(0, 1, -1f), Quaternion.identity);
         }
 
-        var characterStats = Game.Player.Stats.Character;
+        CharacterStats characterStats = Game.Player.Stats.Character;
         int damage = (int)(data.stats.damage.baseValue * characterStats.DamageMultiplier.Evaluate());
 
         int enemyHp = enemy.Health.TakeDamage(damage);
+
         if (enemyHp == 0)
         {
             targetTracker.MarkDirty();

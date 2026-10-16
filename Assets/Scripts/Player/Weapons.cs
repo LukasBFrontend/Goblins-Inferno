@@ -8,7 +8,7 @@ public class Weapons : MonoBehaviour
 {
     [SerializeField] SO_WeaponsConfig weaponsConfig;
     [SerializeField] Transform weaponParent;
-    
+
     HashSet<Weapon> _unlockedWeapons;
     HashSet<Weapon> _availableWeapons;
     float _lastAttackTime;
@@ -24,7 +24,7 @@ public class Weapons : MonoBehaviour
 
         _availableWeapons = new();
 
-        foreach(var weaponData in weaponsConfig.availableWeapons)
+        foreach(SO_WeaponData weaponData in weaponsConfig.availableWeapons)
         {
             _availableWeapons.Add(
                 weaponData.Spawn(weaponParent, _wielder)
@@ -42,7 +42,7 @@ public class Weapons : MonoBehaviour
             return;
         }
 
-        var closestEnemy = Utils.ClosestEnemy(Game.Player);
+        Enemy closestEnemy = Utils.ClosestEnemy(Game.Player);
 
         Vector3 attackDir = closestEnemy != null
             ? Game.Player.DirectionTo(closestEnemy)
@@ -52,7 +52,7 @@ public class Weapons : MonoBehaviour
         float rotation = Mathf.Atan2(attackDir.x, attackDir.z);
         weaponParent.rotation = Quaternion.Euler(new (0, Mathf.Rad2Deg * rotation + 90 , 0));
 
-        foreach(var weapon in _unlockedWeapons)
+        foreach(Weapon weapon in _unlockedWeapons)
         {
             weapon.Attack();
         }

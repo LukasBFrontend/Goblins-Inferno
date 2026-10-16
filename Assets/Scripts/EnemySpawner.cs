@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] SO_EnemyWaveConfig data;
-    
+
     float _elapsed = 0f;
     int _waveIndex = 0;
 
@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < data.enemySpawnData.Count; i++)
         {
-            var spawnData = data.enemySpawnData[i];
+            EnemySpawnData spawnData = data.enemySpawnData[i];
             int biasLower = spawnData.spawnBias.lower;
             int biasUpper = spawnData.spawnBias.upper;
 
@@ -50,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < data.enemySpawnData.Count; i++)
         {
-            var spawnData = data.enemySpawnData[i];
+            EnemySpawnData spawnData = data.enemySpawnData[i];
             float wavePercent = spawnBiases[i] / totalBias;
             int spawnAmount = (int)(wavePercent * totalSpawnAmount);
 
@@ -58,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 Vector3 spawnPoint = Game.Player.transform.position + Utils.RandomDirection() * data.spawnDistance;
 
-                Game.ObjectPool.Spawn<Enemy>(spawnData.poolableData, spawnPoint, Quaternion.identity);
+                Game.ObjectPooler.Spawn<Enemy>(spawnData.poolableData, spawnPoint, Quaternion.identity);
             }
         }
     }

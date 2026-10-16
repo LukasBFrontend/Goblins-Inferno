@@ -10,13 +10,13 @@ public class EnemyLoot : MonoBehaviour
         List<PoolableData> pickupDatas = enemyDropData.GenerateDrops();
         List<BasePickup> pickups = new();
 
-        foreach(var pickupData in pickupDatas)
+        foreach(PoolableData pickupData in pickupDatas)
         {
-            var result = Game.ObjectPool.Spawn<BasePickup>(pickupData, transform.position, Quaternion.identity);
+            BasePickup result = Game.ObjectPooler.Spawn<BasePickup>(pickupData, transform.position, Quaternion.identity);
             pickups.Add(result);
         }
 
-        foreach (var pickup in pickups)
+        foreach (BasePickup pickup in pickups)
         {
             pickup.StartDriftAwayFrom(pickups);
         }

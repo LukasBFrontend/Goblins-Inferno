@@ -9,11 +9,11 @@ public class ParticleSystemControls : MonoBehaviour
     [Header("Readonly")]
     [SerializeField] float simulationSpeed = 1;
 
-    ParticleSystem[] _particleSystems;
-
     public bool Looping => looping;
     public float SimulationSpeed => simulationSpeed;
     public float EffectiveDuration => effectiveDuration;
+
+    ParticleSystem[] _particleSystems;
 
     public void SetEffectiveDuration(float targetDuration)
     {
@@ -22,7 +22,7 @@ public class ParticleSystemControls : MonoBehaviour
 
     public void Play()
     {
-        foreach (var particleSystem in _particleSystems)
+        foreach (ParticleSystem particleSystem in _particleSystems)
         {
             particleSystem.Play();
         }
@@ -30,7 +30,7 @@ public class ParticleSystemControls : MonoBehaviour
 
     public void Stop()
     {
-        foreach (var particleSystem in _particleSystems)
+        foreach (ParticleSystem particleSystem in _particleSystems)
         {
             particleSystem.Stop();
         }
@@ -60,10 +60,10 @@ public class ParticleSystemControls : MonoBehaviour
 
         SetEffectiveDuration(effectiveDuration);
 
-        foreach (var particleSystem in _particleSystems)
+        foreach (ParticleSystem particleSystem in _particleSystems)
         {
             particleSystem.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
-            var main = particleSystem.main;
+            ParticleSystem.MainModule main = particleSystem.main;
             main.loop = looping;
             main.playOnAwake = playOnAwake;
             main.simulationSpeed = simulationSpeed;
@@ -74,7 +74,7 @@ public class ParticleSystemControls : MonoBehaviour
     {
         float longest = 0f;
 
-        foreach (var particleSystem in _particleSystems)
+        foreach (ParticleSystem particleSystem in _particleSystems)
         {
             longest = Mathf.Max(longest, particleSystem.main.duration);
         }
@@ -86,9 +86,9 @@ public class ParticleSystemControls : MonoBehaviour
     {
         simulationSpeed = factor;
 
-        foreach (var particleSystem in _particleSystems)
+        foreach (ParticleSystem particleSystem in _particleSystems)
         {
-            var main = particleSystem.main;
+            ParticleSystem.MainModule main = particleSystem.main;
             main.simulationSpeed = factor;
         }
     }

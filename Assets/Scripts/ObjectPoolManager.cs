@@ -10,7 +10,7 @@ public class ObjectPooler : MonoBehaviour
     {
         T result;
 
-        if (!_poolableObjectLookup.TryGetValue(data.id, out var pool))
+        if (!_poolableObjectLookup.TryGetValue(data.id, out List<IPoolable> pool))
         {
             pool = new List<IPoolable>();
             _poolableObjectLookup.Add(data.id, pool);

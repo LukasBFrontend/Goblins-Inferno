@@ -5,24 +5,12 @@ public class PlayingState : BaseState
 {
     public PlayingState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
     {
-        RegisterCallbacks();
-        Game.Input.Move.Enable();
-        Game.Input.Jump.Enable();
-
-        Time.timeScale = 1;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        InitializePlayingState();
     }
+
     public override void EnterState()
     {
-        Game.Input.Move.Enable();
-        Game.Input.Jump.Enable();
-
-        Time.timeScale = 1;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
-        RegisterCallbacks();
+        InitializePlayingState();
     }
 
     public override void UpdateState()
@@ -42,6 +30,18 @@ public class PlayingState : BaseState
         Cursor.lockState = CursorLockMode.None;
 
         UnregisterCallbacks();
+    }
+
+    void InitializePlayingState()
+    {
+        Game.Input.Move.Enable();
+        Game.Input.Jump.Enable();
+
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        RegisterCallbacks();
     }
 
     void RegisterCallbacks()

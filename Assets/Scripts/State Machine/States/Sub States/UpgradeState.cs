@@ -2,14 +2,12 @@ using UnityEngine;
 
 public class UpgradeState : BaseState
 {
-    public UpgradeState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
-    {
-        // Initialization logic
-    }
+    public UpgradeState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory) { }
+
     public override void EnterState()
     {
         GameEvents.GameResumed.AddListener(OnGameResumed);
-        Game.UpgradeOption.AssignRandom();
+        Game.UpgradeOptions.AssignRandom();
         Time.timeScale = 0;
     }
 

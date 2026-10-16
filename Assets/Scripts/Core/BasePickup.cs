@@ -2,13 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PickupType
-{
-    None,
-    Exp,
-    Health,
-}
-
 public class BasePickup : MonoBehaviour, IPoolable
 {
     [SerializeField] PickupType type;
@@ -21,7 +14,7 @@ public class BasePickup : MonoBehaviour, IPoolable
 
     void OnTriggerEnter(Collider other)
     {
-        if (!other.TryGetComponent<Player>(out var player))
+        if (!other.TryGetComponent(out Player player))
         {
             return;
         }
@@ -38,7 +31,7 @@ public class BasePickup : MonoBehaviour, IPoolable
                 break;
         }
 
-        Game.ObjectPool.Return(this);
+        Game.ObjectPooler.Return(this);
     }
 
     public void StartDriftAwayFrom(List<BasePickup> pickups)
@@ -113,7 +106,12 @@ public class BasePickup : MonoBehaviour, IPoolable
         }
     }
 
-    public void Reset()
-    {
-    }
+    public void Reset(){ }
+}
+
+public enum PickupType
+{
+    None,
+    Exp,
+    Health,
 }

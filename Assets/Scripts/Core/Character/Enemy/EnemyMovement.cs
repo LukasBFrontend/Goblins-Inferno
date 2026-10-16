@@ -11,18 +11,13 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float stopDistance = 1f;
     [SerializeField] float kitingDistance = 0f;
     [SerializeField] float personalSpace = 2f;
-    
+
     Rigidbody _rigidbody;
     Enemy _enemy;
     bool _isActive;
     bool _enemyIsStationary => _enemy.Rigidbody.linearVelocity.magnitude < 0.1;
     bool _isRunningAway;
     Vector3 _nudgeSignal;
-
-    public void Nudge(Vector3 signal)
-    {
-        _nudgeSignal = signal;
-    }
 
     void Awake()
     {
@@ -84,14 +79,14 @@ public class EnemyMovement : MonoBehaviour
     {
         Collider[] hitColliders = new Collider[4];
         int numColliders = Physics.OverlapSphereNonAlloc(transform.position, distance, hitColliders, enemyLayer);
-        
+
 
         Vector3 averagePosition = Vector3.zero;
         int enemyCount = 0;
 
         for (int i = 0; i < numColliders; i++)
         {
-            if (!hitColliders[i].TryGetComponent<BaseCharacter>(out var enemy) || enemy == _enemy)
+            if (!hitColliders[i].TryGetComponent(out BaseCharacter enemy) || enemy == _enemy)
             {
                 continue;
             }

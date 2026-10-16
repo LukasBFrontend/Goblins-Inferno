@@ -5,6 +5,7 @@ public abstract class BaseState
     protected bool IsRootState { get => _isRootState; set => _isRootState = value; }
     protected StateMachine Ctx => _ctx;
     protected StateFactory Factory => _factory;
+
     bool _isRootState = false;
     StateMachine _ctx;
     StateFactory _factory;

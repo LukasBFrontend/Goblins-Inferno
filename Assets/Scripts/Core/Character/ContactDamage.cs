@@ -8,7 +8,7 @@ public class ContactDamage : MonoBehaviour
     [SerializeField] int contactDamage = 20;
     [Range(0, 2)]
     [SerializeField] float cooldown = 1;
-    
+
     WaitForSeconds _waitForSeconds;
     bool _canAttack = true;
     bool _isActive;
@@ -22,7 +22,7 @@ public class ContactDamage : MonoBehaviour
 
     void OnCollisionStay(Collision other)
     {
-        if (!gameObject.activeSelf || !_isActive || !other.collider.TryGetComponent<Player>(out var player))
+        if (!gameObject.activeSelf || !_isActive || !other.collider.TryGetComponent(out Player player))
         {
             return;
         }

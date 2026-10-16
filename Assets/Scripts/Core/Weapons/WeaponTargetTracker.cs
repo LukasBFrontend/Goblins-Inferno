@@ -7,9 +7,9 @@ public class WeaponTargetTracker : MonoBehaviour
     [SerializeField] SphereCollider collider;
     [Header("Runtime filled")]
     [SerializeField] List<Enemy> enemiesInRange = new();
-    
+
     bool _dirty;
-    
+
     public List<Enemy> EnemiesInRange => enemiesInRange;
 
     public void MarkDirty()
@@ -35,7 +35,7 @@ public class WeaponTargetTracker : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!other.TryGetComponent<Enemy>(out var enemy))
+        if (!other.TryGetComponent(out Enemy enemy))
         {
             return;
         }
@@ -45,7 +45,7 @@ public class WeaponTargetTracker : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (!other.TryGetComponent<Enemy>(out var enemy))
+        if (!other.TryGetComponent(out Enemy enemy))
         {
             return;
         }

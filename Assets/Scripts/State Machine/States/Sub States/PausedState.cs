@@ -3,10 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PausedState : BaseState
 {
-    public PausedState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
-    {
-        // Initialization logic
-    }
+    public PausedState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory) { }
+
     public override void EnterState()
     {
         RegisterCallbacks();

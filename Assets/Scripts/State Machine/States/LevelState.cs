@@ -8,12 +8,14 @@ public class LevelState : BaseState
         IsRootState = true;
         SetSubState(Factory.Playing());
     }
+
     public override void EnterState()
     {
         if (Ctx.LogNewStateOnEnter)
         {
             Debug.Log($"{Ctx.name} entered <b><color=white>new state</color></b>: <color=yellow>{nameof(LevelState)}</color> \n<b><color=white>substate</color></b>: <color=yellow>{Factory.Playing().GetType().Name}</color>");
         }
+
         SetSubState(Factory.Playing());
 
         if (SceneManager.GetActiveScene().buildIndex != 1)

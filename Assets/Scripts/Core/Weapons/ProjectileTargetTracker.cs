@@ -10,7 +10,7 @@ public class ProjectileTargetTracker : MonoBehaviour
 
     BaseCharacter _targetCurrent;
     Vector3 _fallbackPosition;
-    
+
     public Vector3 TargetPosition => _targetCurrent != null ? _targetCurrent.ColliderCenter : _fallbackPosition;
 
     public void Initialize(BaseCharacter initialTarget)
@@ -59,7 +59,7 @@ public class ProjectileTargetTracker : MonoBehaviour
         BaseCharacter closest = null;
         float closestDistance = float.MaxValue;
 
-        foreach (var character in InRange(range, layerMask))
+        foreach (BaseCharacter character in InRange(range, layerMask))
         {
             if (character == null || !character.gameObject.activeSelf)
             {

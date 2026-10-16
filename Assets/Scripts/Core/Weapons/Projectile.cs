@@ -39,13 +39,11 @@ public class Projectile : MonoBehaviour, IPoolable
     /// </summary>
     /// <param name="initialTarget"></param>
     /// <param name="damage"></param>
-    /// <exception cref="NotImplementedException"></exception>
     public void Initialize(BaseCharacter sender, BaseCharacter initialTarget, int damage)
     {
         _sender = sender;
         _damage = damage;
 
-        // TODO: Add damage on contact ass a field in SO_Projectile_Data
         switch (data.arcMode)
         {
             case ProjectileArcMode.None:
@@ -104,12 +102,12 @@ public class Projectile : MonoBehaviour, IPoolable
         }
 
 
-        Game.ObjectPool.Return(this);
+        Game.ObjectPooler.Return(this);
     }
 
     void HitTargetsWithinRange()
     {
-        foreach (var character in targetTracker.InRange(data.newTargetRange, data.targetsLayerMask))
+        foreach (BaseCharacter character in targetTracker.InRange(data.newTargetRange, data.targetsLayerMask))
         {
             RegisterHit(character);
         }
@@ -149,7 +147,7 @@ public class Projectile : MonoBehaviour, IPoolable
 
         HitTargetsWithinRange();
         Instantiate(data.onDestroyVFX, transform.position, Quaternion.identity);
-        Game.ObjectPool.Return(this);
+        Game.ObjectPooler.Return(this);
     }
 
     IEnumerator HitMissRoutine(BaseCharacter target)
@@ -180,7 +178,7 @@ public class Projectile : MonoBehaviour, IPoolable
             yield return null;
         }
 
-        Game.ObjectPool.Return(this);
+        Game.ObjectPooler.Return(this);
     }
 
     IEnumerator BoomerangRoutine(BaseCharacter initialTarget)
@@ -204,7 +202,7 @@ public class Projectile : MonoBehaviour, IPoolable
             yield return null;
         }
 
-        Game.ObjectPool.Return(this);
+        Game.ObjectPooler.Return(this);
     }
 
     void MoveTowardsTarget()
@@ -218,7 +216,13 @@ public class Projectile : MonoBehaviour, IPoolable
 
     void OnTriggerEnter(Collider other)
     {
-        if (!_hitEverything || (data.targetsLayerMask & (1 << other.gameObject.layer)) == 0 || !other.TryGetComponent<BaseCharacter>(out var character) || character == _sender)
+        if (
+            !_hitEverything
+            || !other.TryGetComponent(out BaseCharacter character)
+            || character == _sender
+            || (data.targetsLayerMask & (1 << other.gameObject.layer)) == 0
+            || !gameObject.activeSelf
+        )
         {
             return;
         }
@@ -228,7 +232,11 @@ public class Projectile : MonoBehaviour, IPoolable
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!data.destroyOnContact || (data.targetsLayerMask & (1 << collision.gameObject.layer)) == 0)
+        if (
+            !data.destroyOnContact
+            || (data.targetsLayerMask & (1 << collision.gameObject.layer)) == 0
+            || !gameObject.activeSelf
+        )
         {
             return;
         }
@@ -238,7 +246,10 @@ public class Projectile : MonoBehaviour, IPoolable
 
     void OnValidate()
     {
-        if (data.arcMode == ProjectileArcMode.None && particleSystem.controls == null)
+        if (
+            data.arcMode == ProjectileArcMode.None && particleSystem.controls == null
+            || !gameObject.activeSelf
+        )
         {
             Debug.LogWarning($"{nameof(Projectile)} <b><color=white>{name}</color></b> with '{nameof(data)} = {nameof(ProjectileArcMode.None)}' is missing field <b><color=white>{nameof(ParticleSystemControls)}</color></b>");
         }
@@ -283,17 +294,18 @@ public class Projectile : MonoBehaviour, IPoolable
         _damage = 0;
         _hitEverything = false;
         _charactersHit.Clear();
-        
-        
+
         if (rigidbody)
         {
             rigidbody.linearVelocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
         }
+
         if (particleSystem.controls)
         {
             particleSystem.controls.Stop();
         }
+
         if (render)
         {
             render.SetActive(true);

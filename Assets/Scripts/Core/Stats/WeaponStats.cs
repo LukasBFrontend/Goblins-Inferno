@@ -3,20 +3,20 @@ using System.Linq;
 
 public struct WeaponStats : IStats
 {
-    public readonly string WeaponName => _weaponName;
-    public readonly int WeaponLvl => _damageStat.Lvl + _projectileCountStat.Lvl;
-
-    public readonly AdditiveStat BaseSize => _baseSizeStat;
-    public readonly AdditiveStat Damage => _damageStat;
-    public readonly AdditiveStat ProjectileCount => _projectileCountStat;
-    public  readonly MultiplicativeStat SizeMultiplier => _sizeMultiplierStat;
-
     private AdditiveStat _baseSizeStat;
     private AdditiveStat _damageStat;
     private AdditiveStat _projectileCountStat;
     private MultiplicativeStat _sizeMultiplierStat;
     private Dictionary<string, Stat> _statLookup;
     private string _weaponName;
+
+    public  readonly MultiplicativeStat SizeMultiplier => _sizeMultiplierStat;
+    public readonly string WeaponName => _weaponName;
+    public readonly int WeaponLvl => _damageStat.Lvl + _projectileCountStat.Lvl;
+
+    public readonly AdditiveStat BaseSize => _baseSizeStat;
+    public readonly AdditiveStat Damage => _damageStat;
+    public readonly AdditiveStat ProjectileCount => _projectileCountStat;
 
     public WeaponStats(string name, WeaponStatsData data)
     {

@@ -18,9 +18,9 @@ public class WizardAttacks : MonoBehaviour
         StartExplosionSequence(Game.Player.transform);
     }
 
-    private void StartExplosionSequence(Transform origin)
+    void StartExplosionSequence(Transform origin)
     {
-        Projectile projectile = Game.ObjectPool.Spawn<Projectile>(explosionProjectile, origin.position, Quaternion.identity);
+        Projectile projectile = Game.ObjectPooler.Spawn<Projectile>(explosionProjectile, origin.position, Quaternion.identity);
         projectile.Initialize(_archer, Game.Player, damage);
     }
 }

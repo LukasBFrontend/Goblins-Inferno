@@ -20,7 +20,7 @@ public class Stats : MonoBehaviour
 
     public WeaponStats GetWeaponModifier(string weaponName)
     {
-        bool statsExist = _weaponsStatsLookUp.TryGetValue(weaponName, out var weaponStats);
+        bool statsExist = _weaponsStatsLookUp.TryGetValue(weaponName, out WeaponStats weaponStats);
 
         if (!statsExist)
         {

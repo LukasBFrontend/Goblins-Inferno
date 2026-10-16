@@ -115,7 +115,7 @@ public class Health : MonoBehaviour
 
     void OnValidate()
     {
-        var stats = statsConfig.characterStatsConfig;
+        SO_CharacterStatsConfig stats = statsConfig.characterStatsConfig;
 
         if (stats != null)
         {
@@ -127,7 +127,7 @@ public class Health : MonoBehaviour
     {
         _materialInstances.Clear();
 
-        foreach (var renderer in _character.Renderers)
+        foreach (Renderer renderer in _character.Renderers)
         {
             _materialInstances.Add(renderer.materials[0]);
         }

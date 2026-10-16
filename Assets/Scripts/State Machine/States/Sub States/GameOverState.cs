@@ -3,10 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class GameOverState : BaseState
 {
-    public GameOverState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
-    {
-        // Initialization logic
-    }
+    public GameOverState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory) { }
+
     public override void EnterState()
     {
         GameEvents.LevelLoaded.AddListener(OnLevelStarted);

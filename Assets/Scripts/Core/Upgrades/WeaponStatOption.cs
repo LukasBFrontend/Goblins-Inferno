@@ -2,7 +2,7 @@ public class WeaponStatOption : UpgradeOption
 {
     string _weaponName;
     Stat _stat;
-    
+
     public string WeaponName => _weaponName;
     public Stat Stat => _stat;
 
@@ -22,6 +22,7 @@ public class WeaponStatOption : UpgradeOption
         Player player = Game.Player;
         WeaponStats weaponStats = player.Stats.GetWeaponModifier(_weaponName);
         Stat stat = weaponStats.GetStat(_stat.Name);
+
         stat.LevelUp();
     }
 }

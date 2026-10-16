@@ -2,18 +2,19 @@ using UnityEngine;
 
 public abstract class Stat
 {
-    public int Lvl => _lvl;
-    public Sprite Sprite => _sprite;
-    public string Name => _name;
-    public string ShortName => _shortName;
-    public float PerLevelIncrease => _perLevelIncrease;
-    public bool IncludeAsUpgradeOption => _includeAsUpgradeOption;
     protected Sprite _sprite;
     protected bool _includeAsUpgradeOption;
     protected string _name;
     protected string _shortName;
     protected int _lvl;
     protected float _perLevelIncrease;
+
+    public int Lvl => _lvl;
+    public Sprite Sprite => _sprite;
+    public string Name => _name;
+    public string ShortName => _shortName;
+    public float PerLevelIncrease => _perLevelIncrease;
+    public bool IncludeAsUpgradeOption => _includeAsUpgradeOption;
 
     /// <summary>
     /// Advance the stat's lvl by one.

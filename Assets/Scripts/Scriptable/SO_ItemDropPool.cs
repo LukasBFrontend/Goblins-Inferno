@@ -1,13 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct PooledItemDropData
-{
-    public PoolableData data;
-    public int poolQuantity;
-}
-
 [CreateAssetMenu(fileName = "ItemDropPool", menuName = "Drops/ItemDropPool")]
 public class SO_ItemDropPool : ScriptableObject
 {
@@ -19,7 +12,7 @@ public class SO_ItemDropPool : ScriptableObject
         List<PoolableData> drops = new();
         List<PoolableData> itemDropsFlat = new();
 
-        foreach(var itemDrop in itemDrops)
+        foreach(PooledItemDropData itemDrop in itemDrops)
         {
             totalQuantity += itemDrop.poolQuantity;
 
@@ -39,7 +32,7 @@ public class SO_ItemDropPool : ScriptableObject
         for (int i = 0; i <= amount; i++)
         {
             int itemDropIndex = Random.Range(0, itemDropsFlat.Count);
-            var itemDrop = itemDropsFlat[itemDropIndex];
+            PoolableData itemDrop = itemDropsFlat[itemDropIndex];
 
             itemDropsFlat.RemoveAt(itemDropIndex);
             drops.Add(itemDrop);
@@ -47,4 +40,11 @@ public class SO_ItemDropPool : ScriptableObject
 
         return drops;
     }
+}
+
+[System.Serializable]
+public struct PooledItemDropData
+{
+    public PoolableData data;
+    public int poolQuantity;
 }

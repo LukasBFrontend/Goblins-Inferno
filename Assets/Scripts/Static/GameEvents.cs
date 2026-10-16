@@ -2,7 +2,6 @@ using UnityEngine.Events;
 
 public static class GameEvents
 {
-    // Scene
     public static UnityEvent MainMenuLoaded = new();
     public static UnityEvent LevelLoaded = new();
     public static UnityEvent LevelQuit = new();
@@ -10,7 +9,6 @@ public static class GameEvents
     public static UnityEvent GameResumed = new();
     public static UnityEvent GameOverEvent =  new();
 
-    // Level
     public static UnityEvent<int, int> HealthChanged = new();
     public static UnityEvent<int, int> ExpChanged = new();
     public static UnityEvent<int> ScoreChanged = new();

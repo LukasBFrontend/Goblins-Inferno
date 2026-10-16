@@ -27,7 +27,7 @@ public class ArcherAttacks : MonoBehaviour
 
     void ShootArrow(Transform origin)
     {
-        Projectile projectile = Game.ObjectPool.Spawn<Projectile>(arrowProjectile, origin.position, Quaternion.identity);
+        Projectile projectile = Game.ObjectPooler.Spawn<Projectile>(arrowProjectile, origin.position, Quaternion.identity);
         projectile.Initialize(_archer, Game.Player, damage);
     }
 }

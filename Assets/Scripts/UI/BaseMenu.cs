@@ -22,7 +22,7 @@ public abstract class BaseMenu : MonoBehaviour
 
         _submenus = new();
 
-        foreach (var menuData in submenusData)
+        foreach (SubmenuData menuData in submenusData)
         {
             menuData.menu.Initialize(this, GetContainer(root, menuData.containerName));
             _submenus.Add(menuData.menu);
@@ -38,7 +38,7 @@ public abstract class BaseMenu : MonoBehaviour
     {
         _overlayContainer.visible = false;
 
-        foreach (var menu in _submenus)
+        foreach (BaseSubmenu menu in _submenus)
         {
             menu.Container.visible = false;
         }
@@ -46,7 +46,7 @@ public abstract class BaseMenu : MonoBehaviour
 
     public void ShowSubMenu<T>() where T: BaseSubmenu
     {
-        foreach (var menu in _submenus)
+        foreach (BaseSubmenu menu in _submenus)
         {
             menu.Container.visible = menu is T;
         }
@@ -54,7 +54,7 @@ public abstract class BaseMenu : MonoBehaviour
 
     VisualElement GetContainer(VisualElement root, string containerName)
     {
-        var container = root.Q<VisualElement>(containerName);
+        VisualElement container = root.Q<VisualElement>(containerName);
 
         if (container == null)
         {

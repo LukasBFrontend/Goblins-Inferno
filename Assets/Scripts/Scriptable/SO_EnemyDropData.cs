@@ -1,22 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct Range
-{
-    public int lower;
-    public int upper;
-}
-
-[System.Serializable]
-public struct DropPoolData
-{
-    public SO_ItemDropPool itemPool;
-    [Range(0, 100)]
-    public float dropChance;
-    public Range itemsToTakeRange;
-}
-
 [CreateAssetMenu(fileName = "DropData", menuName = "Drops/EnemyDropData")]
 public class SO_EnemyDropData : ScriptableObject
 {
@@ -26,7 +10,7 @@ public class SO_EnemyDropData : ScriptableObject
     {
         List<PoolableData> drops = new();
 
-        foreach (var dropPool in dropPoolDatas)
+        foreach (DropPoolData dropPool in dropPoolDatas)
         {
             float random = Random.Range(0, 100);
             int min = dropPool.itemsToTakeRange.lower - 1;
@@ -41,4 +25,13 @@ public class SO_EnemyDropData : ScriptableObject
 
         return drops;
     }
+}
+
+[System.Serializable]
+public struct DropPoolData
+{
+    public SO_ItemDropPool itemPool;
+    [Range(0, 100)]
+    public float dropChance;
+    public Range itemsToTakeRange;
 }
