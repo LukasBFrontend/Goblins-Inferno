@@ -14,7 +14,7 @@ struct ParticleSystemVariables
 }
 
 // TODO: Seperate different projectile behaviors into components
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IPoolable
 {
     [SerializeField] SO_ProjectileData data;
     [Header("Optional")]
@@ -24,6 +24,9 @@ public class Projectile : MonoBehaviour
     [SerializeField] Rigidbody rigidbody;
     [SerializeField] bool logOnTargetHit;
     public SO_ProjectileData Data => data;
+
+    public string PoolableId { get; set; }
+
     BaseCharacter _sender;
     int _damage;
     bool _hitEverything;
@@ -99,7 +102,7 @@ public class Projectile : MonoBehaviour
         }
 
 
-        Destroy(gameObject);
+        Game.ObjectPool.Return(this);
     }
 
     void HitTargetsWithinRange()
@@ -149,7 +152,7 @@ public class Projectile : MonoBehaviour
         }
 
         Instantiate(data.onDestroyVFX, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        Game.ObjectPool.Return(this);
     }
 
     IEnumerator HitMissRoutine(BaseCharacter target)
@@ -180,7 +183,7 @@ public class Projectile : MonoBehaviour
             yield return null;
         }
 
-        Destroy(gameObject);
+        Game.ObjectPool.Return(this);
     }
 
     IEnumerator BoomerangRoutine(BaseCharacter initialTarget)
@@ -204,7 +207,7 @@ public class Projectile : MonoBehaviour
             yield return null;
         }
 
-        Destroy(gameObject);
+        Game.ObjectPool.Return(this);
     }
 
     void MoveTowardsTarget()
@@ -268,5 +271,13 @@ public class Projectile : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan2(direction.x, direction.z), 0);
 
         return direction;
+    }
+
+    public void Reset()
+    {
+        _sender = null;
+        _damage = 0;
+        _hitEverything = false;
+        _charactersHit.Clear();
     }
 }

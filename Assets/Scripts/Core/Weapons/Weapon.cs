@@ -102,9 +102,7 @@ public class Weapon :  MonoBehaviour
 
         Vector3 transformOrigin = new(_wielder.transform.position.x, projectileOriginY, _wielder.transform.position.z);
 
-        GameObject projectileObject = Instantiate(data.projectilePrefab, transformOrigin, Quaternion.identity);
-
-        Projectile projectile = projectileObject.GetComponent<Projectile>();
+        Projectile projectile = Game.ObjectPool.Spawn<Projectile>(data.projectile, transformOrigin, Quaternion.identity);
 
         var enemiesInRange = targetTracker.EnemiesInRange;
 

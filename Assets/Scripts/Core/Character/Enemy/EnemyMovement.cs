@@ -83,14 +83,16 @@ public class EnemyMovement : MonoBehaviour
 
     void CalculateNudgeSignal(float distance)
     {
-        Collider[] nearbyEnemyColliders = Physics.OverlapSphere(transform.position, distance, enemyLayer);
+        Collider[] hitColliders = new Collider[4];
+        int numColliders = Physics.OverlapSphereNonAlloc(transform.position, distance, hitColliders, enemyLayer);
+        
 
         Vector3 averagePosition = Vector3.zero;
         int enemyCount = 0;
 
-        foreach (var collider in nearbyEnemyColliders)
+        for (int i = 0; i < numColliders; i++)
         {
-            if (!collider.TryGetComponent<BaseCharacter>(out var enemy) || enemy == _enemy)
+            if (!hitColliders[i].TryGetComponent<BaseCharacter>(out var enemy) || enemy == _enemy)
             {
                 continue;
             }

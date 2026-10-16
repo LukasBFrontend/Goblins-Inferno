@@ -48,5 +48,7 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 128
-  projectilePrefab: {fileID: 3965348730678136075, guid: c1d1b07f1f6ca7a45bac60a2e26d8c0e, type: 3}
+  projectile:
+    id: Bomb Projectile
+    prefab: {fileID: 3965348730678136075, guid: c1d1b07f1f6ca7a45bac60a2e26d8c0e, type: 3}
   parentProjectiles: 0

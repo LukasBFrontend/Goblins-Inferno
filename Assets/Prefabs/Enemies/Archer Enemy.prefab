@@ -360,7 +360,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c033de154fe525b4ca3780cb951a1bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArcherAttacks
-  arrowPrefab: {fileID: 5305345980619666261, guid: ad4268200d1864044a7514ca4fa8f6da, type: 3}
+  arrowProjectile:
+    id: Enemy Arrow Projectile
+    prefab: {fileID: 5305345980619666261, guid: ad4268200d1864044a7514ca4fa8f6da, type: 3}
   leftArrowSpawnPoint: {fileID: 7869217028202991132}
   rightArrowSpawnPoint: {fileID: 7459690335882283749}
   damage: 10

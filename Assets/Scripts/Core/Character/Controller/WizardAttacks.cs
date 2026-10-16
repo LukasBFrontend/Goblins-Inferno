@@ -4,7 +4,7 @@ using UnityEngine;
 public class WizardAttacks : MonoBehaviour
 {
     [Header("Energy Explosion")]
-    [SerializeField] GameObject explosionPrefab;
+    [SerializeField] PoolableData explosionProjectile;
     [SerializeField] int damage;
     Enemy _archer;
 
@@ -20,9 +20,7 @@ public class WizardAttacks : MonoBehaviour
 
     private void StartExplosionSequence(Transform origin)
     {
-        GameObject explosionInstance = Instantiate(explosionPrefab, origin.position, Quaternion.identity);
-
-        Projectile projectile = explosionInstance.GetComponent<Projectile>();
+        Projectile projectile = Game.ObjectPool.Spawn<Projectile>(explosionProjectile, origin.position, Quaternion.identity);
         projectile.Initialize(_archer, Game.Player, damage);
     }
 }

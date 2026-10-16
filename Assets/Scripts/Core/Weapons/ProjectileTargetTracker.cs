@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
 public class ProjectileTargetTracker : MonoBehaviour
 {
     [SerializeField] Projectile projectile;
@@ -84,15 +81,14 @@ public class ProjectileTargetTracker : MonoBehaviour
         return closest;
     }
 
-    void OnValidate()
+    void OnDrawGizmosSelected()
     {
         if (!projectile || !projectile.Data)
         {
             Debug.LogWarning($"<color=white>{name}</color> is missing reference <color=white>{nameof(projectile)}</color> or the <color=white>{nameof(Projectile)}</color> instance does not have a valid data reference.");
             return;
         }
-
-        float scale = projectile.Data.newTargetRange;
-        transform.localScale = new(scale, scale, scale);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, projectile.Data.newTargetRange);
     }
 }

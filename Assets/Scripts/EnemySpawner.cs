@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] SO_EnemyWaveConfig data;
     float elapsed = 0f;
     int waveIndex = 0;
+    
 
     public void Run()
     {

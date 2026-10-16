@@ -29,7 +29,7 @@ public class SO_WeaponData : ScriptableObject
     [Tooltip("A weapontype of 'Area' will damage enemies directly while a weapontype of 'Projectile' will attempt to spawn projectiles")]
     public LayerMask hitMask;
     [Header("Only required for projectile weapons")]
-    public GameObject projectilePrefab;
+    public PoolableData projectile;
     public bool parentProjectiles;
     public string WeaponName => weaponName;
     public WeaponStatsData Stats => stats;

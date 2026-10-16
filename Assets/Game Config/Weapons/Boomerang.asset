@@ -48,5 +48,7 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 128
-  projectilePrefab: {fileID: 7842263552249521582, guid: 215813221688520429944f324adb4243, type: 3}
+  projectile:
+    id: Boomerang Projectile
+    prefab: {fileID: 7842263552249521582, guid: 215813221688520429944f324adb4243, type: 3}
   parentProjectiles: 0

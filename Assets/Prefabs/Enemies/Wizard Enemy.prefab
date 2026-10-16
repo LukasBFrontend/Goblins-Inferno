@@ -125,7 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9e7198e63b1a040a924e97ca35fde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WizardAttacks
-  explosionPrefab: {fileID: 4273759548958849969, guid: bfd7edbce4174a84aa4227c6bc731292, type: 3}
+  explosionProjectile:
+    id: Enemy Explosion Projectile
+    prefab: {fileID: 4273759548958849969, guid: bfd7edbce4174a84aa4227c6bc731292, type: 3}
   damage: 40
 --- !u!1001 &3332484206615116635
 PrefabInstance:
