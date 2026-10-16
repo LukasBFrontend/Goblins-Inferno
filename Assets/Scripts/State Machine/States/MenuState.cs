@@ -6,6 +6,7 @@ public class MainMenuState : BaseState
     public MainMenuState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
     {
         IsRootState = true;
+        GameSaveState.Load();
     }
 
     public override void EnterState()

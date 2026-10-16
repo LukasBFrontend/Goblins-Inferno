@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3034866633386620098, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       propertyPath: m_Name
-      value: Wizard Explosion
+      value: Wizard Explosion Projectile
       objectReference: {fileID: 0}
     - target: {fileID: 4414842108950364453, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       propertyPath: m_Enabled

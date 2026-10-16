@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: PowerupDropPool
   m_EditorClassIdentifier: Assembly-CSharp::SO_ItemDropPool
   itemDrops:
-  - prefab: {fileID: 8573654059955536675, guid: 55788ca1b6b9e0d4f916f48febf50a3a, type: 3}
+  - data:
+      id: Health
+      prefab: {fileID: 8573654059955536675, guid: 55788ca1b6b9e0d4f916f48febf50a3a, type: 3}
     poolQuantity: 10

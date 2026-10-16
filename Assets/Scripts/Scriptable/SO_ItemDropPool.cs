@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public struct PooledItemDropData
 {
-    public GameObject prefab;
+    public PoolableData data;
     public int poolQuantity;
 }
 
@@ -13,11 +13,11 @@ public class SO_ItemDropPool : ScriptableObject
 {
     public List<PooledItemDropData> itemDrops;
 
-    public List<GameObject> GetItemsFromPool(int amount)
+    public List<PoolableData> GetItemsFromPool(int amount)
     {
         int totalQuantity = 0;
-        List<GameObject> drops = new();
-        List<GameObject> itemDropsFlat = new();
+        List<PoolableData> drops = new();
+        List<PoolableData> itemDropsFlat = new();
 
         foreach(var itemDrop in itemDrops)
         {
@@ -25,7 +25,7 @@ public class SO_ItemDropPool : ScriptableObject
 
             for (int i = 0; i < itemDrop.poolQuantity; i++)
             {
-                itemDropsFlat.Add(itemDrop.prefab);
+                itemDropsFlat.Add(itemDrop.data);
             }
         }
 
@@ -39,7 +39,7 @@ public class SO_ItemDropPool : ScriptableObject
         for (int i = 0; i <= amount; i++)
         {
             int itemDropIndex = Random.Range(0, itemDropsFlat.Count);
-            GameObject itemDrop = itemDropsFlat[itemDropIndex];
+            var itemDrop = itemDropsFlat[itemDropIndex];
 
             itemDropsFlat.RemoveAt(itemDropIndex);
             drops.Add(itemDrop);

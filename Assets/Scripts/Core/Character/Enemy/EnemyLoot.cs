@@ -7,13 +7,13 @@ public class EnemyLoot : MonoBehaviour
 
     public void Drop()
     {
-        List<GameObject> pickupPrefabs = enemyDropData.GenerateDrops();
+        List<PoolableData> pickupDatas = enemyDropData.GenerateDrops();
         List<BasePickup> pickups = new();
 
-        foreach(var pickupPrefab in pickupPrefabs)
+        foreach(var pickupData in pickupDatas)
         {
-            GameObject instance = Instantiate(pickupPrefab, transform.position, Quaternion.identity);
-            pickups.Add(instance.GetComponent<BasePickup>());
+            var result = Game.ObjectPool.Spawn<BasePickup>(pickupData, transform.position, Quaternion.identity);
+            pickups.Add(result);
         }
 
         foreach (var pickup in pickups)

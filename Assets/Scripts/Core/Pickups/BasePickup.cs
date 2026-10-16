@@ -9,13 +9,15 @@ public enum PickupType
     Health,
 }
 
-public class BasePickup : MonoBehaviour
+public class BasePickup : MonoBehaviour, IPoolable
 {
     [SerializeField] PickupType type;
     [SerializeField] int value = 10;
     [Header("Movement")]
     [SerializeField] float driftRange = 0.5f;
     [SerializeField] float driftSpeed = 1f;
+
+    public string PoolableId { get; set; }
 
     void OnTriggerEnter(Collider other)
     {
@@ -31,13 +33,12 @@ public class BasePickup : MonoBehaviour
                 break;
             case PickupType.Health:
                 player.Health.Restore(value);
-                Debug.Log("Health restored");
                 break;
             default:
                 break;
         }
 
-        Destroy(gameObject);
+        Game.ObjectPool.Return(this);
     }
 
     public void StartDriftAwayFrom(List<BasePickup> pickups)
@@ -110,5 +111,9 @@ public class BasePickup : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
+    }
+
+    public void Reset()
+    {
     }
 }

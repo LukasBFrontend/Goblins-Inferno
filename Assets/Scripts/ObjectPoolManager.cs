@@ -37,7 +37,7 @@ public class ObjectPooler : MonoBehaviour
             }
         }
 
-        result.Id = data.id;
+        result.PoolableId = data.id;
         result.gameObject.SetActive(true);
 
         return result;
@@ -48,7 +48,7 @@ public class ObjectPooler : MonoBehaviour
         poolable.Reset();
         poolable.gameObject.SetActive(false);
 
-        _poolableObjectLookup[poolable.Id].Add(poolable);
+        _poolableObjectLookup[poolable.PoolableId].Add(poolable);
     }
 
     void Awake()
@@ -65,6 +65,6 @@ public class ObjectPooler : MonoBehaviour
 
 public interface IPoolable
 {
-    string Id { get; set; }
+    string PoolableId { get; set; }
     void Reset();
 }

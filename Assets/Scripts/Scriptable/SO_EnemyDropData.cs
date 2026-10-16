@@ -22,9 +22,9 @@ public class SO_EnemyDropData : ScriptableObject
 {
     public List<DropPoolData> dropPoolDatas;
 
-    public List<GameObject> GenerateDrops()
+    public List<PoolableData> GenerateDrops()
     {
-        List<GameObject> drops = new();
+        List<PoolableData> drops = new();
 
         foreach (var dropPool in dropPoolDatas)
         {

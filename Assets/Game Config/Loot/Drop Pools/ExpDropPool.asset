@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: ExpDropPool
   m_EditorClassIdentifier: Assembly-CSharp::SO_ItemDropPool
   itemDrops:
-  - prefab: {fileID: 2335829738638345288, guid: 4b8091c06df33bd4c88705f380d04864, type: 3}
+  - data:
+      id: Exp
+      prefab: {fileID: 2335829738638345288, guid: 4b8091c06df33bd4c88705f380d04864, type: 3}
     poolQuantity: 10

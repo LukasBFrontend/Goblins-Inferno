@@ -4,7 +4,7 @@ public class Enemy : BaseCharacter, IPoolable
 {
     [SerializeField] EnemyLoot loot;
     [SerializeField] int scoreValue = 100;
-    public string Id { get; set; }
+    public string PoolableId { get; set; }
 
     public override void Die()
     {
