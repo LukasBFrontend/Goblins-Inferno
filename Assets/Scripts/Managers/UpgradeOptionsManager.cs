@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Unity.Profiling;
 
 public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
 {
+    static readonly ProfilerMarker RefreshOptionsMarker = new("UpgradeOptions.RefreshOptions");
+    static readonly ProfilerMarker AssignOptionsMarker = new("UpgradeOptions.AssignOptions");
     [SerializeField] SO_UpgradeOptionData optionOneData;
     [SerializeField] SO_UpgradeOptionData optionTwoData;
     [SerializeField] SO_UpgradeOptionData optionThreeData;
@@ -12,17 +15,41 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
 
     public void AssignRandom()
     {
-        RefreshOptions();
+        using (RefreshOptionsMarker.Auto())
+        {
+            RefreshOptions();
+        }
 
-        var numbers = Enumerable.Range(0, _currentOptions.Count)
-            .OrderBy(_ => Random.value)
-            .Take(3)
-            .ToArray()
-        ;
+        using (AssignOptionsMarker.Auto())
+        {
+            int count = _currentOptions.Count;
+            int first = Random.Range(0, count);
 
-        _currentOptions[numbers[0]].AssignTo(optionOneData);
-        _currentOptions[numbers[1]].AssignTo(optionTwoData);
-        _currentOptions[numbers[2]].AssignTo(optionThreeData);
+            int second = Random.Range(0, count - 1);
+
+            if (second >= first)
+            {
+                second++;
+            }
+
+            int third = Random.Range(0, count - 2);
+            int lower = Mathf.Min(first, second);
+            int higher = Mathf.Max(first, second);
+
+            if (third >= lower)
+            {
+                third++;
+            }
+
+            if (third >= higher)
+            {
+                third++;
+            }
+
+            _currentOptions[first].AssignTo(optionOneData);
+            _currentOptions[second].AssignTo(optionTwoData);
+            _currentOptions[third].AssignTo(optionThreeData);
+        }
     }
 
     public void SelectOptionOne()
@@ -80,5 +107,11 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
                 _currentOptions.Add(new CharacterStatOption(stat));
             }
         }
+
+        Debug.Log(
+            $"Upgrade options created: {_currentOptions.Count} " +
+            $"(weapons: {Game.Player.Stats.Weapons.Count}, " +
+            $"character stats: {Game.Player.Stats.Character.All().Length})")
+        ;
     }
 }

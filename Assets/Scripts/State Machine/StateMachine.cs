@@ -19,6 +19,7 @@ public class StateMachine : Singleton<StateMachine>
             : _states.Level()
         ;
         _currentState.EnterState();
+        _currentState.InitializeSubState();
     }
 
     void Update()

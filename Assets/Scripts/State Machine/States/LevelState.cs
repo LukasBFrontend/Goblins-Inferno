@@ -6,7 +6,7 @@ public class LevelState : BaseState
     public LevelState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
     {
         IsRootState = true;
-        SetSubState(Factory.Playing());
+        InitializeSubState();
     }
 
     public override void EnterState()
@@ -41,5 +41,11 @@ public class LevelState : BaseState
     public override void UpdateState(){ }
 
     public override void CheckSwitchStates() { }
-    public override void InitializeSubState() { }
+    public override void InitializeSubState()
+    {
+        BaseState playingState = Factory.Playing();
+
+        SetSubState(playingState);
+        playingState.EnterState();
+    }
 }

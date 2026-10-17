@@ -28,11 +28,11 @@ MonoBehaviour:
       id: Archer
       prefab: {fileID: 7348977928065779791, guid: 788aa06843d99c44ba06a5b89e69da82, type: 3}
     spawnBias:
-      lower: 1
-      upper: 2
+      lower: 0
+      upper: 0
   - poolableData:
       id: Wizard
       prefab: {fileID: 6982063490355154211, guid: 92cd47c4af604294d81466a98cc98033, type: 3}
     spawnBias:
-      lower: 1
-      upper: 3
+      lower: 0
+      upper: 0
