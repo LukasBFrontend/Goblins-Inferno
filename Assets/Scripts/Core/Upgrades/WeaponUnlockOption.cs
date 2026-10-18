@@ -4,7 +4,7 @@ public class WeaponUnlockOption : UpgradeOption
 {
     string _weaponName;
     Sprite _sprite;
-    
+
     public string WeaponName => _weaponName;
     public Sprite Sprite => _sprite;
 
@@ -14,7 +14,7 @@ public class WeaponUnlockOption : UpgradeOption
         _sprite = sprite;
     }
 
-    public override void AssignTo(SO_UpgradeOptionData data)
+    public override void AssignTo(RSO_UpgradeCardData data)
     {
         data.SetValues(this);
     }

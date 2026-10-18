@@ -1,0 +1,64 @@
+:root {
+    --horizontal-text-margin: 2.5;
+    -unity-font-definition: resource("Fonts/skeleboom");
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+}
+
+Label {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.weaponLevel {
+    color: rgba(255, 255, 255, 0.902);
+    -unity-font-definition: resource("Fonts/skeleboom");
+    letter-spacing: 7px;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-cubic;
+    width: 70px;
+    margin-top: 2px;
+}
+
+.lvlTextContainer {
+    flex-direction: row;
+    justify-content: flex-end;
+    -unity-text-align: upper-right;
+    flex-grow: 1;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    margin-bottom: 3px;
+}
+
+.lvlLabel {
+    margin-right: 4px;
+}
+
+.lvlValue {
+}
+
+.imageContainer {
+    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
+    -unity-slice-left: 32;
+    -unity-slice-top: 32;
+    -unity-slice-right: 32;
+    -unity-slice-bottom: 32;
+    -unity-slice-scale: 1.25px;
+    background-color: rgba(0, 0, 0, 0.784);
+    aspect-ratio: 1;
+    -unity-background-image-tint-color: rgba(63, 59, 80, 0.902);
+}
+
+.sprite {
+    aspect-ratio: 1;
+    height: 100%;
+    margin-top: 6px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    margin-left: 6px;
+}

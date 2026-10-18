@@ -30,9 +30,14 @@ public class Weapons : MonoBehaviour
                 weaponData.Spawn(weaponParent, _wielder)
             );
         }
-        _unlockedWeapons = new (){ _availableWeapons.First() };
 
+        _unlockedWeapons = new();
         _lastAttackTime = 0;
+    }
+
+    void Start()
+    {
+        Unlock(_availableWeapons.First().Name);
     }
 
     public void Attack()
@@ -68,6 +73,7 @@ public class Weapons : MonoBehaviour
             throw new System.Exception($"Weapon '{weaponName}' is not in the list of available weapons");
         }
 
+        _wielder.Stats.GetWeaponModifier(weaponName).MarkUnlocked();
         _unlockedWeapons.Add(weapon);
     }
 }

@@ -11,6 +11,8 @@ public class Weapon :  MonoBehaviour
     [SerializeField] float projectileOriginY;
 
     public string Name => data.weaponName;
+    public int Lvl => _wielder.Stats.GetWeaponModifier(data.weaponName).Lvl;
+    public Sprite Sprite => _wielder.Stats.GetWeaponModifier(data.weaponName).Damage.Sprite;
     public SO_WeaponData Data => data;
 
     Player _wielder;

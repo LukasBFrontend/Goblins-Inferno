@@ -3,10 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayingState : BaseState
 {
-    public PlayingState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
-    {
-        InitializePlayingState();
-    }
+    public PlayingState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory){ }
 
     public override void EnterState()
     {

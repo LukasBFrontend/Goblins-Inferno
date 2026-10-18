@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
 {
-    [SerializeField] SO_UpgradeOptionData optionOneData;
-    [SerializeField] SO_UpgradeOptionData optionTwoData;
-    [SerializeField] SO_UpgradeOptionData optionThreeData;
+    [SerializeField] RSO_UpgradeCardData optionOneData;
+    [SerializeField] RSO_UpgradeCardData optionTwoData;
+    [SerializeField] RSO_UpgradeCardData optionThreeData;
 
     List<UpgradeOption> _currentOptions = new();
 
@@ -14,15 +14,33 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
     {
         RefreshOptions();
 
-        var numbers = Enumerable.Range(0, _currentOptions.Count)
-            .OrderBy(_ => Random.value)
-            .Take(3)
-            .ToArray()
-        ;
+        int count = _currentOptions.Count;
+        int first = Random.Range(0, count);
 
-        _currentOptions[numbers[0]].AssignTo(optionOneData);
-        _currentOptions[numbers[1]].AssignTo(optionTwoData);
-        _currentOptions[numbers[2]].AssignTo(optionThreeData);
+        int second = Random.Range(0, count - 1);
+
+        if (second >= first)
+        {
+            second++;
+        }
+
+        int third = Random.Range(0, count - 2);
+        int lower = Mathf.Min(first, second);
+        int higher = Mathf.Max(first, second);
+
+        if (third >= lower)
+        {
+            third++;
+        }
+
+        if (third >= higher)
+        {
+            third++;
+        }
+
+        _currentOptions[first].AssignTo(optionOneData);
+        _currentOptions[second].AssignTo(optionTwoData);
+        _currentOptions[third].AssignTo(optionThreeData);
     }
 
     public void SelectOptionOne()
@@ -64,13 +82,19 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
                 continue;
             }
 
+            List<Stat> upgradeableWeaponStats = new();
+
             foreach (Stat stat in weaponStats.All())
             {
                 if (stat.IncludeAsUpgradeOption)
                 {
-                    _currentOptions.Add(new WeaponStatOption(weaponName, stat));
+                    upgradeableWeaponStats.Add(stat);
                 }
             }
+
+            Stat statToUpgrade = upgradeableWeaponStats[Random.Range(0, upgradeableWeaponStats.Count)];
+
+            _currentOptions.Add(new WeaponStatOption(weaponName, weaponStats.Lvl, statToUpgrade));
         }
 
         foreach (Stat stat in characterStats)

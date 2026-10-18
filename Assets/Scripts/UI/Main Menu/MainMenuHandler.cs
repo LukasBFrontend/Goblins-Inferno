@@ -17,13 +17,11 @@ public class MainMenuHandler : BaseMenu
     {
         _panelRenderer = GetComponent<PanelRenderer>();
         _panelRenderer.RegisterUIReloadCallback(OnUIReload);
-        GameEvents.MainMenuLoaded.AddListener(OnMainMenuLoaded);
     }
 
     void OnDisable()
     {
         _panelRenderer.UnregisterUIReloadCallback(OnUIReload);
-        GameEvents.MainMenuLoaded.RemoveListener(OnMainMenuLoaded);
     }
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
@@ -31,11 +29,6 @@ public class MainMenuHandler : BaseMenu
         Initialize(rootElement, startMenuData, optionsMenuData, creditsMenuData);
         _highscoreText = rootElement.Q<Label>("HighscoreText");
 
-        OnMainMenuLoaded();
-    }
-
-    void OnMainMenuLoaded()
-    {
         _highscoreText.text = Game.HighScore.ToString();
     }
 }

@@ -9,10 +9,11 @@ public struct WeaponStats : IStats
     private MultiplicativeStat _sizeMultiplierStat;
     private Dictionary<string, Stat> _statLookup;
     private string _weaponName;
+    private bool _unlocked;
 
     public  readonly MultiplicativeStat SizeMultiplier => _sizeMultiplierStat;
     public readonly string WeaponName => _weaponName;
-    public readonly int WeaponLvl => _damageStat.Lvl + _projectileCountStat.Lvl;
+    public readonly int Lvl => _baseSizeStat.Lvl + _damageStat.Lvl + _projectileCountStat.Lvl + (_unlocked ? 0 : 1);
 
     public readonly AdditiveStat BaseSize => _baseSizeStat;
     public readonly AdditiveStat Damage => _damageStat;
@@ -21,6 +22,7 @@ public struct WeaponStats : IStats
     public WeaponStats(string name, WeaponStatsData data)
     {
         _weaponName = name;
+        _unlocked = false;
 
         _baseSizeStat = new (data.baseSize);
         _damageStat = new (data.damage);
@@ -44,5 +46,10 @@ public struct WeaponStats : IStats
     public readonly Stat[] All()
     {
         return _statLookup.Values.ToArray();
+    }
+
+    public void MarkUnlocked()
+    {
+        _unlocked = true;
     }
 }
