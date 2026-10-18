@@ -28,7 +28,6 @@ public class MainMenuHandler : BaseMenu
     {
         Initialize(rootElement, startMenuData, optionsMenuData, creditsMenuData);
         _highscoreText = rootElement.Q<Label>("HighscoreText");
-
         _highscoreText.text = Game.HighScore.ToString();
     }
 }

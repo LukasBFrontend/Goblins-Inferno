@@ -240,6 +240,14 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4501246944948846756, guid: d5d8371c68ab79649941755b979ea139, type: 3}
+      propertyPath: fleeCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501246944948846756, guid: d5d8371c68ab79649941755b979ea139, type: 3}
+      propertyPath: movementType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501246944948846756, guid: d5d8371c68ab79649941755b979ea139, type: 3}
       propertyPath: stopDistance
       value: 0.5
       objectReference: {fileID: 0}
@@ -249,7 +257,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4501246944948846756, guid: d5d8371c68ab79649941755b979ea139, type: 3}
       propertyPath: kitingDistance
-      value: 5
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501246944948846756, guid: d5d8371c68ab79649941755b979ea139, type: 3}
+      propertyPath: kitingBehavior.kitingDistance
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501246944948846756, guid: d5d8371c68ab79649941755b979ea139, type: 3}
+      propertyPath: kitingBehavior.retreatCooldown
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6549165088060388711, guid: d5d8371c68ab79649941755b979ea139, type: 3}
       propertyPath: m_LocalPosition.x

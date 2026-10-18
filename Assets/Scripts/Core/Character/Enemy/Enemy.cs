@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Enemy : BaseCharacter, IPoolable
 {
+    [Header("Enemy")]
     [SerializeField] EnemyLoot loot;
     [SerializeField] int scoreValue = 100;
 

@@ -16,6 +16,7 @@ public struct Avatars
 [RequireComponent(typeof(Movement))]
 public class Player : BaseCharacter
 {
+    [Header("Player")]
     [SerializeField] Avatars avatars;
     [SerializeField] Stats stats;
     [SerializeField] Weapons weapons;

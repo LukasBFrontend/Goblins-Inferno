@@ -24,6 +24,7 @@ public class LevelState : BaseState
         }
 
         GameEvents.LevelQuit.AddListener(OnLevelQuit);
+        Game.ResetScore();
     }
 
     public override void ExitState()

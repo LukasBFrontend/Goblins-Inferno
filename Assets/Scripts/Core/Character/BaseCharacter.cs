@@ -3,6 +3,7 @@ using UnityEngine;
 
 public abstract class BaseCharacter : MonoBehaviour
 {
+    [Header("Base Character")]
     [SerializeField] Transform renderTransform;
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody rigidbody;

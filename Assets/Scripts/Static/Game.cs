@@ -39,6 +39,11 @@ public static class Game
         _highScore = score;
     }
 
+    public static void ResetScore()
+    {
+        _score = 0;
+    }
+
     public static void SetStartAvatar(AvatarVariant variant)
     {
         _startAvatar = variant;

@@ -12,10 +12,11 @@ struct StatsConfig
 [RequireComponent(typeof (BaseCharacter))]
 public class Health : MonoBehaviour
 {
-    [SerializeField] int baseHealth = 50;
+    const string EMISSION_PROPERTY_NAME = "_EmissionColor";
+
     [SerializeField] StatsConfig statsConfig;
+    [SerializeField] int baseHealth = 50;
     [Header("Animation")]
-    [SerializeField] string propertyName = "_EmissionColor";
     [ColorUsage(false, true)]
     [SerializeField] Color originalColor;
     [ColorUsage(false, true)]
@@ -89,7 +90,7 @@ public class Health : MonoBehaviour
     public void Reset()
     {
         _currentHealth = _maxHealth;
-        _materialInstances.ForEach(material => material.SetColor(propertyName, originalColor));
+        _materialInstances.ForEach(material => material.SetColor(EMISSION_PROPERTY_NAME, originalColor));
     }
 
     public void SetInvincibilityFrames(float delay, float seconds)
@@ -142,10 +143,10 @@ public class Health : MonoBehaviour
         {
             if (!gameObject.activeSelf)
             {
-                _materialInstances.ForEach(material => material.SetColor(propertyName, originalColor));
+                _materialInstances.ForEach(material => material.SetColor(EMISSION_PROPERTY_NAME, originalColor));
                 yield break;
             }
-            _materialInstances.ForEach(material => material.SetColor(propertyName, i % 2 == 1 ? originalColor : damageColor)) ;
+            _materialInstances.ForEach(material => material.SetColor(EMISSION_PROPERTY_NAME, i % 2 == 1 ? originalColor : damageColor)) ;
             i++;
             yield return _waitForSeconds_1;
         }
