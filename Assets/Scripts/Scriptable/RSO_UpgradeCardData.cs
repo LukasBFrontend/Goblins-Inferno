@@ -2,25 +2,11 @@ using UnityEngine;
 using Unity.Properties;
 using UnityEngine.UIElements;
 
-[System.Serializable]
-public enum StatScalingType
-{
-    Additive,
-    Multiplicative,
-}
-
-public enum UpgradeType
-{
-    CharacterStat,
-    WeaponUnlock,
-    WeaponStat,
-}
-
 /// <summary>
-/// Holds data required to display and select upgrade options. Values will change at runtime.
+/// Holds data required to display and select upgrade cards. Values will change at runtime.
 /// </summary>
-[CreateAssetMenu(fileName = "UpgradeChoiceData", menuName = "Runtime/UpgradeChoiceData")]
-public class SO_UpgradeOptionData : ScriptableObject
+[CreateAssetMenu(fileName = "RSO_UpgradeCardData", menuName = "Runtime/RSO_UpgradeCardData")]
+public class RSO_UpgradeCardData : ScriptableObject
 {
     [Header("Card data")]
     public UpgradeType upgradeType;
@@ -33,7 +19,7 @@ public class SO_UpgradeOptionData : ScriptableObject
     public float statIncrease;
     public int lvl;
     [Header("Default value")]
-    [SerializeField] SO_UpgradeOptionData defaultValues;
+    [SerializeField] RSO_UpgradeCardData defaultValues;
 
     UpgradeOption _upgradeOptionRef;
 
@@ -84,6 +70,8 @@ public class SO_UpgradeOptionData : ScriptableObject
 
         upgradeType = UpgradeType.WeaponStat;
         title = optionRef.WeaponName;
+        lvl = optionRef.WeaponLevel + 1;
+
         Stat stat = optionRef.Stat;
 
         scalingType = stat is AdditiveStat
@@ -94,11 +82,23 @@ public class SO_UpgradeOptionData : ScriptableObject
         sprite = stat.Sprite;
         statname = stat.ShortName;
         statIncrease = stat.PerLevelIncrease;
-        lvl = stat.Lvl + 1;
     }
 
     public void Select()
     {
         _upgradeOptionRef.Select();
     }
+}
+
+public enum StatScalingType
+{
+    Additive,
+    Multiplicative,
+}
+
+public enum UpgradeType
+{
+    CharacterStat,
+    WeaponUnlock,
+    WeaponStat,
 }

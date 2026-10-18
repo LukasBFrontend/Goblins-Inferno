@@ -10,7 +10,7 @@ public class GameOverState : BaseState
         GameEvents.LevelLoaded.AddListener(OnLevelStarted);
 
         Time.timeScale = 0.5f;
-        Game.Player.Rigidbody.linearVelocity = Vector3.zero;
+        Game.Player.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     public override void UpdateState()

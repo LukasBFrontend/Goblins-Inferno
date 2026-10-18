@@ -11,7 +11,7 @@ public class CharacterStatOption : UpgradeOption
         _stat = stat;
     }
 
-    public override void AssignTo(SO_UpgradeOptionData data)
+    public override void AssignTo(RSO_UpgradeCardData data)
     {
         data.SetValues(this);
     }

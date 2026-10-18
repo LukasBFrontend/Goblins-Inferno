@@ -165,3 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f0a634b24260e94ea9debb79124a314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  weaponOneData: {fileID: 11400000, guid: 27094d05bdb301a49bb24707442f4710, type: 2}
+  weaponTwoData: {fileID: 11400000, guid: ff878a1e2421cf44cb1faaa85b8e09d2, type: 2}
+  weaponThreeData: {fileID: 11400000, guid: 5d4a005b01516234d9e605f9160c1eba, type: 2}

@@ -1,5 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="UpgradeButton" src="project://database/Assets/UI%20Toolkit/Upgrade%20Button/UpgradeButton.uxml?fileID=9197481963319205126&amp;guid=c09b3ca478fa25245ad9c1e8d318d5ac&amp;type=3#UpgradeButton"/>
+    <ui:Template name="UpgradeButton" src="project://database/Assets/UI%20Toolkit/Upgrade%20Card/UpgradeButton.uxml?fileID=9197481963319205126&amp;guid=c09b3ca478fa25245ad9c1e8d318d5ac&amp;type=3#UpgradeButton"/>
+    <ui:Template name="WeaponLevel" src="project://database/Assets/UI%20Toolkit/Weapon%20Level/WeaponLevel.uxml?fileID=9197481963319205126&amp;guid=e0de6a98600b699478eb14f98102e66d&amp;type=3#WeaponLevel"/>
     <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=d061f6063ca2fab4d84bfa2407418e4e&amp;type=3#style"/>
     <ui:VisualElement name="HUDContainer">
         <ui:ProgressBar value="0" title="Lvl 1" name="ExpBar"/>
@@ -9,6 +10,11 @@
                 <ui:Label text="SCORE" name="ScoreLabel"/>
                 <ui:Label text="0" name="ScoreText" class="infoText"/>
             </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="SideContainer">
+            <ui:Instance template="WeaponLevel" name="WeaponLevelOne" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Weapon%201.asset?fileID=11400000&amp;guid=27094d05bdb301a49bb24707442f4710&amp;type=2#Weapon 1"/>
+            <ui:Instance template="WeaponLevel" name="WeaponLevelTwo" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Weapon%202.asset?fileID=11400000&amp;guid=ff878a1e2421cf44cb1faaa85b8e09d2&amp;type=2#Weapon 2"/>
+            <ui:Instance template="WeaponLevel" name="WeaponLevelThree" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Weapon%203.asset?fileID=11400000&amp;guid=5d4a005b01516234d9e605f9160c1eba&amp;type=2#Weapon 3"/>
         </ui:VisualElement>
         <ui:VisualElement name="BottomContainer" class="hudBar">
             <ui:VisualElement name="ControllsContainer" class="infoContainer centerText">

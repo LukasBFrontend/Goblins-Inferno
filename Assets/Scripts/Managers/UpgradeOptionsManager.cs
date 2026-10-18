@@ -1,55 +1,46 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Unity.Profiling;
 
 public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
 {
-    static readonly ProfilerMarker RefreshOptionsMarker = new("UpgradeOptions.RefreshOptions");
-    static readonly ProfilerMarker AssignOptionsMarker = new("UpgradeOptions.AssignOptions");
-    [SerializeField] SO_UpgradeOptionData optionOneData;
-    [SerializeField] SO_UpgradeOptionData optionTwoData;
-    [SerializeField] SO_UpgradeOptionData optionThreeData;
+    [SerializeField] RSO_UpgradeCardData optionOneData;
+    [SerializeField] RSO_UpgradeCardData optionTwoData;
+    [SerializeField] RSO_UpgradeCardData optionThreeData;
 
     List<UpgradeOption> _currentOptions = new();
 
     public void AssignRandom()
     {
-        using (RefreshOptionsMarker.Auto())
+        RefreshOptions();
+
+        int count = _currentOptions.Count;
+        int first = Random.Range(0, count);
+
+        int second = Random.Range(0, count - 1);
+
+        if (second >= first)
         {
-            RefreshOptions();
+            second++;
         }
 
-        using (AssignOptionsMarker.Auto())
+        int third = Random.Range(0, count - 2);
+        int lower = Mathf.Min(first, second);
+        int higher = Mathf.Max(first, second);
+
+        if (third >= lower)
         {
-            int count = _currentOptions.Count;
-            int first = Random.Range(0, count);
-
-            int second = Random.Range(0, count - 1);
-
-            if (second >= first)
-            {
-                second++;
-            }
-
-            int third = Random.Range(0, count - 2);
-            int lower = Mathf.Min(first, second);
-            int higher = Mathf.Max(first, second);
-
-            if (third >= lower)
-            {
-                third++;
-            }
-
-            if (third >= higher)
-            {
-                third++;
-            }
-
-            _currentOptions[first].AssignTo(optionOneData);
-            _currentOptions[second].AssignTo(optionTwoData);
-            _currentOptions[third].AssignTo(optionThreeData);
+            third++;
         }
+
+        if (third >= higher)
+        {
+            third++;
+        }
+
+        _currentOptions[first].AssignTo(optionOneData);
+        _currentOptions[second].AssignTo(optionTwoData);
+        _currentOptions[third].AssignTo(optionThreeData);
     }
 
     public void SelectOptionOne()
@@ -91,13 +82,19 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
                 continue;
             }
 
+            List<Stat> upgradeableWeaponStats = new();
+
             foreach (Stat stat in weaponStats.All())
             {
                 if (stat.IncludeAsUpgradeOption)
                 {
-                    _currentOptions.Add(new WeaponStatOption(weaponName, stat));
+                    upgradeableWeaponStats.Add(stat);
                 }
             }
+
+            Stat statToUpgrade = upgradeableWeaponStats[Random.Range(0, upgradeableWeaponStats.Count)];
+
+            _currentOptions.Add(new WeaponStatOption(weaponName, weaponStats.Lvl, statToUpgrade));
         }
 
         foreach (Stat stat in characterStats)
@@ -107,11 +104,5 @@ public class UpgradeOptionManager : Singleton<UpgradeOptionManager>
                 _currentOptions.Add(new CharacterStatOption(stat));
             }
         }
-
-        Debug.Log(
-            $"Upgrade options created: {_currentOptions.Count} " +
-            $"(weapons: {Game.Player.Stats.Weapons.Count}, " +
-            $"character stats: {Game.Player.Stats.Character.All().Length})")
-        ;
     }
 }

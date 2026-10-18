@@ -1,8 +1,13 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(PanelRenderer))]
 public class LevelHUD : MonoBehaviour {
+    [SerializeField] RSO_WeaponLevelData weaponOneData;
+    [SerializeField] RSO_WeaponLevelData weaponTwoData;
+    [SerializeField] RSO_WeaponLevelData weaponThreeData;
+
     ProgressBar _healthBar, _expBar;
     Label _scoreText;
     PanelRenderer _panelRenderer;
@@ -16,6 +21,7 @@ public class LevelHUD : MonoBehaviour {
         GameEvents.ExpChanged.AddListener(OnExpChanged);
         GameEvents.ScoreChanged.AddListener(OnScoreChanged);
         GameEvents.LvlUpEvent.AddListener(OnLvlUp);
+        GameEvents.GameResumed.AddListener(ReadWeaponData);
     }
 
     void OnDisable()
@@ -25,6 +31,7 @@ public class LevelHUD : MonoBehaviour {
         GameEvents.ExpChanged.RemoveListener(OnExpChanged);
         GameEvents.ScoreChanged.RemoveListener(OnScoreChanged);
         GameEvents.LvlUpEvent.RemoveListener(OnLvlUp);
+        GameEvents.GameResumed.RemoveListener(ReadWeaponData);
     }
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
@@ -42,6 +49,11 @@ public class LevelHUD : MonoBehaviour {
     void Awake()
     {
         _player = Game.Player;
+    }
+
+    void Start()
+    {
+        ReadWeaponData();
     }
 
     void OnHealthChanged(int current, int max) {
@@ -64,5 +76,36 @@ public class LevelHUD : MonoBehaviour {
     void OnLvlUp(int oldLvl, int newLvl)
     {
         _expBar.title = $"Lvl: {newLvl}";
+    }
+
+    void ReadWeaponData()
+    {
+        Weapon[] unlockedWeapons = Game.Player.Weapons.Unlocked.ToArray();
+        RSO_WeaponLevelData[] weaponLevelDatas = { weaponOneData, weaponTwoData, weaponThreeData };
+
+        int i = 0;
+        while (i < weaponLevelDatas.Length)
+        {
+            int lvl;
+            Sprite sprite;
+
+            if (i < unlockedWeapons.Length)
+            {
+                lvl = unlockedWeapons[i].Lvl;
+                sprite = unlockedWeapons[i].Sprite;
+            }
+            else
+            {
+                lvl = 0;
+                sprite = null;
+            }
+
+            weaponLevelDatas[i].SetValues(
+                lvl,
+                sprite
+            );
+
+            i++;
+        }
     }
 }
