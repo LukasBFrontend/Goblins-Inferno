@@ -19,6 +19,12 @@ public struct PoolableData
 {
     public string id;
     public GameObject prefab;
+
+    public PoolableData(string id, GameObject prefab)
+    {
+        this.id = id;
+        this.prefab = prefab;
+    }
 }
 
 [System.Serializable]

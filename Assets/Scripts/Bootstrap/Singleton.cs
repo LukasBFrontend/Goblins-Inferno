@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
+    [SerializeField] bool dontDestroyOnLoad;
     private static T instance;
 
     protected virtual void Awake()
@@ -16,7 +17,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
 
         instance = this as T;
-        DontDestroyOnLoad(this);
+        if (dontDestroyOnLoad)
+        {
+            DontDestroyOnLoad(this);
+        }
 
         OnSingletonAwake();
     }

@@ -21,8 +21,11 @@ public class Health : MonoBehaviour
     [SerializeField] Color originalColor;
     [ColorUsage(false, true)]
     [SerializeField] Color damageColor;
+    [Header("Damage Text")]
+    [SerializeField] bool showDamageText;
+    [SerializeField] PoolableData damageTextPoolableData;
 
-    static WaitForSeconds _waitForSeconds_1 = new WaitForSeconds(.1f);
+    static readonly WaitForSeconds _waitForSeconds_1 = new(.1f);
     int _currentHealth;
     int _maxHealth;
     BaseCharacter _character;
@@ -35,15 +38,27 @@ public class Health : MonoBehaviour
     /// <summary>
     /// Subtracts amount from the character health. If it reaches zero, invokes Die().
     /// </summary>
-    /// <param name="amount"></param>
-    public int TakeDamage(int amount)
+    /// <param name="damageAmount"></param>
+    public int TakeDamage(int damageAmount)
     {
         if (_isInvincibilityFrame)
         {
             return 0;
         }
 
-        _currentHealth -= amount;
+        if (showDamageText)
+        {
+            DamageText damageText = Game.ObjectPooler.Spawn<DamageText>
+            (
+                damageTextPoolableData,
+                new (transform.position.x, 1.75f, transform.position.z - .5f),
+                Quaternion.identity
+            );
+
+            damageText.Initialize(damageAmount);
+        }
+
+        _currentHealth -= damageAmount;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
 
         if (_character is Player)

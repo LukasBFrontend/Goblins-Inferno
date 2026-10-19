@@ -211,12 +211,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed425e3b9bcf7e4f8319a9974fcfe1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  baseHealth: 100
   statsConfig:
     characterStatsConfig: {fileID: 11400000, guid: dc350bdc372d2a94b8356d73f6598b9b, type: 2}
-  propertyName: _EmissionColor
+  baseHealth: 100
   originalColor: {r: 0, g: 0, b: 0, a: 0}
   damageColor: {r: 0.070128806, g: 0.070128806, b: 0.070128806, a: 0}
+  damageTextPoolableData:
+    id: Damage Text
+    prefab: {fileID: 8885849690013805291, guid: 523676bc81126d048b9faa7e7a2dbf37, type: 3}
 --- !u!114 &361925515447440459
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -119,7 +119,9 @@ public class Weapon :  MonoBehaviour
     void Shoot()
     {
         CharacterStats characterStats = Game.Player.Stats.Character;
+        WeaponStats weaponStats = Game.Player.Stats.GetWeaponModifier(data.weaponName);
         float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
+        float baseDamage = weaponStats.Damage.Evaluate();
 
         Vector3 transformOrigin = new(_wielder.transform.position.x, projectileOriginY, _wielder.transform.position.z);
 
@@ -132,7 +134,7 @@ public class Weapon :  MonoBehaviour
             : null
         ;
 
-        int damage = (int)(data.stats.damage.baseValue * damageMultiplier);
+        int damage = (int)(baseDamage * damageMultiplier);
 
         projectile.Initialize(_wielder, random, damage);
     }
@@ -145,7 +147,11 @@ public class Weapon :  MonoBehaviour
         }
 
         CharacterStats characterStats = Game.Player.Stats.Character;
-        int damage = (int)(data.stats.damage.baseValue * characterStats.DamageMultiplier.Evaluate());
+        WeaponStats weaponStats = Game.Player.Stats.GetWeaponModifier(data.weaponName);
+        float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
+        float baseDamage = weaponStats.Damage.Evaluate();
+
+        int damage = (int)(baseDamage * damageMultiplier);
 
         int enemyHp = enemy.Health.TakeDamage(damage);
 

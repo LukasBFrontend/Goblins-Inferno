@@ -1,0 +1,42 @@
+:root {
+    -unity-font-definition: resource("Fonts/skeleboom");
+    font-size: 40px;
+}
+
+.damageTextContainer {
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.text {
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    -unity-text-align: upper-center;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    transition-property: all;
+    transition-duration: 0.45s;
+    transition-timing-function: ease-in-circ;
+}
+
+.textGrow {
+    transition-timing-function: ease-out-circ;
+    font-size: 80px;
+    transition-duration: 0.3s;
+    transition-property: all;
+}
+
+.textFade {
+    opacity: 0;
+}

@@ -1,10 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler : MonoBehaviour
+public class ObjectPooler : Singleton<ObjectPooler>
 {
+    [SerializeField] List<PoolPrewarmData> poolPrewarmData;
     readonly Dictionary<string, List<IPoolable>> _poolableObjectLookup = new();
-    static ObjectPooler _instance;
 
     public T Spawn<T>(PoolableData data, Vector3 position, Quaternion rotation) where T : MonoBehaviour, IPoolable
     {
@@ -51,15 +52,53 @@ public class ObjectPooler : MonoBehaviour
         _poolableObjectLookup[poolable.PoolableId].Add(poolable);
     }
 
-    void Awake()
+    protected override void OnSingletonAwake()
     {
-        if (_instance != null && _instance != this)
+        foreach(var prewarmData in poolPrewarmData)
         {
+            for (int i = 0; i < prewarmData.spawnAmount; i++)
+            {
+                Prewarm(prewarmData.poolable);
+            }
+        }
+    }
+
+    void Prewarm(PoolableData data)
+    {
+        GameObject gameObject = Instantiate(
+            data.prefab,
+            new (0, 2000, 0),
+            Quaternion.identity
+        );
+
+        bool isPoolable = gameObject.TryGetComponent<IPoolable>(out var poolable);
+
+        if (!isPoolable)
+        {
+            Debug.LogError(
+                $"Prefab <color=white>'{data.prefab.name}'</color> does not implement IPoolable."
+            );
+
             Destroy(gameObject);
             return;
         }
 
-        _instance = this;
+        poolable.PoolableId = data.id;
+        StartCoroutine(DisableNextFrameRoutine(gameObject)); // Give time for initialization.
+
+        if (!_poolableObjectLookup.TryGetValue(poolable.PoolableId, out List<IPoolable> pool))
+        {
+            pool = new List<IPoolable>();
+            _poolableObjectLookup.Add(poolable.PoolableId, pool);
+        }
+
+        pool.Add(poolable);
+    }
+
+    IEnumerator DisableNextFrameRoutine(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(.1f);
+        gameObject.SetActive(false);
     }
 }
 
@@ -67,4 +106,10 @@ public interface IPoolable
 {
     string PoolableId { get; set; }
     void Reset();
+}
+
+[System.Serializable] struct PoolPrewarmData
+{
+    public PoolableData poolable;
+    public int spawnAmount;
 }

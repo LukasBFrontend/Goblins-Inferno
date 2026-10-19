@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: becc4a7247392224eb76a9538d646a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeOptionFactory
+  dontDestroyOnLoad: 1
   optionOneData: {fileID: 11400000, guid: f5ef43c874b823f4cb40e8d76d048b0a, type: 2}
   optionTwoData: {fileID: 11400000, guid: caa74c8aef6f23348973d39589b4fbd3, type: 2}
   optionThreeData: {fileID: 11400000, guid: 6bf788f0c4930c04bb1a355c9982b094, type: 2}

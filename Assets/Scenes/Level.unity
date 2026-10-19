@@ -6367,6 +6367,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4977756756689065973, guid: 12d670e654a026c4ba5f2bc6cf0812d7, type: 3}
+      propertyPath: poolPrewarmData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977756756689065973, guid: 12d670e654a026c4ba5f2bc6cf0812d7, type: 3}
+      propertyPath: poolPrewarmData.Array.data[0].poolable.id
+      value: Damage Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977756756689065973, guid: 12d670e654a026c4ba5f2bc6cf0812d7, type: 3}
+      propertyPath: poolPrewarmData.Array.data[0].spawnAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977756756689065973, guid: 12d670e654a026c4ba5f2bc6cf0812d7, type: 3}
+      propertyPath: poolPrewarmData.Array.data[0].poolable.prefab
+      value: 
+      objectReference: {fileID: 8885849690013805291, guid: 523676bc81126d048b9faa7e7a2dbf37, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6523,11 +6539,11 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 967871050}
   - {fileID: 4172359539990478116}
-  - {fileID: 6674526248478774518}
   - {fileID: 4502321592639041902}
-  - {fileID: 685891818107585033}
   - {fileID: 2858654131977173489}
   - {fileID: 1756088529522387420}
+  - {fileID: 685891818107585033}
+  - {fileID: 6674526248478774518}
   - {fileID: 1772655890}
   - {fileID: 1090791529}
   - {fileID: 1323366203}
