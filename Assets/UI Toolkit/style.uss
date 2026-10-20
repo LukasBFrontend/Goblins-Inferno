@@ -14,6 +14,19 @@ Label {
     padding-left: 0;
 }
 
+.unity-foldout__text {
+    transition-duration: 0.25s;
+    transition-property: color;
+}
+
+.unity-foldout__input:focus .unity-foldout__text {
+    color: rgb(28, 28, 28);
+}
+
+.unity-foldout__input:hover .unity-foldout__text {
+    color: rgb(222, 222, 222);
+}
+
 .unity-progress-bar {
     color: rgb(255, 255, 255);
     margin-top: 0;
@@ -93,7 +106,13 @@ Label {
 }
 
 #SideContainer {
-    flex-grow: 1;
+    padding-top: 6px;
+    padding-right: 6px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
     flex-direction: column-reverse;
 }
 

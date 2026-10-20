@@ -11,11 +11,6 @@
                 <ui:Label text="0" name="ScoreText" class="infoText"/>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="SideContainer">
-            <ui:Instance template="WeaponLevel" name="WeaponLevelOne" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Weapon%201.asset?fileID=11400000&amp;guid=27094d05bdb301a49bb24707442f4710&amp;type=2#Weapon 1"/>
-            <ui:Instance template="WeaponLevel" name="WeaponLevelTwo" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Weapon%202.asset?fileID=11400000&amp;guid=ff878a1e2421cf44cb1faaa85b8e09d2&amp;type=2#Weapon 2"/>
-            <ui:Instance template="WeaponLevel" name="WeaponLevelThree" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Weapon%203.asset?fileID=11400000&amp;guid=5d4a005b01516234d9e605f9160c1eba&amp;type=2#Weapon 3"/>
-        </ui:VisualElement>
         <ui:VisualElement name="BottomContainer" class="hudBar">
             <ui:VisualElement name="ControllsContainer" class="infoContainer centerText">
                 <ui:Label text="(P)" name="Label"/>
@@ -37,6 +32,13 @@
                 <ui:Button text="OPTIONS" name="OptionsButton" class="button"/>
                 <ui:Button text="QUIT" name="QuitButton" class="button"/>
             </ui:VisualElement>
+            <ui:VisualElement name="CharacterStatsContainer" style="position: absolute; justify-content: flex-start; align-items: flex-start; top: 7.5%; bottom: 0;">
+                <ui:ListView allow-remove="false" allow-add="false" item-template="project://database/Assets/UI%20Toolkit/Character%20Stat%20Levels/CharacterStatRow.uxml?fileID=9197481963319205126&amp;guid=f8342c552ba0b8f4ea798325cbaa5742&amp;type=3#CharacterStatRow" header-title="Stats" show-foldout-header="true" reorderable="false" binding-source-selection-mode="AutoAssign" data-source="project://database/Assets/Resources/Runtime%20Scriptable/RSO_CharacterStatRows.asset?fileID=11400000&amp;guid=1862f2f4b6a526940ba8f1128c84b82f&amp;type=2#RSO_CharacterStatRows" show-add-remove-footer="false" virtualization-method="DynamicHeight" name="CharacterStatsList" selection-type="None" show-bound-collection-size="false" style="width: 400px; height: 600px;">
+                    <Bindings>
+                        <ui:DataBinding property="itemsSource" data-source-path="list"/>
+                    </Bindings>
+                </ui:ListView>
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="GameoverMenuContainer" class="submenuContainer" style="visibility: hidden;">
             <ui:VisualElement name="UpperContainer" class="upperContainer">
@@ -53,5 +55,10 @@
             <ui:Instance template="UpgradeButton" name="UpgradeButtonTwo" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Upgrade%202.asset?fileID=11400000&amp;guid=caa74c8aef6f23348973d39589b4fbd3&amp;type=2#Upgrade 2"/>
             <ui:Instance template="UpgradeButton" name="UpgradeButtonThree" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Upgrade%203.asset?fileID=11400000&amp;guid=6bf788f0c4930c04bb1a355c9982b094&amp;type=2#Upgrade 3"/>
         </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="SideContainer">
+        <ui:Instance template="WeaponLevel" name="WeaponLevelOne" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Weapon%201.asset?fileID=11400000&amp;guid=27094d05bdb301a49bb24707442f4710&amp;type=2#Weapon 1"/>
+        <ui:Instance template="WeaponLevel" name="WeaponLevelTwo" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Weapon%202.asset?fileID=11400000&amp;guid=ff878a1e2421cf44cb1faaa85b8e09d2&amp;type=2#Weapon 2"/>
+        <ui:Instance template="WeaponLevel" name="WeaponLevelThree" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Weapon%203.asset?fileID=11400000&amp;guid=5d4a005b01516234d9e605f9160c1eba&amp;type=2#Weapon 3"/>
     </ui:VisualElement>
 </ui:UXML>

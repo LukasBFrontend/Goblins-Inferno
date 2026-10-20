@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff683f32185e2e8409b68d6110941a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelPauseMenu
+  characterStatRows: {fileID: 11400000, guid: 1862f2f4b6a526940ba8f1128c84b82f, type: 2}
 --- !u!114 &63262008303813156
 MonoBehaviour:
   m_ObjectHideFlags: 0

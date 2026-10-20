@@ -9,7 +9,6 @@ public class Stats : MonoBehaviour
 {
     [SerializeField] SO_WeaponsConfig weaponsConfig;
     [SerializeField] SO_CharacterStatsConfig playerStatsConfig;
-
     CharacterStats _characterStats;
     Dictionary<string, WeaponStats> _weaponsStatsLookUp;
 

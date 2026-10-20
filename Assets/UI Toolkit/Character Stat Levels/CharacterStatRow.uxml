@@ -1,0 +1,44 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Character%20Stat%20Levels/characterStatRowStyle.uss?fileID=7433441132597879392&amp;guid=c00b19f8fc1e83b40b7dc4eea8ee0045&amp;type=3#characterStatRowStyle"/>
+    <ui:VisualElement name="CharacterStatRow" data-source="" class="characterStatRow">
+        <ui:VisualElement name="ImageContainer" class="backgroundTint imageContainer">
+            <ui:Image source="project://database/Assets/Resources/Sprites/placeholder_square.png?fileID=2800000&amp;guid=ee0c57da3cd509340a3c6efd39622932&amp;type=3#placeholder_square" name="Sprite" class="sprite">
+                <Bindings>
+                    <ui:DataBinding property="source" data-source-path="sprite" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:Image>
+            <Bindings>
+                <ui:DataBinding property="style.display" data-source-path="DisplayStatSprite" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:VisualElement>
+        <ui:VisualElement name="TextContainer" class="textContainer">
+            <ui:Label text="[Statname]" name="Title">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="title" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:Label>
+            <ui:VisualElement name="LvlTextContainer" class="lvlTextContainer">
+                <ui:Label text="Lvl  " name="LvlLabel" class="lvlLabel"/>
+                <ui:Label text="[x]" name="LvlValue" class="lvlValue">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="lvl" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <Bindings>
+                    <ui:DataBinding property="style.display" data-source-path="DisplayStatLevel" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:VisualElement>
+            <ui:VisualElement name="ValueTextContainer" class="lvlTextContainer">
+                <ui:Label text="Value:" name="ValueLabel" class="lvlLabel"/>
+                <ui:Label text="[x]" name="Value" class="lvlValue">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="ValueText" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <Bindings>
+            <ui:DataBinding property="style.visibility" data-source-path="Visible" binding-mode="ToTarget"/>
+        </Bindings>
+    </ui:VisualElement>
+</ui:UXML>

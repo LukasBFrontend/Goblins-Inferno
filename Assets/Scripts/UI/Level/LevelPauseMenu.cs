@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(PanelRenderer))]
 public class LevelPauseMenu : BaseSubmenu
 {
+    [SerializeField] RSO_CharacterStatRows characterStatRows;
     Button _resumeButton, _optionsButton;
     PanelRenderer _panelRenderer;
 
@@ -11,11 +12,13 @@ public class LevelPauseMenu : BaseSubmenu
     {
         _panelRenderer = GetComponent<PanelRenderer>();
         _panelRenderer.RegisterUIReloadCallback(OnUIReload);
+        GameEvents.GameResumed.AddListener(OnGameResumed);
     }
 
     void OnDisable()
     {
         _panelRenderer.UnregisterUIReloadCallback(OnUIReload);
+        GameEvents.GameResumed.RemoveListener(OnGameResumed);
     }
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
@@ -27,6 +30,11 @@ public class LevelPauseMenu : BaseSubmenu
         _optionsButton.clicked += OnOptionsButtonClicked;
     }
 
+    void Start()
+    {
+        characterStatRows.Populate();
+    }
+
     void OneResumeButtonClicked()
     {
         GameEvents.RaiseGameResumed();
@@ -35,5 +43,10 @@ public class LevelPauseMenu : BaseSubmenu
     void OnOptionsButtonClicked()
     {
         //SwitchSubmenu<OptionsMenu>();
+    }
+
+    void OnGameResumed()
+    {
+        characterStatRows.Populate();
     }
 }

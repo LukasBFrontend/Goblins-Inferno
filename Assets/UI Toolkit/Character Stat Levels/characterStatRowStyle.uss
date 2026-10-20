@@ -1,0 +1,77 @@
+:root {
+    --horizontal-text-margin: 2.5;
+    -unity-font-definition: resource("Fonts/skeleboom");
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+}
+
+Label {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.characterStatRow {
+    color: rgba(255, 255, 255, 0.902);
+    -unity-font-definition: resource("Fonts/skeleboom");
+    letter-spacing: 7px;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-cubic;
+    margin-top: 4px;
+    height: 70px;
+    flex-direction: row;
+    margin-bottom: 4px;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+.imageContainer {
+    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
+    -unity-slice-left: 32;
+    -unity-slice-top: 32;
+    -unity-slice-right: 32;
+    -unity-slice-bottom: 32;
+    -unity-slice-scale: 1.25px;
+    background-color: rgba(0, 0, 0, 0.784);
+    aspect-ratio: 1;
+    -unity-background-image-tint-color: rgba(63, 130, 81, 0.902);
+}
+
+.textContainer {
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    justify-content: space-around;
+    padding-top: 6px;
+    padding-right: 6px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+}
+
+.lvlTextContainer {
+    -unity-text-align: upper-right;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    margin-bottom: 0;
+    flex-direction: row;
+}
+
+.lvlLabel {
+    margin-right: 4px;
+    color: rgba(255, 255, 255, 0.627);
+}
+
+.lvlValue {
+    font-size: 16px;
+}
+
+.sprite {
+    aspect-ratio: 1;
+    height: 100%;
+    margin-top: 6px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    margin-left: 6px;
+}
