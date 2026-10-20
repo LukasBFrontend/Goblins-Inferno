@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ObjectPooler : Singleton<ObjectPooler>
 {
+    [SerializeField] Transform poolParent;
     [SerializeField] List<PoolPrewarmData> poolPrewarmData;
     readonly Dictionary<string, List<IPoolable>> _poolableObjectLookup = new();
+    readonly Dictionary<string, Transform> _transformLookup = new();
 
     public T Spawn<T>(PoolableData data, Vector3 position, Quaternion rotation) where T : MonoBehaviour, IPoolable
     {
@@ -13,8 +15,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
         if (!_poolableObjectLookup.TryGetValue(data.id, out List<IPoolable> pool))
         {
-            pool = new List<IPoolable>();
-            _poolableObjectLookup.Add(data.id, pool);
+            pool = CreatePool(data.id);
         }
 
         if (pool.Count > 0)
@@ -26,8 +27,8 @@ public class ObjectPooler : Singleton<ObjectPooler>
         }
         else
         {
-            GameObject obj = Instantiate(data.prefab, position, rotation);
-            result = obj.GetComponent<T>();
+            GameObject gameObject = Instantiate(data.prefab, position, rotation);
+            result = gameObject.GetComponent<T>();
 
             if (result == null)
             {
@@ -40,6 +41,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
         result.PoolableId = data.id;
         result.gameObject.SetActive(true);
+        result.transform.SetParent(_transformLookup[data.id]);
 
         return result;
     }
@@ -63,12 +65,35 @@ public class ObjectPooler : Singleton<ObjectPooler>
         }
     }
 
+    List<IPoolable> CreatePool(string poolableId)
+    {
+            List<IPoolable> pool = new();
+            _poolableObjectLookup.Add(poolableId, pool);
+
+            GameObject gameObject = new()
+            {
+                name = $"{poolableId} Pool"
+            };
+
+            gameObject.transform.SetParent(poolParent);
+            _transformLookup.Add(poolableId, gameObject.transform);
+
+            return pool;
+    }
+
     void Prewarm(PoolableData data)
     {
+
+        if (!_poolableObjectLookup.TryGetValue(data.id, out List<IPoolable> pool))
+        {
+            pool = CreatePool(data.id);
+        }
+
         GameObject gameObject = Instantiate(
             data.prefab,
             new (0, 2000, 0),
-            Quaternion.identity
+            Quaternion.identity,
+            _transformLookup[data.id]
         );
 
         bool isPoolable = gameObject.TryGetComponent<IPoolable>(out var poolable);
@@ -85,12 +110,6 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
         poolable.PoolableId = data.id;
         StartCoroutine(DisableNextFrameRoutine(gameObject)); // Give time for initialization.
-
-        if (!_poolableObjectLookup.TryGetValue(poolable.PoolableId, out List<IPoolable> pool))
-        {
-            pool = new List<IPoolable>();
-            _poolableObjectLookup.Add(poolable.PoolableId, pool);
-        }
 
         pool.Add(poolable);
     }
