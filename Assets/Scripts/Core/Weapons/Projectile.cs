@@ -13,7 +13,7 @@ struct ParticleSystemVariables
     public float tryRegisterHitsAt;
 }
 
-// TODO: Seperate different projectile behaviors into components
+[System.Obsolete("Should be refactored")]
 public class Projectile : MonoBehaviour, IPoolable
 {
     [SerializeField] SO_ProjectileData data;

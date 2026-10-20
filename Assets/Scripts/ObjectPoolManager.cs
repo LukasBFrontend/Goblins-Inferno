@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObjectPooler : Singleton<ObjectPooler>
 {
+    [Space()]
     [SerializeField] Transform poolParent;
     [SerializeField] List<PoolPrewarmData> poolPrewarmData;
     readonly Dictionary<string, List<IPoolable>> _poolableObjectLookup = new();

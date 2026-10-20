@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    [SerializeField] bool dontDestroyOnLoad;
+    [SerializeField] SingletonData singleton;
     private static T instance;
 
     protected virtual void Awake()
@@ -17,7 +17,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
 
         instance = this as T;
-        if (dontDestroyOnLoad)
+        if (singleton.dontDestroyOnLoad)
         {
             DontDestroyOnLoad(this);
         }
@@ -29,4 +29,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     /// Replaces the Awake method for Monobehaviors which inherit from this class.
     /// </summary>
     protected virtual void OnSingletonAwake(){}
+
+    [System.Serializable]
+    public struct SingletonData
+    {
+        public bool dontDestroyOnLoad;
+    }
 }

@@ -24,6 +24,7 @@ public class OptionsMenu : BaseSubmenu
         _returnButton.clicked += OnReturnButtonClicked;
     }
 
+    [System.Obsolete("Should be refactored")]
     void OnReturnButtonClicked()
     {
         // TODO: Replace with more general purpose solution or seperate OptionsMenu into two components.

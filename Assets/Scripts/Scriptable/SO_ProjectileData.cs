@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[System.Obsolete("Should be refactored")]
 [CreateAssetMenu(fileName = "ProjectileData", menuName = "Weapons/ProjectileData")]
 public class SO_ProjectileData : ScriptableObject
 {

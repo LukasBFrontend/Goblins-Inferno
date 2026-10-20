@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e77916904ed7f4bbcbfc32d2d67e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameInputActions
-  dontDestroyOnLoad: 1
+  singleton:
+    dontDestroyOnLoad: 1
   move: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jump: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   togglePause: {fileID: -7544878490045679675, guid: 052faaac586de48259a63d0c4782560b, type: 3}

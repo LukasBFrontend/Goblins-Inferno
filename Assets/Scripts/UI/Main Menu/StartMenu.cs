@@ -32,8 +32,9 @@ public class StartMenu : BaseSubmenu
         _quitButton.clicked += OnQuitButtonClicked;
     }
 
-    void OnStartButtonClicked()
+    async void OnStartButtonClicked()
     {
+        await Game.VolumeTransitions.ColorFadeOut();
         GameEvents.RaiseLevelLoaded();
     }
     void OnOptionsButtonClicked()

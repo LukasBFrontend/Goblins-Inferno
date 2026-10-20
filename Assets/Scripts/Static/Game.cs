@@ -3,6 +3,7 @@ using UnityEngine;
 public static class Game
 {
     static GameInputActions _input;
+    static VolumeTransitionHandler _volumeTransitionHandler;
     static UpgradeOptionManager _upgradeOptionManager;
     static ObjectPooler _objectPooler;
     static EnemySpawner _enemySpawner;
@@ -13,6 +14,7 @@ public static class Game
     static int _highScore;
 
     public static GameInputActions Input => GetSafely(_input);
+    public static VolumeTransitionHandler VolumeTransitions => GetSafely(_volumeTransitionHandler);
     public static UpgradeOptionManager UpgradeOptions => GetSafely(_upgradeOptionManager);
     public static ObjectPooler ObjectPooler => GetSafely(_objectPooler);
     public static EnemySpawner EnemySpawner => GetSafely(_enemySpawner);

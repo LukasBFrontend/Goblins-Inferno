@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemySpawner : Singleton<EnemySpawner>
 {
+    [Space()]
     [SerializeField] SO_EnemyWaveConfig data;
 
     float _elapsed = 0f;
