@@ -7,7 +7,7 @@ public class GameOverState : BaseState
 
     public override void EnterState()
     {
-        GameEvents.LevelLoaded.AddListener(OnLevelStarted);
+        GameEvents.StartLevelInvoked.AddListener(OnLevelStarted);
 
         Time.timeScale = 0.5f;
         Game.Player.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
@@ -20,7 +20,7 @@ public class GameOverState : BaseState
 
     public override void ExitState()
     {
-        GameEvents.LevelLoaded.RemoveListener(OnLevelStarted);
+        GameEvents.StartLevelInvoked.RemoveListener(OnLevelStarted);
     }
 
     void OnLevelStarted()

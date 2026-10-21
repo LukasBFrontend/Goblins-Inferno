@@ -2,8 +2,8 @@ using UnityEngine.Events;
 
 public static class GameEvents
 {
-    public static UnityEvent LevelLoaded = new();
-    public static UnityEvent LevelQuit = new();
+    public static UnityEvent StartLevelInvoked = new();
+    public static UnityEvent QuitLevelInvoked = new();
     public static UnityEvent GamePaused = new();
     public static UnityEvent GameResumed = new();
     public static UnityEvent GameOverEvent =  new();
@@ -13,14 +13,14 @@ public static class GameEvents
     public static UnityEvent<int> ScoreChanged = new();
     public static UnityEvent<int, int> LvlUpEvent = new();
 
-    public static void RaiseLevelLoaded()
+    public static void RaiseStartLevel()
     {
-        LevelLoaded?.Invoke();
+        StartLevelInvoked?.Invoke();
     }
 
-    public static void RaiseLevelQuit()
+    public static void RaiseQuitLevel()
     {
-        LevelQuit?.Invoke();
+        QuitLevelInvoked?.Invoke();
     }
 
     public static void RaiseGamePaused()

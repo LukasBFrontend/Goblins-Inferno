@@ -30,6 +30,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     /// </summary>
     protected virtual void OnSingletonAwake(){}
 
+    public static T GetInstance()
+    {
+        return instance;
+    }
+
     [System.Serializable]
     public struct SingletonData
     {

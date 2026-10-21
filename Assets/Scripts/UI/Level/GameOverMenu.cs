@@ -26,6 +26,6 @@ public class GameOverMenu : BaseSubmenu
 
     void OnRetryButtonClicked()
     {
-        GameEvents.RaiseLevelLoaded();
+        GameEvents.RaiseStartLevel();
     }
 }

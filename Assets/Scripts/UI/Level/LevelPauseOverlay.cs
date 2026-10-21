@@ -68,7 +68,7 @@ public class LevelPauseOverlayHandler : BaseMenu
 
     void OnQuitButtonClicked()
     {
-        GameEvents.RaiseLevelQuit();
+        GameEvents.RaiseQuitLevel();
     }
 
 }

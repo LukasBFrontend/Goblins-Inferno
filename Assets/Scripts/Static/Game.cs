@@ -13,13 +13,13 @@ public static class Game
     static int _score;
     static int _highScore;
 
-    public static GameInputActions Input => GetSafely(_input);
-    public static VolumeTransitionHandler VolumeTransitions => GetSafely(_volumeTransitionHandler);
-    public static UpgradeOptionManager UpgradeOptions => GetSafely(_upgradeOptionManager);
-    public static ObjectPooler ObjectPooler => GetSafely(_objectPooler);
-    public static EnemySpawner EnemySpawner => GetSafely(_enemySpawner);
-    public static Player Player => GetSafely(_player);
+    public static GameInputActions Input => GetSingleton<GameInputActions>();
+    public static VolumeTransitionHandler VolumeTransitions => GetSingleton<VolumeTransitionHandler>();
+    public static UpgradeOptionManager UpgradeOptions => GetSingleton<UpgradeOptionManager>();
+    public static ObjectPooler ObjectPooler => GetSingleton<ObjectPooler>();
+    public static EnemySpawner EnemySpawner => GetSingleton<EnemySpawner>();
 
+    public static Player Player => GetFirst(_player);
     public static AvatarVariant StartAvatar => _startAvatar;
     public static int Score => _score;
     public static int HighScore => _highScore;
@@ -51,14 +51,22 @@ public static class Game
         _startAvatar = variant;
     }
 
-    static T GetSafely<T>(T type) where T: MonoBehaviour
+    static T GetFirst<T>(T type) where T: MonoBehaviour
     {
-        type ??= Object.FindAnyObjectByType<T>();
+        if (type == null)
+        {
+            type ??= Object.FindAnyObjectByType<T>();
+        }
 
         if (type == null)
         {
             throw new System.NullReferenceException($"No component {nameof(T)} found in scene");
         }
         return type;
+    }
+
+    static T GetSingleton<T>() where T: Singleton<T>
+    {
+        return Singleton<T>.GetInstance();
     }
 }

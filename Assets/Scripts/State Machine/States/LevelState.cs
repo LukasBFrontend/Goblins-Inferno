@@ -6,36 +6,33 @@ public class LevelState : BaseState
     public LevelState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
     {
         IsRootState = true;
+        InitializeSubState();
     }
 
-    public override async void EnterState()
+    public async override void EnterState()
     {
         if (Ctx.LogNewStateOnEnter)
         {
             Debug.Log($"{Ctx.name} entered <b><color=white>new state</color></b>: <color=yellow>{nameof(LevelState)}</color> \n<b><color=white>substate</color></b>: <color=yellow>{Factory.Playing().GetType().Name}</color>");
         }
 
-        if (SceneManager.GetActiveScene().buildIndex != 1)
-        {
-            await SceneManager.LoadSceneAsync(1);
-        }
-
-        InitializeSubState();
         await Game.VolumeTransitions.GammaFadeIn();
 
-        GameEvents.LevelQuit.AddListener(OnLevelQuit);
+        GameEvents.QuitLevelInvoked.AddListener(OnQuitLevelInvoked);
         Game.ResetScore();
     }
 
     public override void ExitState()
     {
         GameSaveState.Save(Game.Score, AvatarVariant.Default);
-        GameEvents.LevelQuit.RemoveListener(OnLevelQuit);
+        GameEvents.QuitLevelInvoked.RemoveListener(OnQuitLevelInvoked);
     }
 
-    void OnLevelQuit()
+    async void OnQuitLevelInvoked()
     {
-        SetSubState(null);
+        await SceneManager.LoadSceneAsync(0);
+
+        CurrentSubState.ExitState();
         SwitchState(Factory.MainMenu());
     }
 
