@@ -24,7 +24,6 @@ public class LevelState : BaseState
 
     public override void ExitState()
     {
-        GameSaveState.Save(Game.Score, AvatarVariant.Default);
         GameEvents.QuitLevelInvoked.RemoveListener(OnQuitLevelInvoked);
     }
 

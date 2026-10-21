@@ -10,21 +10,34 @@ public class VolumeSnapshot : MonoBehaviour
     [SerializeField] VolumeProfile snapshot;
     VolumeProfile _live;
 
-    [ContextMenu("Apply Snapshot")]
-    public void ApplySnapshot()
+    public VolumeProfile Default => snapshot;
+
+    [ContextMenu("Reset To Snapshot")]
+    public void ResetToSnapshot()
     {
-        foreach (VolumeComponent component in snapshot.components)
+        ApplyOverrides(snapshot, _live);
+    }
+
+    [ContextMenu("Apply Overrides")]
+    public void ApplyToSnapshot()
+    {
+        ApplyOverrides(_live, snapshot);
+    }
+
+    void ApplyOverrides(VolumeProfile source, VolumeProfile target)
+    {
+        foreach (VolumeComponent component in source.components)
         {
             Type type = component.GetType();
 
-            VolumeComponent liveComponent = _live.components.FirstOrDefault(c => c.GetType() == type);
+            VolumeComponent targetComponent = target.components.FirstOrDefault(c => c.GetType() == type);
 
-            if (liveComponent == null)
+            if (targetComponent == null)
             {
-                liveComponent = _live.Add(type);
+                targetComponent = target.Add(type);
             }
 
-            component.Override(liveComponent, 1);
+            component.Override(targetComponent, 1);
         }
     }
 

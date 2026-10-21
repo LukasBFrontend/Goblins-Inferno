@@ -11,6 +11,7 @@ public class GameOverState : BaseState
 
         Time.timeScale = 0.5f;
         Game.Player.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        GameSaveState.Save(Game.Score, AvatarVariant.Default);
     }
 
     public override void UpdateState()

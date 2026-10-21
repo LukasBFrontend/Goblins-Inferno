@@ -61,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpawnSequence
   singleton:
     dontDestroyOnLoad: 1
+  volumeSnapshot: {fileID: 4324569951438319833}
   transitionFPS: 60
   gammaFadeIn:
     startValue: {x: 1, y: 1, z: 1, w: -1}
@@ -73,8 +74,8 @@ MonoBehaviour:
     duration: 2
     logTransition: 0
   colorFadeOut:
-    startValue: {r: 1, g: 1, b: 1, a: 0}
-    targetValue: {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 0}
+    startValue: {r: 0.88235295, g: 0.78431374, b: 0.88235295, a: 0}
+    targetValue: {r: 0, g: 0, b: 0, a: 0}
     duration: 2
     logTransition: 0
 --- !u!114 &5246305992476575897

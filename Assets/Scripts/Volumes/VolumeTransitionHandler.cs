@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class VolumeTransitionHandler : Singleton<VolumeTransitionHandler>
 {
     [Space()]
+    [SerializeField] VolumeSnapshot volumeSnapshot;
     [Range(30, 120)]
     [SerializeField] int transitionFPS;
     [Header("Transitions")]
@@ -40,12 +41,17 @@ public class VolumeTransitionHandler : Singleton<VolumeTransitionHandler>
 
     void ResetColorFilter()
     {
-        _colorAdjustments.colorFilter.value = colorFadeOut.startValue;
+        if (!volumeSnapshot.Default.TryGet(out ColorAdjustments colorAdjustments))
+        {
+            return;
+        }
+
+        _colorAdjustments.colorFilter.value = colorAdjustments.colorFilter.value;
     }
 
     /* MONOBEHAVIOR LIFECYCLE METHODS */
 
-    void Start()
+    protected override void OnSingletonAwake()
     {
         _volume = GetComponent<Volume>();
         _profile = _volume.profile;

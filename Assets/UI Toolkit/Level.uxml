@@ -40,13 +40,36 @@
                 </ui:ListView>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="GameoverMenuContainer" class="submenuContainer" style="visibility: hidden;">
-            <ui:VisualElement name="UpperContainer" class="upperContainer">
-                <ui:Label text="Game Over" name="TitleLabel" class="title"/>
+        <ui:VisualElement name="GameoverMenuContainer" class="submenuContainer">
+            <ui:VisualElement name="UpperContainer" class="upperContainer" style="height: 60%;">
+                <ui:VisualElement name="GameOverTextContainer" class="gameOverTextContainer">
+                    <ui:Label text="Game Over" name="TitleLabel" class="title"/>
+                    <ui:VisualElement name="ScoreBoardContainer" class="scoreBoardContainer">
+                        <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer">
+                            <ui:Label text="POINTS:" name="FinalScoreLabel"/>
+                            <ui:Label text="[000]" name="FinalScoreValue" class="gameOverStatValue"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer">
+                            <ui:Label text="LEVEL:" name="FinalScoreLabel"/>
+                            <ui:Label text="[0]" name="FinalScoreValue" class="gameOverStatValue"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="Divider" style="flex-grow: 1; background-image: resource(&quot;Asset Packs/Fantasy UI Borders/Default/Divider/divider-001&quot;); height: 20px; -unity-slice-left: 16; -unity-slice-top: 16; -unity-slice-right: 16; -unity-slice-bottom: 16; -unity-slice-scale: 2px; margin-top: 8px; margin-bottom: 8px; -unity-background-image-tint-color: rgba(255, 255, 255, 0.427);"/>
+                        <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer">
+                            <ui:Label text="THE ABYSS:" name="FinalScoreLabel"/>
+                            <ui:Label text="BECKONING" name="FinalScoreValue" class="gameOverStatValue"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="LowerContainer" class="lowerContainer">
-                <ui:Button text="RETRY" name="RetryButton" class="button"/>
-                <ui:Button text="QUIT" name="QuitButton" class="button"/>
+                <ui:VisualElement name="HorizontalButtonContainer" style="flex-direction: row;">
+                    <ui:VisualElement name="ButtonLeft">
+                        <ui:Button text="RETRY" name="RetryButton" class="buttonSmall"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="ButtonRight" style="flex-direction: column;">
+                        <ui:Button text="QUIT" name="QuitButton" class="buttonSmall buttonDiscrete"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="UpgradeMenuContainer" style="visibility: hidden;">

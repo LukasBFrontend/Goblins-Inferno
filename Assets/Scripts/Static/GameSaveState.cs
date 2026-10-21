@@ -6,7 +6,7 @@ public static class GameSaveState
     static SaveState gameSaveState = new();
     static string LocalPath => Application.persistentDataPath + "/savegame.json";
 
-    public static void Save(int score, AvatarVariant selectedAvatar)
+    public static async void Save(int score, AvatarVariant selectedAvatar)
     {
         if (score > gameSaveState.highScore)
         {
@@ -15,7 +15,7 @@ public static class GameSaveState
         gameSaveState.avatar = selectedAvatar;
 
         var savegameJson = JsonUtility.ToJson(gameSaveState);
-        File.WriteAllTextAsync(Application.persistentDataPath + "/savegame.json", savegameJson);
+        await File.WriteAllTextAsync(Application.persistentDataPath + "/savegame.json", savegameJson);
     }
 
     public static void Load()

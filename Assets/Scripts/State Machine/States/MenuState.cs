@@ -7,7 +7,6 @@ public class MainMenuState : BaseState
     public MainMenuState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory)
     {
         IsRootState = true;
-        GameSaveState.Load();
     }
 
     public override void EnterState()
@@ -18,6 +17,7 @@ public class MainMenuState : BaseState
         }
 
         Time.timeScale = 1;
+        GameSaveState.Load();
         GameEvents.StartLevelInvoked.AddListener(OnStartLevelInvoked);
     }
 
