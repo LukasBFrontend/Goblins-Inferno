@@ -10,7 +10,7 @@ public class StateMachine : Singleton<StateMachine>
     BaseState _currentState;
     StateFactory _states;
 
-    protected override void OnSingletonAwake()
+    void Start()
     {
         _states = new StateFactory(this);
 
