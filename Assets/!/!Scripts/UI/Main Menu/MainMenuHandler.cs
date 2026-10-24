@@ -15,8 +15,6 @@ public class MainMenuHandler : BaseMenu
 
     void OnEnable()
     {
-        Debug.Log("MainMenuHandler: OnEnable");
-
         _panelRenderer = GetComponent<PanelRenderer>();
         _panelRenderer.RegisterUIReloadCallback(OnUIReload);
     }

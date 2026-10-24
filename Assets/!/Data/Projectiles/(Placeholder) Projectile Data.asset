@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec2fa4616f1fbeb42a96f08f8b1efbf8, type: 3}
-  m_Name: Placeholder Projectile Data
+  m_Name: (Placeholder) Projectile Data
   m_EditorClassIdentifier: Assembly-CSharp::SO_ProjectileData
   arcMode: 1
   lifeTime: 5
