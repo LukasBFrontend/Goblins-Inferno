@@ -1,0 +1,1 @@
+DebugTextGUISettings needs to stay in resources folder to be loaded.

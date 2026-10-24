@@ -12,10 +12,10 @@ public static class GameSaveState
     public static PlayerAvatar Avatar;
     public static PlayerScore Score;
 
-    public static async void Save()
+    public static void Save()
     {
         var savegameJson = JsonUtility.ToJson(gameSaveState);
-        await File.WriteAllTextAsync(Application.persistentDataPath + "/savegame.json", savegameJson);
+        File.WriteAllText(Application.persistentDataPath + "/savegame.json", savegameJson);
     }
 
     public static void Load()
@@ -69,7 +69,7 @@ public static class GameSaveState
         }
     }
 
-    public struct PlayerScore
+    public class PlayerScore
     {
         public int Current { get; private set; }
         public int HighScore { get; private set; }
