@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749bf5f39dabd68478f68c11f19bb449, type: 3}
   m_Name: EnemyWaveConfig
   m_EditorClassIdentifier: Assembly-CSharp::SO_EnemyPoolData
+  initialWait: 5
   spawnDistance: 15
   baseWaveSize: 4
   waveSizePerMinute: 2

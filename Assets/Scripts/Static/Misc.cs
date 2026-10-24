@@ -1,6 +1,10 @@
-[System.Serializable]
-public struct Range
+
+namespace Misc
 {
-    public int lower;
-    public int upper;
+    [System.Serializable]
+    public struct Range
+    {
+        public int lower;
+        public int upper;
+    }
 }

@@ -33,5 +33,5 @@ public struct DropPoolData
     public SO_ItemDropPool itemPool;
     [Range(0, 100)]
     public float dropChance;
-    public Range itemsToTakeRange;
+    public Misc.Range itemsToTakeRange;
 }

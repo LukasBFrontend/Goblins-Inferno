@@ -15,19 +15,25 @@ public class MainMenuHandler : BaseMenu
 
     void OnEnable()
     {
+        Debug.Log("MainMenuHandler: OnEnable");
+
         _panelRenderer = GetComponent<PanelRenderer>();
         _panelRenderer.RegisterUIReloadCallback(OnUIReload);
     }
 
     void OnDisable()
     {
+        Debug.Log("MainMenuHandler: OnDisable");
+
         _panelRenderer.UnregisterUIReloadCallback(OnUIReload);
     }
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
     {
+        Debug.Log($"MainMenuHandler: OnUIReload Highscore: {GameSaveState.Score.HighScore}");
+
         Initialize(rootElement, startMenuData, optionsMenuData, creditsMenuData);
         _highscoreText = rootElement.Q<Label>("HighscoreText");
-        _highscoreText.text = Game.HighScore.ToString();
+        _highscoreText.text = GameSaveState.Score.HighScore.ToString();
     }
 }

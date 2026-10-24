@@ -19,7 +19,7 @@ public class LevelState : BaseState
         await Game.VolumeTransitions.GammaFadeIn();
 
         GameEvents.QuitLevelInvoked.AddListener(OnQuitLevelInvoked);
-        Game.ResetScore();
+        GameSaveState.Score.Reset();
     }
 
     public override void ExitState()

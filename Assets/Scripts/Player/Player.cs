@@ -32,12 +32,12 @@ public class Player : BaseCharacter
     public int Lvl => _lvl;
     public int Exp => _exp;
 
-    public void SetAvatar(AvatarVariant variant)
+    public void SetAvatar(PlayerAvatarVariant variant)
     {
         GameObject avatar = variant switch
         {
-            AvatarVariant.Archer => avatars.archerAvatar,
-            AvatarVariant.Knight => avatars.knightAvatar,
+            PlayerAvatarVariant.Archer => avatars.archerAvatar,
+            PlayerAvatarVariant.Knight => avatars.knightAvatar,
             _ => avatars.defaultAvatar,
         };
 
@@ -49,20 +49,20 @@ public class Player : BaseCharacter
         Animator.Rebind();
     }
 
-    public AvatarVariant Avatar()
+    public PlayerAvatarVariant Avatar()
     {
         Avatar avatar = Animator.avatar;
 
         if (avatar == avatars.archerAvatar)
         {
-            return AvatarVariant.Archer;
+            return PlayerAvatarVariant.Archer;
         }
         else if (avatar == avatars.knightAvatar)
         {
-            return AvatarVariant.Knight;
+            return PlayerAvatarVariant.Knight;
         }
 
-        return AvatarVariant.Default;
+        return PlayerAvatarVariant.Default;
     }
 
     /// <summary>
@@ -113,7 +113,7 @@ public class Player : BaseCharacter
         }
 
         _instance = this;
-        SetAvatar(Game.StartAvatar);
+        SetAvatar(GameSaveState.Avatar.Current);
     }
 
     void LvlUp()

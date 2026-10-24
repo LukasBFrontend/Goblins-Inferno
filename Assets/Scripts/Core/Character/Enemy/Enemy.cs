@@ -16,7 +16,7 @@ public class Enemy : BaseCharacter, IPoolable
         }
 
         Game.ObjectPooler.Return(this);
-        Game.AddPoints(scoreValue);
+        GameSaveState.Score.AddPoints(scoreValue);
     }
 
     void IPoolable.Reset()

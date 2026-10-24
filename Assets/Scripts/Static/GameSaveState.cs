@@ -6,14 +6,14 @@ public static class GameSaveState
     static SaveState gameSaveState = new();
     static string LocalPath => Application.persistentDataPath + "/savegame.json";
 
-    public static async void Save(int score, AvatarVariant selectedAvatar)
-    {
-        if (score > gameSaveState.highScore)
-        {
-            gameSaveState.highScore = score;
-        }
-        gameSaveState.avatar = selectedAvatar;
+    static bool _hasBeenLoaded;
 
+    public static bool HasBeenLoaded => _hasBeenLoaded;
+    public static PlayerAvatar Avatar;
+    public static PlayerScore Score;
+
+    public static async void Save()
+    {
         var savegameJson = JsonUtility.ToJson(gameSaveState);
         await File.WriteAllTextAsync(Application.persistentDataPath + "/savegame.json", savegameJson);
     }
@@ -22,20 +22,17 @@ public static class GameSaveState
     {
         if (!PathExists())
         {
-            CreateDefault();
+            Save();
             return;
         }
 
         var savegameJson = File.ReadAllText(LocalPath);
         gameSaveState = JsonUtility.FromJson<SaveState>(savegameJson);
 
-        SetGame();
-    }
+        Score = new(gameSaveState.highScore);
+        Avatar = new(gameSaveState.avatar);
 
-    static void SetGame()
-    {
-        Game.SetStartAvatar(gameSaveState.avatar);
-        Game.SetStartHighScore(gameSaveState.highScore);
+        _hasBeenLoaded = true;
     }
 
     static bool PathExists()
@@ -55,13 +52,55 @@ public static class GameSaveState
         }
     }
 
-    static void CreateDefault()
+
+    public struct PlayerAvatar
     {
-        Save(0, AvatarVariant.Default);
+        public PlayerAvatarVariant Current { get; private set; }
+
+        public PlayerAvatar(PlayerAvatarVariant variant)
+        {
+            Current = variant;
+        }
+
+        public void Set(PlayerAvatarVariant avatarVariant)
+        {
+            Current = avatarVariant;
+            gameSaveState.avatar = avatarVariant;
+        }
+    }
+
+    public struct PlayerScore
+    {
+        public int Current { get; private set; }
+        public int HighScore { get; private set; }
+
+        public PlayerScore(int highScore)
+        {
+            Current = 0;
+            HighScore = highScore;
+        }
+
+        public void AddPoints(int points)
+        {
+            Current += points;
+
+            GameEvents.RaiseScoreChanged(Current);
+        }
+
+        public void Reset()
+        {
+            Current = 0;
+        }
+
+        public void SetHighScore(int highScore)
+        {
+            HighScore = highScore;
+            gameSaveState.highScore = highScore;
+        }
     }
 }
 
-public enum AvatarVariant
+public enum PlayerAvatarVariant
 {
     Default,
     Archer,
@@ -70,6 +109,6 @@ public enum AvatarVariant
 
 public struct SaveState
 {
-    public AvatarVariant avatar;
+    public PlayerAvatarVariant avatar;
     public int highScore;
 }

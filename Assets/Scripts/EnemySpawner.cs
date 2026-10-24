@@ -9,6 +9,11 @@ public class EnemySpawner : Singleton<EnemySpawner>
     float _elapsed = 0f;
     int _waveIndex = 0;
 
+    void Start()
+    {
+        _elapsed = -data.initialWait;
+    }
+
     public void Run()
     {
         _elapsed += Time.deltaTime;

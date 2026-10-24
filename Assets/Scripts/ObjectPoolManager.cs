@@ -7,6 +7,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
     [Space()]
     [SerializeField] Transform poolParent;
     [SerializeField] List<PoolPrewarmData> poolPrewarmData;
+
     readonly Dictionary<string, List<IPoolable>> _poolableObjectLookup = new();
     readonly Dictionary<string, Transform> _transformLookup = new();
 
@@ -120,6 +121,14 @@ public class ObjectPooler : Singleton<ObjectPooler>
         yield return new WaitForSeconds(.1f);
         gameObject.SetActive(false);
     }
+
+
+    [System.Serializable]
+    struct PoolPrewarmData
+    {
+        public PoolableData poolable;
+        public int spawnAmount;
+    }
 }
 
 public interface IPoolable
@@ -128,8 +137,16 @@ public interface IPoolable
     void Reset();
 }
 
-[System.Serializable] struct PoolPrewarmData
+
+[System.Serializable]
+public struct PoolableData
 {
-    public PoolableData poolable;
-    public int spawnAmount;
+    public string id;
+    public GameObject prefab;
+
+    public PoolableData(string id, GameObject prefab)
+    {
+        this.id = id;
+        this.prefab = prefab;
+    }
 }

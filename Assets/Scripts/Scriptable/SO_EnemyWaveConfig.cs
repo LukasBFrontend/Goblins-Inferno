@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyWaveConfig", menuName = "Enemy/WaveConfig")]
 public class SO_EnemyWaveConfig : ScriptableObject
 {
+    public float initialWait = 10f;
     public float spawnDistance = 15f;
     [Header("Size")]
     public int baseWaveSize = 3;
@@ -15,21 +16,8 @@ public class SO_EnemyWaveConfig : ScriptableObject
 }
 
 [System.Serializable]
-public struct PoolableData
-{
-    public string id;
-    public GameObject prefab;
-
-    public PoolableData(string id, GameObject prefab)
-    {
-        this.id = id;
-        this.prefab = prefab;
-    }
-}
-
-[System.Serializable]
 public struct EnemySpawnData
 {
     public PoolableData poolableData;
-    public Range spawnBias;
+    public Misc.Range spawnBias;
 }

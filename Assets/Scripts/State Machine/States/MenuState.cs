@@ -16,8 +16,13 @@ public class MainMenuState : BaseState
             Debug.Log($"{Ctx.name} entered <b><color=white>new state</color></b>: <color=yellow>{nameof(MainMenuState)}</color>");
         }
 
+        if (!GameSaveState.HasBeenLoaded)
+        {
+            GameSaveState.Load();
+        }
+
         Time.timeScale = 1;
-        GameSaveState.Load();
+
         GameEvents.StartLevelInvoked.AddListener(OnStartLevelInvoked);
     }
 

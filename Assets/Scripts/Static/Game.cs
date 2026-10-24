@@ -2,16 +2,7 @@ using UnityEngine;
 
 public static class Game
 {
-    static GameInputActions _input;
-    static VolumeTransitionHandler _volumeTransitionHandler;
-    static UpgradeOptionManager _upgradeOptionManager;
-    static ObjectPooler _objectPooler;
-    static EnemySpawner _enemySpawner;
     static Player _player;
-
-    static AvatarVariant _startAvatar;
-    static int _score;
-    static int _highScore;
 
     public static GameInputActions Input => GetSingleton<GameInputActions>();
     public static VolumeTransitionHandler VolumeTransitions => GetSingleton<VolumeTransitionHandler>();
@@ -19,39 +10,9 @@ public static class Game
     public static ObjectPooler ObjectPooler => GetSingleton<ObjectPooler>();
     public static EnemySpawner EnemySpawner => GetSingleton<EnemySpawner>();
 
-    public static Player Player => GetFirst(_player);
-    public static AvatarVariant StartAvatar => _startAvatar;
-    public static int Score => _score;
-    public static int HighScore => _highScore;
+    public static Player Player => GetFirstOrDefault(_player);
 
-    public static void AddPoints(int points)
-    {
-        _score += points;
-
-        if (points > _highScore)
-        {
-            _highScore = _score;
-        }
-
-        GameEvents.RaiseScoreChanged(_score);
-    }
-
-    public static void SetStartHighScore(int score)
-    {
-        _highScore = score;
-    }
-
-    public static void ResetScore()
-    {
-        _score = 0;
-    }
-
-    public static void SetStartAvatar(AvatarVariant variant)
-    {
-        _startAvatar = variant;
-    }
-
-    static T GetFirst<T>(T type) where T: MonoBehaviour
+    static T GetFirstOrDefault<T>(T type) where T: MonoBehaviour
     {
         if (type == null)
         {
@@ -62,6 +23,7 @@ public static class Game
         {
             throw new System.NullReferenceException($"No component {nameof(T)} found in scene");
         }
+
         return type;
     }
 
