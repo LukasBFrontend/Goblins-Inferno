@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Luscious;
 
 [CreateAssetMenu(fileName = "EnemyWaveConfig", menuName = "Enemy/WaveConfig")]
 public class SO_EnemyWaveConfig : ScriptableObject

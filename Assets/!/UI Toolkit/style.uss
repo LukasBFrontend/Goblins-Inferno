@@ -211,63 +211,38 @@ Label {
     position: absolute;
 }
 
-.button {
-    margin-bottom: 30px;
-    width: 350px;
-    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
-    background-color: rgb(0, 0, 0);
-    color: rgba(255, 255, 255, 0.902);
-    font-size: 26px;
-    -unity-font-definition: resource("Fonts/skeleboom");
-    letter-spacing: 7px;
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-out-cubic;
-    -unity-slice-left: 32;
-    -unity-slice-top: 32;
-    -unity-slice-right: 32;
-    -unity-slice-bottom: 32;
-    -unity-background-image-tint-color: rgba(63, 63, 63, 0.902);
-    -unity-slice-scale: 1.25px;
-    -unity-slice-type: tiled;
-    aspect-ratio: 4;
-}
-
-.buttonSmall {
-    margin-bottom: 30px;
-    width: 300px;
-    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
-    background-color: rgb(0, 0, 0);
-    color: rgba(255, 255, 255, 0.902);
-    font-size: 26px;
-    -unity-font-definition: resource("Fonts/skeleboom");
-    letter-spacing: 7px;
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-out-cubic;
-    -unity-slice-left: 32;
-    -unity-slice-top: 32;
-    -unity-slice-right: 32;
-    -unity-slice-bottom: 32;
-    -unity-background-image-tint-color: rgba(63, 63, 63, 0.902);
-    -unity-slice-scale: 1.25px;
-    -unity-slice-type: tiled;
-    aspect-ratio: 4;
-}
-
 .buttonDiscrete {
     opacity: 0.8;
 }
 
+.button {
+    margin-bottom: 30px;
+    width: 350px;
+    background-image: resource("Fantasy UI Borders/Default/Transparent center/panel-transparent-center-005#panel-transparent-center-005");
+    background-color: rgb(0, 0, 0);
+    color: rgba(255, 255, 255, 0.902);
+    font-size: 26px;
+    -unity-font-definition: resource("Fonts/skeleboom");
+    letter-spacing: 7px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-cubic;
+    -unity-slice-left: 32;
+    -unity-slice-top: 32;
+    -unity-slice-right: 32;
+    -unity-slice-bottom: 32;
+    -unity-background-image-tint-color: rgba(63, 63, 63, 0.902);
+    -unity-slice-scale: 1.25px;
+    -unity-slice-type: tiled;
+    aspect-ratio: 4;
+}
+
 .button:hover {
     color: rgb(255, 255, 255);
-    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-005#panel-005");
+    background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
     -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
     scale: 1.05 1.05;
     background-color: rgb(255, 255, 255);
@@ -275,7 +250,7 @@ Label {
 
 .button:focus {
     color: rgb(255, 255, 255);
-    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-005#panel-005");
+    background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
     -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
     background-color: rgb(255, 255, 255);
 }

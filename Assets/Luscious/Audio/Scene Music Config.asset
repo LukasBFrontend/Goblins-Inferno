@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23fd9f7edfcc8c04b951395d1fe8c981, type: 3}
+  m_Name: Scene Music Config
+  m_EditorClassIdentifier: Assembly-CSharp::SO_MusicSettingsData
+  tracks:
+  - name: Main Menu Music
+    sceneIndex: 0
+    data:
+      audioClip: {fileID: 8300000, guid: 8bad5b9e92ce6b148a5a026de8f7741f, type: 3}
+      volume: 50
+    timeAfterSceneLoadPlay: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+  - name: Level Music
+    sceneIndex: 1
+    data:
+      audioClip: {fileID: 8300000, guid: a3c7946da63cd14418fb6477bad835fe, type: 3}
+      volume: 50
+    timeAfterSceneLoadPlay: 4
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5

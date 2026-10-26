@@ -9,8 +9,8 @@ public static class GameSaveState
     static bool _hasBeenLoaded;
 
     public static bool HasBeenLoaded => _hasBeenLoaded;
-    public static PlayerAvatar Avatar;
-    public static PlayerScore Score;
+    public static PlayerAvatar Avatar = new();
+    public static PlayerScore Score = new(0);
 
     public static void Save()
     {

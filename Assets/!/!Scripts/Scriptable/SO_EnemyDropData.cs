@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Luscious;
 
 [CreateAssetMenu(fileName = "DropData", menuName = "Drops/EnemyDropData")]
 public class SO_EnemyDropData : ScriptableObject

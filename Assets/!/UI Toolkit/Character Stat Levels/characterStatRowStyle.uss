@@ -31,7 +31,7 @@ Label {
 }
 
 .imageContainer {
-    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
+    background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
     -unity-slice-left: 32;
     -unity-slice-top: 32;
     -unity-slice-right: 32;

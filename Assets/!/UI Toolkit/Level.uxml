@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="UpgradeButton" src="project://database/Assets/UI%20Toolkit/Upgrade%20Card/UpgradeButton.uxml?fileID=9197481963319205126&amp;guid=c09b3ca478fa25245ad9c1e8d318d5ac&amp;type=3#UpgradeButton"/>
-    <ui:Template name="WeaponLevel" src="project://database/Assets/UI%20Toolkit/Weapon%20Level/WeaponLevel.uxml?fileID=9197481963319205126&amp;guid=e0de6a98600b699478eb14f98102e66d&amp;type=3#WeaponLevel"/>
-    <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=d061f6063ca2fab4d84bfa2407418e4e&amp;type=3#style"/>
+    <ui:Template name="UpgradeButton" src="project://database/Assets/!/UI%20Toolkit/Upgrade%20Card/UpgradeButton.uxml?fileID=9197481963319205126&amp;guid=c09b3ca478fa25245ad9c1e8d318d5ac&amp;type=3#UpgradeButton"/>
+    <ui:Template name="WeaponLevel" src="project://database/Assets/!/UI%20Toolkit/Weapon%20Level/WeaponLevel.uxml?fileID=9197481963319205126&amp;guid=e0de6a98600b699478eb14f98102e66d&amp;type=3#WeaponLevel"/>
+    <Style src="project://database/Assets/!/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=d061f6063ca2fab4d84bfa2407418e4e&amp;type=3#style"/>
     <ui:VisualElement name="HUDContainer">
         <ui:ProgressBar value="0" title="Lvl 1" name="ExpBar"/>
         <ui:VisualElement name="TopContainer" class="hudBar">
@@ -33,7 +33,7 @@
                 <ui:Button text="QUIT" name="QuitButton" class="button"/>
             </ui:VisualElement>
             <ui:VisualElement name="CharacterStatsContainer" style="position: absolute; justify-content: flex-start; align-items: flex-start; top: 7.5%; bottom: 0;">
-                <ui:ListView allow-remove="false" allow-add="false" item-template="project://database/Assets/UI%20Toolkit/Character%20Stat%20Levels/CharacterStatRow.uxml?fileID=9197481963319205126&amp;guid=f8342c552ba0b8f4ea798325cbaa5742&amp;type=3#CharacterStatRow" header-title="Stats" show-foldout-header="true" reorderable="false" binding-source-selection-mode="AutoAssign" data-source="project://database/Assets/Resources/Runtime%20Scriptable/RSO_CharacterStatRows.asset?fileID=11400000&amp;guid=1862f2f4b6a526940ba8f1128c84b82f&amp;type=2#RSO_CharacterStatRows" show-add-remove-footer="false" virtualization-method="DynamicHeight" name="CharacterStatsList" selection-type="None" show-bound-collection-size="false" style="width: 400px; height: 600px;">
+                <ui:ListView allow-remove="false" allow-add="false" item-template="project://database/Assets/!/UI%20Toolkit/Character%20Stat%20Levels/CharacterStatRow.uxml?fileID=9197481963319205126&amp;guid=f8342c552ba0b8f4ea798325cbaa5742&amp;type=3#CharacterStatRow" header-title="Stats" show-foldout-header="true" reorderable="false" binding-source-selection-mode="AutoAssign" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/RSO_CharacterStatRows.asset?fileID=11400000&amp;guid=1862f2f4b6a526940ba8f1128c84b82f&amp;type=2#RSO_CharacterStatRows" show-add-remove-footer="false" virtualization-method="DynamicHeight" name="CharacterStatsList" selection-type="None" show-bound-collection-size="false" style="width: 400px; height: 600px;">
                     <Bindings>
                         <ui:DataBinding property="itemsSource" data-source-path="list"/>
                     </Bindings>
@@ -44,7 +44,7 @@
             <ui:VisualElement name="UpperContainer" class="upperContainer" style="height: 60%;">
                 <ui:VisualElement name="GameOverTextContainer" class="gameOverTextContainer">
                     <ui:Label text="Game Over" name="TitleLabel" class="title"/>
-                    <ui:VisualElement name="ScoreBoardContainer" class="scoreBoardContainer">
+                    <ui:VisualElement name="ScoreBoardContainer" class="scoreBoardContainer" style="background-image: resource(&quot;Fantasy UI Borders/Default/Panel/panel-007#panel-007&quot;); -unity-background-image-tint-color: rgb(24, 24, 24);">
                         <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer">
                             <ui:Label text="POINTS:" name="FinalScoreLabel"/>
                             <ui:Label text="[000]" name="FinalScoreValue" class="gameOverStatValue"/>
@@ -53,7 +53,7 @@
                             <ui:Label text="LEVEL:" name="FinalScoreLabel"/>
                             <ui:Label text="[0]" name="FinalScoreValue" class="gameOverStatValue"/>
                         </ui:VisualElement>
-                        <ui:VisualElement name="Divider" style="flex-grow: 1; background-image: resource(&quot;Asset Packs/Fantasy UI Borders/Default/Divider/divider-001&quot;); height: 20px; -unity-slice-left: 16; -unity-slice-top: 16; -unity-slice-right: 16; -unity-slice-bottom: 16; -unity-slice-scale: 2px; margin-top: 8px; margin-bottom: 8px; -unity-background-image-tint-color: rgba(255, 255, 255, 0.427);"/>
+                        <ui:VisualElement name="Divider" style="flex-grow: 1; background-image: resource(&quot;Fantasy UI Borders/Default/Divider Fade/divider-fade-002&quot;); height: 20px; -unity-slice-left: 16; -unity-slice-top: 16; -unity-slice-right: 16; -unity-slice-bottom: 16; -unity-slice-scale: 2px; margin-top: 8px; margin-bottom: 8px; -unity-background-image-tint-color: rgba(255, 255, 255, 0.427);"/>
                         <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer">
                             <ui:Label text="THE ABYSS:" name="FinalScoreLabel"/>
                             <ui:Label text="BECKONING" name="FinalScoreValue" class="gameOverStatValue"/>
@@ -64,24 +64,24 @@
             <ui:VisualElement name="LowerContainer" class="lowerContainer">
                 <ui:VisualElement name="HorizontalButtonContainer" style="flex-direction: row;">
                     <ui:VisualElement name="ButtonLeft">
-                        <ui:Button text="RETRY" name="RetryButton" class="buttonSmall"/>
+                        <ui:Button text="RETRY" name="RetryButton" class="button" style="width: 325px; -unity-slice-left: 16; -unity-slice-top: 16; -unity-slice-right: 16; -unity-slice-bottom: 16;"/>
                     </ui:VisualElement>
                     <ui:VisualElement name="ButtonRight" style="flex-direction: column;">
-                        <ui:Button text="QUIT" name="QuitButton" class="buttonSmall buttonDiscrete"/>
+                        <ui:Button text="QUIT" name="QuitButton" class="button buttonDiscrete" style="width: 325px; -unity-slice-left: 16; -unity-slice-top: 16; -unity-slice-right: 16; -unity-slice-bottom: 16;"/>
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="UpgradeMenuContainer" style="visibility: hidden;">
             <ui:Label text="Level Up" name="LevelUpLabel" class="title"/>
-            <ui:Instance template="UpgradeButton" name="UpgradeButtonOne" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Upgrade%201.asset?fileID=11400000&amp;guid=f5ef43c874b823f4cb40e8d76d048b0a&amp;type=2#Upgrade 1"/>
-            <ui:Instance template="UpgradeButton" name="UpgradeButtonTwo" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Upgrade%202.asset?fileID=11400000&amp;guid=caa74c8aef6f23348973d39589b4fbd3&amp;type=2#Upgrade 2"/>
-            <ui:Instance template="UpgradeButton" name="UpgradeButtonThree" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Upgrade%203.asset?fileID=11400000&amp;guid=6bf788f0c4930c04bb1a355c9982b094&amp;type=2#Upgrade 3"/>
+            <ui:Instance template="UpgradeButton" name="UpgradeButtonOne" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Upgrade%201.asset?fileID=11400000&amp;guid=f5ef43c874b823f4cb40e8d76d048b0a&amp;type=2#Upgrade 1"/>
+            <ui:Instance template="UpgradeButton" name="UpgradeButtonTwo" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Upgrade%202.asset?fileID=11400000&amp;guid=caa74c8aef6f23348973d39589b4fbd3&amp;type=2#Upgrade 2"/>
+            <ui:Instance template="UpgradeButton" name="UpgradeButtonThree" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Upgrade%203.asset?fileID=11400000&amp;guid=6bf788f0c4930c04bb1a355c9982b094&amp;type=2#Upgrade 3"/>
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="SideContainer">
-        <ui:Instance template="WeaponLevel" name="WeaponLevelOne" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Weapon%201.asset?fileID=11400000&amp;guid=27094d05bdb301a49bb24707442f4710&amp;type=2#Weapon 1"/>
-        <ui:Instance template="WeaponLevel" name="WeaponLevelTwo" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Weapon%202.asset?fileID=11400000&amp;guid=ff878a1e2421cf44cb1faaa85b8e09d2&amp;type=2#Weapon 2"/>
-        <ui:Instance template="WeaponLevel" name="WeaponLevelThree" data-source="project://database/Assets/Resources/Runtime%20Scriptable/Weapon%203.asset?fileID=11400000&amp;guid=5d4a005b01516234d9e605f9160c1eba&amp;type=2#Weapon 3"/>
+        <ui:Instance template="WeaponLevel" name="WeaponLevelOne" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Weapon%201.asset?fileID=11400000&amp;guid=27094d05bdb301a49bb24707442f4710&amp;type=2#Weapon 1"/>
+        <ui:Instance template="WeaponLevel" name="WeaponLevelTwo" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Weapon%202.asset?fileID=11400000&amp;guid=ff878a1e2421cf44cb1faaa85b8e09d2&amp;type=2#Weapon 2"/>
+        <ui:Instance template="WeaponLevel" name="WeaponLevelThree" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Weapon%203.asset?fileID=11400000&amp;guid=5d4a005b01516234d9e605f9160c1eba&amp;type=2#Weapon 3"/>
     </ui:VisualElement>
 </ui:UXML>

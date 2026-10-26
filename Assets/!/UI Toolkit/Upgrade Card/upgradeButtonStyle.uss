@@ -99,26 +99,26 @@ Label {
 .upgradeButton:hover > .upgradeButtonBackground {
     background-color: rgb(255, 255, 255);
     -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
-    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-005#panel-005");
+    background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
 }
 
 .upgradeButton:focus {
     color: rgb(255, 255, 255);
 }
 
-.upgradeButton:hover > .upgradeButtonBackground {
+.upgradeButton:focus .upgradeButtonBackground {
     background-color: rgb(255, 255, 255);
     -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
-    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-005#panel-005");
+    background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
 }
 
 .upgradeButtonBackground {
-    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
-    -unity-slice-left: 32;
-    -unity-slice-top: 32;
-    -unity-slice-right: 32;
-    -unity-slice-bottom: 32;
-    -unity-slice-scale: 1.25px;
+    background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
+    -unity-slice-left: 16;
+    -unity-slice-top: 16;
+    -unity-slice-right: 16;
+    -unity-slice-bottom: 16;
+    -unity-slice-scale: 1.5px;
     background-color: rgb(0, 0, 0);
 }
 
