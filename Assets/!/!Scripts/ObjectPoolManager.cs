@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Luscious;
 using UnityEngine;
 
 public class ObjectPooler : Singleton<ObjectPooler>

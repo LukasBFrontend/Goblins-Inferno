@@ -17,15 +17,15 @@ MonoBehaviour:
     sceneIndex: 0
     data:
       audioClip: {fileID: 8300000, guid: 8bad5b9e92ce6b148a5a026de8f7741f, type: 3}
-      volume: 50
+      volume: 45
     timeAfterSceneLoadPlay: 0
     fadeInDuration: 0.5
-    fadeOutDuration: 0.5
+    fadeOutDuration: 3
   - name: Level Music
     sceneIndex: 1
     data:
       audioClip: {fileID: 8300000, guid: a3c7946da63cd14418fb6477bad835fe, type: 3}
-      volume: 50
-    timeAfterSceneLoadPlay: 4
-    fadeInDuration: 0.5
+      volume: 20
+    timeAfterSceneLoadPlay: 4.5
+    fadeInDuration: 2
     fadeOutDuration: 0.5

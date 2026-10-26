@@ -21,7 +21,7 @@ public class LevelHUD : MonoBehaviour {
         GameEvents.ExpChanged.AddListener(OnExpChanged);
         GameEvents.ScoreChanged.AddListener(OnScoreChanged);
         GameEvents.LvlUpEvent.AddListener(OnLvlUp);
-        GameEvents.GameResumed.AddListener(ReadWeaponData);
+        GameEvents.GameResumed.AddListener(OnGameResumed);
     }
 
     void OnDisable()
@@ -31,7 +31,7 @@ public class LevelHUD : MonoBehaviour {
         GameEvents.ExpChanged.RemoveListener(OnExpChanged);
         GameEvents.ScoreChanged.RemoveListener(OnScoreChanged);
         GameEvents.LvlUpEvent.RemoveListener(OnLvlUp);
-        GameEvents.GameResumed.RemoveListener(ReadWeaponData);
+        GameEvents.GameResumed.RemoveListener(OnGameResumed);
     }
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
@@ -39,6 +39,15 @@ public class LevelHUD : MonoBehaviour {
         _healthBar = rootElement.Q<ProgressBar>("HealthBar");
         _expBar = rootElement.Q<ProgressBar>("ExpBar");
         _scoreText = rootElement.Q<Label>("ScoreText");
+
+        var buttonPressedSound = Game.SoundFX.Default.buttonPressSound;
+        rootElement.Query<Button>().ForEach(
+            button => button.clicked += () => Game.SoundFX.PlaySoundFXClip(
+                buttonPressedSound.audioClip,
+                transform,
+                buttonPressedSound.volume
+            )
+        );
 
         OnHealthChanged(_player.Health.Current, _player.Health.Max);
         OnExpChanged(_player.Exp, _player.ExpToLvlUp(_player.Lvl));
@@ -76,6 +85,11 @@ public class LevelHUD : MonoBehaviour {
     void OnLvlUp(int oldLvl, int newLvl)
     {
         _expBar.title = $"Lvl: {newLvl}";
+    }
+
+    void OnGameResumed()
+    {
+        ReadWeaponData();
     }
 
     void ReadWeaponData()

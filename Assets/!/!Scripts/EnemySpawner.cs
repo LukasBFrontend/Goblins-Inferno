@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Luscious;
 using UnityEngine;
 
 public class EnemySpawner : Singleton<EnemySpawner>

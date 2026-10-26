@@ -10,8 +10,8 @@ namespace Luscious.Audio
         public float InitialVolume => _initialVolume;
         public int SceneIndex => _sceneIndex;
         private AudioSource _audioSource;
-        private int _sceneIndex;
         private float _initialVolume;
+        private int _sceneIndex;
 
         private void Awake()
         {

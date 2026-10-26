@@ -7,12 +7,14 @@ namespace Luscious.Audio
     {
         [SerializeField] private AudioMixer audioMixer;
         [Header("Channel Multipliers")]
-        [Range(0.1f, 2f)]
+        [Range(0.1f, 3f)]
         [SerializeField] private float masterVolumeMultiplier = 1f;
-        [Range(0.1f, 2f)]
+        [Range(0.1f, 3f)]
         [SerializeField] private float soundFXVolumeMultiplier = 1f;
-        [Range(0.1f, 2f)]
+        [Range(0.1f, 3f)]
         [SerializeField] private float musicVolumeMultiplier = 1f;
+
+        public AudioMixer AudioMixer => audioMixer;
 
         public float MasterVolume
         {
@@ -77,7 +79,7 @@ namespace Luscious.Audio
 
         private void SetMixerVolume(string parameter, float percent, float multiplier)
         {
-            float db = Utils.PercentToDecibel(percent);
+            float db = AudioUtils.PercentToDecibel(percent);
             db += MultiplierToDecibel(multiplier);
             audioMixer.SetFloat(parameter, db);
         }
@@ -86,7 +88,7 @@ namespace Luscious.Audio
         {
             float multiplierDb = MultiplierToDecibel(multiplier);
             float originalDb = mixerDb - multiplierDb;
-            return Utils.DecibelToPercent(originalDb);
+            return AudioUtils.DecibelToPercent(originalDb);
         }
 
         private float MultiplierToDecibel(float multiplier)

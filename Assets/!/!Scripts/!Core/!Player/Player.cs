@@ -120,6 +120,10 @@ public class Player : BaseCharacter
     {
         int oldLvl = _lvl;
         _lvl++;
+
+        var levelUpSound = Game.SoundFX.Default.levelUpSound;
+        Game.SoundFX.PlaySoundFXClip(levelUpSound.audioClip, transform, levelUpSound.volume, true);
+
         GameEvents.RaiseLvlUpEvent(oldLvl, _lvl);
     }
 }

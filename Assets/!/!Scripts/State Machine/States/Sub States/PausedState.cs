@@ -8,12 +8,14 @@ public class PausedState : BaseState
     public override void EnterState()
     {
         RegisterCallbacks();
+        Game.Music.SetLowPassOn();
         Time.timeScale = 0;
     }
 
     public override void ExitState()
     {
         UnregisterCallbacks();
+        Game.Music.SetLowPassOff();
     }
 
     void RegisterCallbacks()

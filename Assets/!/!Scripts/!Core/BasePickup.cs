@@ -31,6 +31,11 @@ public class BasePickup : MonoBehaviour, IPoolable
                 break;
         }
 
+        /*
+        var pickupSound = Game.SoundFX.Default.pickupSound;
+        Game.SoundFX.PlaySoundFXClip(pickupSound.audioClip, transform, pickupSound.volume);
+        */
+
         Game.ObjectPooler.Return(this);
     }
 

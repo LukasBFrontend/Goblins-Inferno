@@ -29,5 +29,14 @@ public class MainMenuHandler : BaseMenu
         Initialize(rootElement, startMenuData, optionsMenuData, creditsMenuData);
         _highscoreText = rootElement.Q<Label>("HighscoreText");
         _highscoreText.text = GameSaveState.Score.HighScore.ToString();
+
+        var buttonPressedSound = Game.SoundFX.Default.buttonPressSound;
+        rootElement.Query<Button>().ForEach(
+            button => button.clicked += () => Game.SoundFX.PlaySoundFXClip(
+                buttonPressedSound.audioClip,
+                transform,
+                buttonPressedSound.volume
+            )
+        );
     }
 }

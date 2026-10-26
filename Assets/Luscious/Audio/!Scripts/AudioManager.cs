@@ -12,7 +12,7 @@ namespace Luscious.Audio
         MusicInterface _musicInterface;
 
         public SoundFXInterface SoundFX => _soundFXInterface;
-        public SoundMixerInterface MixerControls => _soundMixerInterface;
+        public SoundMixerInterface Mixer => _soundMixerInterface;
         public MusicInterface Music => _musicInterface;
 
 

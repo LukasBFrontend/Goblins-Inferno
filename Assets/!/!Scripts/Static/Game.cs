@@ -1,3 +1,5 @@
+using Luscious.Audio;
+using Luscious;
 using UnityEngine;
 
 public static class Game
@@ -9,6 +11,10 @@ public static class Game
     public static UpgradeOptionManager UpgradeOptions => GetSingleton<UpgradeOptionManager>();
     public static ObjectPooler ObjectPooler => GetSingleton<ObjectPooler>();
     public static EnemySpawner EnemySpawner => GetSingleton<EnemySpawner>();
+
+    public static SoundMixerInterface SoundMixer => GetSingleton<AudioManager>().Mixer;
+    public static SoundFXInterface SoundFX => GetSingleton<AudioManager>().SoundFX;
+    public static MusicInterface Music => GetSingleton<AudioManager>().Music;
 
     public static Player Player => GetFirstOrDefault(_player);
 

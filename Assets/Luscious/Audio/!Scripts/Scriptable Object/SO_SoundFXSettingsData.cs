@@ -12,6 +12,7 @@ namespace Luscious.Audio
         public SO_SoundEffectData pickupSound;
         public SO_SoundEffectData chestOpenSound;
         public SO_SoundEffectData jumpLandSound;
+        public SO_SoundEffectData levelUpSound;
 
         [System.Serializable]
         public struct SO_SoundEffectData

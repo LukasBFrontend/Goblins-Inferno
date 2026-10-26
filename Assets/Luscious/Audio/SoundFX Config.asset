@@ -12,22 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59050ab7ede9694bbec590dd5b0e893, type: 3}
   m_Name: SoundFX Config
   m_EditorClassIdentifier: Assembly-CSharp::SO_SoundFXSettingsData
-  audioMixerGroup: {fileID: -8291191789860906522, guid: e442e6bc43b334543a918c587d0b546a, type: 2}
   buttonPressSound:
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 658be94ac7911914daf8e969c669dce2, type: 3}
     volume: 50
   gameOverSound:
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: ca2b4c29b877b464f97772d2ef7c6735, type: 3}
     volume: 50
   lvlStartSound:
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 6e8f60b1a6d21ea43bb2a9a768225d50, type: 3}
     volume: 50
   pickupSound:
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 52c0a4fa8fc853342a52646651c9e987, type: 3}
     volume: 50
   chestOpenSound:
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 9ad880ac0710d36469c7fa1cf2d1bed6, type: 3}
     volume: 50
   jumpLandSound:
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 08465d1cb4162c647b70438106e85670, type: 3}
     volume: 50
+  levelUpSound:
+    audioClip: {fileID: 8300000, guid: 52c0a4fa8fc853342a52646651c9e987, type: 3}
+    volume: 75

@@ -63,8 +63,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundMixerManager
   audioMixer: {fileID: 24100000, guid: e442e6bc43b334543a918c587d0b546a, type: 2}
   masterVolumeMultiplier: 1
-  soundFXVolumeMultiplier: 1
-  musicVolumeMultiplier: 1
+  soundFXVolumeMultiplier: 3
+  musicVolumeMultiplier: 0.5
 --- !u!114 &3845876790373939366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,9 +77,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1aa50f5fc8d08c4a9094fbefac86e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
-  audioMixerGroup: {fileID: -8980722355824931480, guid: e442e6bc43b334543a918c587d0b546a, type: 2}
   musicSettings: {fileID: 11400000, guid: c8988fada347cba42b9029584085c405, type: 2}
-  playAutoOnSceneLoad: 1
+  mixerGroup: {fileID: -8980722355824931480, guid: e442e6bc43b334543a918c587d0b546a, type: 2}
+  lowPassCutoffFrequency: 3000
+  autoPlayOnSceneLoad: 1
+  _audioManager: {fileID: 352907459215442143}
 --- !u!114 &5022568188458768452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,5 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a083a81924724fd43960a7ceaff39f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundFXManager
-  audioMixerGroup: {fileID: -8291191789860906522, guid: e442e6bc43b334543a918c587d0b546a, type: 2}
-  settings: {fileID: 11400000, guid: e34075b02eb781c448c1c687c8409558, type: 2}
+  config: {fileID: 11400000, guid: e34075b02eb781c448c1c687c8409558, type: 2}
+  mixerGroup: {fileID: -8291191789860906522, guid: e442e6bc43b334543a918c587d0b546a, type: 2}
+  priorityMixerGroup: {fileID: -7899145629499349969, guid: e442e6bc43b334543a918c587d0b546a, type: 2}

@@ -31,6 +31,7 @@ public class LevelState : BaseState
     {
         await SceneManager.LoadSceneAsync(0);
 
+        Game.Music.SetLowPassOff();
         CurrentSubState.ExitState();
         SwitchState(Factory.MainMenu());
     }

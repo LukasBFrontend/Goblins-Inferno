@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Luscious.Audio
 {
-    public static class Utils
+    public static class AudioUtils
     {
         const float MINIMUM_VOLUME_DB = -80f;
 
