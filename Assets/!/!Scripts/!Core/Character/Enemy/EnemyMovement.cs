@@ -19,12 +19,24 @@ public class EnemyMovement : MonoBehaviour
     Rigidbody _rigidbody;
     Enemy _enemy;
     bool _movementEnabled = true;
-    bool _enemyIsStationary => _enemy.Rigidbody.linearVelocity.magnitude < 0.1f;
-
     bool _isRetreating;
     bool _canStartFleeing = true;
     Vector3 _nudgeSignal;
     Coroutine _retreatCoroutine;
+
+    bool EnemyIsStationary => _enemy.Rigidbody.linearVelocity.magnitude < 0.1f;
+
+    public void Enable()
+    {
+        _movementEnabled = true;
+    }
+
+    public void Reset()
+    {
+        _movementEnabled = false;
+        _canStartFleeing = true;
+        _isRetreating = false;
+    }
 
     void Awake()
     {
@@ -47,13 +59,14 @@ public class EnemyMovement : MonoBehaviour
         }
 
         CalculateNudgeSignal(checkNeigboursRadius);
-        TrackPlayer(stopAtDistance, decelerationDistance, kitingBehavior.retreatToDistance);
+        TrackPlayer(stopAtDistance, decelerationDistance, kitingBehavior);
     }
 
     void OnValidate()
     {
         if (movementType == EnemyMovementType.Melee)
         {
+            kitingBehavior.retreatThreshold = 0f;
             kitingBehavior.retreatToDistance = 0f;
             kitingBehavior.retreatCooldown = 0f;
         }
@@ -73,19 +86,19 @@ public class EnemyMovement : MonoBehaviour
         _rigidbody.linearVelocity = Vector3.zero;
     }
 
-    void TrackPlayer(float distanceAway, float stopDistance, float kitingDistance)
+    void TrackPlayer(float stopAtDistance, float stopDistance, KitingData kitingData)
     {
         Vector3 direction = _enemy.DirectionTo(Game.Player);
         float distanceToPlayer = _enemy.DistanceTo(Game.Player);
 
         if (
-            distanceToPlayer < kitingDistance && !_isRetreating && _canStartFleeing
+            distanceToPlayer < kitingData.retreatThreshold && !_isRetreating && _canStartFleeing
         )
         {
-            _retreatCoroutine = StartCoroutine(RetreatRoutine(kitingDistance));
+            _retreatCoroutine = StartCoroutine(RetreatRoutine(kitingData.retreatToDistance));
         }
 
-        float t = stopDistance > 0f ? (distanceToPlayer - distanceAway) / stopDistance: 1f;
+        float t = stopDistance > 0f ? (distanceToPlayer - stopAtDistance) / stopDistance: 1f;
 
         float adjustedMoveSpeed = Mathf.Lerp(0f, baseMoveSpeed, t);
 
@@ -97,7 +110,7 @@ public class EnemyMovement : MonoBehaviour
 
         _rigidbody.linearVelocity = (direction + _nudgeSignal).normalized * adjustedMoveSpeed;
 
-        _enemy.Animator.SetBool("IsStationary", _enemyIsStationary);
+        _enemy.Animator.SetBool("IsStationary", EnemyIsStationary);
 
         SetRotationDirection(direction);
     }
@@ -167,10 +180,7 @@ public class EnemyMovement : MonoBehaviour
 
         yield return new WaitForSeconds(kitingBehavior.retreatCooldown);
 
-        if (_movementEnabled)
-        {
-            _canStartFleeing = true;
-        }
+        _canStartFleeing = true;
     }
 }
 
@@ -183,6 +193,7 @@ public enum EnemyMovementType
 [System.Serializable]
 struct KitingData
 {
+    public float retreatThreshold;
     public float retreatToDistance;
     public float retreatCooldown;
 }

@@ -276,8 +276,12 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4501246944948846756, guid: d5d8371c68ab79649941755b979ea139, type: 3}
+      propertyPath: kitingBehavior.retreatThreshold
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501246944948846756, guid: d5d8371c68ab79649941755b979ea139, type: 3}
       propertyPath: kitingBehavior.retreatToDistance
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6549165088060388711, guid: d5d8371c68ab79649941755b979ea139, type: 3}
       propertyPath: m_LocalPosition.x

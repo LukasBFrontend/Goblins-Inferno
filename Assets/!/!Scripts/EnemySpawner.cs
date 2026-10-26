@@ -64,7 +64,8 @@ public class EnemySpawner : Singleton<EnemySpawner>
             {
                 Vector3 spawnPoint = Game.Player.transform.position + Utils.RandomDirection() * data.spawnDistance;
 
-                Game.ObjectPooler.Spawn<Enemy>(spawnData.poolableData, spawnPoint, Quaternion.identity);
+                Enemy enemy = Game.ObjectPooler.Spawn<Enemy>(spawnData.poolableData, spawnPoint, Quaternion.identity);
+                enemy.Movement.Enable();
             }
         }
     }

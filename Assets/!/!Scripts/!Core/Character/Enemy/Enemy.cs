@@ -4,7 +4,10 @@ public class Enemy : BaseCharacter, IPoolable
 {
     [Header("Enemy")]
     [SerializeField] EnemyLoot loot;
+    [SerializeField] EnemyMovement movement;
     [SerializeField] int scoreValue = 100;
+
+    public EnemyMovement Movement => movement;
 
     public string PoolableId { get; set; }
 
@@ -22,5 +25,6 @@ public class Enemy : BaseCharacter, IPoolable
     void IPoolable.Reset()
     {
         Health.Reset();
+        Movement.Reset();
     }
 }

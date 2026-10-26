@@ -6311,6 +6311,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 4659688784483778931, guid: 44c30bff0d16dfe499a7c008a37f6563, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7743788842054305723, guid: 44c30bff0d16dfe499a7c008a37f6563, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

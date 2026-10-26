@@ -162,6 +162,7 @@ MonoBehaviour:
   collider: {fileID: 3490434929943945283}
   health: {fileID: 8292207059351111743}
   loot: {fileID: 7695627580935869272}
+  movement: {fileID: 4501246944948846756}
   scoreValue: 100
 --- !u!114 &7695627580935869272
 MonoBehaviour:
@@ -207,13 +208,13 @@ MonoBehaviour:
     m_Bits: 128
   movementType: 0
   baseMoveSpeed: 4
-  stopAt: 0.5
-  stopDistance: 0.1
-  personalSpace: 2
+  stopAtDistance: 10
+  decelerationDistance: 1
+  checkNeigboursRadius: 2
   kitingBehavior:
-    kitingDistance: 0
-    retreatMargin: 0
+    retreatToDistance: 0
     retreatCooldown: 0
+  log: 0
 --- !u!114 &8292207059351111743
 MonoBehaviour:
   m_ObjectHideFlags: 0
