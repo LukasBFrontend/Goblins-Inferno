@@ -14,11 +14,12 @@ namespace Luscious.Audio
         public SO_SoundEffectData jumpLandSound;
         public SO_SoundEffectData levelUpSound;
 
-        [System.Serializable]
-        public struct SO_SoundEffectData
-        {
-            public AudioClip audioClip;
-            [Range(0, 100)] public float volume;
-        }
+    }
+    
+    [System.Serializable]
+    public struct SO_SoundEffectData
+    {
+        public AudioClip audioClip;
+        [Range(0, 100)] public float volume;
     }
 }

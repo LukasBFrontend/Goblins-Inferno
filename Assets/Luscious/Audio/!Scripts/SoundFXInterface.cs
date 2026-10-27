@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using System.Globalization;
 
 namespace Luscious.Audio
 {
-
     public class SoundFXInterface : MonoBehaviour
     {
         [SerializeField] SO_SoundFXConfig config;
@@ -11,7 +11,6 @@ namespace Luscious.Audio
         [SerializeField] AudioMixerGroup mixerGroup;
         [SerializeField] AudioMixerGroup priorityMixerGroup;
 
-        private Transform soundFXParent;
         private readonly AudioSource _repeatSource = null;
         private float _timer = 0f;
         private float _repeatDelay = 0f;
@@ -29,8 +28,9 @@ namespace Luscious.Audio
         /// <param name="volume">The relative volume at which to play the AudioClip(s). Expected to be a value between 0f and 100f.</param>
         public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, bool sendDuckSignal = false)
         {
-            AudioSource audioSource = new GameObject("SoundFXObject").AddComponent<AudioSource>();
+            AudioSource audioSource = new GameObject(CreateObjectName(audioClip)).AddComponent<AudioSource>();
 
+            audioSource.transform.SetParent(transform);
             audioSource.transform.position = spawnTransform.position;
             audioSource.clip = audioClip;
             audioSource.volume = Mathf.Log10(volume / 100 + 1);
@@ -39,25 +39,46 @@ namespace Luscious.Audio
 
             float clipLength = audioSource.clip.length + 1f;
 
-            DontDestroyOnLoad(audioSource.gameObject);
+            Destroy(audioSource.gameObject, clipLength);
+        }
+
+        /// <summary>
+        /// Play a sound effect once.
+        /// </summary>
+        /// <param name="soundFXData"></param>
+        /// <param name="spawnTransform">The transform which will be used to determine where the SoundFXObject is spawned.</param>
+        /// <param name="volume">The relative volume at which to play the AudioClip(s). Expected to be a value between 0f and 100f.</param>
+        public void PlaySoundFXClip(SO_SoundEffectData soundFXData, Transform spawnTransform, bool sendDuckSignal = false)
+        {
+            AudioSource audioSource = new GameObject(CreateObjectName(soundFXData.audioClip)).AddComponent<AudioSource>();
+
+            audioSource.transform.SetParent(transform);
+            audioSource.transform.position = spawnTransform.position;
+            audioSource.clip = soundFXData.audioClip;
+            audioSource.volume = Mathf.Log10(soundFXData.volume / 100 + 1);
+            audioSource.Play();
+            audioSource.outputAudioMixerGroup = sendDuckSignal ? priorityMixerGroup : mixerGroup;
+
+            float clipLength = audioSource.clip.length + 1f;
+
             Destroy(audioSource.gameObject, clipLength);
         }
 
         /// <summary>
         /// Play a random sound effect from an array of AudioClips.
         /// </summary>
-        /// <param name="audioClip"></param>
+        /// <param name="audioClips"></param>
         /// <param name="spawnTransform">The transform which will be used to determine where the SoundFXObject is spawned.</param>
         /// <param name="volume">The relative volume at which to play the AudioClip(s). Expected to be a value between 0f and 100f.</param>
-        public void PlayRandomSoundFXClip(AudioClip[] audioClip, Transform spawnTransform, float volume)
+        public void PlayRandomSoundFXClip(AudioClip[] audioClips, Transform spawnTransform, float volume)
         {
-            int rand = Random.Range(0, audioClip.Length);
+            int rand = Random.Range(0, audioClips.Length);
 
-            AudioSource audioSource = new GameObject("SoundFXObject").AddComponent<AudioSource>();
+            AudioSource audioSource = new GameObject(CreateObjectName(audioClips[0])).AddComponent<AudioSource>();
 
-            audioSource.transform.SetParent(soundFXParent);
+            audioSource.transform.SetParent(transform);
             audioSource.transform.position = spawnTransform.position;
-            audioSource.clip = audioClip[rand];
+            audioSource.clip = audioClips[rand];
             audioSource.volume = Mathf.Log10(volume / 100 + 1);
             audioSource.Play();
 
@@ -79,8 +100,9 @@ namespace Luscious.Audio
             _iterationsLeft = iterations;
             _repeatDelay = delay;
 
-            AudioSource audioSource = new GameObject("SoundFXObject").AddComponent<AudioSource>();
+            AudioSource audioSource = new GameObject(CreateObjectName(audioClip)).AddComponent<AudioSource>();
 
+            audioSource.transform.SetParent(transform);
             audioSource.transform.position = spawnTransform.position;
             _repeatSource.clip = audioClip;
             _repeatSource.volume = Mathf.Log10(volume / 100 + 1);
@@ -92,13 +114,6 @@ namespace Luscious.Audio
 
         /* MONOBEHAVIOR LIFECYCLE METHODS */
 
-        private void Awake()
-        {
-            soundFXParent = new GameObject("SoundFX").transform;
-            soundFXParent.SetParent(transform);
-            DontDestroyOnLoad(soundFXParent);
-        }
-
         private void Update()
         {
             if (_timer <= 0 && _iterationsLeft > 0)
@@ -109,6 +124,13 @@ namespace Luscious.Audio
             }
 
             _timer -= Time.deltaTime;
+        }
+
+        /* PRIVATE METHODS */
+
+        private string CreateObjectName(AudioClip audioClip)
+        {
+            return $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(audioClip.name.ToLower())} (SoundFXObject)";
         }
 
         private void OnGameOver()

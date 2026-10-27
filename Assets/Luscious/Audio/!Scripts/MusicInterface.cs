@@ -17,11 +17,12 @@ namespace Luscious.Audio
         [SerializeField] float lowPassCutoffFrequency = 3000f;
         [Space()]
         [SerializeField] bool autoPlayOnSceneLoad = true;
-        Dictionary<int, MusicTrackControls> _sceneMusicLookUp = new();
-        readonly Dictionary<int, SO_SceneMusicConfig.TrackSettings> _sceneMusicSettingsLookUp = new();
-        bool _playMusic;
-        AudioManager _audioManager;
-        float _startCutoffFreq;
+
+        private readonly Dictionary<int, MusicTrackControls> _sceneMusicLookUp = new();
+        private readonly Dictionary<int, SO_SceneMusicConfig.TrackSettings> _sceneMusicSettingsLookUp = new();
+        private bool _playMusic;
+        private AudioManager _audioManager;
+        private float _startCutoffFreq;
 
         public void SetLowPassOn()
         {
