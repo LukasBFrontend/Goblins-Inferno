@@ -153,12 +153,29 @@ public class Weapon :  MonoBehaviour
 
         int damage = (int)(baseDamage * damageMultiplier);
 
+        int critModifier = RollCritModifier((int)weaponStats.CritChance.Evaluate());
+        damage *= critModifier;
+
         int enemyHp = enemy.Health.TakeDamage(damage);
 
         if (enemyHp == 0)
         {
             targetTracker.MarkDirty();
         }
+    }
+
+    int RollCritModifier(int critChance)
+    {
+        int critLevel = critChance / 100;
+
+        int damageCritModifier = critLevel + 1;
+
+        if (Random.Range(0, 100) < (critChance % 100))
+        {
+            damageCritModifier += 1;
+        }
+
+        return damageCritModifier;
     }
 
     void PlayWeaponVFX(float animationDuration)

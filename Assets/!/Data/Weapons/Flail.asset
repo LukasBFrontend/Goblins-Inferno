@@ -32,12 +32,19 @@ MonoBehaviour:
       baseValue: 25
       flatScaling: 5
     projectileCount:
-      includeAsUpgradeOption: 1
+      includeAsUpgradeOption: 0
       UISprite: {fileID: 21300000, guid: 746bd06602d72174da44b9e40f6b07c1, type: 3}
       name: Flail Projectiles
       shortName: projectile count
       baseValue: 1
       flatScaling: 1
+    critChance:
+      includeAsUpgradeOption: 1
+      UISprite: {fileID: 21300000, guid: 746bd06602d72174da44b9e40f6b07c1, type: 3}
+      name: Flail Crit Chance
+      shortName: crit chance
+      baseValue: 1
+      flatScaling: 20
     size:
       includeAsUpgradeOption: 1
       UISprite: {fileID: 21300000, guid: 746bd06602d72174da44b9e40f6b07c1, type: 3}
@@ -48,5 +55,7 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 128
-  projectilePrefab: {fileID: 0}
+  projectile:
+    id: 
+    prefab: {fileID: 0}
   parentProjectiles: 0

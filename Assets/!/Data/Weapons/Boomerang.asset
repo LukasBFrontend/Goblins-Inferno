@@ -38,6 +38,13 @@ MonoBehaviour:
       shortName: projectiles
       baseValue: 1
       flatScaling: 1
+    critChance:
+      includeAsUpgradeOption: 0
+      UISprite: {fileID: 21300000, guid: c1c38b15562539d4fb59ee473de89842, type: 3}
+      name: Boomerang Crit Chance
+      shortName: crit chance
+      baseValue: 1
+      flatScaling: 10
     size:
       includeAsUpgradeOption: 0
       UISprite: {fileID: 21300000, guid: c1c38b15562539d4fb59ee473de89842, type: 3}

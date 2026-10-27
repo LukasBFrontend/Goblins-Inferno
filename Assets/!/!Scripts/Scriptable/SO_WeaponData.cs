@@ -43,5 +43,6 @@ public struct WeaponStatsData
     public AdditiveStatData baseSize;
     public AdditiveStatData damage;
     public AdditiveStatData projectileCount;
+    public AdditiveStatData critChance;
     public MultiplicativeStatData size;
 }

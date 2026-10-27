@@ -44,10 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4010c38761a5b4a84526b6d34dd7ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
-  dontDestroyOnLoad: 0
+  singleton:
+    dontDestroyOnLoad: 0
   poolParent: {fileID: 2490264884529183924}
   poolPrewarmData:
   - poolable:
       id: Damage Text
       prefab: {fileID: 8885849690013805291, guid: 523676bc81126d048b9faa7e7a2dbf37, type: 3}
-    spawnAmount: 20
+    spawnAmount: 60
