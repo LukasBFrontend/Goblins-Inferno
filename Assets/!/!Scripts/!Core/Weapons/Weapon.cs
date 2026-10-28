@@ -134,9 +134,9 @@ public class Weapon :  MonoBehaviour
             : null
         ;
 
-        int damage = (int)(baseDamage * damageMultiplier);
+        int damage = CalculateHitDamage();
 
-        projectile.Initialize(_wielder, random, damage);
+        projectile.Initialize(_wielder, random, damage, (int)weaponStats.CritChance.Evaluate());
     }
 
     void RegisterHit(Enemy enemy)
@@ -146,17 +146,8 @@ public class Weapon :  MonoBehaviour
             Instantiate(data.hitVFX, enemy.transform.position + new Vector3(0, 1, -1f), Quaternion.identity);
         }
 
-        CharacterStats characterStats = Game.Player.Stats.Character;
-        WeaponStats weaponStats = Game.Player.Stats.GetWeaponModifier(data.weaponName);
-        float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
-        float baseDamage = weaponStats.Damage.Evaluate();
-
-        int damage = (int)(baseDamage * damageMultiplier);
-
-        int critModifier = RollCritModifier((int)weaponStats.CritChance.Evaluate());
-        damage *= critModifier;
-
-        int enemyHp = enemy.Health.TakeDamage(damage);
+        int damage = CalculateHitDamage(out int critLevel);
+        int enemyHp = enemy.Health.TakeDamage(damage, critLevel); // REEE
 
         if (enemyHp == 0)
         {
@@ -164,18 +155,33 @@ public class Weapon :  MonoBehaviour
         }
     }
 
-    int RollCritModifier(int critChance)
+    int CalculateHitDamage()
     {
-        int critLevel = critChance / 100;
+        CharacterStats characterStats = Game.Player.Stats.Character;
+        WeaponStats weaponStats = Game.Player.Stats.GetWeaponModifier(data.weaponName);
+        float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
+        float baseDamage = weaponStats.Damage.Evaluate();
 
-        int damageCritModifier = critLevel + 1;
+        int damage = (int)(baseDamage * damageMultiplier);
 
-        if (Random.Range(0, 100) < (critChance % 100))
-        {
-            damageCritModifier += 1;
-        }
+        return damage;        
+    }
 
-        return damageCritModifier;
+    int CalculateHitDamage(out int critLevel)
+    {
+        CharacterStats characterStats = Game.Player.Stats.Character;
+        WeaponStats weaponStats = Game.Player.Stats.GetWeaponModifier(data.weaponName);
+        float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
+        float baseDamage = weaponStats.Damage.Evaluate();
+
+        int damage = (int)(baseDamage * damageMultiplier);
+
+        int critModifier = WeaponsUtils.RollCritModifier((int)weaponStats.CritChance.Evaluate(), out int level);
+
+        critLevel = level;
+        damage *= critModifier;
+
+        return damage; 
     }
 
     void PlayWeaponVFX(float animationDuration)

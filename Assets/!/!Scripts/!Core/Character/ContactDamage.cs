@@ -36,7 +36,7 @@ public class ContactDamage : MonoBehaviour
             yield break;
         }
 
-        player.Health.TakeDamage(contactDamage);
+        player.Health.TakeDamage(contactDamage, 0);
 
         _canAttack = false;
         yield return _waitForSeconds;

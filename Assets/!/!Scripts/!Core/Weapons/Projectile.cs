@@ -27,12 +27,47 @@ public class Projectile : MonoBehaviour, IPoolable
 
     BaseCharacter _sender;
     int _damage;
+    int _critChance;
     bool _hitEverything;
     List<BaseCharacter> _charactersHit = new();
     WaitForSeconds _bombWaitForSeconds;
 
     public SO_ProjectileData Data => data;
     public string PoolableId { get; set; }
+
+    /// <summary>
+    /// Manually sets the target character of the projectile and initiates the projectile arc.
+    /// </summary>
+    /// <param name="initialTarget"></param>
+    /// <param name="damage"></param>
+    public void Initialize(BaseCharacter sender, BaseCharacter initialTarget, int damage, int critChance)
+    {
+        _sender = sender;
+        _damage = damage;
+        _critChance = critChance;
+
+        switch (data.arcMode)
+        {
+            case ProjectileArcMode.None:
+                _hitEverything = false;
+                StartCoroutine(StaticAnimationRoutine(initialTarget));
+                break;
+            case ProjectileArcMode.HitMiss:
+                _hitEverything = true;
+                StartCoroutine(HitMissRoutine(initialTarget));
+                break;
+            case ProjectileArcMode.Boomerang:
+                _hitEverything = true;
+                StartCoroutine(BoomerangRoutine(initialTarget));
+                break;
+            case ProjectileArcMode.Physics:
+                _hitEverything = false;
+                StartCoroutine(BombRoutine(initialTarget));
+                break;
+            default:
+                throw new System.NotImplementedException();
+        }
+    }
 
     /// <summary>
     /// Manually sets the target character of the projectile and initiates the projectile arc.
@@ -267,7 +302,8 @@ public class Projectile : MonoBehaviour, IPoolable
 
     void RegisterHit(BaseCharacter character)
     {
-        character.Health.TakeDamage(_damage);
+        int damage = _damage * WeaponsUtils.RollCritModifier(_critChance, out int critLevel);
+        character.Health.TakeDamage(damage, critLevel);
         _charactersHit.Add(character);
 
         if (logOnTargetHit)

@@ -39,12 +39,14 @@ public class Health : MonoBehaviour
     /// Subtracts amount from the character health. If it reaches zero, invokes Die().
     /// </summary>
     /// <param name="damageAmount"></param>
-    public int TakeDamage(int damageAmount)
+    public int TakeDamage(int damageAmount, int critLevel)
     {
         if (_isInvincibilityFrame)
         {
             return 0;
         }
+
+        Debug.Log($"critLevel: <color=white>{critLevel}</color>");
 
         if (showDamageText)
         {
