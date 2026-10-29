@@ -11,6 +11,7 @@ public static class WeaponsUtils
         if (Random.Range(0, 100) < (critChance % 100))
         {
             damageCritModifier += 1;
+            critLevel += 1;
         }
 
         return damageCritModifier;

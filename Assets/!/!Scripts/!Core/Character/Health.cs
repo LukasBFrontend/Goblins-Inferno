@@ -57,7 +57,7 @@ public class Health : MonoBehaviour
                 Quaternion.identity
             );
 
-            damageText.Initialize(damageAmount);
+            damageText.Initialize(damageAmount, critLevel);
         }
 
         _currentHealth -= damageAmount;

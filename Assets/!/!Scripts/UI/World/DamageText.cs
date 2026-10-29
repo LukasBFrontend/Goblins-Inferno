@@ -1,9 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class DamageText : MonoBehaviour, IPoolable
 {
+    [SerializeField] Color baseColor = Color.white;
+    [SerializeField] List<Color> damageColorsByCritLevel;
     [SerializeField] string labelId = "DamageTextLabel";
     [Header("USS-transition classes")]
     [SerializeField] string textGrowClass = "textGrow";
@@ -14,9 +17,14 @@ public class DamageText : MonoBehaviour, IPoolable
 
     public string PoolableId { get; set; }
 
-    public void Initialize(int damage)
+    public void Initialize(int damage, int critLevel)
     {
         _textLabel.text = damage.ToString();
+        _textLabel.style.color = critLevel > 0
+            ? damageColorsByCritLevel[(critLevel - 1) % damageColorsByCritLevel.Count]
+            : baseColor
+        ;
+
         StartCoroutine(TextAnimationRoutine());
     }
 
@@ -25,6 +33,7 @@ public class DamageText : MonoBehaviour, IPoolable
         _textLabel.RemoveFromClassList(textGrowClass);
         _textLabel.RemoveFromClassList(textFadeClass);
         _textLabel.text = "[damage]";
+        _textLabel.style.color = baseColor;
     }
 
 

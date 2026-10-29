@@ -29,8 +29,8 @@ MonoBehaviour:
       UISprite: {fileID: 21300000, guid: f7560c1ee6232dc4f95e7d7c3a43710a, type: 3}
       name: Bomb Damage
       shortName: damage
-      baseValue: 25
-      flatScaling: 5
+      baseValue: 20
+      flatScaling: 10
     projectileCount:
       includeAsUpgradeOption: 0
       UISprite: {fileID: 21300000, guid: f7560c1ee6232dc4f95e7d7c3a43710a, type: 3}
@@ -43,7 +43,7 @@ MonoBehaviour:
       UISprite: {fileID: 21300000, guid: f7560c1ee6232dc4f95e7d7c3a43710a, type: 3}
       name: Bomb Crit Chance
       shortName: crit chance
-      baseValue: 3
+      baseValue: 5
       flatScaling: 10
     size:
       includeAsUpgradeOption: 0

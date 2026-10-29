@@ -30,7 +30,7 @@ MonoBehaviour:
       name: Flail Damage
       shortName: damage
       baseValue: 25
-      flatScaling: 5
+      flatScaling: 7.5
     projectileCount:
       includeAsUpgradeOption: 0
       UISprite: {fileID: 21300000, guid: 746bd06602d72174da44b9e40f6b07c1, type: 3}
@@ -43,8 +43,8 @@ MonoBehaviour:
       UISprite: {fileID: 21300000, guid: 746bd06602d72174da44b9e40f6b07c1, type: 3}
       name: Flail Crit Chance
       shortName: crit chance
-      baseValue: 5
-      flatScaling: 20
+      baseValue: 10
+      flatScaling: 10
     size:
       includeAsUpgradeOption: 1
       UISprite: {fileID: 21300000, guid: 746bd06602d72174da44b9e40f6b07c1, type: 3}

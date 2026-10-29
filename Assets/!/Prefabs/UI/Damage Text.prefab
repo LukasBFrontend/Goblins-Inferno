@@ -103,6 +103,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa6bf53067b8b948b337342c27f4477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageText
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
+  damageColorsByCritLevel:
+  - {r: 0.8867924, g: 0.7859416, b: 0, a: 1}
+  - {r: 0.26521456, g: 0.035294134, b: 0.8039216, a: 1}
+  - {r: 0.8039216, g: 0.38031447, b: 0.0392157, a: 1}
+  - {r: 0.7509433, g: 0.026920503, b: 0.6704726, a: 1}
   labelId: DamageText
   textGrowClass: textGrow
   textFadeClass: textFade
