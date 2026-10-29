@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using System.Globalization;
+using System.Collections;
+using System;
 
 namespace Luscious.Audio
 {
@@ -70,21 +72,31 @@ namespace Luscious.Audio
         /// <param name="audioClips"></param>
         /// <param name="spawnTransform">The transform which will be used to determine where the SoundFXObject is spawned.</param>
         /// <param name="volume">The relative volume at which to play the AudioClip(s). Expected to be a value between 0f and 100f.</param>
-        public void PlayRandomSoundFXClip(AudioClip[] audioClips, Transform spawnTransform, float volume)
+        public SoundFXLifetimeData PlayRandomSoundFXClip(AudioClip[] audioClips, Transform spawnTransform, float volume, int lastIndex, out int selectedIndex)
         {
-            int rand = Random.Range(0, audioClips.Length);
+            if (audioClips.Length < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(PlayRandomSoundFXClip));
+            }
 
-            AudioSource audioSource = new GameObject(CreateObjectName(audioClips[0])).AddComponent<AudioSource>();
+            selectedIndex = UnityEngine.Random.Range(0, audioClips.Length);
+
+            while (selectedIndex == lastIndex)
+            {
+                selectedIndex = UnityEngine.Random.Range(0, audioClips.Length);
+            }
+
+            AudioSource audioSource = new GameObject(CreateObjectName(audioClips[selectedIndex])).AddComponent<AudioSource>();
 
             audioSource.transform.SetParent(transform);
             audioSource.transform.position = spawnTransform.position;
-            audioSource.clip = audioClips[rand];
+            audioSource.clip = audioClips[selectedIndex];
             audioSource.volume = Mathf.Log10(volume / 100 + 1);
             audioSource.Play();
 
             float clipLength = audioSource.clip.length;
 
-            Destroy(audioSource.gameObject, clipLength);
+            return new SoundFXLifetimeData(this, audioSource, clipLength);
         }
 
         /// <summary>
@@ -137,5 +149,39 @@ namespace Luscious.Audio
         {
             PlaySoundFXClip(config.gameOverSound.audioClip, transform, config.gameOverSound.volume);
         }
+
+    }
+
+    public class SoundFXLifetimeData
+    {
+        public AudioSource AudioSource => _audioSource;
+        public float TimeLeft => _timeLeft;
+        public bool Active => _timeLeft > 0;
+        public OnLifetimeOver OnLifeTimeOver { get => _onLifeTimeOver; set => _onLifeTimeOver = value; }
+        private AudioSource _audioSource;
+        private float _timeLeft;
+        private OnLifetimeOver _onLifeTimeOver;
+
+        public SoundFXLifetimeData(MonoBehaviour monoBehavior, AudioSource audioSource, float lifeTime)
+        {
+            _audioSource = audioSource;
+            _timeLeft = lifeTime;
+
+            monoBehavior.StartCoroutine(LifeTimeRoutine());
+        }
+
+        private IEnumerator LifeTimeRoutine()
+        {
+            while(_timeLeft > 0)
+            {
+                yield return null;
+                _timeLeft -= Time.deltaTime;
+            }
+
+            OnLifeTimeOver.Invoke();
+            UnityEngine.Object.Destroy(_audioSource.gameObject);
+        }
+
+        public delegate void OnLifetimeOver();
     }
 }

@@ -46,8 +46,6 @@ public class Health : MonoBehaviour
             return 0;
         }
 
-        Debug.Log($"critLevel: <color=white>{critLevel}</color>");
-
         if (showDamageText)
         {
             DamageText damageText = Game.ObjectPooler.Spawn<DamageText>

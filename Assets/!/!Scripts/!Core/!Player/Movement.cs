@@ -66,4 +66,5 @@ public class Movement : MonoBehaviour
     {
         _player = GetComponent<Player>();
     }
+
 }
