@@ -1,3 +1,4 @@
+using Luscious.Audio;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Weapons/WeaponData")]
@@ -9,6 +10,7 @@ public class SO_WeaponData : ScriptableObject
     public Sprite sprite;
     public WeaponStatsData stats;
     public GameObject hitVFX;
+    public MultipleSoundsData soundEffect;
     [Tooltip("A weapontype of 'Area' will damage enemies directly while a weapontype of 'Projectile' will attempt to spawn projectiles")]
     public LayerMask hitMask;
     [Header("Only required for projectile weapons")]

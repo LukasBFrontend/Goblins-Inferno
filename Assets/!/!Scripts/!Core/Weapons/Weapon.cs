@@ -16,6 +16,7 @@ public class Weapon :  MonoBehaviour
     public SO_WeaponData Data => data;
 
     Player _wielder;
+    int _lastSoundFXIndex;
 
     public void Initialize(Player wielder)
     {
@@ -33,6 +34,16 @@ public class Weapon :  MonoBehaviour
         float projectileCount = currentStats.ProjectileCount.Evaluate();
 
         targetTracker.SetAttackSize(weaponSize);
+
+        if (data.soundEffect.clips.Count == 1)
+        {
+            Game.SoundFX.PlaySoundFXClip(data.soundEffect.clips[0], transform, data.soundEffect.volume);
+        }
+        else if (data.soundEffect.clips.Count != 0)
+        {
+            Game.SoundFX.PlayRandomSoundFXClip(data.soundEffect.clips.ToArray(), transform, data.soundEffect.volume, _lastSoundFXIndex, out int newSoundFXIndex);
+            _lastSoundFXIndex = newSoundFXIndex;
+        }
 
         StartCoroutine(AttackRoutine(
             Game.Player.Stats.AttackCooldown * .95f,
@@ -164,7 +175,7 @@ public class Weapon :  MonoBehaviour
 
         int damage = (int)(baseDamage * damageMultiplier);
 
-        return damage;        
+        return damage;
     }
 
     int CalculateHitDamage(out int critLevel)
@@ -181,7 +192,7 @@ public class Weapon :  MonoBehaviour
         critLevel = level;
         damage *= critModifier;
 
-        return damage; 
+        return damage;
     }
 
     void PlayWeaponVFX(float animationDuration)

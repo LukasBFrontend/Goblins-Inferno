@@ -52,6 +52,9 @@ MonoBehaviour:
       shortName: range
       multiplierScaling: 15
   hitVFX: {fileID: 0}
+  soundEffect:
+    volume: 30
+    clips: []
   hitMask:
     serializedVersion: 2
     m_Bits: 128

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Luscious.Audio;
 
 [System.Serializable]
 struct ParticleSystemVariables
@@ -31,6 +32,7 @@ public class Projectile : MonoBehaviour, IPoolable
     bool _hitEverything;
     List<BaseCharacter> _charactersHit = new();
     WaitForSeconds _bombWaitForSeconds;
+    SoundFXLifetimeData _currentSoundEffect;
 
     public SO_ProjectileData Data => data;
     public string PoolableId { get; set; }
@@ -298,6 +300,23 @@ public class Projectile : MonoBehaviour, IPoolable
     void OnEnable()
     {
         _bombWaitForSeconds = new(data.lifeTime);
+
+        if (data.soundEffect.audioClip == null)
+        {
+            return;
+        }
+
+        _currentSoundEffect = Game.SoundFX.PlaySoundFXClip(data.soundEffect, transform);
+    }
+
+    void OnDisable()
+    {
+        if(_currentSoundEffect == null || !_currentSoundEffect.Active)
+        {
+            return;
+        }
+
+        _currentSoundEffect.AudioSource.Stop();
     }
 
     void RegisterHit(BaseCharacter character)

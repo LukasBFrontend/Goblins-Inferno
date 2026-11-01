@@ -52,6 +52,14 @@ MonoBehaviour:
       shortName: size
       multiplierScaling: 15
   hitVFX: {fileID: 500345726442012828, guid: 50a810bfd70577b41a2d43ae0241ea2d, type: 3}
+  soundEffect:
+    volume: 4
+    clips:
+    - {fileID: 8300000, guid: 4dbb48e8ae3360c468e416a51f55279e, type: 3}
+    - {fileID: 8300000, guid: 2b934b5dbc2c2e147afedaf5d2628c49, type: 3}
+    - {fileID: 8300000, guid: 3d71998643f3e8e4d863bb6f7ee6eb68, type: 3}
+    - {fileID: 8300000, guid: 7e9cc7be32b4d1140a9398299a6d3c39, type: 3}
+    - {fileID: 8300000, guid: d88a38ba6a0d68f44b001a20cd758b16, type: 3}
   hitMask:
     serializedVersion: 2
     m_Bits: 128

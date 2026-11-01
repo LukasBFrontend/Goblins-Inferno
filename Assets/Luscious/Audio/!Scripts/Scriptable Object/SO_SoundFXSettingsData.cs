@@ -18,7 +18,7 @@ namespace Luscious.Audio
         public SO_SoundEffectData chestOpenSound;
         [Header("Movement")]
         public SO_SoundEffectData jumpLandSound;
-        public FootstepsSoundData footsteps;
+        public MultipleSoundsData footsteps;
 
     }
 
@@ -30,7 +30,7 @@ namespace Luscious.Audio
     }
 
     [System.Serializable]
-    public struct FootstepsSoundData
+    public struct MultipleSoundsData
     {
         [Range(0, 100)] public float volume;
         public List<AudioClip> clips;

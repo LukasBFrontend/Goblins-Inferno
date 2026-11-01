@@ -16,6 +16,9 @@ MonoBehaviour:
   arcMode: 2
   destroyOnContact: 1
   lifeTime: 3
+  soundEffect:
+    volume: 30
+    audioClip: {fileID: 8300000, guid: 90c3cbcb566892841ac6f8b05b1f2edb, type: 3}
   onDestroyVFX: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
   targetReachedThreshold: 0.015
   newTargetRange: 4

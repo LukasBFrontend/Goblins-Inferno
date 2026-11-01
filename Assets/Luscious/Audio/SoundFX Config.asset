@@ -34,7 +34,7 @@ MonoBehaviour:
     volume: 50
     audioClip: {fileID: 8300000, guid: 08465d1cb4162c647b70438106e85670, type: 3}
   footsteps:
-    volume: 3
+    volume: 1.5
     clips:
     - {fileID: 8300000, guid: c0dc7e92b6c9ee94eb7f3143dbd1fbaa, type: 3}
     - {fileID: 8300000, guid: 3591d722b52003c44ad2e11d1368dfc2, type: 3}

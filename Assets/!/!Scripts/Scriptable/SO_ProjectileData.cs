@@ -1,3 +1,4 @@
+using Luscious.Audio;
 using UnityEngine;
 
 [System.Obsolete("Should be refactored")]
@@ -11,6 +12,7 @@ public class SO_ProjectileData : ScriptableObject
     [Header("Lifecycle")]
     public bool destroyOnContact;
     public float lifeTime = 5f;
+    public SO_SoundEffectData soundEffect;
     public GameObject onDestroyVFX;
     [Header("Targeting")]
     [Range(0f, .2f)]

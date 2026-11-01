@@ -50,20 +50,20 @@ namespace Luscious.Audio
         /// <param name="soundFXData"></param>
         /// <param name="spawnTransform">The transform which will be used to determine where the SoundFXObject is spawned.</param>
         /// <param name="volume">The relative volume at which to play the AudioClip(s). Expected to be a value between 0f and 100f.</param>
-        public void PlaySoundFXClip(SO_SoundEffectData soundFXData, Transform spawnTransform, bool sendDuckSignal = false)
+        public SoundFXLifetimeData PlaySoundFXClip(SO_SoundEffectData soundFXData, Transform spawnTransform, bool sendDuckSignal = false)
         {
             AudioSource audioSource = new GameObject(CreateObjectName(soundFXData.audioClip)).AddComponent<AudioSource>();
 
             audioSource.transform.SetParent(transform);
             audioSource.transform.position = spawnTransform.position;
             audioSource.clip = soundFXData.audioClip;
-            audioSource.volume = Mathf.Log10(soundFXData.volume / 100 + 1);
+            audioSource.volume = soundFXData.volume / 100f;
             audioSource.Play();
             audioSource.outputAudioMixerGroup = sendDuckSignal ? priorityMixerGroup : mixerGroup;
 
             float clipLength = audioSource.clip.length + 1f;
 
-            Destroy(audioSource.gameObject, clipLength);
+            return new SoundFXLifetimeData(this, audioSource, clipLength);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Luscious.Audio
             audioSource.transform.SetParent(transform);
             audioSource.transform.position = spawnTransform.position;
             audioSource.clip = audioClips[selectedIndex];
-            audioSource.volume = Mathf.Log10(volume / 100 + 1);
+            audioSource.volume = volume / 100f;
             audioSource.Play();
 
             float clipLength = audioSource.clip.length;
@@ -117,7 +117,7 @@ namespace Luscious.Audio
             audioSource.transform.SetParent(transform);
             audioSource.transform.position = spawnTransform.position;
             _repeatSource.clip = audioClip;
-            _repeatSource.volume = Mathf.Log10(volume / 100 + 1);
+            _repeatSource.volume = volume / 100f;
 
             float clipLength = _repeatSource.clip.length;
 
@@ -178,7 +178,7 @@ namespace Luscious.Audio
                 _timeLeft -= Time.deltaTime;
             }
 
-            OnLifeTimeOver.Invoke();
+            OnLifeTimeOver?.Invoke();
             UnityEngine.Object.Destroy(_audioSource.gameObject);
         }
 
