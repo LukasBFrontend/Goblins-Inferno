@@ -8,31 +8,45 @@ namespace Luscious.Audio
     {
         [Header("SoundFX Data")]
         [Header("UI")]
-        public SO_SoundEffectData buttonPressSound;
+        public SoundEffectData buttonPressSound;
         [Header("Game State")]
-        public SO_SoundEffectData gameOverSound;
-        public SO_SoundEffectData lvlStartSound;
-        public SO_SoundEffectData levelUpSound;
+        public SoundEffectData gameOverSound;
+        public SoundEffectData lvlStartSound;
+        public SoundEffectData levelUpSound;
         [Header("Scene Items")]
-        public SO_SoundEffectData pickupSound;
-        public SO_SoundEffectData chestOpenSound;
+        public SoundEffectData pickupSound;
+        public SoundEffectData chestOpenSound;
         [Header("Movement")]
-        public SO_SoundEffectData jumpLandSound;
-        public MultipleSoundsData footsteps;
-
+        public SoundEffectData jumpLandSound;
+        public MultipleSoundData footsteps;
     }
 
     [System.Serializable]
-    public struct SO_SoundEffectData
+    public struct SoundEffectData
     {
-        [Range(0, 100)] public float volume;
         public AudioClip audioClip;
+        [Range(0, 100)] public float volume;
+        public bool loop;
+        public float playDelay;
+        [Space]
+        public SpatialSoundSettings spatialSoundSettings;
     }
 
     [System.Serializable]
-    public struct MultipleSoundsData
+    public struct MultipleSoundData
     {
-        [Range(0, 100)] public float volume;
         public List<AudioClip> clips;
+        [Range(0, 100)] public float volume;
+        public float playDelay;
+        [Space]
+        public SpatialSoundSettings spatialSoundSettings;
+    }
+
+    [System.Serializable]
+    public struct SpatialSoundSettings
+    {
+        [Range(0f, 1f)] public float blend;
+        public float minDistance;
+        public float maxDistance;
     }
 }

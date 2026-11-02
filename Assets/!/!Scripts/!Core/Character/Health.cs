@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Luscious.Audio;
 
 [System.Serializable]
 struct StatsConfig
@@ -21,6 +22,8 @@ public class Health : MonoBehaviour
     [SerializeField] Color originalColor;
     [ColorUsage(false, true)]
     [SerializeField] Color damageColor;
+    [Space()]
+    [SerializeField] SoundEffectData damagedSound;
     [Header("Damage Text")]
     [SerializeField] bool showDamageText;
     [SerializeField] PoolableData damageTextPoolableData;
@@ -45,6 +48,7 @@ public class Health : MonoBehaviour
         {
             return 0;
         }
+
 
         if (showDamageText)
         {
@@ -74,6 +78,11 @@ public class Health : MonoBehaviour
         else if (gameObject.activeSelf)
         {
             StartCoroutine(AnimateMaterialRoutine());
+
+            if (damagedSound.audioClip != null)
+            {
+                Game.SoundFX.PlaySoundFXClip(damagedSound, transform.position);
+            }
         }
 
         return _currentHealth;

@@ -212,9 +212,9 @@ MonoBehaviour:
   decelerationDistance: 1
   checkNeigboursRadius: 2
   kitingBehavior:
+    retreatThreshold: 0
     retreatToDistance: 0
     retreatCooldown: 0
-  log: 0
 --- !u!114 &8292207059351111743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +232,15 @@ MonoBehaviour:
   baseHealth: 75
   originalColor: {r: 0, g: 0, b: 0, a: 0}
   damageColor: {r: 0.50000006, g: 0.50000006, b: 0.50000006, a: 0}
+  damagedSound:
+    audioClip: {fileID: 0}
+    volume: 10
+    loop: 0
+    playDelay: 0
+    spatialSoundSettings:
+      blend: 0
+      minDistance: 1
+      maxDistance: 500
   showDamageText: 1
   damageTextPoolableData:
     id: Damage Text

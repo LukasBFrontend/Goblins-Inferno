@@ -12,14 +12,17 @@ public class SO_ProjectileData : ScriptableObject
     [Header("Lifecycle")]
     public bool destroyOnContact;
     public float lifeTime = 5f;
-    public SO_SoundEffectData soundEffect;
     public GameObject onDestroyVFX;
     [Header("Targeting")]
     [Range(0f, .2f)]
     public float targetReachedThreshold;
     public float newTargetRange = 10f; // TODO: Replace use with weaponstat size + sizemultiplier.
     public LayerMask targetsLayerMask;
-
+    [Header("Sound Effects")]
+    [Space]
+    public SoundEffectData alive;
+    [Space]
+    public MultipleSoundData onDestroy;
 }
 
 public enum ProjectileArcMode

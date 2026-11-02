@@ -20,7 +20,7 @@ public class PlayerSound : MonoBehaviour
         }
 
         var steps = Game.SoundFX.Default.footsteps;
-        var lifetimeData = Game.SoundFX.PlayRandomSoundFXClip(steps.clips.ToArray(), transform, steps.volume, _lastStepIndex, out int selectedIndex);
+        var lifetimeData = Game.SoundFX.PlayRandomSoundFXClip(steps, transform.position, _lastStepIndex, out int selectedIndex);
         _lastStepIndex = selectedIndex;
 
         AudioSource audioSource = lifetimeData.AudioSource;
@@ -36,26 +36,7 @@ public class PlayerSound : MonoBehaviour
     {
         foreach(var lifeTimeData in ongoingSoundFX)
         {
-            StartCoroutine(FadeVolumeRoutine(lifeTimeData));
-        }
-    }
-
-    IEnumerator FadeVolumeRoutine(SoundFXLifetimeData lifetimeData)
-    {
-        float elapsed = 0f;
-        float duration = Mathf.Min(lifetimeData.TimeLeft, 0.2f);
-
-        AudioSource audioSource = lifetimeData.AudioSource;
-        float startVolume = audioSource.volume;
-
-        while (lifetimeData.Active)
-        {
-            float t = elapsed / duration;
-
-            audioSource.volume = Mathf.Lerp(startVolume, 0, t);
-
-            elapsed += Time.deltaTime;
-            yield return null;
+            AudioUtils.FadeVolume(this, lifeTimeData.AudioSource,  Mathf.Min(lifeTimeData.TimeLeft, 0.2f));
         }
     }
 }

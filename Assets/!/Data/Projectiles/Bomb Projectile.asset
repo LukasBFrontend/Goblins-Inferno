@@ -16,12 +16,29 @@ MonoBehaviour:
   arcMode: 2
   destroyOnContact: 1
   lifeTime: 3
-  soundEffect:
-    volume: 30
-    audioClip: {fileID: 8300000, guid: 90c3cbcb566892841ac6f8b05b1f2edb, type: 3}
   onDestroyVFX: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
   targetReachedThreshold: 0.015
   newTargetRange: 4
   targetsLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  alive:
+    audioClip: {fileID: 8300000, guid: 90c3cbcb566892841ac6f8b05b1f2edb, type: 3}
+    volume: 15
+    loop: 0
+    playDelay: 0.5
+    spatialSoundSettings:
+      blend: 1
+      minDistance: 1
+      maxDistance: 500
+  onDestroy:
+    clips:
+    - {fileID: 8300000, guid: f8a4ad6372e97194eb350e2e1321fa89, type: 3}
+    - {fileID: 8300000, guid: 7d656af97bb728f4a8239b2d066ae799, type: 3}
+    - {fileID: 8300000, guid: 0d78ffc8798ed0f4883c086fbd128c06, type: 3}
+    volume: 12
+    playDelay: 0
+    spatialSoundSettings:
+      blend: 1
+      minDistance: 5
+      maxDistance: 500

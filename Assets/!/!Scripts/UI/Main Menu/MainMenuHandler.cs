@@ -33,9 +33,8 @@ public class MainMenuHandler : BaseMenu
         var buttonPressedSound = Game.SoundFX.Default.buttonPressSound;
         rootElement.Query<Button>().ForEach(
             button => button.clicked += () => Game.SoundFX.PlaySoundFXClip(
-                buttonPressedSound.audioClip,
-                transform,
-                buttonPressedSound.volume
+                buttonPressedSound,
+                transform.position
             )
         );
     }

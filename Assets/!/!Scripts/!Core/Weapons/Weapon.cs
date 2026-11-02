@@ -16,7 +16,7 @@ public class Weapon :  MonoBehaviour
     public SO_WeaponData Data => data;
 
     Player _wielder;
-    int _lastSoundFXIndex;
+    int _lastAttackSoundIndex, _lastHitSoundIndex;
 
     public void Initialize(Player wielder)
     {
@@ -35,14 +35,10 @@ public class Weapon :  MonoBehaviour
 
         targetTracker.SetAttackSize(weaponSize);
 
-        if (data.soundEffect.clips.Count == 1)
+        if (data.attackSound.clips.Count > 1)
         {
-            Game.SoundFX.PlaySoundFXClip(data.soundEffect.clips[0], transform, data.soundEffect.volume);
-        }
-        else if (data.soundEffect.clips.Count != 0)
-        {
-            Game.SoundFX.PlayRandomSoundFXClip(data.soundEffect.clips.ToArray(), transform, data.soundEffect.volume, _lastSoundFXIndex, out int newSoundFXIndex);
-            _lastSoundFXIndex = newSoundFXIndex;
+            Game.SoundFX.PlayRandomSoundFXClip(data.attackSound, transform.position, _lastAttackSoundIndex, out int newAttackSoundIndex);
+            _lastAttackSoundIndex = newAttackSoundIndex;
         }
 
         StartCoroutine(AttackRoutine(
@@ -155,6 +151,12 @@ public class Weapon :  MonoBehaviour
         if (data.hitVFX)
         {
             Instantiate(data.hitVFX, enemy.transform.position + new Vector3(0, 1, -1f), Quaternion.identity);
+        }
+
+        if (data.hitSound.clips.Count > 0)
+        {
+            Game.SoundFX.PlayRandomSoundFXClip(data.hitSound, enemy.transform.position, _lastHitSoundIndex, out int newHitSoundIndex);
+            _lastAttackSoundIndex = newHitSoundIndex;
         }
 
         int damage = CalculateHitDamage(out int critLevel);

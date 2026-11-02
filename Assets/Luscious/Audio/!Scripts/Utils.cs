@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Luscious.Audio
@@ -28,6 +29,27 @@ namespace Luscious.Audio
 
             float linear = Mathf.Pow(10f, db / 20f);
             return linear * 100f;
+        }
+
+        public static void FadeVolume(MonoBehaviour monoBehaviour, AudioSource audioSource, float duration)
+        {
+            monoBehaviour.StartCoroutine(FadeVolumeRoutine(audioSource, duration));
+        }
+
+        private static IEnumerator FadeVolumeRoutine(AudioSource audioSource, float duration)
+        {
+            float elapsed = 0f;
+            float startVolume = audioSource.volume;
+
+            while (elapsed <= duration && audioSource != null)
+            {
+                float t = elapsed / duration;
+
+                audioSource.volume = Mathf.Lerp(startVolume, 0, t);
+
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
         }
     }
 }

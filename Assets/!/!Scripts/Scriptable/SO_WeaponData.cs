@@ -10,9 +10,12 @@ public class SO_WeaponData : ScriptableObject
     public Sprite sprite;
     public WeaponStatsData stats;
     public GameObject hitVFX;
-    public MultipleSoundsData soundEffect;
-    [Tooltip("A weapontype of 'Area' will damage enemies directly while a weapontype of 'Projectile' will attempt to spawn projectiles")]
     public LayerMask hitMask;
+    [Header("Sound Effects")]
+    public MultipleSoundData attackSound;
+    [Space()]
+    public MultipleSoundData hitSound;
+    [Tooltip("A weapontype of 'Area' will damage enemies directly while a weapontype of 'Projectile' will attempt to spawn projectiles")]
     [Header("Only required for projectile weapons")]
     public PoolableData projectile;
     public bool parentProjectiles;

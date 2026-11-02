@@ -3,6 +3,9 @@ using UnityEngine.Audio;
 using System.Globalization;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using UnityEngine.Animations;
 
 namespace Luscious.Audio
 {
@@ -13,167 +16,180 @@ namespace Luscious.Audio
         [SerializeField] AudioMixerGroup mixerGroup;
         [SerializeField] AudioMixerGroup priorityMixerGroup;
 
-        private readonly AudioSource _repeatSource = null;
-        private float _timer = 0f;
-        private float _repeatDelay = 0f;
-        private int _iterationsLeft = 0;
-
         public SO_SoundFXConfig Default => config;
 
         /* PUBLIC METHODS */
 
-        /// <summary>
-        /// Play a sound effect once.
-        /// </summary>
-        /// <param name="audioClip"></param>
-        /// <param name="spawnTransform">The transform which will be used to determine where the SoundFXObject is spawned.</param>
-        /// <param name="volume">The relative volume at which to play the AudioClip(s). Expected to be a value between 0f and 100f.</param>
-        public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, bool sendDuckSignal = false)
+        public SoundFXLifetimeData PlaySoundFXClip(SoundEffectData data, Vector3 position, bool sendDuckSignal = false, Transform followTarget = null)
         {
-            AudioSource audioSource = new GameObject(CreateObjectName(audioClip)).AddComponent<AudioSource>();
+            AudioSource audioSource = CreateAudioSource(
+                CreateObjectName(data.audioClip, followTarget),
+                position,
+                followTarget,
+                sendDuckSignal ? priorityMixerGroup : mixerGroup,
+                data.audioClip,
+                data.volume,
+                data.spatialSoundSettings,
+                data.loop
+            );
 
-            audioSource.transform.SetParent(transform);
-            audioSource.transform.position = spawnTransform.position;
-            audioSource.clip = audioClip;
-            audioSource.volume = Mathf.Log10(volume / 100 + 1);
-            audioSource.Play();
-            audioSource.outputAudioMixerGroup = sendDuckSignal ? priorityMixerGroup : mixerGroup;
+            StartCoroutine(PlayWithDelay(audioSource, data.playDelay));
 
-            float clipLength = audioSource.clip.length + 1f;
-
-            Destroy(audioSource.gameObject, clipLength);
+            return new SoundFXLifetimeData(this, audioSource, audioSource.clip.length + data.playDelay);
         }
 
-        /// <summary>
-        /// Play a sound effect once.
-        /// </summary>
-        /// <param name="soundFXData"></param>
-        /// <param name="spawnTransform">The transform which will be used to determine where the SoundFXObject is spawned.</param>
-        /// <param name="volume">The relative volume at which to play the AudioClip(s). Expected to be a value between 0f and 100f.</param>
-        public SoundFXLifetimeData PlaySoundFXClip(SO_SoundEffectData soundFXData, Transform spawnTransform, bool sendDuckSignal = false)
+        public SoundFXLifetimeData PlayRandomSoundFXClip(MultipleSoundData data, Vector3 position, int lastIndex, out int selectedIndex, Transform followTarget = null)
         {
-            AudioSource audioSource = new GameObject(CreateObjectName(soundFXData.audioClip)).AddComponent<AudioSource>();
-
-            audioSource.transform.SetParent(transform);
-            audioSource.transform.position = spawnTransform.position;
-            audioSource.clip = soundFXData.audioClip;
-            audioSource.volume = soundFXData.volume / 100f;
-            audioSource.Play();
-            audioSource.outputAudioMixerGroup = sendDuckSignal ? priorityMixerGroup : mixerGroup;
-
-            float clipLength = audioSource.clip.length + 1f;
-
-            return new SoundFXLifetimeData(this, audioSource, clipLength);
-        }
-
-        /// <summary>
-        /// Play a random sound effect from an array of AudioClips.
-        /// </summary>
-        /// <param name="audioClips"></param>
-        /// <param name="spawnTransform">The transform which will be used to determine where the SoundFXObject is spawned.</param>
-        /// <param name="volume">The relative volume at which to play the AudioClip(s). Expected to be a value between 0f and 100f.</param>
-        public SoundFXLifetimeData PlayRandomSoundFXClip(AudioClip[] audioClips, Transform spawnTransform, float volume, int lastIndex, out int selectedIndex)
-        {
-            if (audioClips.Length < 1)
+            if (data.clips.Count < 1)
             {
                 throw new ArgumentOutOfRangeException(nameof(PlayRandomSoundFXClip));
             }
 
-            selectedIndex = UnityEngine.Random.Range(0, audioClips.Length);
-
+            selectedIndex = UnityEngine.Random.Range(0, data.clips.Count);
             while (selectedIndex == lastIndex)
             {
-                selectedIndex = UnityEngine.Random.Range(0, audioClips.Length);
+                selectedIndex = UnityEngine.Random.Range(0, data.clips.Count);
             }
 
-            AudioSource audioSource = new GameObject(CreateObjectName(audioClips[selectedIndex])).AddComponent<AudioSource>();
+            AudioSource audioSource = CreateAudioSource(
+                CreateObjectName(data.clips[selectedIndex], followTarget),
+                position,
+                followTarget,
+                mixerGroup,
+                data.clips[selectedIndex],
+                data.volume,
+                data.spatialSoundSettings,
+                false
+            );
 
-            audioSource.transform.SetParent(transform);
-            audioSource.transform.position = spawnTransform.position;
-            audioSource.clip = audioClips[selectedIndex];
-            audioSource.volume = volume / 100f;
-            audioSource.Play();
+            StartCoroutine(PlayWithDelay(audioSource, data.playDelay));
 
-            float clipLength = audioSource.clip.length;
-
-            return new SoundFXLifetimeData(this, audioSource, clipLength);
+            return new SoundFXLifetimeData(this, audioSource, audioSource.clip.length +  data.playDelay);
         }
 
-        /// <summary>
-        /// Play a sound effect a given amount of times. SoundFXManager can currently only keep track of one repeating sound effect.
-        /// </summary>
-        /// <param name="audioClip"></param>
-        /// <param name="spawnTransform">The transform which will be used to determine where the SoundFXObject is spawned.</param>
-        /// <param name="volume">The relative volume at which to play the AudioClip(s). Expected to be a value between 0f and 100f.</param>
-        /// <param name="iterations"></param>
-        /// <param name="delay">The interval between invokes.</param>
-        public void PlaySoundFXtimes(AudioClip audioClip, Transform spawnTransform, float volume, int iterations, float delay)
+        public SoundFXLifetimeData PlayRandomSoundFXClip(MultipleSoundData data, Vector3 position, Transform followTarget = null)
         {
-            _iterationsLeft = iterations;
-            _repeatDelay = delay;
-
-            AudioSource audioSource = new GameObject(CreateObjectName(audioClip)).AddComponent<AudioSource>();
-
-            audioSource.transform.SetParent(transform);
-            audioSource.transform.position = spawnTransform.position;
-            _repeatSource.clip = audioClip;
-            _repeatSource.volume = volume / 100f;
-
-            float clipLength = _repeatSource.clip.length;
-
-            Destroy(_repeatSource.gameObject, iterations * (clipLength + delay));
-        }
-
-        /* MONOBEHAVIOR LIFECYCLE METHODS */
-
-        private void Update()
-        {
-            if (_timer <= 0 && _iterationsLeft > 0)
+            if (data.clips.Count < 1)
             {
-                _repeatSource.Play();
-                _timer = _repeatSource.clip.length + _repeatDelay;
-                _iterationsLeft--;
+                throw new ArgumentOutOfRangeException(nameof(PlayRandomSoundFXClip));
             }
 
-            _timer -= Time.deltaTime;
+            int selectedIndex = UnityEngine.Random.Range(0, data.clips.Count);
+
+            AudioSource audioSource = CreateAudioSource(
+                CreateObjectName(data.clips[selectedIndex], followTarget),
+                position,
+                followTarget,
+                mixerGroup,
+                data.clips[selectedIndex],
+                data.volume,
+                data.spatialSoundSettings,
+                false
+            );
+
+            StartCoroutine(PlayWithDelay(audioSource, data.playDelay));
+
+            return new SoundFXLifetimeData(this, audioSource, audioSource.clip.length + data.playDelay);
         }
 
         /* PRIVATE METHODS */
 
-        private string CreateObjectName(AudioClip audioClip)
+        private AudioSource CreateAudioSource(string name, Vector3 position, Transform followTarget, AudioMixerGroup outputMixerGroup, AudioClip clip,  float volumePercent, SpatialSoundSettings spatialSoundSettings, bool loop)
         {
-            return $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(audioClip.name.ToLower())} (SoundFXObject)";
+            AudioSource audioSource = new GameObject(name).AddComponent<AudioSource>();
+
+            audioSource.transform.SetParent(transform);
+            audioSource.transform.position = position;
+            audioSource.clip = clip;
+            audioSource.volume = volumePercent / 100f;
+            audioSource.loop = loop;
+            audioSource.spatialBlend = spatialSoundSettings.blend;
+            audioSource.minDistance = spatialSoundSettings.minDistance;
+            audioSource.maxDistance = spatialSoundSettings.minDistance;
+            audioSource.outputAudioMixerGroup = outputMixerGroup;
+
+            if (followTarget)
+            {
+                SetPositionSource(audioSource, followTarget);
+            }
+
+            return audioSource;
         }
 
-        private void OnGameOver()
+        private void SetPositionSource(AudioSource audioSource, Transform source)
         {
-            PlaySoundFXClip(config.gameOverSound.audioClip, transform, config.gameOverSound.volume);
+            var constraint = audioSource.AddComponent<PositionConstraint>();
+            constraint.AddSource(new ConstraintSource(){ sourceTransform = source, weight = 1 });
+            constraint.constraintActive = true;
         }
 
+        private IEnumerator PlayWithDelay(AudioSource audioSource, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            if (audioSource == null)
+            {
+                yield break;
+            }
+            audioSource.Play();
+        }
+
+        private string CreateObjectName(AudioClip audioClip, Transform followTarget )
+        {
+            string result = "";
+
+            result += CultureInfo.CurrentCulture.TextInfo.ToTitleCase(audioClip.name.ToLower());
+            result += followTarget != null ? $" : [{followTarget.name}]" : "";
+            result += " (SoundFXObject)";
+
+            return result;
+        }
     }
+
 
     public class SoundFXLifetimeData
     {
         public AudioSource AudioSource => _audioSource;
         public float TimeLeft => _timeLeft;
-        public bool Active => _timeLeft > 0;
+        public bool Active => _timeLeft > 0 && _audioSource != null;
         public OnLifetimeOver OnLifeTimeOver { get => _onLifeTimeOver; set => _onLifeTimeOver = value; }
+
         private AudioSource _audioSource;
         private float _timeLeft;
+        MonoBehaviour _monoBehavior;
         private OnLifetimeOver _onLifeTimeOver;
 
         public SoundFXLifetimeData(MonoBehaviour monoBehavior, AudioSource audioSource, float lifeTime)
         {
             _audioSource = audioSource;
-            _timeLeft = lifeTime;
+            _timeLeft = audioSource.loop ? Mathf.Infinity : lifeTime;
+            _monoBehavior = monoBehavior;
 
+            SceneManager.sceneUnloaded += (scene) =>
+            {
+                if (_audioSource != null)
+                {
+                    _audioSource.Stop();
+                }
+            };
             monoBehavior.StartCoroutine(LifeTimeRoutine());
+        }
+
+        public void Destroy()
+        {
+            OnLifeTimeOver?.Invoke();
+            AudioUtils.FadeVolume(_monoBehavior, _audioSource, .2f);
+            UnityEngine.Object.Destroy(_audioSource.gameObject, .21f);
         }
 
         private IEnumerator LifeTimeRoutine()
         {
             while(_timeLeft > 0)
             {
+                if (!Active)
+                {
+                    yield break;
+                }
+
                 yield return null;
                 _timeLeft -= Time.deltaTime;
             }

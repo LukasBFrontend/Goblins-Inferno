@@ -22,3 +22,20 @@ MonoBehaviour:
   targetsLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  alive:
+    audioClip: {fileID: 8300000, guid: 9e6dd3f9ffae9a54caa093a7d488a110, type: 3}
+    volume: 7
+    loop: 1
+    playDelay: 0
+    spatialSoundSettings:
+      blend: 1
+      minDistance: 1.5
+      maxDistance: 500
+  onDestroy:
+    clips: []
+    volume: 0
+    playDelay: 0
+    spatialSoundSettings:
+      blend: 0
+      minDistance: 0
+      maxDistance: 0

@@ -230,6 +230,15 @@ MonoBehaviour:
   baseHealth: 100
   originalColor: {r: 0, g: 0, b: 0, a: 0}
   damageColor: {r: 0.070128806, g: 0.070128806, b: 0.070128806, a: 0}
+  damagedSound:
+    audioClip: {fileID: 8300000, guid: 771cc92ae33b5bf4fbb461da74f9c387, type: 3}
+    volume: 7.5
+    loop: 0
+    playDelay: 0
+    spatialSoundSettings:
+      blend: 0
+      minDistance: 0
+      maxDistance: 0
   showDamageText: 0
   damageTextPoolableData:
     id: Damage Text

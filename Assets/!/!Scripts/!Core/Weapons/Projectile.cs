@@ -184,6 +184,7 @@ public class Projectile : MonoBehaviour, IPoolable
 
         HitTargetsWithinRange();
         Instantiate(data.onDestroyVFX, transform.position, Quaternion.identity);
+        Game.SoundFX.PlayRandomSoundFXClip(data.onDestroy, transform.position);
         Game.ObjectPooler.Return(this);
     }
 
@@ -300,13 +301,14 @@ public class Projectile : MonoBehaviour, IPoolable
     void OnEnable()
     {
         _bombWaitForSeconds = new(data.lifeTime);
+        var soundEffectData = data.alive;
 
-        if (data.soundEffect.audioClip == null)
+        if (soundEffectData.audioClip == null)
         {
             return;
         }
 
-        _currentSoundEffect = Game.SoundFX.PlaySoundFXClip(data.soundEffect, transform);
+        _currentSoundEffect = Game.SoundFX.PlaySoundFXClip(soundEffectData, transform.position, false, transform);
     }
 
     void OnDisable()
@@ -316,7 +318,7 @@ public class Projectile : MonoBehaviour, IPoolable
             return;
         }
 
-        _currentSoundEffect.AudioSource.Stop();
+        _currentSoundEffect.Destroy();
     }
 
     void RegisterHit(BaseCharacter character)
