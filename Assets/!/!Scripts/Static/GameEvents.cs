@@ -13,6 +13,7 @@ public static class GameEvents
     public static UnityEvent<int> ScoreChanged = new();
     public static UnityEvent<int> NewHighScoreEvent = new();
     public static UnityEvent<int, int> LvlUpEvent = new();
+    public static UnityEvent GameOverTranitionCompleted = new();
 
     public static void RaiseStartLevel()
     {
@@ -37,6 +38,11 @@ public static class GameEvents
     public static void RaiseGameOverEvent()
     {
         GameOverEvent?.Invoke();
+    }
+
+    public static void RaiseGameOverTransitionCompleted()
+    {
+        GameOverTranitionCompleted?.Invoke();
     }
 
     public static void RaiseHealthChanged(int currentHealth, int maxHealth)

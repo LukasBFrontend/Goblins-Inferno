@@ -24,11 +24,11 @@ MonoBehaviour:
     m_Bits: 128
   alive:
     audioClip: {fileID: 8300000, guid: 9e6dd3f9ffae9a54caa093a7d488a110, type: 3}
-    volume: 7
+    volume: 5.5
     loop: 1
     playDelay: 0
     spatialSoundSettings:
-      blend: 1
+      blend: 0.65
       minDistance: 1.5
       maxDistance: 500
   onDestroy:

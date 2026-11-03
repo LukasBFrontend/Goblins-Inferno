@@ -5,12 +5,17 @@ public class GameOverState : BaseState
 {
     public GameOverState(StateMachine currentContext, StateFactory StateFactory) : base(currentContext, StateFactory) { }
 
-    public override void EnterState()
+    public async override void EnterState()
     {
         GameEvents.StartLevelInvoked.AddListener(OnLevelStarted);
 
         Time.timeScale = 0.5f;
         Game.Player.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
+        var soundEffect = Game.SoundFX.Default.gameOverSound;
+        Game.SoundFX.PlaySoundFXClip(soundEffect, Vector3.zero, true);
+        await Game.VolumeTransitions.ColorFadeOut();
+        GameEvents.RaiseGameOverTransitionCompleted();
 
         var score = GameSaveState.Score;
 
