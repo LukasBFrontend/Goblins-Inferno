@@ -11,13 +11,11 @@ namespace Luscious.Audio
         [System.Serializable]
         public struct TrackSettings
         {
-            public string name;
+            public string id;
             public int sceneIndex;
             public MusicData data;
             [Space]
-            public float timeAfterSceneLoadPlay;
-            public float fadeInDuration;
-            public float fadeOutDuration;
+            public AutoPlaySettings autoPlaySettings;
 
         }
 
@@ -26,6 +24,14 @@ namespace Luscious.Audio
         {
             public AudioClip audioClip;
             [Range(0, 100)] public float volume;
+        }
+
+        [System.Serializable]
+        public struct AutoPlaySettings
+        {
+            public float timeAfterSceneLoadPlay;
+            public float fadeInDuration;
+            public float fadeOutDuration;
         }
     }
 }

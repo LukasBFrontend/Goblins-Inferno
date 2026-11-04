@@ -20,7 +20,6 @@ namespace Luscious.Audio
 
         private readonly Dictionary<int, MusicTrackControls> _sceneMusicLookUp = new();
         private readonly Dictionary<int, SO_SceneMusicConfig.TrackSettings> _sceneMusicSettingsLookUp = new();
-        private bool _playMusic;
         private AudioManager _audioManager;
         private float _startCutoffFreq;
 
@@ -37,7 +36,6 @@ namespace Luscious.Audio
         private void Awake()
         {
             _audioManager = GetComponent<AudioManager>();
-            _playMusic = autoPlayOnSceneLoad;
         }
 
 
@@ -45,7 +43,7 @@ namespace Luscious.Audio
         {
             musicSettings.tracks.ForEach((musicSetting) =>
             {
-                MusicTrackControls music = new GameObject(musicSetting.name).AddComponent<MusicTrackControls>();
+                MusicTrackControls music = new GameObject(musicSetting.id).AddComponent<MusicTrackControls>();
                 music.transform.SetParent(transform);
                 music.Initialize(mixerGroup, musicSetting.data, musicSetting.sceneIndex);
 
@@ -53,25 +51,38 @@ namespace Luscious.Audio
                 _sceneMusicSettingsLookUp.Add(musicSetting.sceneIndex, musicSetting);
             });
 
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.sceneUnloaded += OnSceneUnloaded;
-
             if (_audioManager.Mixer.AudioMixer.GetFloat(LOWPASS_CUTOFF_FREQ, out float cutoffFreq))
             {
                 _startCutoffFreq = cutoffFreq;
             }
 
-            PlaySceneMusic(SceneManager.GetActiveScene());
+            if (autoPlayOnSceneLoad)
+            {
+                SceneManager.sceneLoaded += AutoOnSceneLoaded;
+                SceneManager.sceneUnloaded += AutoOnSceneUnloaded;
+                PlaySceneMusic(SceneManager.GetActiveScene());
+            }
         }
 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        private void AutoOnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            PlaySceneMusic(scene);
+            var autoPlaySettings = _sceneMusicSettingsLookUp[scene.buildIndex].autoPlaySettings;
+
+            float fadeInDuration = autoPlaySettings.fadeInDuration;
+            float delay = autoPlaySettings.timeAfterSceneLoadPlay;
+            PlaySceneMusic(scene, fadeInDuration, delay);
         }
 
-        private void OnSceneUnloaded(Scene scene)
+        private void AutoOnSceneUnloaded(Scene scene)
         {
-            // TODO: Fade out the volume for the entire music AudioMixerGroup for the purpose of avoiding sound artifacts when scene is unloaded.
+            var autoPlaySettings = _sceneMusicSettingsLookUp[scene.buildIndex].autoPlaySettings;
+
+            float fadeOutDuration = autoPlaySettings.fadeInDuration;
+            StopSceneMusic(scene, fadeOutDuration);
+        }
+
+        public void PlaySceneMusic(Scene scene, float fadeInDuration = .5f, float delay = 0f)
+        {
             if (
                 !_sceneMusicLookUp.TryGetValue(scene.buildIndex, out MusicTrackControls targetMusic)
                 || !_sceneMusicSettingsLookUp.TryGetValue(scene.buildIndex, out SO_SceneMusicConfig.TrackSettings musicSettings)
@@ -80,23 +91,20 @@ namespace Luscious.Audio
                 return;
             }
 
-            targetMusic.TransitionVolume(targetMusic.Volume, 0f, musicSettings.fadeOutDuration, 0f);
+            targetMusic.Play(fadeInDuration, delay);
         }
 
-        private void PlaySceneMusic(Scene scene)
+        public void StopSceneMusic(Scene scene, float fadeOutDuration = .5f, float delay = 0f)
         {
             if (
-                !_playMusic
-                || !_sceneMusicLookUp.TryGetValue(scene.buildIndex, out MusicTrackControls targetMusic)
+                !_sceneMusicLookUp.TryGetValue(scene.buildIndex, out MusicTrackControls targetMusic)
                 || !_sceneMusicSettingsLookUp.TryGetValue(scene.buildIndex, out SO_SceneMusicConfig.TrackSettings musicSettings)
             )
             {
                 return;
             }
 
-            targetMusic.Play(musicSettings.timeAfterSceneLoadPlay);
-            targetMusic.TransitionVolume(0f, targetMusic.InitialVolume, musicSettings.fadeInDuration, musicSettings.timeAfterSceneLoadPlay);
+            targetMusic.Stop(fadeOutDuration, delay);
         }
-
     }
 }

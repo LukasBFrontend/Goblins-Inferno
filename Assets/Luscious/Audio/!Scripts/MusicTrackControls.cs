@@ -29,25 +29,14 @@ namespace Luscious.Audio
             _sceneIndex = sceneIndex;
         }
 
-        /// <summary>
-        /// Play the BackgroundMusic from the beginning.
-        /// </summary>
-        /// <param name="delay"></param>
-        public void Play(float delay)
+        public void Play(float fadeInDuration = .5f, float delay = 0f)
         {
-            StartCoroutine(PlayRoutine(delay));
+            StartCoroutine(TransitionVolumeRoutine(0f, InitialVolume, fadeInDuration, delay));
         }
 
-        /// <summary>
-        /// Lerps the volume of the BackgroundMusic between startPercent and targetPercent.
-        /// </summary>
-        /// <param name="startPercent"></param>
-        /// <param name="targetPercent"></param>
-        /// <param name="duration"></param>
-        /// <param name="delay"></param>
-        public void TransitionVolume(float startPercent, float targetPercent, float duration, float delay)
+        public void Stop(float fadeOutDuration = .5f, float delay = 0f)
         {
-            StartCoroutine(TransitionVolumeRoutine(startPercent, targetPercent, duration, delay));
+            StartCoroutine(TransitionVolumeRoutine(Volume, 0f, fadeOutDuration, delay));
         }
 
         private void ResetVolume()
@@ -55,17 +44,16 @@ namespace Luscious.Audio
             _audioSource.volume = _initialVolume / 100;
         }
 
-        private IEnumerator PlayRoutine(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            _audioSource.Play();
-        }
-
         private IEnumerator TransitionVolumeRoutine(float startPercent, float targetPercent, float duration, float delay)
         {
             if (delay > 0f)
             {
                 yield return new WaitForSeconds(delay);
+            }
+
+            if (startPercent <= 0f)
+            {
+                _audioSource.Play();
             }
 
             float elapsed = 0f;
