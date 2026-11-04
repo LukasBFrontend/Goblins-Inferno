@@ -309,6 +309,9 @@ public class Projectile : MonoBehaviour, IPoolable
         }
 
         _currentSoundEffect = Game.SoundFX.PlaySoundFXClip(soundEffectData, transform.position, false, transform);
+        GameEvents.GamePaused.AddListener(OnGamePaused);
+        GameEvents.GameResumed.AddListener(OnGameResumed);
+        GameEvents.LvlUpEvent.AddListener(OnLevelUp);
     }
 
     void OnDisable()
@@ -318,7 +321,36 @@ public class Projectile : MonoBehaviour, IPoolable
             return;
         }
 
+        GameEvents.GamePaused.RemoveListener(OnGamePaused);
+        GameEvents.GameResumed.RemoveListener(OnGameResumed);
+        GameEvents.LvlUpEvent.RemoveListener(OnLevelUp);
+
         _currentSoundEffect.Destroy();
+    }
+
+    void OnGamePaused()
+    {
+        if(_currentSoundEffect == null || !_currentSoundEffect.Active)
+        {
+            return;
+        }
+
+        _currentSoundEffect.AudioSource.Pause();
+    }
+
+    void OnGameResumed()
+    {
+        if(_currentSoundEffect == null || !_currentSoundEffect.Active)
+        {
+            return;
+        }
+
+        _currentSoundEffect.AudioSource.Play();
+    }
+
+    void OnLevelUp(int oldLevel, int newLevel)
+    {
+        OnGamePaused();
     }
 
     void RegisterHit(BaseCharacter character)

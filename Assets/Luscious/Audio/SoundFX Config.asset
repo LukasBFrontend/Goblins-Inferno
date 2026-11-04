@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_SoundFXSettingsData
   buttonPressSound:
     audioClip: {fileID: 8300000, guid: 658be94ac7911914daf8e969c669dce2, type: 3}
-    volume: 50
+    volume: 35
     loop: 0
     playDelay: 0
     spatialSoundSettings:

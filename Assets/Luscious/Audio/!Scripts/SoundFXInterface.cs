@@ -161,7 +161,7 @@ namespace Luscious.Audio
         public SoundFXLifetimeData(MonoBehaviour monoBehavior, AudioSource audioSource, float lifeTime)
         {
             _audioSource = audioSource;
-            _timeLeft = audioSource.loop ? Mathf.Infinity : lifeTime;
+            _timeLeft = audioSource.loop ? Mathf.Infinity : lifeTime + 0.25f;
             _monoBehavior = monoBehavior;
 
             SceneManager.sceneUnloaded += (scene) =>
