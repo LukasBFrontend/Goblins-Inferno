@@ -16,7 +16,7 @@ public class LevelState : BaseState
             Debug.Log($"{Ctx.name} entered <b><color=white>new state</color></b>: <color=yellow>{nameof(LevelState)}</color> \n<b><color=white>substate</color></b>: <color=yellow>{Factory.Playing().GetType().Name}</color>");
         }
 
-        await Game.VolumeTransitions.GammaFadeIn();
+        await Game.VolumeTransitions.ColorFadeIn();
 
         GameEvents.QuitLevelInvoked.AddListener(OnQuitLevelInvoked);
         GameSaveState.Score.Reset();

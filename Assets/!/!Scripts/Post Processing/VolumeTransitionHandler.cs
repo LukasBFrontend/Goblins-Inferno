@@ -17,6 +17,7 @@ public class VolumeTransitionHandler : Singleton<VolumeTransitionHandler>
     [SerializeField] Vector4Transition gammaFadeIn;
     [SerializeField] Vector4Transition gammaFadeOut;
     [SerializeField] ColorTransition colorFadeOut;
+    [SerializeField] ColorTransition colorFadeIn;
 
     LiftGammaGain _liftGammaGain;
     ColorAdjustments _colorAdjustments;
@@ -35,9 +36,14 @@ public class VolumeTransitionHandler : Singleton<VolumeTransitionHandler>
         return ColorTransitionTask(_liftGammaGain.gamma, gammaFadeOut);
     }
 
-    public Task<bool> ColorFadeOut()
+    public Task<bool> ColorFadeOut(float duration = 1f)
     {
         return ColorTransitionTask(_colorAdjustments.colorFilter, colorFadeOut);
+    }
+
+    public Task<bool> ColorFadeIn(float duration = 1f)
+    {
+        return ColorTransitionTask(_colorAdjustments.colorFilter, colorFadeIn);
     }
 
     void ResetColorFilter()
@@ -79,21 +85,26 @@ public class VolumeTransitionHandler : Singleton<VolumeTransitionHandler>
 
     /* PRIVATE METHODS */
 
-    Task<bool> ColorTransitionTask<T>(T volumeParameter, IColorTransitionData colorTransition) where T : VolumeParameter
+    Task<bool> ColorTransitionTask<T>(T volumeParameter, IColorTransitionData colorTransition, float duration = 0f) where T : VolumeParameter
     {
         GetProfileComponents();
         var promise = new TaskCompletionSource<bool>();
-        StartCoroutine(ColorFadeRoutine(volumeParameter, colorTransition, promise));
+        StartCoroutine(ColorFadeRoutine(volumeParameter, colorTransition, promise, duration));
 
         return promise.Task;
     }
 
-    IEnumerator ColorFadeRoutine<T>(T volumeParameter, IColorTransitionData colorTransition, TaskCompletionSource<bool> promise) where T: VolumeParameter
+    IEnumerator ColorFadeRoutine<T>(T volumeParameter, IColorTransitionData colorTransition, TaskCompletionSource<bool> promise, float duration = 0f) where T: VolumeParameter
     {
         bool logTransition = colorTransition.LogTransition;
         Color start = colorTransition.StartValue;
         Color end = colorTransition.TargetValue;
-        float duration = colorTransition.Duration;
+
+        if (duration == 0f)
+        {
+            duration = colorTransition.Duration;
+        }
+
         float elapsed = 0f;
 
         _colorAdjustments.colorFilter.overrideState = true;

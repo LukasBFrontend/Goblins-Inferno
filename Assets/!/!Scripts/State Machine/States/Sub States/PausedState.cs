@@ -7,6 +7,9 @@ public class PausedState : BaseState
 
     public override void EnterState()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         RegisterCallbacks();
         Game.Music.SetLowPassOn();
         Time.timeScale = 0;

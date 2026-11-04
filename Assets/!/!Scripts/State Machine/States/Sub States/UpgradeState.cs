@@ -6,6 +6,9 @@ public class UpgradeState : BaseState
 
     public override void EnterState()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         GameEvents.GameResumed.AddListener(OnGameResumed);
         Game.UpgradeOptions.AssignRandom();
         Time.timeScale = 0;

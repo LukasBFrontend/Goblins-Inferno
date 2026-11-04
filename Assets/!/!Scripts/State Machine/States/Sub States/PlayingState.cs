@@ -23,9 +23,6 @@ public class PlayingState : BaseState
         Game.Input.Move.Disable();
         Game.Input.Jump.Disable();
 
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-
         UnregisterCallbacks();
     }
 

@@ -78,6 +78,11 @@ MonoBehaviour:
     targetValue: {r: 0, g: 0, b: 0, a: 0}
     duration: 2
     logTransition: 0
+  colorFadeIn:
+    startValue: {r: 0, g: 0, b: 0, a: 0}
+    targetValue: {r: 0.88235295, g: 0.78431374, b: 0.88235295, a: 0}
+    duration: 2
+    logTransition: 0
 --- !u!114 &5246305992476575897
 MonoBehaviour:
   m_ObjectHideFlags: 0

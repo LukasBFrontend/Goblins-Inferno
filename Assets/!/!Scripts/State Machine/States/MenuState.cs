@@ -22,6 +22,7 @@ public class MainMenuState : BaseState
         }
 
         Time.timeScale = 1;
+        Game.VolumeTransitions.ColorFadeIn();
 
         GameEvents.StartLevelInvoked.AddListener(OnStartLevelInvoked);
     }

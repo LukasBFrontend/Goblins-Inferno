@@ -12,18 +12,21 @@ public class GameOverState : BaseState
         Time.timeScale = 0.5f;
         Game.Player.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 
-        var soundEffect = Game.SoundFX.Default.gameOverSound;
-        Game.SoundFX.PlaySoundFXClip(soundEffect, Vector3.zero, true);
-        await Game.VolumeTransitions.ColorFadeOut();
-        GameEvents.RaiseGameOverTransitionCompleted();
-
         var score = GameSaveState.Score;
-
         if (score.Current > score.HighScore)
         {
             score.SetHighScore(score.Current);
             GameSaveState.Save();
         }
+
+        var soundEffect = Game.SoundFX.Default.gameOverSound;
+        Game.SoundFX.PlaySoundFXClip(soundEffect, Vector3.zero, true);
+
+        await Game.VolumeTransitions.ColorFadeOut();
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        GameEvents.RaiseGameOverTransitionCompleted();
     }
 
     public override void UpdateState()
