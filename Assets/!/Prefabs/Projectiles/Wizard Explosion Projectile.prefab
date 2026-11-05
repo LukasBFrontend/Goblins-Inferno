@@ -65,6 +65,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5641989422901108855}
     - target: {fileID: 1771649944702901548, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: particleSystem.soundEffectAt
+      value: 0.475
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771649944702901548, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       propertyPath: particleSystem.tryRegisterHitsAt
       value: 0.6
       objectReference: {fileID: 0}

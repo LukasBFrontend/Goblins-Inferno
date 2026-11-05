@@ -43,6 +43,21 @@ public class Health : MonoBehaviour
         _currentHealth -= damageAmount;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
 
+        if (damagedSound.audioClip != null)
+        {
+            Game.SoundFX.PlaySoundFXClip(damagedSound, transform.position);
+        }
+
+        if (_character is Enemy)
+        {
+            SpawnText(damageAmount, critLevel);
+        }
+
+        if (_character is Player)
+        {
+            GameEvents.RaiseHealthChanged(_currentHealth, _maxHealth);
+        }
+
         if (_currentHealth == 0)
         {
             _character.Die();
@@ -52,21 +67,6 @@ public class Health : MonoBehaviour
         {
             StartCoroutine(AnimateMaterialRoutine());
 
-        }
-
-        if (damagedSound.audioClip != null)
-        {
-            Game.SoundFX.PlaySoundFXClip(damagedSound, transform.position);
-        }
-
-        if (_character is Player)
-        {
-            GameEvents.RaiseHealthChanged(_currentHealth, _maxHealth);
-        }
-
-        if (_character is Enemy)
-        {
-            SpawnText(damageAmount, critLevel);
         }
 
         return _currentHealth;

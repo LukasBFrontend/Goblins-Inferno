@@ -12,6 +12,8 @@ struct ParticleSystemVariables
     public ParticleSystemControls controls;
     [Range(0f, 1f)]
     public float tryRegisterHitsAt;
+    [Range(0f, 1f)]
+    public float soundEffectAt;
 }
 
 [System.Obsolete("Should be refactored")]
@@ -115,11 +117,22 @@ public class Projectile : MonoBehaviour, IPoolable
         targetTracker.Initialize(target);
         float elapsed = 0f;
         float duration = particleSystem.controls.EffectiveDuration;
-        bool hasAttempedHits = false;
+        bool hasAttempedHits = false, hasPlayedSound = false;
 
         while (elapsed < duration)
         {
             float elapsedRelative = elapsed / duration;
+
+            if (elapsedRelative >= particleSystem.soundEffectAt && !hasPlayedSound)
+            {
+                StopLiveSound();
+                if (data.onDestroy.clips.Count > 0)
+                {
+                    Game.SoundFX.PlayRandomSoundFXClip(data.onDestroy, transform.position);
+                }
+
+                hasPlayedSound = true;
+            }
 
             if (elapsedRelative >= particleSystem.tryRegisterHitsAt && !hasAttempedHits)
             {
@@ -133,11 +146,20 @@ public class Projectile : MonoBehaviour, IPoolable
         }
 
         // elapsedRelative is unlikely to land at exactly 1f.
+
+        if (!hasPlayedSound)
+        {
+            StopLiveSound();
+            if (data.onDestroy.clips.Count > 0)
+            {
+                Game.SoundFX.PlayRandomSoundFXClip(data.onDestroy, transform.position);
+            }
+        }
+
         if (!hasAttempedHits)
         {
             HitTargetIfWithinRange(target);
         }
-
 
         Game.ObjectPooler.Return(this);
     }
@@ -184,7 +206,11 @@ public class Projectile : MonoBehaviour, IPoolable
 
         HitTargetsWithinRange();
         Instantiate(data.onDestroyVFX, transform.position, Quaternion.identity);
-        Game.SoundFX.PlayRandomSoundFXClip(data.onDestroy, transform.position);
+
+        if (data.onDestroy.clips.Count > 0)
+        {
+            Game.SoundFX.PlayRandomSoundFXClip(data.onDestroy, transform.position);
+        }
         Game.ObjectPooler.Return(this);
     }
 
@@ -330,6 +356,26 @@ public class Projectile : MonoBehaviour, IPoolable
 
     void OnGamePaused()
     {
+        PauseLiveSound();
+    }
+
+    void OnGameResumed()
+    {
+        PlayLiveSound();
+    }
+
+    void PlayLiveSound()
+    {
+        if(_currentSoundEffect == null || !_currentSoundEffect.Active)
+        {
+            return;
+        }
+
+        _currentSoundEffect.AudioSource.Play();
+    }
+
+    void PauseLiveSound()
+    {
         if(_currentSoundEffect == null || !_currentSoundEffect.Active)
         {
             return;
@@ -338,14 +384,14 @@ public class Projectile : MonoBehaviour, IPoolable
         _currentSoundEffect.AudioSource.Pause();
     }
 
-    void OnGameResumed()
+    void StopLiveSound()
     {
         if(_currentSoundEffect == null || !_currentSoundEffect.Active)
         {
             return;
         }
 
-        _currentSoundEffect.AudioSource.Play();
+        _currentSoundEffect.AudioSource.Stop();
     }
 
     void OnLevelUp(int oldLevel, int newLevel)
