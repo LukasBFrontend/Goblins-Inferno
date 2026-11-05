@@ -23,6 +23,7 @@ public class GameOverState : BaseState
         Game.SoundFX.PlaySoundFXClip(soundEffect, Vector3.zero, true);
 
         await Game.VolumeTransitions.ColorFadeOut();
+        Game.SoundMixer.SetLowPassFilterOn();
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -36,6 +37,7 @@ public class GameOverState : BaseState
 
     public override void ExitState()
     {
+        Game.SoundMixer.SetLowPassFilterOff();
         GameEvents.StartLevelInvoked.RemoveListener(OnLevelStarted);
     }
 

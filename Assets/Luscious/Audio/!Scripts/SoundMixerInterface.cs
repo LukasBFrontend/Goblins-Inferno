@@ -5,6 +5,8 @@ namespace Luscious.Audio
 {
     public class SoundMixerInterface : MonoBehaviour
     {
+        const string LOWPASS_CUTOFF_FREQ = "lowpassCutoffFreq";
+
         [SerializeField] private AudioMixer audioMixer;
         [Header("Channel Multipliers")]
         [Range(0.1f, 3f)]
@@ -61,13 +63,13 @@ namespace Luscious.Audio
         public void SetLowPassFilterOn()
         {
             // TODO: Transition to Mixer Snapshots instead
-            audioMixer.SetFloat("lowPassCutoffFrequency", 500f);
+            audioMixer.SetFloat(LOWPASS_CUTOFF_FREQ, 500f);
         }
 
         public void SetLowPassFilterOff()
         {
             // TODO: Transition to Mixer Snapshots instead
-            audioMixer.SetFloat("lowPassCutoffFrequency", 5000f);
+            audioMixer.SetFloat(LOWPASS_CUTOFF_FREQ, 5000f);
         }
 
         void Start()

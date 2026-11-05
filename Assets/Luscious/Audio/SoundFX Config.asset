@@ -49,9 +49,11 @@ MonoBehaviour:
       minDistance: 0
       maxDistance: 0
   pickupSound:
-    audioClip: {fileID: 8300000, guid: 52c0a4fa8fc853342a52646651c9e987, type: 3}
-    volume: 50
-    loop: 0
+    clips:
+    - {fileID: 8300000, guid: 7a864809114bf3846afda26e569f2d8b, type: 3}
+    - {fileID: 8300000, guid: 42b440f91f4175d44b62936fd62c1e72, type: 3}
+    - {fileID: 8300000, guid: 046d380f02e55454e89c303e3a6a305f, type: 3}
+    volume: 1.25
     playDelay: 0
     spatialSoundSettings:
       blend: 0

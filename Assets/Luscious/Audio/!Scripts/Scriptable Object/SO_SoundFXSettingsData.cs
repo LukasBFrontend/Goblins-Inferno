@@ -14,7 +14,7 @@ namespace Luscious.Audio
         public SoundEffectData lvlStartSound;
         public SoundEffectData levelUpSound;
         [Header("Scene Items")]
-        public SoundEffectData pickupSound;
+        public MultipleSoundData pickupSound;
         public SoundEffectData chestOpenSound;
         [Header("Movement")]
         public SoundEffectData jumpLandSound;

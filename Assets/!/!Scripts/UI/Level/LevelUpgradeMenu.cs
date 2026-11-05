@@ -1,8 +1,11 @@
+using Luscious.Audio;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(PanelRenderer))]
 public class LevelUpgradeMenu : BaseSubmenu {
+    [SerializeField] SoundEffectData upgradeSelectedSound;
+
     Button _upgradeButtonOne, _upgradeButtonTwo, _upgradeButtonThree;
     PanelRenderer _panelRenderer;
 
@@ -32,17 +35,25 @@ public class LevelUpgradeMenu : BaseSubmenu {
     {
         Game.UpgradeOptions.SelectOptionOne();
         GameEvents.RaiseGameResumed();
+        PlayUpgradeSelectedSound();
     }
 
     void OnUpgradeButtonTwoClick()
     {
         Game.UpgradeOptions.SelectOptionTwo();
         GameEvents.RaiseGameResumed();
+        PlayUpgradeSelectedSound();
     }
 
     void OnUpgradeButtonThreeClick()
     {
         Game.UpgradeOptions.SelectOptionThree();
         GameEvents.RaiseGameResumed();
+        PlayUpgradeSelectedSound();
+    }
+
+    void PlayUpgradeSelectedSound()
+    {
+        Game.SoundFX.PlaySoundFXClip(upgradeSelectedSound, Vector3.zero);
     }
 }

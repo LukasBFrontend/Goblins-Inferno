@@ -129,6 +129,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb6d23afa3888a40af9d8f39df07d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIUpgradeHandler
+  upgradeSelectedSound:
+    audioClip: {fileID: 8300000, guid: d1249bb599a29184b9fec91b5d054b16, type: 3}
+    volume: 9
+    loop: 0
+    playDelay: 0
+    spatialSoundSettings:
+      blend: 0
+      minDistance: 0
+      maxDistance: 0
 --- !u!114 &1218385047617684678
 MonoBehaviour:
   m_ObjectHideFlags: 0
