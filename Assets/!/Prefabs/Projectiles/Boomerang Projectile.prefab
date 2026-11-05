@@ -309,6 +309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boomerang Projectile
       objectReference: {fileID: 0}
+    - target: {fileID: 8510473197682465176, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: rigidbody
+      value: 
+      objectReference: {fileID: 2234535837425708082}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

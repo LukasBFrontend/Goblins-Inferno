@@ -205,6 +205,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8510473197682465176, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: rigidbody
+      value: 
+      objectReference: {fileID: 895077172936894795}
+    - target: {fileID: 8510473197682465176, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: particleSystem.controls
+      value: 
+      objectReference: {fileID: 3210587010220537395}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

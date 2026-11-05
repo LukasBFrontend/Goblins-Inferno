@@ -6,11 +6,11 @@ public class WizardAttacks : MonoBehaviour
     [Header("Energy Explosion")]
     [SerializeField] PoolableData explosionProjectile;
     [SerializeField] int damage;
-    Enemy _archer;
+    Enemy _enemy;
 
     void Awake()
     {
-        _archer = GetComponent<Enemy>();
+        _enemy = GetComponent<Enemy>();
     }
 
     public void StartChannelingExplosion()
@@ -20,7 +20,7 @@ public class WizardAttacks : MonoBehaviour
 
     void StartExplosionSequence(Transform origin)
     {
-        Projectile projectile = Game.ObjectPooler.Spawn<Projectile>(explosionProjectile, origin.position, Quaternion.identity);
-        projectile.Initialize(_archer, Game.Player, damage);
+        EnergyExplosionProjectile projectile = Game.ObjectPooler.Spawn<EnergyExplosionProjectile>(explosionProjectile, origin.position, Quaternion.identity);
+        projectile.Initialize(_enemy, Game.Player, damage);
     }
 }

@@ -132,7 +132,7 @@ public class Weapon :  MonoBehaviour
 
         Vector3 transformOrigin = new(_wielder.transform.position.x, projectileOriginY, _wielder.transform.position.z);
 
-        Projectile projectile = Game.ObjectPooler.Spawn<Projectile>(data.projectile, transformOrigin, Quaternion.identity);
+        BaseProjectile projectile = Game.ObjectPooler.Spawn<BaseProjectile>(data.projectile, transformOrigin, Quaternion.identity);
 
         List<Enemy> enemiesInRange = targetTracker.EnemiesInRange;
 

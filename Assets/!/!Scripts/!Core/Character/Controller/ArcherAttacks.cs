@@ -31,7 +31,7 @@ public class ArcherAttacks : MonoBehaviour
 
     private void ShootArrow(Transform origin)
     {
-        Projectile projectile = Game.ObjectPooler.Spawn<Projectile>(arrowProjectile, origin.position, Quaternion.identity);
+        ArrowProjectile projectile = Game.ObjectPooler.Spawn<ArrowProjectile>(arrowProjectile, origin.position, Quaternion.identity);
         projectile.Initialize(_archer, Game.Player, damage);
 
         Game.SoundFX.PlayRandomSoundFXClip(shootSound, origin.position, _lastSoundIndex, out int newSoundIndex, projectile.transform);

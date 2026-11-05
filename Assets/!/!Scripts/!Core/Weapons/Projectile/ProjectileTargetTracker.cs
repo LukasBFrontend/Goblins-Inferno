@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ProjectileTargetTracker : MonoBehaviour
 {
-    [SerializeField] Projectile projectile;
+    [SerializeField] BaseProjectile projectile;
     [Space()]
     [Tooltip("A cheesy way to trigger validation in order to set collider radius to projectileData.range.")]
     [SerializeField] bool triggerValidate;
@@ -16,12 +16,12 @@ public class ProjectileTargetTracker : MonoBehaviour
     public void Initialize(BaseCharacter initialTarget)
     {
         _targetCurrent = initialTarget;
-        _fallbackPosition = Projectile.RandomMaxRange(transform, projectile.Data.newTargetRange);
+        _fallbackPosition = BaseProjectile.RandomMaxRange(transform, projectile.Data.newTargetRange);
     }
 
     public void Initialize()
     {
-        _fallbackPosition = Projectile.RandomMaxRange(transform, projectile.Data.newTargetRange);
+        _fallbackPosition = BaseProjectile.RandomMaxRange(transform, projectile.Data.newTargetRange);
     }
 
     public BaseCharacter[] InRange(float range, LayerMask layerMask)
@@ -84,7 +84,7 @@ public class ProjectileTargetTracker : MonoBehaviour
     {
         if (!projectile || !projectile.Data)
         {
-            Debug.LogWarning($"<color=white>{name}</color> is missing reference <color=white>{nameof(projectile)}</color> or the <color=white>{nameof(Projectile)}</color> instance does not have a valid data reference.");
+            Debug.LogWarning($"<color=white>{name}</color> is missing reference <color=white>{nameof(projectile)}</color> or the <color=white>{nameof(BaseProjectile)}</color> instance does not have a valid data reference.");
             return;
         }
         Gizmos.color = Color.yellow;
