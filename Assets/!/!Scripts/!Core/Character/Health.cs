@@ -2,13 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Luscious.Audio;
+using System;
 
-[System.Serializable]
-struct StatsConfig
-{
-    [Header("Overrides base health if set")]
-    public SO_CharacterStatsConfig characterStatsConfig;
-}
 
 [RequireComponent(typeof (BaseCharacter))]
 public class Health : MonoBehaviour
@@ -24,24 +19,20 @@ public class Health : MonoBehaviour
     [SerializeField] Color damageColor;
     [Space()]
     [SerializeField] SoundEffectData damagedSound;
+    [SerializeField] SoundEffectData healedSound;
     [Header("Damage Text")]
-    [SerializeField] bool showDamageText;
     [SerializeField] PoolableData damageTextPoolableData;
 
-    static readonly WaitForSeconds _waitForSeconds_1 = new(.1f);
-    int _currentHealth;
-    int _maxHealth;
-    BaseCharacter _character;
-    List<Material> _materialInstances = new();
-    bool _isInvincibilityFrame;
+    private static readonly WaitForSeconds _waitForSeconds_1 = new(.1f);
+    private int _currentHealth;
+    private int _maxHealth;
+    private BaseCharacter _character;
+    private List<Material> _materialInstances = new();
+    private bool _isInvincibilityFrame;
 
     public int Current => _currentHealth;
     public int Max => _maxHealth;
 
-    /// <summary>
-    /// Subtracts amount from the character health. If it reaches zero, invokes Die().
-    /// </summary>
-    /// <param name="damageAmount"></param>
     public int TakeDamage(int damageAmount, int critLevel)
     {
         if (_isInvincibilityFrame)
@@ -49,26 +40,8 @@ public class Health : MonoBehaviour
             return 0;
         }
 
-
-        if (showDamageText)
-        {
-            DamageText damageText = Game.ObjectPooler.Spawn<DamageText>
-            (
-                damageTextPoolableData,
-                new (transform.position.x, 1.75f, transform.position.z - .5f),
-                Quaternion.identity
-            );
-
-            damageText.Initialize(damageAmount, critLevel);
-        }
-
         _currentHealth -= damageAmount;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-
-        if (_character is Player)
-        {
-            GameEvents.RaiseHealthChanged(_currentHealth, _maxHealth);
-        }
 
         if (_currentHealth == 0)
         {
@@ -79,25 +52,53 @@ public class Health : MonoBehaviour
         {
             StartCoroutine(AnimateMaterialRoutine());
 
-            if (damagedSound.audioClip != null)
-            {
-                Game.SoundFX.PlaySoundFXClip(damagedSound, transform.position);
-            }
+        }
+
+        if (damagedSound.audioClip != null)
+        {
+            Game.SoundFX.PlaySoundFXClip(damagedSound, transform.position);
+        }
+
+        if (_character is Player)
+        {
+            GameEvents.RaiseHealthChanged(_currentHealth, _maxHealth);
+        }
+
+        if (_character is Enemy)
+        {
+            SpawnText(damageAmount, critLevel);
         }
 
         return _currentHealth;
     }
 
-    /// <summary>
-    /// Sets the
-    /// </summary>
-    /// <param name="maxHealth"></param>
+    public void Restore(int amount)
+    {
+        if (amount <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(Restore));
+        }
+
+        _currentHealth = Mathf.Clamp(_currentHealth + amount, 0, _maxHealth);
+
+        if (healedSound.audioClip != null)
+        {
+            Game.SoundFX.PlaySoundFXClip(healedSound, transform.position);
+        }
+
+        if (_character is Player)
+        {
+            GameEvents.RaiseHealthChanged(_currentHealth, _maxHealth);
+        }
+
+        SpawnText(-amount);
+    }
+
     public void SetMaxHealth(int maxHealth)
     {
         if (maxHealth <= _maxHealth)
         {
-            Debug.LogWarning($"Tried invoking method <b><color=white>{nameof(Restore)}()</color></b> of <b>{name}</b> with value = {maxHealth} which is lower than current MaxHealth = {_maxHealth}.");
-            return;
+            throw new ArgumentOutOfRangeException(nameof(SetMaxHealth));
         }
 
         int difference = maxHealth - _maxHealth;
@@ -122,7 +123,7 @@ public class Health : MonoBehaviour
         StartCoroutine(InvincibilityRoutine(delay, seconds));
     }
 
-    void Awake()
+    private void Awake()
     {
         _maxHealth = statsConfig.characterStatsConfig != null
             ? (int)statsConfig.characterStatsConfig.maxHealth.baseValue
@@ -133,12 +134,12 @@ public class Health : MonoBehaviour
         _character = GetComponent<BaseCharacter>();
     }
 
-    void Start()
+    private void Start()
     {
         GetMaterialRefs();
     }
 
-    void OnValidate()
+    private void OnValidate()
     {
         SO_CharacterStatsConfig stats = statsConfig.characterStatsConfig;
 
@@ -148,7 +149,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    void GetMaterialRefs()
+    private void GetMaterialRefs()
     {
         _materialInstances.Clear();
 
@@ -158,7 +159,19 @@ public class Health : MonoBehaviour
         }
     }
 
-    IEnumerator AnimateMaterialRoutine()
+    private void SpawnText(int damageAmount, int critLevel = 0)
+    {
+            DamageText damageText = Game.ObjectPooler.Spawn<DamageText>
+            (
+                damageTextPoolableData,
+                new (transform.position.x, 1.75f, transform.position.z - .5f),
+                Quaternion.identity
+            );
+
+            damageText.Initialize(damageAmount, critLevel);
+    }
+
+    private IEnumerator AnimateMaterialRoutine()
     {
         int i = 0;
         int maxIterations = 2;
@@ -176,7 +189,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    IEnumerator InvincibilityRoutine(float delay, float seconds)
+    private IEnumerator InvincibilityRoutine(float delay, float seconds)
     {
         yield return new WaitForSeconds(delay);
         _isInvincibilityFrame = true;
@@ -184,19 +197,10 @@ public class Health : MonoBehaviour
         _isInvincibilityFrame = false;
     }
 
-    /// <summary>
-    /// Adds amount to character health up to MaxHealth
-    /// </summary>
-    /// <param name="amount"></param>
-    public void Restore(int amount)
+    [System.Serializable]
+    struct StatsConfig
     {
-        if (amount <= 0)
-        {
-            Debug.LogWarning($"Tried invoking method <b><color=white>{nameof(Restore)}()</color></b> of <b>{name}</b> with a non-positive value.");
-            return;
-        }
-
-        _currentHealth = Mathf.Clamp(_currentHealth + amount, 0, _maxHealth);
-        GameEvents.RaiseHealthChanged(_currentHealth, _maxHealth);
+        [Header("Overrides base health if set")]
+        public SO_CharacterStatsConfig characterStatsConfig;
     }
 }

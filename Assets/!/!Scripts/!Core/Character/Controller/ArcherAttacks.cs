@@ -1,4 +1,5 @@
 using UnityEngine;
+using Luscious.Audio;
 
 [RequireComponent(typeof(Enemy))]
 public class ArcherAttacks : MonoBehaviour
@@ -8,12 +9,10 @@ public class ArcherAttacks : MonoBehaviour
     [SerializeField] Transform leftArrowSpawnPoint;
     [SerializeField] Transform rightArrowSpawnPoint;
     [SerializeField] int damage;
-    Enemy _archer;
+    [SerializeField] MultipleSoundData shootSound;
 
-    void Awake()
-    {
-        _archer = GetComponent<Enemy>();
-    }
+    private int _lastSoundIndex;
+    private Enemy _archer;
 
     public void ShootArrowLeft()
     {
@@ -25,9 +24,17 @@ public class ArcherAttacks : MonoBehaviour
         ShootArrow(rightArrowSpawnPoint);
     }
 
-    void ShootArrow(Transform origin)
+    private void Awake()
+    {
+        _archer = GetComponent<Enemy>();
+    }
+
+    private void ShootArrow(Transform origin)
     {
         Projectile projectile = Game.ObjectPooler.Spawn<Projectile>(arrowProjectile, origin.position, Quaternion.identity);
         projectile.Initialize(_archer, Game.Player, damage);
+
+        Game.SoundFX.PlayRandomSoundFXClip(shootSound, origin.position, _lastSoundIndex, out int newSoundIndex, projectile.transform);
+        _lastSoundIndex = newSoundIndex;
     }
 }

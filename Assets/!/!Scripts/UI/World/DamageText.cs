@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class DamageText : MonoBehaviour, IPoolable
 {
     [SerializeField] Color baseColor = Color.white;
+    [SerializeField] Color healColor = Color.green;
     [SerializeField] List<Color> damageColorsByCritLevel;
     [SerializeField] string labelId = "DamageTextLabel";
     [Header("USS-transition classes")]
@@ -14,18 +15,35 @@ public class DamageText : MonoBehaviour, IPoolable
 
     Label _textLabel;
     PanelRenderer _panelRenderer;
+    bool _readyToDisplay;
 
     public string PoolableId { get; set; }
 
     public void Initialize(int damage, int critLevel)
     {
-        _textLabel.text = damage.ToString();
-        _textLabel.style.color = critLevel > 0
-            ? damageColorsByCritLevel[(critLevel - 1) % damageColorsByCritLevel.Count]
-            : baseColor
-        ;
+        Color color;
+        string text;
 
-        StartCoroutine(TextAnimationRoutine());
+        if (damage < 0)
+        {
+            color = healColor;
+            text = $"+{Mathf.Abs(damage)}";
+        }
+        else if (critLevel > 0)
+        {
+            color = damageColorsByCritLevel[(critLevel - 1) % damageColorsByCritLevel.Count];
+            text = $"{damage}";
+        }
+        else
+        {
+            color = baseColor;
+            text = $"{damage}";
+        }
+
+        _textLabel.style.color = color;
+        _textLabel.text = text;
+
+        _readyToDisplay = true;
     }
 
     public void Reset()
@@ -41,6 +59,17 @@ public class DamageText : MonoBehaviour, IPoolable
     {
         _panelRenderer = GetComponent<PanelRenderer>();
         _panelRenderer.RegisterUIReloadCallback(OnUIReload);
+    }
+
+    void Update()
+    {
+        if (!_readyToDisplay)
+        {
+            return;
+        }
+
+        StartCoroutine(TextAnimationRoutine());
+        _readyToDisplay = false;
     }
 
     void OnDestroy()

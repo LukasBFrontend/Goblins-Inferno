@@ -398,6 +398,18 @@ MonoBehaviour:
   leftArrowSpawnPoint: {fileID: 7869217028202991132}
   rightArrowSpawnPoint: {fileID: 7459690335882283749}
   damage: 10
+  shootSound:
+    clips:
+    - {fileID: 8300000, guid: bb4d0d70a84558e41975a0d3bff64fdf, type: 3}
+    - {fileID: 8300000, guid: 21e4faaa6d9407e4fbf8431c2ddce63c, type: 3}
+    - {fileID: 8300000, guid: 3fbaa1a538fd9044ca9f91a4a7a63a61, type: 3}
+    - {fileID: 8300000, guid: 7d301de7554866640ba9b7c284706162, type: 3}
+    volume: 15
+    playDelay: 0
+    spatialSoundSettings:
+      blend: 1
+      minDistance: 1
+      maxDistance: 500
 --- !u!1001 &8173159740415939316
 PrefabInstance:
   m_ObjectHideFlags: 0

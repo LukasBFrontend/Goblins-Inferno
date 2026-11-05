@@ -239,7 +239,15 @@ MonoBehaviour:
       blend: 0
       minDistance: 0
       maxDistance: 0
-  showDamageText: 0
+  healedSound:
+    audioClip: {fileID: 8300000, guid: 216ec10a5f6185c4aaf48a23adb888fd, type: 3}
+    volume: 5
+    loop: 0
+    playDelay: 0
+    spatialSoundSettings:
+      blend: 0
+      minDistance: 0
+      maxDistance: 0
   damageTextPoolableData:
     id: Damage Text
     prefab: {fileID: 8885849690013805291, guid: 523676bc81126d048b9faa7e7a2dbf37, type: 3}
