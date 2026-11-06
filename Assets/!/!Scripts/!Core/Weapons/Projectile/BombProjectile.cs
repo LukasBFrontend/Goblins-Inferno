@@ -8,8 +8,6 @@ public sealed class BombProjectile: BaseProjectile
 
     public override IEnumerator ProjectileRoutine(BaseCharacter target)
     {
-        TargetTracker.Initialize();
-
         Vector3 direction = PointToPosition(target != null
             ? target.ColliderCenter
             : RandomMaxRange(transform, Data.newTargetRange)

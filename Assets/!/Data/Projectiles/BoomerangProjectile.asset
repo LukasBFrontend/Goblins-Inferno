@@ -18,7 +18,7 @@ MonoBehaviour:
   lifeTime: 5
   onDestroyVFX: {fileID: 0}
   targetReachedThreshold: 0.015
-  newTargetRange: 8
+  newTargetRange: 10
   targetsLayerMask:
     serializedVersion: 2
     m_Bits: 128

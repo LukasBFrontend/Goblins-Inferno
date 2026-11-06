@@ -10,15 +10,25 @@ public class ProjectileTargetTracker : MonoBehaviour
 
     public Vector3 TargetPosition => _targetCurrent != null ? _targetCurrent.ColliderCenter : _fallbackPosition;
 
-    public void Initialize(BaseCharacter initialTarget)
+    public void SetTarget(BaseCharacter initialTarget)
     {
         _targetCurrent = initialTarget;
-        _fallbackPosition = BaseProjectile.RandomMaxRange(transform, projectile.Data.newTargetRange);
+
+        _fallbackPosition = initialTarget != null 
+            ? initialTarget.ColliderCenter 
+            : BaseProjectile.RandomMaxRange(transform, projectile.Data.newTargetRange)
+        ;
     }
 
-    public void Initialize()
+    public void SetTarget(Vector3 position)
     {
-        _fallbackPosition = BaseProjectile.RandomMaxRange(transform, projectile.Data.newTargetRange);
+        _fallbackPosition = position;
+    }
+
+    public void Reset()
+    {
+        _targetCurrent = null;
+        _fallbackPosition = Vector3.zero;
     }
 
     public BaseCharacter[] InRange(float range, LayerMask layerMask)
@@ -38,12 +48,6 @@ public class ProjectileTargetTracker : MonoBehaviour
         }
 
         return results.ToArray();
-    }
-
-    public void SetNewTarget(BaseCharacter target, Vector3 fallbackPosition)
-    {
-        _targetCurrent = target;
-        _fallbackPosition = fallbackPosition;
     }
 
     public bool IsTargetPositionReached(float threshold)

@@ -7,7 +7,7 @@ public sealed class EnergyExplosionProjectile : BaseProjectile
 {
     public override IEnumerator ProjectileRoutine(BaseCharacter target)
     {
-        TargetTracker.Initialize(target);
+        TargetTracker.SetTarget(target);
         float elapsed = 0f;
         float duration = ParticleSystem.controls.EffectiveDuration;
         bool hasAttempedHits = false, hasPlayedSound = false;

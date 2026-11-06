@@ -29,7 +29,7 @@ MonoBehaviour:
       UISprite: {fileID: 21300000, guid: c1c38b15562539d4fb59ee473de89842, type: 3}
       name: Boomerang Damage
       shortName: damage
-      baseValue: 15
+      baseValue: 10
       flatScaling: 5
     projectileCount:
       includeAsUpgradeOption: 1
@@ -50,11 +50,27 @@ MonoBehaviour:
       UISprite: {fileID: 21300000, guid: c1c38b15562539d4fb59ee473de89842, type: 3}
       name: Boomerang Range
       shortName: range
-      multiplierScaling: 15
+      multiplierScaling: 8
   hitVFX: {fileID: 271054424957760564, guid: 1468eeb0963ddad41909c04ad8af0aee, type: 3}
   hitMask:
     serializedVersion: 2
     m_Bits: 128
+  attackSound:
+    clips: []
+    volume: 0
+    playDelay: 0
+    spatialSoundSettings:
+      blend: 0
+      minDistance: 0
+      maxDistance: 0
+  hitSound:
+    clips: []
+    volume: 0
+    playDelay: 0
+    spatialSoundSettings:
+      blend: 0
+      minDistance: 0
+      maxDistance: 0
   projectile:
     id: Boomerang Projectile
     prefab: {fileID: 7842263552249521582, guid: 215813221688520429944f324adb4243, type: 3}

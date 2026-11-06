@@ -49,6 +49,11 @@ public abstract class BaseProjectile: MonoBehaviour, IPoolable
         _sender = null;
         _damage = 0;
         _charactersHit.Clear();
+        
+        if (TargetTracker != null)
+        {
+            TargetTracker.Reset();
+        }
 
         if (rigidbody)
         {
