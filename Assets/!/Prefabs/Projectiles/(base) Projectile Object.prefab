@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 587217379074690310}
   - component: {fileID: 1657381282341612735}
-  - component: {fileID: 8510473197682465176}
   m_Layer: 0
   m_Name: (base) Projectile Object
   m_TagString: Untagged
@@ -89,26 +88,6 @@ CapsuleCollider:
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &8510473197682465176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3034866633386620098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c23d78f95a79938499d1811ce6b89907, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ArrowProjectile
-  data: {fileID: 11400000, guid: 7f49d33a020a33649ad9ebef5795f100, type: 2}
-  render: {fileID: 2051434200979898748}
-  targetTracker: {fileID: 3555430341570801904}
-  particleSystem:
-    controls: {fileID: 0}
-    tryRegisterHitsAt: 0
-    soundEffectAt: 0
-  rigidbody: {fileID: 0}
 --- !u!1 &7899806756747332281
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,5 +132,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98d17e175d5e9a24d93745de4874e04d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileTargetTracker
-  projectile: {fileID: 8510473197682465176}
+  projectile: {fileID: 0}
   triggerValidate: 0

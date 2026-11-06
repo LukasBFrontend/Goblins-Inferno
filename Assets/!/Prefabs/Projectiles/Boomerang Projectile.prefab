@@ -309,6 +309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boomerang Projectile
       objectReference: {fileID: 0}
+    - target: {fileID: 3555430341570801904, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 3978111810973375109}
     - target: {fileID: 8510473197682465176, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       propertyPath: rigidbody
       value: 
@@ -324,8 +328,11 @@ PrefabInstance:
       addedObject: {fileID: 2189071166492074030}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3034866633386620098, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
-      insertIndex: 2
+      insertIndex: -1
       addedObject: {fileID: 2234535837425708082}
+    - targetCorrespondingSourceObject: {fileID: 3034866633386620098, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3978111810973375109}
     - targetCorrespondingSourceObject: {fileID: 2051434200979898748, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4284320191114734174}
@@ -394,3 +401,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
+--- !u!114 &3978111810973375109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842263552249521582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eef146539c0e69447bd2f116dbc8912e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoomerangProjectile
+  data: {fileID: 11400000, guid: 889a796e9f28c7c4cbdb9f0f5e2d3346, type: 2}
+  render: {fileID: 6535702382055788560}
+  targetTracker: {fileID: 8618833295852675484}
+  particleSystem:
+    controls: {fileID: 0}
+    tryRegisterHitsAt: 0
+    soundEffectAt: 0
+  rigidbody: {fileID: 2234535837425708082}
+--- !u!114 &8618833295852675484 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3555430341570801904, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+  m_PrefabInstance: {fileID: 5101261408589484396}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d17e175d5e9a24d93745de4874e04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileTargetTracker

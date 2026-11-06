@@ -201,6 +201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bomb Projectile
       objectReference: {fileID: 0}
+    - target: {fileID: 3555430341570801904, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 395020523930422038}
     - target: {fileID: 8166896396699391582, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -229,12 +233,31 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3034866633386620098, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
       insertIndex: 1
       addedObject: {fileID: 895077172936894795}
+    - targetCorrespondingSourceObject: {fileID: 3034866633386620098, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 395020523930422038}
   m_SourcePrefab: {fileID: 100100000, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+--- !u!1 &99523667436943541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2051434200979898748, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+  m_PrefabInstance: {fileID: 2096914595165518281}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1531095980798309583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 587217379074690310, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
   m_PrefabInstance: {fileID: 2096914595165518281}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3192719774154295609 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3555430341570801904, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
+  m_PrefabInstance: {fileID: 2096914595165518281}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d17e175d5e9a24d93745de4874e04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileTargetTracker
 --- !u!1 &3965348730678136075 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3034866633386620098, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}
@@ -267,6 +290,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &395020523930422038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3965348730678136075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f681c0fd77126d4bb6617e7ec5e4224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BombProjectile
+  data: {fileID: 11400000, guid: 1cc0eadf8ff371a45b3ecc2af86a6c10, type: 2}
+  render: {fileID: 99523667436943541}
+  targetTracker: {fileID: 3192719774154295609}
+  particleSystem:
+    controls: {fileID: 3210587010220537395}
+    tryRegisterHitsAt: 0
+    soundEffectAt: 0
+  rigidbody: {fileID: 895077172936894795}
 --- !u!4 &6671205834504652387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4723535945511862186, guid: dd15a8bc2ffc8044d8ecea1c216d83a0, type: 3}

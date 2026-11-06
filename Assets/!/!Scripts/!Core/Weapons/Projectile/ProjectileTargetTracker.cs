@@ -4,9 +4,6 @@ using UnityEngine;
 public class ProjectileTargetTracker : MonoBehaviour
 {
     [SerializeField] BaseProjectile projectile;
-    [Space()]
-    [Tooltip("A cheesy way to trigger validation in order to set collider radius to projectileData.range.")]
-    [SerializeField] bool triggerValidate;
 
     BaseCharacter _targetCurrent;
     Vector3 _fallbackPosition;
