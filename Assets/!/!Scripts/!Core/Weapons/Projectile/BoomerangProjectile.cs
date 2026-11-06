@@ -46,24 +46,45 @@ public sealed class BoomerangProjectile : BaseProjectile
         // Return to sender.
         TargetTracker.SetTarget(Sender);
 
+        float elapsed = 0f;
+
         while (!TargetTracker.IsTargetPositionReached(threshold))
         {
             // Accelerate projectile speed based off the player velocity parallel to  the projectile velocity.
-            float scalarProjection = Vector3.Dot(Sender.Rigidbody.linearVelocity, lastVelocity.normalized);
+            Vector3 senderVelocity = Sender.Rigidbody.linearVelocity;
+            float scalarProjection = Vector3.Dot(senderVelocity, lastVelocity.normalized); // How fast is the sender moving in the direction of the projectile
 
             float lastSpeed = lastVelocity.magnitude;
-            float speedDifference = scalarProjection - lastSpeed;
+            float speedDifference = lastSpeed - scalarProjection; // How much faster / slower is the projectile moving compared to sender.        
 
-            Debug.Log($"scalarProjection: <color=white>{scalarProjection}</color> lastSpeed: <color=white>{lastSpeed}</color> speedDifference: <color=white>{speedDifference}</color>");
-
-            float adjustedSpeed = speedDifference > 0 
+            float adjustedSpeed = speedDifference < 0 
                 ? Data.initialVelocity + speedDifference * 2 
                 : Data.initialVelocity
             ;
 
+            if (speedDifference > 0)
+            {
+
+                // 1. Calculate the amount of time the return arc should take, should the sender not move
+
+            }
+
+            float referenceTime = Data.newTargetRange / Data.initialVelocity;
+            float estimatedArrival = elapsed + (TargetTracker.TargetPosition - transform.position).magnitude / speedDifference;
+
+            if (elapsed > referenceTime) // increase speed if after schedule
+            {
+                adjustedSpeed = Mathf.Lerp(Data.initialVelocity, Mathf.Max(scalarProjection, Data.initialVelocity) * 2f, (elapsed - referenceTime) / 4);
+            }
+            else if (estimatedArrival < referenceTime)
+            {
+                adjustedSpeed = Mathf.Lerp(Data.initialVelocity, 0f, referenceTime - estimatedArrival);
+            }
+
             MoveTowardsTarget(adjustedSpeed, out Vector3 velocity);
             lastVelocity = velocity;
 
+            elapsed += Time.deltaTime;
             yield return null;
         }
 
