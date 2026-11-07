@@ -91,12 +91,12 @@ Label {
     padding-left: 28px;
 }
 
-.upgradeButton:hover {
+.upgradeButtonHover:hover {
     color: rgb(255, 255, 255);
     scale: 1.05 1.05;
 }
 
-.upgradeButton:hover > .upgradeButtonBackground {
+.upgradeButtonHover:hover > .upgradeButtonBackground {
     background-color: rgb(255, 255, 255);
     -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
     background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");

@@ -49,3 +49,5 @@ MonoBehaviour:
   move: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jump: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   togglePause: {fileID: -7544878490045679675, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  navigate: {fileID: -8784545083839296357, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  click: {fileID: 3001919216989983466, guid: 052faaac586de48259a63d0c4782560b, type: 3}

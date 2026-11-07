@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/Upgrade%20Button/upgradeButtonStyle.uss?fileID=7433441132597879392&amp;guid=2c23c507fc6f30948ab28f18b0433ce0&amp;type=3#upgradeButtonStyle"/>
-    <ui:Button name="UpgradeButton" class="upgradeButton">
+    <Style src="project://database/Assets/!/UI%20Toolkit/Upgrade%20Card/upgradeButtonStyle.uss?fileID=7433441132597879392&amp;guid=2c23c507fc6f30948ab28f18b0433ce0&amp;type=3#upgradeButtonStyle"/>
+    <ui:Button name="UpgradeButton" class="upgradeButton upgradeButtonHover">
         <ui:VisualElement name="UpgradeBackground_STAT" class="upgradeBackgroundStat upgradeButtonBackground">
             <Bindings>
                 <ui:DataBinding property="style.display" data-source-path="DisplayStat" binding-mode="ToTarget"/>
@@ -11,7 +11,7 @@
                 <ui:DataBinding property="style.display" data-source-path="DisplayWeaponUnlock" binding-mode="ToTarget"/>
             </Bindings>
         </ui:VisualElement>
-        <ui:Image source="project://database/Assets/Resources/Sprites/placeholder_square.png?fileID=2800000&amp;guid=ee0c57da3cd509340a3c6efd39622932&amp;type=3#placeholder_square" name="UpgradeImage" class="upgradeImage">
+        <ui:Image source="project://database/Assets/!/Sprites/placeholder_square.png?fileID=2800000&amp;guid=ee0c57da3cd509340a3c6efd39622932&amp;type=3#placeholder_square" name="UpgradeImage" class="upgradeImage">
             <Bindings>
                 <ui:DataBinding property="source" data-source-path="sprite" binding-mode="ToTarget"/>
             </Bindings>

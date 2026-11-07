@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Luscious.Audio;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,54 +8,66 @@ using UnityEngine.UIElements;
 public class LevelUpgradeMenu : BaseSubmenu {
     [SerializeField] SoundEffectData upgradeSelectedSound;
 
-    Button _upgradeButtonOne, _upgradeButtonTwo, _upgradeButtonThree;
-    PanelRenderer _panelRenderer;
+    private List<Button> _upgradeButtons = new();
+    private readonly Action[] _selectUpgradeActions = new Action[]
+    {
+        () => Game.UpgradeOptions.SelectOptionOne(),
+        () => Game.UpgradeOptions.SelectOptionTwo(),
+        () => Game.UpgradeOptions.SelectOptionThree(),
+    };
+    private bool _hoverClassActive = true;
+    private PanelRenderer _panelRenderer;
 
-    void OnEnable()
+    private void OnEnable()
     {
         _panelRenderer = GetComponent<PanelRenderer>();
         _panelRenderer.RegisterUIReloadCallback(OnUIReload);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         _panelRenderer.UnregisterUIReloadCallback(OnUIReload);
     }
 
-    void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
+    private void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
     {
-        _upgradeButtonOne = rootElement.Q<TemplateContainer>("UpgradeButtonOne").Q<Button>();
-        _upgradeButtonTwo = rootElement.Q<TemplateContainer>("UpgradeButtonTwo").Q<Button>();
-        _upgradeButtonThree = rootElement.Q<TemplateContainer>("UpgradeButtonThree").Q<Button>();
+        _upgradeButtons.Clear();
+        rootElement.Query<TemplateContainer>("UpgradeButton").ForEach(container =>
+        {
+            Button button = container.Q<Button>();
+            int index = _upgradeButtons.Count;
 
-        _upgradeButtonOne.clicked += OnUpgradeButtonOneClick;
-        _upgradeButtonTwo.clicked += OnUpgradeButtonTwoClick;
-        _upgradeButtonThree.clicked += OnUpgradeButtonThreeClick;
+            _upgradeButtons.Add(button);
+            button.clicked += () => OnUpgradeButtonClick(_selectUpgradeActions[index]);
+        });
     }
 
-    void OnUpgradeButtonOneClick()
+    private void Update()
     {
-        Game.UpgradeOptions.SelectOptionOne();
+        if (UnityEngine.Cursor.visible)
+        {
+            foreach(Button button in _upgradeButtons)
+            {
+                button.AddToClassList("upgradeButtonHover");
+            }
+
+            _hoverClassActive = true;
+        }
+        else if (!UnityEngine.Cursor.visible)
+        {
+            foreach(Button button in _upgradeButtons)
+            {
+                button.RemoveFromClassList("upgradeButtonHover");
+            }
+
+            _hoverClassActive = false;
+        }
+    }
+
+    private void OnUpgradeButtonClick(Action selectUpgrade)
+    {
+        selectUpgrade.Invoke();
         GameEvents.RaiseGameResumed();
-        PlayUpgradeSelectedSound();
-    }
-
-    void OnUpgradeButtonTwoClick()
-    {
-        Game.UpgradeOptions.SelectOptionTwo();
-        GameEvents.RaiseGameResumed();
-        PlayUpgradeSelectedSound();
-    }
-
-    void OnUpgradeButtonThreeClick()
-    {
-        Game.UpgradeOptions.SelectOptionThree();
-        GameEvents.RaiseGameResumed();
-        PlayUpgradeSelectedSound();
-    }
-
-    void PlayUpgradeSelectedSound()
-    {
         Game.SoundFX.PlaySoundFXClip(upgradeSelectedSound, Vector3.zero);
     }
 }
