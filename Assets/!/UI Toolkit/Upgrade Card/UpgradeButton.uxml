@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/!/UI%20Toolkit/Upgrade%20Card/upgradeButtonStyle.uss?fileID=7433441132597879392&amp;guid=2c23c507fc6f30948ab28f18b0433ce0&amp;type=3#upgradeButtonStyle"/>
     <ui:Button name="UpgradeButton" class="upgradeButton upgradeButtonHover">
-        <ui:VisualElement name="UpgradeBackground_STAT" class="upgradeBackgroundStat upgradeButtonBackground">
+        <ui:VisualElement name="UpgradeBackground_STAT" class="upgradeBackgroundStat upgradeButtonBackground" style="display: none;">
             <Bindings>
                 <ui:DataBinding property="style.display" data-source-path="DisplayStat" binding-mode="ToTarget"/>
             </Bindings>

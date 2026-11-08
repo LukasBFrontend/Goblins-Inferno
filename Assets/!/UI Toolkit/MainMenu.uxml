@@ -23,6 +23,7 @@
                 <ui:VisualElement name="Spacer" style="height: 20%;"/>
             </ui:VisualElement>
             <ui:VisualElement name="LowerContainer" class="lowerContainer">
+                <MenuButton text="Start" button-text="Start" name="StartButton"/>
                 <ui:Button text="START" name="StartButton" class="button"/>
                 <ui:Button text="OPTIONS" name="OptionsButton" class="button"/>
                 <ui:Button text="CREDITS" name="CreditsButton" class="button"/>
