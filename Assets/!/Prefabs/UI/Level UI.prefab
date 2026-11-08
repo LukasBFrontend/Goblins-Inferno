@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1218385047617684678}
   - component: {fileID: 63262008303813156}
   - component: {fileID: 805074245506233799}
+  - component: {fileID: 1475785684661636347}
   m_Layer: 5
   m_Name: Level UI
   m_TagString: Untagged
@@ -178,3 +179,18 @@ MonoBehaviour:
   weaponOneData: {fileID: 11400000, guid: 27094d05bdb301a49bb24707442f4710, type: 2}
   weaponTwoData: {fileID: 11400000, guid: ff878a1e2421cf44cb1faaa85b8e09d2, type: 2}
   weaponThreeData: {fileID: 11400000, guid: 5d4a005b01516234d9e605f9160c1eba, type: 2}
+--- !u!114 &1475785684661636347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456760527616442994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5d20c832a119a4bbfd7858a1358ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TooltipController
+  tooltipTemplate: {fileID: 0}
+  showDelay: 500
+  offset: {x: 12, y: 16}

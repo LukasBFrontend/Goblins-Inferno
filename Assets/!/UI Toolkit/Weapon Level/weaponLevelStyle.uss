@@ -2,7 +2,7 @@
     --horizontal-text-margin: 2.5;
     -unity-font-definition: resource("Fonts/skeleboom");
     color: rgb(255, 255, 255);
-    font-size: 12px;
+    font-size: 16px;
 }
 
 Label {
@@ -22,7 +22,7 @@ Label {
     letter-spacing: 7px;
     transition-duration: 0.2s;
     transition-timing-function: ease-out-cubic;
-    width: 70px;
+    width: 72px;
     margin-top: 2px;
 }
 
@@ -44,18 +44,18 @@ Label {
 
 .imageContainer {
     background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
-    -unity-slice-left: 32;
-    -unity-slice-top: 32;
-    -unity-slice-right: 32;
-    -unity-slice-bottom: 32;
-    -unity-slice-scale: 1.25px;
-    background-color: rgba(0, 0, 0, 0.784);
+    -unity-slice-left: 16;
+    -unity-slice-top: 16;
+    -unity-slice-right: 16;
+    -unity-slice-bottom: 16;
+    -unity-slice-scale: 1.5px;
+    background-color: rgba(0, 0, 0, 0.686);
     aspect-ratio: 1;
     -unity-background-image-tint-color: rgba(63, 59, 80, 0.902);
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 
 .sprite {

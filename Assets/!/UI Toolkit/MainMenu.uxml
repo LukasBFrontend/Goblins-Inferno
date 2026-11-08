@@ -24,10 +24,9 @@
             </ui:VisualElement>
             <ui:VisualElement name="LowerContainer" class="lowerContainer">
                 <MenuButton text="Start" button-text="Start" name="StartButton"/>
-                <ui:Button text="START" name="StartButton" class="button"/>
-                <ui:Button text="OPTIONS" name="OptionsButton" class="button"/>
-                <ui:Button text="CREDITS" name="CreditsButton" class="button"/>
-                <ui:Button text="QUIT" name="QuitButton" class="button"/>
+                <MenuButton text="Options" button-text="Start" name="OptionsButton"/>
+                <MenuButton text="Credits" button-text="Start" name="CreditsButton"/>
+                <MenuButton text="Quit" button-text="Start" name="QuitButton"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="CreditsMenuContainer" class="submenuContainer" style="visibility: hidden;">
@@ -35,7 +34,7 @@
                 <ui:Label text="Credits" name="TitleLabel" class="title"/>
             </ui:VisualElement>
             <ui:VisualElement name="LowerContainer" class="lowerContainer">
-                <ui:Button text="RETURN" name="CreditsReturnButton" class="button"/>
+                <MenuButton text="Return" button-text="Start" name="CreditsReturnButton"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="OptionsMenuContainer" class="submenuContainer" style="visibility: hidden;">
@@ -43,7 +42,7 @@
                 <ui:Label text="Options" name="TitleLabel" class="title"/>
             </ui:VisualElement>
             <ui:VisualElement name="LowerContainer" class="lowerContainer">
-                <ui:Button text="RETURN" name="OptionsReturnButton" class="button"/>
+                <MenuButton text="Return" button-text="Start" name="OptionsReturnButton"/>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

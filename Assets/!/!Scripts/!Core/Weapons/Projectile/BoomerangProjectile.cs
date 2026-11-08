@@ -109,7 +109,7 @@ public sealed class BoomerangProjectile : BaseProjectile
 
         velocity = (newPosition - transform.position) / Time.deltaTime;
 
-        if (velocity.x == float.NaN)
+        if (float.IsNaN(newPosition.x) || float.IsNaN(newPosition.y) || float.IsNaN(newPosition.z))
         {
             return;
         }

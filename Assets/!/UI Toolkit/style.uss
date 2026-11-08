@@ -14,6 +14,93 @@ Label {
     padding-left: 0;
 }
 
+.runtime-tooltip {
+    background-color: rgba(255, 255, 255, 0.455);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding-top: 8px;
+    padding-right: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+}
+
+.runtime-tooltip__label {
+}
+
+.menu-button {
+    margin-bottom: 30px;
+    width: 375px;
+    color: rgba(255, 255, 255, 0.902);
+    font-size: 26px;
+    -unity-font-definition: resource("Fonts/skeleboom");
+    letter-spacing: 7px;
+    border-top-width: 2.5px;
+    border-right-width: 2.5px;
+    border-bottom-width: 2.5px;
+    border-left-width: 2.5px;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-cubic;
+    aspect-ratio: 4;
+    overflow: hidden;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.menu-button-background {
+    background-image: resource("Fantasy UI Borders/Default/Transparent center/panel-transparent-center-005#panel-transparent-center-005");
+    background-color: rgb(0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    -unity-slice-left: 16;
+    -unity-slice-top: 16;
+    -unity-slice-right: 16;
+    -unity-slice-bottom: 16;
+    -unity-background-image-tint-color: rgba(63, 63, 63, 0.902);
+    -unity-slice-scale: 1.5px;
+    -unity-slice-type: tiled;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.menu-button-label {
+    height: 100%;
+}
+
+.menu-button:hover {
+    color: rgb(255, 255, 255);
+    scale: 1.05 1.05;
+}
+
+.menu-button:hover .menu-button-background {
+    background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
+    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
+    background-color: rgb(255, 255, 255);
+}
+
+.menu-button:focus {
+    color: rgb(255, 255, 255);
+}
+
+.menu-button:focus .menu-button-background {
+    background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
+    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
+    background-color: rgb(255, 255, 255);
+}
+
 .unity-foldout__text {
     transition-duration: 0.25s;
     transition-property: color;
@@ -45,6 +132,14 @@ Label {
 
 .unity-list-view__item:hover {
     background-color: rgba(61, 61, 61, 0.588);
+}
+
+.unity-list-view__item:hover .character-stat-row-title {
+    color: rgba(213, 175, 12, 0.863);
+}
+
+.unity-list-view__item .character-stat-row-title:hover {
+    color: rgb(213, 175, 12);
 }
 
 .unity-progress-bar {
@@ -231,55 +326,6 @@ Label {
     position: absolute;
 }
 
-.buttonDiscrete {
-    opacity: 0.8;
-}
-
-.button {
-    margin-bottom: 30px;
-    width: 375px;
-    background-image: resource("Fantasy UI Borders/Default/Transparent center/panel-transparent-center-005#panel-transparent-center-005");
-    background-color: rgb(0, 0, 0);
-    color: rgba(255, 255, 255, 0.902);
-    font-size: 26px;
-    -unity-font-definition: resource("Fonts/skeleboom");
-    letter-spacing: 7px;
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-out-cubic;
-    -unity-slice-left: 16;
-    -unity-slice-top: 16;
-    -unity-slice-right: 16;
-    -unity-slice-bottom: 16;
-    -unity-background-image-tint-color: rgba(63, 63, 63, 0.902);
-    -unity-slice-scale: 1.8px;
-    -unity-slice-type: tiled;
-    aspect-ratio: 4;
-    overflow: hidden;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    border-bottom-left-radius: 6px;
-}
-
-.button:hover {
-    color: rgb(255, 255, 255);
-    background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
-    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
-    scale: 1.05 1.05;
-    background-color: rgb(255, 255, 255);
-}
-
-.button:focus {
-    color: rgb(255, 255, 255);
-    background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
-    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
-    background-color: rgb(255, 255, 255);
-}
-
 .gameOverTextContainer {
     font-size: 30px;
     -unity-font-definition: resource("Fonts/blackwood_castle/BLACC___");
@@ -331,72 +377,4 @@ Label {
     font-size: 30px;
     word-spacing: 20px;
     margin-top: 30px;
-}
-
-.menu-button {
-    margin-bottom: 30px;
-    width: 375px;
-    color: rgba(255, 255, 255, 0.902);
-    font-size: 26px;
-    -unity-font-definition: resource("Fonts/skeleboom");
-    letter-spacing: 7px;
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-out-cubic;
-    aspect-ratio: 4;
-    overflow: hidden;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    border-bottom-left-radius: 6px;
-}
-
-.menu-button-background {
-    background-image: resource("Fantasy UI Borders/Default/Transparent center/panel-transparent-center-005#panel-transparent-center-005");
-    background-color: rgb(0, 0, 0);
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
-    -unity-slice-left: 16;
-    -unity-slice-top: 16;
-    -unity-slice-right: 16;
-    -unity-slice-bottom: 16;
-    -unity-background-image-tint-color: rgba(63, 63, 63, 0.902);
-    -unity-slice-scale: 1.8px;
-    -unity-slice-type: tiled;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-}
-
-.menu-button-label {
-    height: 100%;
-}
-
-.menu-button:hover {
-    color: rgb(255, 255, 255);
-    scale: 1.05 1.05;
-}
-
-.menu-button:hover .menu-button-background {
-    background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
-    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
-    background-color: rgb(255, 255, 255);
-}
-
-.menu-button:focus {
-    color: rgb(255, 255, 255);
-}
-
-.menu-button:focus .menu-button-background {
-    background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
-    -unity-background-image-tint-color: rgba(63, 63, 63, 0.961);
-    background-color: rgb(255, 255, 255);
 }
