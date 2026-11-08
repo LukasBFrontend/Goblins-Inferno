@@ -258,6 +258,10 @@ Label {
     -unity-slice-scale: 1.25px;
     -unity-slice-type: tiled;
     aspect-ratio: 4;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
 }
 
 .button:hover {

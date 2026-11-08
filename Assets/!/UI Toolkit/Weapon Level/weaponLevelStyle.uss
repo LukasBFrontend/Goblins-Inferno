@@ -52,6 +52,10 @@ Label {
     background-color: rgba(0, 0, 0, 0.784);
     aspect-ratio: 1;
     -unity-background-image-tint-color: rgba(63, 59, 80, 0.902);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
 }
 
 .sprite {

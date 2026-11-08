@@ -15,7 +15,6 @@ public class LevelUpgradeMenu : BaseSubmenu {
         () => Game.UpgradeOptions.SelectOptionTwo(),
         () => Game.UpgradeOptions.SelectOptionThree(),
     };
-    private bool _hoverClassActive = true;
     private PanelRenderer _panelRenderer;
 
     private void OnEnable()
@@ -50,8 +49,6 @@ public class LevelUpgradeMenu : BaseSubmenu {
             {
                 button.AddToClassList("upgradeButtonHover");
             }
-
-            _hoverClassActive = true;
         }
         else if (!UnityEngine.Cursor.visible)
         {
@@ -59,8 +56,6 @@ public class LevelUpgradeMenu : BaseSubmenu {
             {
                 button.RemoveFromClassList("upgradeButtonHover");
             }
-
-            _hoverClassActive = false;
         }
     }
 
