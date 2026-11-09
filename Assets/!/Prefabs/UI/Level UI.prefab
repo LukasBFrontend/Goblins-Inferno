@@ -191,6 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa5d20c832a119a4bbfd7858a1358ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TooltipController
-  tooltipTemplate: {fileID: 0}
-  showDelay: 500
-  offset: {x: 12, y: 16}
+  cursorSettings: {fileID: 11400000, guid: 2ff1c6c44d9c98f45af080fe93044dd8, type: 2}
+  showDelayMs: 350
+  offset: {x: -64, y: -64}
+  enableAutoFlip: 0
+  defaultDirection: 3

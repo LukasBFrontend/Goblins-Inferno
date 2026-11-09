@@ -42,6 +42,7 @@
                         <ui:Label text="[statname]" name="STATNAME" class="horizontalTextMargin emphasizedText" style="margin-right: 3px; margin-left: 3px;">
                             <Bindings>
                                 <ui:DataBinding property="text" data-source-path="statname" binding-mode="ToTarget"/>
+                                <ui:DataBinding property="tooltip" data-source-path="tooltip" binding-mode="ToTarget"/>
                             </Bindings>
                         </ui:Label>
                         <ui:Label text="by" name="by"/>
@@ -57,6 +58,7 @@
                         <ui:Label text="[statname]" name="STATNAME" class="horizontalTextMargin emphasizedText" style="margin-right: 3px; margin-left: 3px;">
                             <Bindings>
                                 <ui:DataBinding property="text" data-source-path="statname" binding-mode="ToTarget"/>
+                                <ui:DataBinding property="tooltip" data-source-path="tooltip" binding-mode="ToTarget"/>
                             </Bindings>
                         </ui:Label>
                         <ui:Label text="by" name="by" style="margin-right: 3px;"/>
@@ -75,7 +77,8 @@
                     </Bindings>
                 </ui:VisualElement>
                 <ui:VisualElement name="UpgradeTextContainer_WEAPON_UNLOCK" class="upgradeTextContainer" style="flex-grow: 1;">
-                    <ui:VisualElement name="UpgradeDescriptionTextContainer" class="upgradeDescriptionTextContainer" style="flex-grow: 1;">
+                    <ui:VisualElement name="UpgradeDescriptionTextContainer" class="upgradeDescriptionTextContainer" style="flex-grow: 1; flex-direction: column; justify-content: space-around;">
+                        <ui:Label text="???" name="MysteriousLabel"/>
                         <ui:Label text="Unlock weapon" name="MetaDescriptionLabel"/>
                     </ui:VisualElement>
                     <Bindings>

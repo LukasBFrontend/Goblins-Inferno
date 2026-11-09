@@ -1,15 +1,17 @@
 
 using UnityEngine;
 using UnityEngine.UIElements;
+using Luscious;
 
 [RequireComponent(typeof(PanelRenderer))]
 public class RuntimeTooltipController : MonoBehaviour
 {
+    [SerializeField] SO_CursorSettings cursorSettings;
     [Header("Tooltip Settings")]
-    [SerializeField] private long _showDelay = 500;
-    [SerializeField] private Vector2 _offset = new(20, 20);
-    [SerializeField] private bool _enableAutoFlip = true;
-    [SerializeField] private TooltipDirection _defaultDirection = TooltipDirection.Bottom;
+    [SerializeField] long showDelayMs = 500;
+    [SerializeField] Vector2 offset = new(20, 20);
+    [SerializeField] bool enableAutoFlip = true;
+    [SerializeField] TooltipDirection defaultDirection = TooltipDirection.Bottom;
 
     private PanelRenderer _panelRenderer;
     private VisualElement _root;
@@ -43,10 +45,10 @@ public class RuntimeTooltipController : MonoBehaviour
         _root = rootElement;
         _tooltip = new RuntimeTooltip
         {
-            showDelay = _showDelay,
-            offset = _offset,
-            enableAutoFlip = _enableAutoFlip,
-            defaultDirection = _defaultDirection
+            showDelay = showDelayMs,
+            offset = offset,
+            enableAutoFlip = enableAutoFlip,
+            defaultDirection = defaultDirection
         };
 
         _tooltip.style.display = DisplayStyle.None;
@@ -63,9 +65,13 @@ public class RuntimeTooltipController : MonoBehaviour
         VisualElement target = FindTooltipTarget(evt.target as VisualElement);
 
         if (target == null || target == _currentTarget)
+        {
             return;
+        }
 
         ShowDelayed(target);
+
+        CursorManager.SetCursor(cursorSettings.progressCursor);
     }
 
     private void OnPointerMove(PointerMoveEvent evt)
@@ -82,9 +88,6 @@ public class RuntimeTooltipController : MonoBehaviour
 
             ShowDelayed(target);
         }
-
-        if (_tooltip.style.display == DisplayStyle.Flex)
-            _tooltip.UpdatePosition(_currentTarget, _root);
     }
 
     private void OnPointerLeave(PointerLeaveEvent evt)
@@ -97,7 +100,9 @@ public class RuntimeTooltipController : MonoBehaviour
         while (element != null && element != _root)
         {
             if (!string.IsNullOrEmpty(element.tooltip))
+            {
                 return element;
+            }
 
             element = element.parent;
         }
@@ -112,24 +117,34 @@ public class RuntimeTooltipController : MonoBehaviour
         _currentTarget = target;
         _tooltip.text = target.tooltip;
 
+        CursorManager.SetCursor(cursorSettings.progressCursor);
+
         _showSchedule = _root.schedule.Execute(() =>
         {
             if (_currentTarget == null)
+            {
                 return;
+            }
 
+            _tooltip.UpdatePosition(_currentTarget, _root);
             _tooltip.style.display = DisplayStyle.Flex;
-            _tooltip.schedule.Execute(() => _tooltip.UpdatePosition(_currentTarget, _root));
+            CursorManager.SetCursor(cursorSettings.focusCursor);
         }).StartingIn(_tooltip.showDelay);
     }
 
     private void Hide()
     {
+        if (_tooltip != null)
+        {
+            _tooltip.style.display = DisplayStyle.None;
+        }
+
         _showSchedule?.Pause();
         _showSchedule = null;
 
         _currentTarget = null;
 
-        if (_tooltip != null)
-            _tooltip.style.display = DisplayStyle.None;
+        CursorManager.SetCursor(cursorSettings.defaultCursor);
+
     }
 }

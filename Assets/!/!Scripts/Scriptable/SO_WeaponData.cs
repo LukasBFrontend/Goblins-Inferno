@@ -5,6 +5,7 @@ using UnityEngine;
 public class SO_WeaponData : ScriptableObject
 {
     public GameObject weaponPrefab;
+    public string description;
     public string weaponName;
     public WeaponType weaponType;
     public Sprite sprite;

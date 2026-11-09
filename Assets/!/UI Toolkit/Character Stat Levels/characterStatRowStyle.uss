@@ -39,6 +39,17 @@ Label {
     overflow: hidden;
 }
 
+.spriteBackgroundContainer:hover {
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-left-color: rgb(213, 175, 12);
+    border-right-color: rgb(213, 175, 12);
+    border-top-color: rgb(213, 175, 12);
+    border-bottom-color: rgb(213, 175, 12);
+}
+
 .spriteBackground {
     background-image: resource("Fantasy UI Borders/Default/Transparent border/panel-transparent-border-005#panel-transparent-border-005");
     -unity-slice-left: 16;

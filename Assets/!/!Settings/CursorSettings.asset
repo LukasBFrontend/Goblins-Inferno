@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a88c7d4d28f3d2742917ec0844efb654, type: 3}
+  m_Name: CursorSettings
+  m_EditorClassIdentifier: Assembly-CSharp::Luscious.SO_CursorSettings
+  defaultCursor:
+    offset: {x: 0, y: 0}
+    spriteArray:
+    - {fileID: 2800000, guid: 83a94557da7b8a64aac150309af09902, type: 3}
+    fps: 0
+  progressCursor:
+    offset: {x: 0, y: 0}
+    spriteArray:
+    - {fileID: 2800000, guid: 204aa5c2b7d67fd43b0d568fd2e37b18, type: 3}
+    - {fileID: 2800000, guid: 90c2df56ab43bef4a8dddac6018e1639, type: 3}
+    - {fileID: 2800000, guid: 6317528b11399be44b4cffc5a3784dc0, type: 3}
+    - {fileID: 2800000, guid: f1fe189f524ac9c4b986b3e6cf4382eb, type: 3}
+    - {fileID: 2800000, guid: ca7f41f66e309ef4684fba4a7ff32aab, type: 3}
+    - {fileID: 2800000, guid: b7b2ac33a543d574883a84ccf2345383, type: 3}
+    - {fileID: 2800000, guid: 8ea8e5727f302bc478dd06eb116b9c58, type: 3}
+    fps: 14
+  focusCursor:
+    offset: {x: 0, y: 0}
+    spriteArray:
+    - {fileID: 2800000, guid: 52a2f35f9b2eca947a749cc27595ceb4, type: 3}
+    fps: 0

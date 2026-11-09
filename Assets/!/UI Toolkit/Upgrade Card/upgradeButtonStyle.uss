@@ -62,8 +62,8 @@ Label {
 }
 
 .upgradeDescriptionTextContainer {
-    flex-direction: row;
     letter-spacing: -3px;
+    flex-direction: row;
 }
 
 .emphasizedText {

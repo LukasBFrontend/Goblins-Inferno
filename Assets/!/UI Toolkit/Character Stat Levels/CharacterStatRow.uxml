@@ -11,12 +11,14 @@
             </ui:VisualElement>
             <Bindings>
                 <ui:DataBinding property="style.display" data-source-path="DisplayStatSprite" binding-mode="ToTarget"/>
+                <ui:DataBinding property="tooltip" data-source-path="tooltip" binding-mode="ToTarget"/>
             </Bindings>
         </ui:VisualElement>
         <ui:VisualElement name="TextContainer" class="textContainer">
             <ui:Label text="[Statname]" name="Title" tooltip="Stat description" class="character-stat-row-title">
                 <Bindings>
                     <ui:DataBinding property="text" data-source-path="title" binding-mode="ToTarget"/>
+                    <ui:DataBinding property="tooltip" data-source-path="tooltip" binding-mode="ToTarget"/>
                 </Bindings>
             </ui:Label>
             <ui:VisualElement name="LvlTextContainer" class="lvlTextContainer">

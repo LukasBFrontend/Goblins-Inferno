@@ -7,13 +7,15 @@ public class RSO_WeaponLevelData : ScriptableObject
 {
     public int lvl;
     public Sprite sprite;
+    public string tooltip;
 
     [CreateProperty]
     public StyleEnum<Visibility> Visible => lvl != 0 ? Visibility.Visible : Visibility.Hidden;
 
-    public void SetValues(int lvl, Sprite sprite)
+    public void SetValues(int lvl, Sprite sprite, string tooltip)
     {
         this.lvl = lvl;
         this.sprite = sprite;
+        this.tooltip = tooltip;
     }
 }

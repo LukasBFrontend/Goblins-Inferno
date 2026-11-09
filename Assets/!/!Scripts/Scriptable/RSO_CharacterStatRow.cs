@@ -15,7 +15,7 @@ public class RSO_CharacterStatRows : ScriptableObject
 
         foreach (Stat stat in characterStats.All())
         {
-            list.Add(new(stat.Sprite, stat.Name, stat.Lvl, stat.Evaluate(), stat.IncludeAsUpgradeOption));
+            list.Add(new(stat.Sprite, stat.Name, stat.MetaDescription, stat.Lvl, stat.Evaluate(), stat.IncludeAsUpgradeOption));
         }
     }
 
@@ -27,6 +27,7 @@ public class RSO_CharacterStatRows : ScriptableObject
         public int lvl;
         public bool upgradeable;
         public float value;
+        public string tooltip;
 
         [CreateProperty]
         public readonly string ValueText => upgradeable ? $"{value*100}%" : value.ToString();
@@ -38,10 +39,11 @@ public class RSO_CharacterStatRows : ScriptableObject
         public readonly StyleEnum<DisplayStyle> DisplayStatSprite => upgradeable ? DisplayStyle.Flex : DisplayStyle.None;
 
 
-        public StatRow (Sprite sprite, string title, int lvl, float value, bool upgradeable)
+        public StatRow (Sprite sprite, string title, string tooltip, int lvl, float value, bool upgradeable)
         {
             this.sprite = sprite;
             this.title = title;
+            this.tooltip = tooltip;
             this.lvl = lvl;
             this.value = value;
             this.upgradeable = upgradeable;

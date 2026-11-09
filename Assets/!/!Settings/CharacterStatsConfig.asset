@@ -17,6 +17,7 @@ MonoBehaviour:
     UISprite: {fileID: 8312936430579362208, guid: ee0c57da3cd509340a3c6efd39622932, type: 3}
     name: Base Cooldown
     shortName: base cooldown
+    description: Base time between character attacks.
     baseValue: 1.5
     flatScaling: 0
   baseMoveSpeed:
@@ -24,6 +25,7 @@ MonoBehaviour:
     UISprite: {fileID: 8312936430579362208, guid: ee0c57da3cd509340a3c6efd39622932, type: 3}
     name: Base Movement Speed
     shortName: base move speed
+    description: Character base movement speed in m/s.
     baseValue: 7
     flatScaling: 0
   maxHealth:
@@ -31,6 +33,7 @@ MonoBehaviour:
     UISprite: {fileID: 8312936430579362208, guid: ee0c57da3cd509340a3c6efd39622932, type: 3}
     name: Max Health
     shortName: max hp
+    description: Current character max health.
     baseValue: 100
     flatScaling: 0
   damageMultiplier:
@@ -38,22 +41,26 @@ MonoBehaviour:
     UISprite: {fileID: 1338618465950266308, guid: 912d326a6bb64f047a24692cbbe53ffe, type: 3}
     name: Damage
     shortName: damage
+    description: Multiplies all damage dealt.
     multiplierScaling: 10
   healthMultiplier:
     includeAsUpgradeOption: 1
     UISprite: {fileID: 6969808744107213720, guid: a9857caf53cb88d44b1785ea2798d177, type: 3}
     name: Health
     shortName: health
+    description: Increases max health multiplicatively.
     multiplierScaling: 10
   movementMultiplier:
     includeAsUpgradeOption: 1
     UISprite: {fileID: -7705587524849762523, guid: 357e958e1ae35324c909dc1a9fbaf49f, type: 3}
     name: Movement
     shortName: movement
+    description: Increases movement speed multiplicatively.
     multiplierScaling: 10
   attackSpeedMultiplier:
     includeAsUpgradeOption: 1
     UISprite: {fileID: 5565177215636927096, guid: d685d557f6d0acb438671c8190166dfa, type: 3}
     name: Attack Speed
     shortName: attack speed
+    description: Reduces the time between attacks.
     multiplierScaling: 10

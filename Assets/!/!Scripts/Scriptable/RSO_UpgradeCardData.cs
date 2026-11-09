@@ -12,7 +12,7 @@ public class RSO_UpgradeCardData : ScriptableObject
     public UpgradeType upgradeType;
     public Sprite sprite;
     public string title;
-    public string metaDescription;
+    public string tooltip;
     [Header("Stat data")]
     public StatScalingType scalingType;
     public string statname;
@@ -50,6 +50,7 @@ public class RSO_UpgradeCardData : ScriptableObject
         sprite = stat.Sprite;
         title = stat.Name;
         statname = stat.ShortName;
+        tooltip = stat.MetaDescription;
         statIncrease = stat.PerLevelIncrease;
         lvl = stat.Lvl + 1;
     }
@@ -81,6 +82,7 @@ public class RSO_UpgradeCardData : ScriptableObject
 
         sprite = stat.Sprite;
         statname = stat.ShortName;
+        tooltip = stat.MetaDescription;
         statIncrease = stat.PerLevelIncrease;
     }
 

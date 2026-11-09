@@ -32,8 +32,9 @@
                 <MenuButton name="OptionsButton" text="Options"/>
                 <MenuButton name="QuitButton" text="Quit"/>
             </ui:VisualElement>
-            <ui:VisualElement name="CharacterStatsContainer" style="position: absolute; justify-content: flex-start; align-items: flex-start; top: 7.5%; bottom: 0;">
-                <ui:ListView allow-remove="false" allow-add="false" item-template="project://database/Assets/!/UI%20Toolkit/Character%20Stat%20Levels/CharacterStatRow.uxml?fileID=9197481963319205126&amp;guid=f8342c552ba0b8f4ea798325cbaa5742&amp;type=3#CharacterStatRow" header-title="Stats" show-foldout-header="true" reorderable="false" binding-source-selection-mode="AutoAssign" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/RSO_CharacterStatRows.asset?fileID=11400000&amp;guid=1862f2f4b6a526940ba8f1128c84b82f&amp;type=2#RSO_CharacterStatRows" show-add-remove-footer="false" virtualization-method="DynamicHeight" name="CharacterStatsList" selection-type="None" show-bound-collection-size="false" style="width: 400px;">
+            <ui:VisualElement name="CharacterStatsContainer" style="position: absolute; justify-content: flex-start; align-items: flex-start; top: 7.5%; bottom: 0; padding-left: 12px;">
+                <ui:Label text="Stats" name="CharacterStatsTitle" style="margin-left: 12px; color: rgb(255, 255, 255); text-shadow: 1px 1px 2px rgb(0, 0, 0); margin-bottom: 12px; margin-top: 12px; margin-right: 12px;"/>
+                <ui:ListView allow-remove="false" allow-add="false" item-template="project://database/Assets/!/UI%20Toolkit/Character%20Stat%20Levels/CharacterStatRow.uxml?fileID=9197481963319205126&amp;guid=f8342c552ba0b8f4ea798325cbaa5742&amp;type=3#CharacterStatRow" header-title="Stats" show-foldout-header="false" reorderable="false" binding-source-selection-mode="AutoAssign" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/RSO_CharacterStatRows.asset?fileID=11400000&amp;guid=1862f2f4b6a526940ba8f1128c84b82f&amp;type=2#RSO_CharacterStatRows" show-add-remove-footer="false" virtualization-method="DynamicHeight" name="CharacterStatsList" selection-type="None" show-bound-collection-size="false" style="width: 400px;">
                     <Bindings>
                         <ui:DataBinding property="itemsSource" data-source-path="list"/>
                     </Bindings>
@@ -84,5 +85,5 @@
         <ui:Instance template="WeaponLevel" name="WeaponLevelTwo" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Weapon%202.asset?fileID=11400000&amp;guid=ff878a1e2421cf44cb1faaa85b8e09d2&amp;type=2#Weapon 2"/>
         <ui:Instance template="WeaponLevel" name="WeaponLevelThree" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Weapon%203.asset?fileID=11400000&amp;guid=5d4a005b01516234d9e605f9160c1eba&amp;type=2#Weapon 3"/>
     </ui:VisualElement>
-    <RuntimeTooltip/>
+    <RuntimeTooltip style="display: none;"/>
 </ui:UXML>

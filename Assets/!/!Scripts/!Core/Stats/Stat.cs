@@ -6,6 +6,7 @@ public abstract class Stat
     protected bool _includeAsUpgradeOption;
     protected string _name;
     protected string _shortName;
+    protected string _description;
     protected int _lvl;
     protected float _perLevelIncrease;
 
@@ -13,6 +14,7 @@ public abstract class Stat
     public Sprite Sprite => _sprite;
     public string Name => _name;
     public string ShortName => _shortName;
+    public string MetaDescription => _description;
     public float PerLevelIncrease => _perLevelIncrease;
     public bool IncludeAsUpgradeOption => _includeAsUpgradeOption;
 
@@ -46,6 +48,7 @@ public class AdditiveStat : Stat
         _sprite = statData.UISprite;
         _name = statData.name;
         _shortName = statData.shortName;
+        _description = statData.description;
         _baseValue = statData.baseValue;
         _perLevelIncrease = statData.flatScaling;
         _includeAsUpgradeOption = statData.includeAsUpgradeOption;
@@ -68,6 +71,7 @@ public sealed class MultiplicativeStat : Stat
         _sprite = statData.UISprite;
         _name = statData.name;
         _shortName = statData.shortName;
+        _description = statData.description;
         _perLevelIncrease = statData.multiplierScaling;
         _includeAsUpgradeOption = statData.includeAsUpgradeOption;
     }

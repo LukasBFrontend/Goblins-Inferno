@@ -8,6 +8,7 @@ public class StatData
     public Sprite UISprite;
     public string name;
     public string shortName;
+    public string description;
 }
 
 [System.Serializable]
