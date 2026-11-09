@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 namespace Luscious.Audio
 {
@@ -49,6 +50,12 @@ namespace Luscious.Audio
             if (delay > 0f)
             {
                 yield return new WaitForSeconds(delay);
+            }
+
+            if (SceneManager.GetActiveScene().buildIndex != _sceneIndex)
+            {
+                // Scene was switched during delay.
+                yield break;
             }
 
             if (startPercent <= 0f)

@@ -40,4 +40,6 @@ public class OptionsMenu : BaseSubmenu
             SwitchSubmenu<LevelPauseMenu>();
         }
     }
+
+    public override void OnDisplaySubmenu(){ }
 }

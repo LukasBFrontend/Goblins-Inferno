@@ -44,6 +44,7 @@ public class MainMenuState : BaseState
             await Task.Yield();
         }
 
+        Game.VolumeTransitions.StopAll();
         SwitchState(Factory.Level());
     }
 

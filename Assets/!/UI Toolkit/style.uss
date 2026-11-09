@@ -154,8 +154,9 @@ Label {
     color: rgb(255, 255, 255);
     margin-top: 0;
     margin-right: 0;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     margin-left: 0;
+    height: 26px;
 }
 
 .unity-progress-bar__container {
@@ -167,10 +168,13 @@ Label {
     border-right-color: rgba(0, 0, 0, 0.196);
     border-top-color: rgba(0, 0, 0, 0.196);
     border-bottom-color: rgba(0, 0, 0, 0.196);
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    height: 100%;
+    max-height: initial;
+    max-width: initial;
 }
 
 .unity-progress-bar__background {
@@ -179,10 +183,11 @@ Label {
     border-right-width: 0;
     border-bottom-width: 0;
     border-left-width: 0;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    height: 100%;
 }
 
 .unity-progress-bar__progress {
@@ -190,14 +195,14 @@ Label {
     margin-right: 0;
     margin-bottom: 0;
     margin-left: 0;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    height: 100%;
 }
 
 .unity-progress-bar__title {
-    padding-top: 0;
     font-size: 20px;
 }
 
@@ -217,10 +222,10 @@ Label {
     right: 0;
     bottom: 0;
     left: 0;
-    padding-top: 6px;
-    padding-right: 6px;
-    padding-bottom: 6px;
-    padding-left: 6px;
+    padding-top: 12px;
+    padding-right: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
 }
 
 #TopContainer {
@@ -337,6 +342,19 @@ Label {
 .gameOverTextContainer {
     font-size: 30px;
     -unity-font-definition: resource("Fonts/blackwood_castle/BLACC___");
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    justify-content: center;
+}
+
+.gameOverTextContainer .menu-button {
+    margin-bottom: 0;
+    height: 64px;
+    margin-top: 24px;
 }
 
 .gameOverTextContainer > .title {
@@ -344,20 +362,29 @@ Label {
 }
 
 .scoreBoardContainer {
-    background-image: resource("Asset Packs/Fantasy UI Borders/Default/Panel/panel-017#panel-017");
+    -unity-slice-scale: 2px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    width: 700px;
+}
+
+.scoreBoardBackground {
+    padding-top: 42px;
+    padding-right: 42px;
+    padding-bottom: 42px;
+    padding-left: 42px;
+    -unity-background-image-tint-color: rgb(151, 54, 54);
     -unity-slice-left: 32;
     -unity-slice-top: 32;
     -unity-slice-right: 32;
     -unity-slice-bottom: 32;
     -unity-slice-scale: 2px;
-    padding-top: 32px;
-    padding-right: 32px;
-    padding-bottom: 32px;
-    padding-left: 32px;
-    -unity-background-image-tint-color: rgb(47, 47, 47);
-    background-color: rgb(149, 0, 0);
-    margin-top: 10px;
-    margin-bottom: 40px;
+    background-image: resource("Fantasy UI Borders/Default/Border/panel-border-026#panel-border-026");
 }
 
 .gameOverStatContainer {
@@ -365,10 +392,12 @@ Label {
     justify-content: space-between;
     margin-bottom: 6px;
     color: rgb(224, 224, 224);
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 .gameOverStatValue {
-    color: rgb(0, 255, 26);
+    color: rgb(255, 207, 1);
     font-size: 28px;
     -unity-font-definition: resource("Fonts/RandomLetters");
     margin-left: 12px;

@@ -9,14 +9,14 @@ public class LevelState : BaseState
         InitializeSubState();
     }
 
-    public async override void EnterState()
+    public override void EnterState()
     {
         if (Ctx.LogNewStateOnEnter)
         {
             Debug.Log($"{Ctx.name} entered <b><color=white>new state</color></b>: <color=yellow>{nameof(LevelState)}</color> \n<b><color=white>substate</color></b>: <color=yellow>{Factory.Playing().GetType().Name}</color>");
         }
 
-        await Game.VolumeTransitions.ColorFadeIn();
+        Game.VolumeTransitions.ColorFadeIn();
 
         GameEvents.QuitLevelInvoked.AddListener(OnQuitLevelInvoked);
         GameSaveState.Score.Reset();
@@ -33,6 +33,7 @@ public class LevelState : BaseState
 
         Game.Music.SetLowPassOff();
         CurrentSubState.ExitState();
+        Game.VolumeTransitions.StopAll();
         SwitchState(Factory.MainMenu());
     }
 

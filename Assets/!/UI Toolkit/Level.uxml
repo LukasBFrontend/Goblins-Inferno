@@ -42,33 +42,31 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="GameoverMenuContainer" class="submenuContainer">
-            <ui:VisualElement name="UpperContainer" class="upperContainer" style="height: 60%;">
-                <ui:VisualElement name="GameOverTextContainer" class="gameOverTextContainer">
-                    <ui:Label text="Game Over" name="TitleLabel" class="title"/>
-                    <ui:VisualElement name="ScoreBoardContainer" class="scoreBoardContainer" style="background-image: resource(&quot;Fantasy UI Borders/Default/Panel/panel-007#panel-007&quot;); -unity-background-image-tint-color: rgb(24, 24, 24);">
+            <ui:VisualElement name="GameOverTextContainer" class="gameOverTextContainer">
+                <ui:VisualElement name="ScoreBoardContainer" class="scoreBoardContainer">
+                    <ui:VisualElement name="ScoreBoardBackground" class="scoreBoardBackground">
+                        <ui:Label text="Game Over" name="TitleLabel" class="title"/>
                         <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer">
                             <ui:Label text="POINTS:" name="FinalScoreLabel"/>
                             <ui:Label text="[000]" name="FinalScoreValue" class="gameOverStatValue"/>
                         </ui:VisualElement>
-                        <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer">
-                            <ui:Label text="LEVEL:" name="FinalScoreLabel"/>
-                            <ui:Label text="[0]" name="FinalScoreValue" class="gameOverStatValue"/>
+                        <ui:VisualElement name="FinalLevelContainer" class="gameOverStatContainer">
+                            <ui:Label text="LEVEL:" name="FinalLevelLabel"/>
+                            <ui:Label text="[0]" name="FinalLevelValue" class="gameOverStatValue"/>
                         </ui:VisualElement>
-                        <ui:VisualElement name="Divider" style="flex-grow: 1; background-image: resource(&quot;Fantasy UI Borders/Default/Divider Fade/divider-fade-002&quot;); height: 20px; -unity-slice-left: 16; -unity-slice-top: 16; -unity-slice-right: 16; -unity-slice-bottom: 16; -unity-slice-scale: 2px; margin-top: 8px; margin-bottom: 8px; -unity-background-image-tint-color: rgba(255, 255, 255, 0.427);"/>
-                        <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer">
+                        <ui:VisualElement name="Divider" style="flex-grow: 1; background-image: resource(&quot;Fantasy UI Borders/Default/Divider Fade/divider-fade-002&quot;); height: 20px; -unity-slice-left: 16; -unity-slice-top: 16; -unity-slice-right: 16; -unity-slice-bottom: 16; -unity-slice-scale: 2px; margin-top: 20px; margin-bottom: 20px; -unity-background-image-tint-color: rgba(255, 255, 255, 0.427);"/>
+                        <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer" style="margin-top: 20px;">
                             <ui:Label text="THE ABYSS:" name="FinalScoreLabel"/>
                             <ui:Label text="BECKONING" name="FinalScoreValue" class="gameOverStatValue"/>
                         </ui:VisualElement>
-                    </ui:VisualElement>
-                </ui:VisualElement>
-            </ui:VisualElement>
-            <ui:VisualElement name="LowerContainer" class="lowerContainer">
-                <ui:VisualElement name="HorizontalButtonContainer" style="flex-direction: row;">
-                    <ui:VisualElement name="ButtonLeft">
-                        <MenuButton name="RetryButton" text="Retry"/>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="ButtonRight" style="flex-direction: column;">
-                        <MenuButton name="QuitButton" text="Quit"/>
+                        <ui:VisualElement name="HorizontalButtonContainer" style="flex-direction: row; justify-content: space-evenly;">
+                            <ui:VisualElement name="ButtonLeft">
+                                <MenuButton name="RetryButton" text="Retry"/>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="ButtonRight" style="flex-direction: column;">
+                                <MenuButton name="QuitButton" text="Quit"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>

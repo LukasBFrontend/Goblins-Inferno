@@ -48,7 +48,12 @@ public abstract class BaseMenu : MonoBehaviour
     {
         foreach (BaseSubmenu menu in _submenus)
         {
-            menu.Container.visible = menu is T;
+            if (menu is T)
+            {
+                menu.Open();
+                continue;
+            }
+            menu.Container.visible = false;
         }
     }
 

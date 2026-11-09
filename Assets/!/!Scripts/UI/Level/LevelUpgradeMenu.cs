@@ -65,4 +65,6 @@ public class LevelUpgradeMenu : BaseSubmenu {
         GameEvents.RaiseGameResumed();
         Game.SoundFX.PlaySoundFXClip(upgradeSelectedSound, Vector3.zero);
     }
+
+    public override void OnDisplaySubmenu(){ }
 }

@@ -49,4 +49,6 @@ public class LevelPauseMenu : BaseSubmenu
     {
         characterStatRows.Populate();
     }
+
+    public override void OnDisplaySubmenu(){ }
 }

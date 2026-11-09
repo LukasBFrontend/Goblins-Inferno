@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Luscious;
 using UnityEngine;
@@ -25,6 +26,13 @@ public class VolumeTransitionHandler : Singleton<VolumeTransitionHandler>
     VolumeProfile _profile;
 
     /* PUBLIC METHODS */
+
+    public void StopAll()
+    {
+        StopAllCoroutines();
+
+        ResetColorFilter();
+    }
 
     public Task<bool> GammaFadeIn()
     {
@@ -87,6 +95,7 @@ public class VolumeTransitionHandler : Singleton<VolumeTransitionHandler>
 
     Task<bool> ColorTransitionTask<T>(T volumeParameter, IColorTransitionData colorTransition, float duration = 0f) where T : VolumeParameter
     {
+        StopAllCoroutines();
         GetProfileComponents();
         var promise = new TaskCompletionSource<bool>();
         StartCoroutine(ColorFadeRoutine(volumeParameter, colorTransition, promise, duration));
