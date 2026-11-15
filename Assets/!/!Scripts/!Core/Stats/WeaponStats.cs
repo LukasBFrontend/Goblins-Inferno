@@ -14,8 +14,14 @@ public struct WeaponStats : IStats
 
     public  readonly MultiplicativeStat SizeMultiplier => _sizeMultiplierStat;
     public readonly string WeaponName => _weaponName;
-    public readonly int Lvl => _baseSizeStat.Lvl + _damageStat.Lvl + _projectileCountStat.Lvl + (_unlocked ? 0 : 1);
-
+    public readonly int Lvl =>
+        + _baseSizeStat.Lvl
+        + _damageStat.Lvl
+        + _projectileCountStat.Lvl
+        + _critChanceStat.Lvl
+        + _sizeMultiplierStat.Lvl
+        + (_unlocked ? 0 : 1)
+    ;
     public readonly AdditiveStat BaseSize => _baseSizeStat;
     public readonly AdditiveStat Damage => _damageStat;
     public readonly AdditiveStat ProjectileCount => _projectileCountStat;

@@ -73,7 +73,7 @@ public class Weapons : MonoBehaviour
             throw new System.Exception($"Weapon '{weaponName}' is not in the list of available weapons");
         }
 
-        _wielder.Stats.GetWeaponModifier(weaponName).MarkUnlocked();
+        _wielder.Stats.GetWeaponStat(weaponName).MarkUnlocked();
         _unlockedWeapons.Add(weapon);
     }
 }

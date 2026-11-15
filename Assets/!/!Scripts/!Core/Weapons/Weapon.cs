@@ -11,8 +11,8 @@ public class Weapon :  MonoBehaviour
     [SerializeField] float projectileOriginY;
 
     public string Name => data.weaponName;
-    public int Lvl => _wielder.Stats.GetWeaponModifier(data.weaponName).Lvl;
-    public Sprite Sprite => _wielder.Stats.GetWeaponModifier(data.weaponName).Damage.Sprite;
+    public int Lvl => _wielder.Stats.GetWeaponStat(data.weaponName).Lvl;
+    public Sprite Sprite => _wielder.Stats.GetWeaponStat(data.weaponName).Damage.Sprite;
     public string MetaDescription => data.description;
     public SO_WeaponData Data => data;
 
@@ -29,7 +29,7 @@ public class Weapon :  MonoBehaviour
     /// </summary>
     public void Attack()
     {
-        WeaponStats currentStats = _wielder.Stats.GetWeaponModifier(data.weaponName);
+        WeaponStats currentStats = _wielder.Stats.GetWeaponStat(data.weaponName);
 
         float weaponSize = currentStats.BaseSize.Evaluate() * currentStats.SizeMultiplier.Evaluate();
         float projectileCount = currentStats.ProjectileCount.Evaluate();
@@ -127,7 +127,7 @@ public class Weapon :  MonoBehaviour
     void Shoot()
     {
         CharacterStats characterStats = Game.Player.Stats.Character;
-        WeaponStats weaponStats = Game.Player.Stats.GetWeaponModifier(data.weaponName);
+        WeaponStats weaponStats = Game.Player.Stats.GetWeaponStat(data.weaponName);
         float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
         float baseDamage = weaponStats.Damage.Evaluate();
 
@@ -172,7 +172,7 @@ public class Weapon :  MonoBehaviour
     int CalculateHitDamage()
     {
         CharacterStats characterStats = Game.Player.Stats.Character;
-        WeaponStats weaponStats = Game.Player.Stats.GetWeaponModifier(data.weaponName);
+        WeaponStats weaponStats = Game.Player.Stats.GetWeaponStat(data.weaponName);
         float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
         float baseDamage = weaponStats.Damage.Evaluate();
 
@@ -184,7 +184,7 @@ public class Weapon :  MonoBehaviour
     int CalculateHitDamage(out int critLevel)
     {
         CharacterStats characterStats = Game.Player.Stats.Character;
-        WeaponStats weaponStats = Game.Player.Stats.GetWeaponModifier(data.weaponName);
+        WeaponStats weaponStats = Game.Player.Stats.GetWeaponStat(data.weaponName);
         float damageMultiplier = characterStats.DamageMultiplier.Evaluate();
         float baseDamage = weaponStats.Damage.Evaluate();
 

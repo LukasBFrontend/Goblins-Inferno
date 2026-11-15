@@ -17,7 +17,7 @@ public class Stats : MonoBehaviour
     public float AttackCooldown =>  _characterStats.Cooldown.BaseValue / _characterStats.AttackSpeedMultiplier.Evaluate();
     public float MovementSpeed => _characterStats.MovementSpeed.BaseValue * _characterStats.MoveSpeedMultiplier.Evaluate();
 
-    public WeaponStats GetWeaponModifier(string weaponName)
+    public WeaponStats GetWeaponStat(string weaponName)
     {
         bool statsExist = _weaponsStatsLookUp.TryGetValue(weaponName, out WeaponStats weaponStats);
 

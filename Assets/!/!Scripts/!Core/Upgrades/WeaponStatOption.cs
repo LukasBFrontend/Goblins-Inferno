@@ -23,7 +23,7 @@ public class WeaponStatOption : UpgradeOption
     public override void Select()
     {
         Player player = Game.Player;
-        WeaponStats weaponStats = player.Stats.GetWeaponModifier(_weaponName);
+        WeaponStats weaponStats = player.Stats.GetWeaponStat(_weaponName);
         Stat stat = weaponStats.GetStat(_stat.Name);
 
         stat.LevelUp();

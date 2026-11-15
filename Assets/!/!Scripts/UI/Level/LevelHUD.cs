@@ -99,9 +99,9 @@ public class LevelHUD : MonoBehaviour {
         int i = 0;
         while (i < weaponLevelDatas.Length)
         {
-            int lvl = 0;
-            Sprite sprite = null;
-            string description = "";
+            int lvl;
+            Sprite sprite;
+            string description;
 
             if (i < unlockedWeapons.Length)
             {
