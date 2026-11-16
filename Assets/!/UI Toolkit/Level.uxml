@@ -22,7 +22,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="PauseOverlayContainer" class="overlayContainer" style="justify-content: center; align-items: center; visibility: hidden;">
+    <ui:VisualElement name="PauseOverlayContainer" class="overlayContainer" style="justify-content: center; align-items: center; visibility: hidden; transition-duration: 1s; transition-property: visibility;">
         <ui:VisualElement name="PauseMenuContainer" class="submenuContainer">
             <ui:VisualElement name="UpperContainer" class="upperContainer">
                 <ui:Label text="– Paused –" name="PauseLabel" class="title"/>

@@ -7,6 +7,7 @@ public class LevelState : BaseState
     {
         IsRootState = true;
         InitializeSubState();
+        Game.VolumeTransitions.ColorFadeIn();
     }
 
     public override void EnterState()

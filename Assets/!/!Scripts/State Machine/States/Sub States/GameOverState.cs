@@ -44,6 +44,7 @@ public class GameOverState : BaseState
     void OnLevelStarted()
     {
         SwitchState(Factory.Playing());
+        SetSuperState(Factory.Level());
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

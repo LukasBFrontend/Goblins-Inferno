@@ -15,8 +15,6 @@ public class PlayingState : BaseState
         Cursor.lockState = CursorLockMode.Locked;
 
         RegisterCallbacks();
-
-        Game.VolumeTransitions.ColorFadeIn();
     }
 
     public override void UpdateState()
