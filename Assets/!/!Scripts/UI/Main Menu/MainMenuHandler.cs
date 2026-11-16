@@ -1,3 +1,5 @@
+using System.Collections;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -6,6 +8,8 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(PanelRenderer))]
 public class MainMenuHandler : BaseMenu
 {
+    private const string START_MENU_CONTAINER_FADED = "mainMenuContainerFaded";
+
     [Header("Menus")]
     [SerializeField] SubmenuData startMenuData;
     [SerializeField] SubmenuData optionsMenuData;
@@ -27,6 +31,8 @@ public class MainMenuHandler : BaseMenu
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
     {
         Initialize(rootElement, startMenuData, optionsMenuData, creditsMenuData);
+        ShowMenu();
+        OverlayContainer.schedule.Execute(() => OverlayContainer.RemoveFromClassList(START_MENU_CONTAINER_FADED)).StartingIn(5);
         _highscoreText = rootElement.Q<Label>("HighscoreText");
         _highscoreText.text = GameSaveState.Score.HighScore.ToString();
 
@@ -37,5 +43,6 @@ public class MainMenuHandler : BaseMenu
                 transform.position
             )
         );
+
     }
 }

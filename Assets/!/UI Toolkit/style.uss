@@ -48,8 +48,6 @@ Label {
     border-right-width: 2.5px;
     border-bottom-width: 2.5px;
     border-left-width: 2.5px;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-out-cubic;
     aspect-ratio: 4;
     overflow: hidden;
     border-top-left-radius: 6px;
@@ -60,6 +58,8 @@ Label {
     border-right-color: rgb(0, 0, 0);
     border-top-color: rgb(0, 0, 0);
     border-bottom-color: rgb(0, 0, 0);
+    transition-duration: 0.15s;
+    transition-property: all;
 }
 
 .menu-button-background {
@@ -414,4 +414,13 @@ Label {
     font-size: 30px;
     word-spacing: 20px;
     margin-top: 30px;
+}
+
+.mainMenuContainerFaded {
+    filter: tint(rgb(0, 0, 0));
+}
+
+.menu-button.menuButtonFaded {
+    filter: tint(rgb(26, 26, 26));
+    transition-duration: 0.1s;
 }

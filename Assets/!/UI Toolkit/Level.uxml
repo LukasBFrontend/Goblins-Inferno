@@ -22,8 +22,8 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="PauseOverlayContainer" class="overlayContainer" style="justify-content: center; align-items: center; visibility: hidden; transition-duration: 1s; transition-property: visibility;">
-        <ui:VisualElement name="PauseMenuContainer" class="submenuContainer">
+    <ui:VisualElement name="PauseOverlayContainer" class="overlayContainer" style="justify-content: center; align-items: center; transition-duration: 0.15s; transition-property: opacity; opacity: 0;">
+        <ui:VisualElement name="PauseMenuContainer" class="submenuContainer" style="visibility: hidden;">
             <ui:VisualElement name="UpperContainer" class="upperContainer">
                 <ui:Label text="– Paused –" name="PauseLabel" class="title"/>
             </ui:VisualElement>
@@ -41,7 +41,7 @@
                 </ui:ListView>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="GameoverMenuContainer" class="submenuContainer">
+        <ui:VisualElement name="GameoverMenuContainer" class="submenuContainer" style="visibility: hidden;">
             <ui:VisualElement name="GameOverTextContainer" class="gameOverTextContainer">
                 <ui:VisualElement name="ScoreBoardContainer" class="scoreBoardContainer">
                     <ui:VisualElement name="ScoreBoardBackground" class="scoreBoardBackground">

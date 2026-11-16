@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/!/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=d061f6063ca2fab4d84bfa2407418e4e&amp;type=3#style"/>
-    <ui:VisualElement name="MainMenuContainer" style="flex-grow: 1;">
+    <ui:VisualElement name="MainMenuContainer" class="mainMenuContainerFaded" style="flex-grow: 1; opacity: 1; transition-duration: 2s; transition-property: filter; transition-delay: 1s;">
         <ui:VisualElement name="HeaderContainer" style="flex-direction: row; font-size: 32px; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px;">
             <ui:VisualElement name="LeftContainer" style="flex-grow: 1; flex-direction: row;">
                 <ui:Label text="HIGHSCORE:" name="HighscoreLabel" class="highscoreLabel"/>
