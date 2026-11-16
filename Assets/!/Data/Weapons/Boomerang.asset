@@ -40,7 +40,7 @@ MonoBehaviour:
       name: Boomerang Projectiles
       shortName: projectiles
       description: More!!!
-      baseValue: 1
+      baseValue: 5
       flatScaling: 1
     critChance:
       includeAsUpgradeOption: 0

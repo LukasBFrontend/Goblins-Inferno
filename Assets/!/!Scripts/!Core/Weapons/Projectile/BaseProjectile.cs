@@ -35,11 +35,6 @@ public abstract class BaseProjectile: MonoBehaviour, IPoolable
         _critChance = critChance;
 
         StartCoroutine(ProjectileRoutine(initialTarget));
-
-        if (data.alive.audioClip != null)
-        {
-            _aliveSound = Game.SoundFX.PlaySoundFXClip(data.alive, transform.position, false, transform);
-        }
     }
 
     public void Reset()
@@ -49,7 +44,7 @@ public abstract class BaseProjectile: MonoBehaviour, IPoolable
         _sender = null;
         _damage = 0;
         _charactersHit.Clear();
-        
+
         if (TargetTracker != null)
         {
             TargetTracker.Reset();
@@ -95,60 +90,52 @@ public abstract class BaseProjectile: MonoBehaviour, IPoolable
         _charactersHit.Add(character);
     }
 
-    void OnEnable()
+    protected void StopAliveSound()
+    {
+        _aliveSound.StopAudio();
+    }
+
+    private void OnEnable()
     {
         if (data.alive.audioClip == null)
         {
             return;
         }
 
-        GameEvents.GamePaused.AddListener(PauseLiveSound);
-        GameEvents.GameResumed.AddListener(PlayAliveSound);
-        GameEvents.LvlUpEvent.AddListener((oldLevel, newLevel) => PauseLiveSound());
+        _aliveSound = Game.SoundFX.PlaySoundFXClip(data.alive, transform.position, false, transform);
+
+        GameEvents.GamePaused.AddListener(OnGamePaused);
+        GameEvents.GameResumed.AddListener(OnGameResumed);
+        GameEvents.LvlUpEvent.AddListener(OnLevelUp);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
-        if(_aliveSound == null || !_aliveSound.Active)
+        if(_aliveSound == null)
         {
             return;
         }
 
-        GameEvents.GamePaused.RemoveListener(PauseLiveSound);
-        GameEvents.GameResumed.RemoveListener(PlayAliveSound);
-        GameEvents.LvlUpEvent.RemoveListener((oldLevel, newLevel) => PauseLiveSound());
+        GameEvents.GamePaused.RemoveListener(OnGamePaused);
+        GameEvents.GameResumed.RemoveListener(OnGameResumed);
+        GameEvents.LvlUpEvent.RemoveListener(OnLevelUp);
 
         _aliveSound.Destroy();
     }
 
-    private void PlayAliveSound()
+    private void OnGameResumed()
     {
-        if(_aliveSound == null || !_aliveSound.Active)
-        {
-            return;
-        }
-
-        _aliveSound.AudioSource.Play();
+        _aliveSound.PlayAudio();
     }
 
-    protected void PauseLiveSound()
+    private void OnGamePaused()
     {
-        if(_aliveSound == null || !_aliveSound.Active)
-        {
-            return;
-        }
-
-        _aliveSound.AudioSource.Pause();
+        _aliveSound.PauseAudio();
     }
 
-    protected void StopAliveSound()
+    private void OnLevelUp(int oldLevel, int newLevel)
     {
-        if(_aliveSound == null || !_aliveSound.Active)
-        {
-            return;
-        }
-
-        _aliveSound.AudioSource.Stop();
+        _aliveSound.PauseAudio();
     }
 
     public abstract IEnumerator ProjectileRoutine(BaseCharacter target);

@@ -33,9 +33,11 @@ namespace Luscious.Audio
                 data.loop
             );
 
-            StartCoroutine(PlayWithDelay(audioSource, data.playDelay));
+            SoundFXLifetimeData result = new(this, audioSource, audioSource.clip.length + data.playDelay);
 
-            return new SoundFXLifetimeData(this, audioSource, audioSource.clip.length + data.playDelay);
+            StartCoroutine(PlayWithDelay(result, data.playDelay));
+
+            return result;
         }
 
         public SoundFXLifetimeData PlayRandomSoundFXClip(MultipleSoundData data, Vector3 position, int lastIndex, out int selectedIndex, Transform followTarget = null)
@@ -62,9 +64,11 @@ namespace Luscious.Audio
                 false
             );
 
-            StartCoroutine(PlayWithDelay(audioSource, data.playDelay));
+            SoundFXLifetimeData result = new(this, audioSource, audioSource.clip.length + data.playDelay);
 
-            return new SoundFXLifetimeData(this, audioSource, audioSource.clip.length +  data.playDelay);
+            StartCoroutine(PlayWithDelay(result, data.playDelay));
+
+            return result;
         }
 
         public SoundFXLifetimeData PlayRandomSoundFXClip(MultipleSoundData data, Vector3 position, Transform followTarget = null)
@@ -87,9 +91,11 @@ namespace Luscious.Audio
                 false
             );
 
-            StartCoroutine(PlayWithDelay(audioSource, data.playDelay));
+            SoundFXLifetimeData result = new(this, audioSource, audioSource.clip.length + data.playDelay);
 
-            return new SoundFXLifetimeData(this, audioSource, audioSource.clip.length + data.playDelay);
+            StartCoroutine(PlayWithDelay(result, data.playDelay));
+
+            return result;
         }
 
         /* PRIVATE METHODS */
@@ -107,6 +113,7 @@ namespace Luscious.Audio
             audioSource.minDistance = spatialSoundSettings.minDistance;
             audioSource.maxDistance = spatialSoundSettings.minDistance;
             audioSource.outputAudioMixerGroup = outputMixerGroup;
+            audioSource.playOnAwake = false;
 
             if (followTarget)
             {
@@ -123,14 +130,15 @@ namespace Luscious.Audio
             constraint.constraintActive = true;
         }
 
-        private IEnumerator PlayWithDelay(AudioSource audioSource, float delay)
+        private IEnumerator PlayWithDelay(SoundFXLifetimeData soundFXLifetimeData, float delay)
         {
             yield return new WaitForSeconds(delay);
-            if (audioSource == null)
+
+            if (!soundFXLifetimeData.Active)
             {
                 yield break;
             }
-            audioSource.Play();
+            soundFXLifetimeData.PlayAudio();
         }
 
         private string CreateObjectName(AudioClip audioClip, Transform followTarget )
@@ -150,11 +158,12 @@ namespace Luscious.Audio
     {
         public AudioSource AudioSource => _audioSource;
         public float TimeLeft => _timeLeft;
-        public bool Active => _timeLeft > 0 && _audioSource != null;
+        public bool Active => _timeLeft > 0 && _audioSource != null && !_paused;
         public OnLifetimeOver OnLifeTimeOver { get => _onLifeTimeOver; set => _onLifeTimeOver = value; }
 
         private AudioSource _audioSource;
         private float _timeLeft;
+        private bool _paused;
         MonoBehaviour _monoBehavior;
         private OnLifetimeOver _onLifeTimeOver;
 
@@ -174,11 +183,50 @@ namespace Luscious.Audio
             monoBehavior.StartCoroutine(LifeTimeRoutine());
         }
 
+        public void PlayAudio()
+        {
+            _paused = false;
+            if (_audioSource == null)
+            {
+                return;
+            }
+
+            _audioSource.Play();
+        }
+
+        public void PauseAudio()
+        {
+            _paused = true;
+            if (_audioSource == null)
+            {
+                return;
+            }
+
+            _audioSource.Pause();
+        }
+
+        public void StopAudio()
+        {
+            if (_audioSource == null)
+            {
+                return;
+            }
+
+            _audioSource.Stop();
+        }
+
         public void Destroy()
         {
             OnLifeTimeOver?.Invoke();
             AudioUtils.FadeVolume(_monoBehavior, _audioSource, .2f);
-            UnityEngine.Object.Destroy(_audioSource.gameObject, .21f);
+            _monoBehavior.StartCoroutine(DestroyDelayed(_audioSource.gameObject, .21f));
+        }
+
+        private IEnumerator DestroyDelayed(GameObject gameObject, float delay)
+        {
+            yield return new WaitForSecondsRealtime(delay);
+            StopAudio();
+            Destroy();
         }
 
         private IEnumerator LifeTimeRoutine()
@@ -191,7 +239,7 @@ namespace Luscious.Audio
                 }
 
                 yield return null;
-                _timeLeft -= Time.deltaTime;
+                _timeLeft -= Time.unscaledDeltaTime;
             }
 
             OnLifeTimeOver?.Invoke();
