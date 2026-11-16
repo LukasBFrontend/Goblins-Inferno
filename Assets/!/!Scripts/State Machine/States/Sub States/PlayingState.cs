@@ -7,7 +7,16 @@ public class PlayingState : BaseState
 
     public override void EnterState()
     {
-        InitializePlayingState();
+        Game.Input.Move.Enable();
+        Game.Input.Jump.Enable();
+
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        RegisterCallbacks();
+
+        Game.VolumeTransitions.ColorFadeIn();
     }
 
     public override void UpdateState()
@@ -24,18 +33,6 @@ public class PlayingState : BaseState
         Game.Input.Jump.Disable();
 
         UnregisterCallbacks();
-    }
-
-    void InitializePlayingState()
-    {
-        Game.Input.Move.Enable();
-        Game.Input.Jump.Enable();
-
-        Time.timeScale = 1;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
-        RegisterCallbacks();
     }
 
     void RegisterCallbacks()
