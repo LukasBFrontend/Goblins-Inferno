@@ -28,21 +28,20 @@ public sealed class BoomerangProjectile : BaseProjectile
         float threshold = Data.targetReachedThreshold;
         Vector3 lastSenderPosition = Sender.transform.position;
 
-        // Outbound journey.
         while (!TargetTracker.IsTargetPositionReached(threshold))
         {
             UpdateTargetPosition(startPosition, lastSenderPosition);
-            MoveWithSenderVelocityCompensation(ref lastSenderPosition, false);
+            MoveWithSenderVelocityCompensation(ref lastSenderPosition, startPosition, true);
             yield return null;
         }
 
-        // Return journey.
+        startPosition = TargetTracker.TargetPosition;
         TargetTracker.SetTarget(Sender);
 
         while (!TargetTracker.IsTargetPositionReached(threshold))
         {
             UpdateTargetPosition(startPosition, lastSenderPosition);
-            MoveWithSenderVelocityCompensation(ref lastSenderPosition, true);
+            MoveWithSenderVelocityCompensation(ref lastSenderPosition, startPosition, false);
             yield return null;
         }
 
@@ -58,12 +57,10 @@ public sealed class BoomerangProjectile : BaseProjectile
         TargetTracker.SetTarget(TargetTracker.TargetPosition + projection);
     }
 
-    private void MoveWithSenderVelocityCompensation(ref Vector3 lastSenderPosition, bool returning)
+    private void MoveWithSenderVelocityCompensation(ref Vector3 lastSenderPosition, Vector3 startPosition, bool outbound)
     {
         Vector3 senderVelocity = (Sender.transform.position - lastSenderPosition) / Time.deltaTime;
-        Vector3 targetDirection = returning
-            ? (Sender.transform.position - transform.position).normalized
-            : (TargetTracker.TargetPosition - transform.position).normalized;
+        Vector3 targetDirection = (TargetTracker.TargetPosition - transform.position).normalized;
 
         float directionalVelocity = Vector3.Dot(senderVelocity, targetDirection);
         float speed = CalculateCompensatedSpeed(directionalVelocity);

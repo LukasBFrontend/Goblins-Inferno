@@ -24,7 +24,7 @@ MonoBehaviour:
       name: Boomerang Base Range
       shortName: base Range
       description: 
-      baseValue: 8
+      baseValue: 7
       flatScaling: 0
     damage:
       includeAsUpgradeOption: 1
@@ -33,7 +33,7 @@ MonoBehaviour:
       shortName: damage
       description: Flat damage increase
       baseValue: 10
-      flatScaling: 5
+      flatScaling: 4
     projectileCount:
       includeAsUpgradeOption: 1
       UISprite: {fileID: 21300000, guid: c1c38b15562539d4fb59ee473de89842, type: 3}

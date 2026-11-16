@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2fa4616f1fbeb42a96f08f8b1efbf8, type: 3}
   m_Name: BoomerangProjectile
   m_EditorClassIdentifier: Assembly-CSharp::SO_ProjectileData
-  initialVelocity: 15
+  initialVelocity: 12
   arcMode: 3
   destroyOnContact: 0
   lifeTime: 5
   onDestroyVFX: {fileID: 0}
   targetReachedThreshold: 0.015
-  newTargetRange: 10
+  newTargetRange: 7
   targetsLayerMask:
     serializedVersion: 2
     m_Bits: 128

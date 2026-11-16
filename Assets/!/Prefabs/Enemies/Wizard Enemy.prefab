@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8292207059351111743, guid: d5d8371c68ab79649941755b979ea139, type: 3}
+      propertyPath: baseHealth
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 8314846039856513820, guid: d5d8371c68ab79649941755b979ea139, type: 3}
       propertyPath: m_Avatar
       value: 
@@ -128,7 +132,7 @@ MonoBehaviour:
   explosionProjectile:
     id: Enemy Explosion Projectile
     prefab: {fileID: 4273759548958849969, guid: bfd7edbce4174a84aa4227c6bc731292, type: 3}
-  damage: 40
+  damage: 50
 --- !u!1001 &3332484206615116635
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -43,13 +43,13 @@ MonoBehaviour:
       baseValue: 1
       flatScaling: 1
     critChance:
-      includeAsUpgradeOption: 0
+      includeAsUpgradeOption: 1
       UISprite: {fileID: 21300000, guid: f7560c1ee6232dc4f95e7d7c3a43710a, type: 3}
       name: Bomb Crit Chance
       shortName: crit chance
       description: 
       baseValue: 5
-      flatScaling: 10
+      flatScaling: 15
     size:
       includeAsUpgradeOption: 0
       UISprite: {fileID: 21300000, guid: f7560c1ee6232dc4f95e7d7c3a43710a, type: 3}
