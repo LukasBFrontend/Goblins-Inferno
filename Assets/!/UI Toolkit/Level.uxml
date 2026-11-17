@@ -13,7 +13,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="BottomContainer" class="hudBar">
             <ui:VisualElement name="ControllsContainer" class="infoContainer centerText">
-                <ui:Label text="(P)" name="Label"/>
+                <ui:Label text="(ESCAPE)" name="Label"/>
                 <ui:Label text="PAUSE" name="Text" focusable="true" class="infoText"/>
             </ui:VisualElement>
             <ui:VisualElement name="ControllsContainer" class="infoContainer centerText">

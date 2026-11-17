@@ -248,10 +248,11 @@ Label {
     justify-content: flex-end;
     align-items: flex-end;
     flex-direction: row;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     position: absolute;
     bottom: 0;
     right: 0;
+    margin-right: 4px;
 }
 
 .infoContainer {

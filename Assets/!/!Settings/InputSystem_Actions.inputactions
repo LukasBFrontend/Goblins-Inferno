@@ -507,7 +507,7 @@
                 {
                     "name": "",
                     "id": "fab0e6b5-9dff-48e9-8d71-5f2b22e98c3b",
-                    "path": "<Keyboard>/p",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -530,6 +530,17 @@
                     "name": "",
                     "id": "fb55b609-2a2e-4a4b-b475-924e3de9a899",
                     "path": "<Joystick>/{Cancel}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ed8172b6-e2af-44e8-91ad-0b30bd4e5e23",
+                    "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -916,6 +927,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81cd80bd-aba0-430a-a97a-349750f88df6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
