@@ -6,6 +6,7 @@ public class LevelPauseMenu : BaseSubmenu
 {
     [SerializeField] RSO_CharacterStatRows characterStatRows;
     Button _resumeButton, _optionsButton;
+    Label _currentHighScoreLabel;
     PanelRenderer _panelRenderer;
 
     void OnEnable()
@@ -25,9 +26,12 @@ public class LevelPauseMenu : BaseSubmenu
     {
         _resumeButton = rootElement.Q<Button>("ResumeButton");
         _optionsButton = rootElement.Q<Button>("OptionsButton");
+        _currentHighScoreLabel = rootElement.Q<Label>("CurrentHighscoreValue");
 
         _resumeButton.clicked += OneResumeButtonClicked;
         _optionsButton.clicked += OnOptionsButtonClicked;
+
+        _currentHighScoreLabel.text = GameSaveState.Score.HighScore.ToString();
     }
 
     void Start()

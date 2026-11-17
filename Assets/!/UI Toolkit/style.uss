@@ -425,3 +425,36 @@ Label {
     filter: tint(rgb(26, 26, 26));
     transition-duration: 0.1s;
 }
+
+.hint {
+    color: rgba(255, 255, 255, 0.612);
+    -unity-text-align: upper-center;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.hintEmphasis {
+    color: rgba(232, 255, 0, 0.612);
+    font-size: 22px;
+    margin-right: 4px;
+}
+
+
+
+.currentHighscoreContainer {
+    flex-direction: row;
+    font-size: 22px;
+    margin-bottom: 50px;
+    color: rgba(255, 255, 255, 0.922);
+    -unity-font-definition: resource("Fonts/RandomLetters");
+    text-shadow: 4px 4px 0 rgb(0, 0, 0);
+    -unity-text-outline-color: rgb(0, 0, 0);
+    -unity-text-outline-width: 0.75px;
+}
+
+.currentHighscoreValue {
+    margin-left: 8px;
+    color: rgb(255, 255, 255);
+}
