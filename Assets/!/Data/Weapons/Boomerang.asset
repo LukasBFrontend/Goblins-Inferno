@@ -33,14 +33,14 @@ MonoBehaviour:
       shortName: damage
       description: Flat damage increase
       baseValue: 10
-      flatScaling: 4
+      flatScaling: 3
     projectileCount:
       includeAsUpgradeOption: 1
       UISprite: {fileID: 21300000, guid: c1c38b15562539d4fb59ee473de89842, type: 3}
       name: Boomerang Projectiles
       shortName: projectiles
       description: More!!!
-      baseValue: 5
+      baseValue: 1
       flatScaling: 1
     critChance:
       includeAsUpgradeOption: 0

@@ -218,8 +218,12 @@ namespace Luscious.Audio
         public void Destroy()
         {
             OnLifeTimeOver?.Invoke();
-            AudioUtils.FadeVolume(_monoBehavior, _audioSource, .2f);
-            _monoBehavior.StartCoroutine(DestroyDelayed(_audioSource.gameObject, .21f));
+            
+            if (_audioSource != null)
+            {
+                AudioUtils.FadeVolume(_monoBehavior, _audioSource, .2f);
+                _monoBehavior.StartCoroutine(DestroyDelayed(_audioSource.gameObject, .21f));
+            }
         }
 
         private IEnumerator DestroyDelayed(GameObject gameObject, float delay)

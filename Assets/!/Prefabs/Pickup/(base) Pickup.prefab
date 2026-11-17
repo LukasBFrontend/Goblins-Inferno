@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4952997565222400126}
-  - component: {fileID: 1772190701093324606}
+  - component: {fileID: 8330391071797804702}
   - component: {fileID: 5021136712408645856}
   m_Layer: 0
   m_Name: (base) Pickup
@@ -66,8 +66,8 @@ Transform:
   - {fileID: 1701835348911923079}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1772190701093324606
-BoxCollider:
+--- !u!135 &8330391071797804702
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -85,7 +85,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5021136712408645856
 MonoBehaviour:
@@ -101,6 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BasePickup
   type: 0
   value: 5
+  pickupRange: 0.15
+  gravitateTowardsPlayer: 0
   driftRange: 0.5
   driftSpeed: 1
 --- !u!1 &9089877519355959181

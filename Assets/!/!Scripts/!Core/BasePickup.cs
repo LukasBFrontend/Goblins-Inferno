@@ -7,8 +7,13 @@ public class BasePickup : MonoBehaviour, IPoolable
     [SerializeField] PickupType type;
     [SerializeField] int value = 10;
     [Header("Movement")]
+    [SerializeField] float pickupRange = 0.15f;
+    [SerializeField] bool gravitateTowardsPlayer;
     [SerializeField] float driftRange = 0.5f;
     [SerializeField] float driftSpeed = 1f;
+
+    private Coroutine _driftAwayCurrent;
+    private Coroutine _driftTowardsCurrent;
 
     public string PoolableId { get; set; }
 
@@ -19,6 +24,44 @@ public class BasePickup : MonoBehaviour, IPoolable
             return;
         }
 
+        if (gravitateTowardsPlayer)
+        {
+            if (_driftAwayCurrent != null)
+            {
+                StopCoroutine(_driftAwayCurrent);
+            }
+
+            _driftTowardsCurrent = StartCoroutine(DriftTowards(player));
+        }
+        else
+        {
+            RegisterPickUp(player);
+        }
+
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (!other.TryGetComponent(out Player player) || _driftTowardsCurrent == null)
+        {
+            return;
+        }
+
+        StopCoroutine(_driftTowardsCurrent);
+    }
+
+    public void StartDriftAwayFrom(List<BasePickup> pickups)
+    {
+        if (pickups.Count == 0 || _driftTowardsCurrent != null)
+        {
+            return;
+        }
+
+        _driftAwayCurrent = StartCoroutine(DriftAwayRoutine(pickups));
+    }
+
+    private void RegisterPickUp(Player player)
+    {
         switch (type)
         {
             case PickupType.Exp:
@@ -35,20 +78,31 @@ public class BasePickup : MonoBehaviour, IPoolable
         Game.SoundFX.PlayRandomSoundFXClip(pickupSound, transform.position);
 
 
-        Game.ObjectPooler.Return(this);
+        Game.ObjectPooler.Return(this);        
     }
 
-    public void StartDriftAwayFrom(List<BasePickup> pickups)
+    private IEnumerator DriftTowards(Player player)
     {
-        if (pickups.Count == 0)
+        Vector3 targetOffset = player.transform.position - transform.position;
+        float distanceSquared = targetOffset.sqrMagnitude;
+
+        while (distanceSquared > Mathf.Pow(pickupRange, 2))
         {
-            return;
+            targetOffset = player.transform.position - transform.position;
+            distanceSquared = targetOffset.sqrMagnitude;
+
+            float t = 3 * Mathf.Cos(Mathf.Sqrt(distanceSquared)) + 0.5f;
+            float speed = Mathf.Lerp(0.5f * driftSpeed, 2 * driftSpeed, t);
+            
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+
+            yield return null;
         }
 
-        StartCoroutine(ItemDriftRoutine(pickups));
+        RegisterPickUp(player);
     }
 
-    IEnumerator ItemDriftRoutine(List<BasePickup> pickups)
+    IEnumerator DriftAwayRoutine(List<BasePickup> pickups)
     {
         const float TIMEOUT = 1f;
         float nearestDistanceSquared = 0f;
