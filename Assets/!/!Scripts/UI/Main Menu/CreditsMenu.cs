@@ -28,5 +28,5 @@ public class CreditsMenu : BaseSubmenu
         SwitchSubmenu<StartMenu>();
     }
 
-    public override void OnDisplaySubmenu(){ }
+    public override void OnOpen(){ }
 }

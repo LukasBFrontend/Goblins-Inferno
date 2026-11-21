@@ -8,6 +8,7 @@ public class GameInputActions : Singleton<GameInputActions>
     [SerializeField] InputActionReference move;
     [SerializeField] InputActionReference jump;
     [SerializeField] InputActionReference togglePause;
+    [SerializeField] InputActionReference toggleStats;
     [Header("UI")]
     [SerializeField] InputActionReference navigate;
     [SerializeField] InputActionReference click;
@@ -17,5 +18,5 @@ public class GameInputActions : Singleton<GameInputActions>
     public InputAction TogglePause => togglePause.action;
 
     public InputAction UINavigate => navigate.action;
-    public InputAction UIClic => click.action;
+    public InputAction UIClick => click.action;
 }

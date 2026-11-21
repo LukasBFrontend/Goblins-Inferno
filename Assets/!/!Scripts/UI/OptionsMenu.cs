@@ -41,5 +41,5 @@ public class OptionsMenu : BaseSubmenu
         }
     }
 
-    public override void OnDisplaySubmenu(){ }
+    public override void OnOpen(){ }
 }

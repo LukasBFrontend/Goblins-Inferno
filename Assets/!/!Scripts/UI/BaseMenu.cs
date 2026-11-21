@@ -1,13 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
-
-[System.Serializable]
-public struct SubmenuData
-{
-    public BaseSubmenu menu;
-    public string containerName;
-}
 
 public abstract class BaseMenu : MonoBehaviour
 {
@@ -17,19 +11,24 @@ public abstract class BaseMenu : MonoBehaviour
 
     private List<BaseSubmenu> _submenus;
     private VisualElement _overlayContainer;
+    private VisualElement _root;
 
     public VisualElement OverlayContainer => _overlayContainer;
-    public bool IsVisible => _overlayContainer.style.opacity == 1f;
 
     protected void Initialize(VisualElement root, params SubmenuData[] submenusData)
     {
-        _overlayContainer = GetContainer(root, containerName);
-
+        _root = root;
+        _overlayContainer = GetContainer(containerName);
         _submenus = new();
 
         foreach (SubmenuData menuData in submenusData)
         {
-            menuData.menu.Initialize(this, GetContainer(root, menuData.containerName));
+            menuData.menu.Initialize(
+                this,
+                GetContainer(menuData.containerName),
+                GetAdditionalElements(menuData.additionalElements)
+            );
+
             _submenus.Add(menuData.menu);
         }
 
@@ -55,7 +54,7 @@ public abstract class BaseMenu : MonoBehaviour
 
         foreach (BaseSubmenu menu in _submenus)
         {
-            menu.Container.visible = false;
+            menu.Close();
         }
 
         OverlayContainer.Query<Button>().ForEach(button =>
@@ -74,22 +73,46 @@ public abstract class BaseMenu : MonoBehaviour
                 continue;
             }
 
-            menu.Container.visible = false;
+            menu.Close();
         }
     }
 
-    VisualElement GetContainer(VisualElement root, string containerName)
+    private VisualElement GetContainer(string containerName)
     {
-        VisualElement container = root.Q<VisualElement>(containerName);
+        VisualElement container = _root.Q<VisualElement>(containerName);
 
         if (container == null)
         {
             Debug.LogError(
                 $"Container with name <color=white>{containerName}</color> " +
                 $"could not be found in root visual element " +
-                $"<color=white>{root.name}</color>");
+                $"<color=white>{_root.name}</color>");
         }
 
         return container;
     }
+
+    private VisualElement[] GetAdditionalElements(IEnumerable<string> names)
+    {
+        VisualElement[] result = new VisualElement[names.Count()];
+
+        int i = 0;
+
+        foreach (var name in names)
+        {
+            result[i] =  _root.Query<VisualElement>(name);
+            i++;
+        }
+
+        return result;
+    }
+}
+
+
+[System.Serializable]
+public struct SubmenuData
+{
+    public BaseSubmenu menu;
+    public string containerName;
+    public List<string> additionalElements;
 }

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 63262008303813156}
   - component: {fileID: 805074245506233799}
   - component: {fileID: 1475785684661636347}
+  - component: {fileID: 3444357987467513157}
   m_Layer: 5
   m_Name: Level UI
   m_TagString: Untagged
@@ -112,12 +113,15 @@ MonoBehaviour:
   levelUpgradeData:
     menu: {fileID: 6659046050882650041}
     containerName: UpgradeMenuContainer
+    additionalElements: []
   levelPauseData:
     menu: {fileID: 1218385047617684678}
     containerName: PauseMenuContainer
+    additionalElements: []
   gameoverMenuData:
     menu: {fileID: 63262008303813156}
     containerName: GameoverMenuContainer
+    additionalElements: []
 --- !u!114 &6659046050882650041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,3 +200,16 @@ MonoBehaviour:
   offset: {x: -64, y: -64}
   enableAutoFlip: 0
   defaultDirection: 3
+--- !u!114 &3444357987467513157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456760527616442994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe81bf30ae218a45860a7762766fbf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterStatsListHandler
+  characterStatRows: {fileID: 11400000, guid: 1862f2f4b6a526940ba8f1128c84b82f, type: 2}

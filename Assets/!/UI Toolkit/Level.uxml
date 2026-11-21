@@ -3,97 +3,106 @@
     <ui:Template name="WeaponLevel" src="project://database/Assets/!/UI%20Toolkit/Weapon%20Level/WeaponLevel.uxml?fileID=9197481963319205126&amp;guid=e0de6a98600b699478eb14f98102e66d&amp;type=3#WeaponLevel"/>
     <Style src="project://database/Assets/!/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=d061f6063ca2fab4d84bfa2407418e4e&amp;type=3#style"/>
     <ui:VisualElement name="HUDContainer">
-        <ui:ProgressBar value="0" title="Lvl 1" name="ExpBar"/>
-        <ui:VisualElement name="TopContainer" class="hudBar">
+        <ui:VisualElement name="ExpBarContainer" class="hudBar" style="margin-bottom: 12px;">
+            <ui:ProgressBar value="0" title="Lvl 1" name="ExpBar"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="HealthBarContainer" style="flex-grow: 1; position: absolute; left: 0; right: 0; align-items: center; padding-top: 12px; padding-right: 12px; padding-bottom: 12px; padding-left: 12px; bottom: 0;">
             <ui:ProgressBar value="100" title="100/100" name="HealthBar"/>
-            <ui:VisualElement name="ScoreContainer" class="infoContainer">
-                <ui:Label text="SCORE" name="ScoreLabel"/>
-                <ui:Label text="0" name="ScoreText" class="infoText"/>
-            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="BottomContainer" class="hudBar">
-            <ui:VisualElement name="ControllsContainer" class="infoContainer centerText">
-                <ui:Label text="(ESCAPE)" name="Label"/>
-                <ui:Label text="PAUSE" name="Text" focusable="true" class="infoText"/>
-            </ui:VisualElement>
-            <ui:VisualElement name="ControllsContainer" class="infoContainer centerText">
-                <ui:Label text="(SPACE)" name="Label"/>
-                <ui:Label text="ROLL" name="Text" class="infoText"/>
-            </ui:VisualElement>
-        </ui:VisualElement>
-    </ui:VisualElement>
-    <ui:VisualElement name="PauseOverlayContainer" class="overlayContainer" style="justify-content: center; align-items: center; transition-duration: 0.15s; transition-property: opacity; opacity: 0;">
-        <ui:VisualElement name="PauseMenuContainer" class="submenuContainer" style="visibility: hidden;">
-            <ui:VisualElement name="UpperContainer" class="upperContainer">
-                <ui:Label text="– Paused –" name="PauseLabel" class="title" style="margin-bottom: 10px;"/>
-                <ui:VisualElement name="CurrentHighscoreContainer" class="currentHighscoreContainer">
-                    <ui:Label text="Highscore:" name="CurrentHighscoreLabel"/>
-                    <ui:Label text="[000]" name="CurrentHighscoreValue" class="currentHighscoreValue"/>
+        <ui:VisualElement name="PauseOverlayContainer" class="overlayContainer" style="justify-content: center; align-items: center; transition-duration: 0.15s; transition-property: opacity; opacity: 0;">
+            <ui:VisualElement name="PauseMenuContainer" class="submenuContainer" style="visibility: hidden;">
+                <ui:VisualElement name="UpperContainer" class="upperContainer">
+                    <ui:Label text="– Paused –" name="PauseLabel" class="title" style="margin-bottom: 10px;"/>
+                    <ui:VisualElement name="CurrentHighscoreContainer" class="currentHighscoreContainer">
+                        <ui:Label text="Highscore:" name="CurrentHighscoreLabel"/>
+                        <ui:Label text="[000]" name="CurrentHighscoreValue" class="currentHighscoreValue"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="LowerContainer" class="lowerContainer">
+                    <MenuButton name="ResumeButton" text="Resume"/>
+                    <MenuButton name="OptionsButton" text="Options"/>
+                    <MenuButton name="QuitButton" text="Quit"/>
+                    <ui:VisualElement name="HoverHintContainer" class="hint">
+                        <ui:Label text="!" name="HoverHintExclamation" class="hintEmphasis"/>
+                        <ui:Label text="Hover for more info" name="HoverHintText"/>
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="LowerContainer" class="lowerContainer">
-                <MenuButton name="ResumeButton" text="Resume"/>
-                <MenuButton name="OptionsButton" text="Options"/>
-                <MenuButton name="QuitButton" text="Quit"/>
-            </ui:VisualElement>
-            <ui:VisualElement name="CharacterStatsContainer" style="position: absolute; justify-content: flex-start; align-items: flex-start; top: 7.5%; bottom: 0; padding-left: 12px;">
-                <ui:Label text="Stats" name="CharacterStatsTitle" style="margin-left: 12px; color: rgb(255, 255, 255); text-shadow: 1px 1px 2px rgb(0, 0, 0); margin-bottom: 12px; margin-top: 12px; margin-right: 12px;"/>
-                <ui:ListView allow-remove="false" allow-add="false" item-template="project://database/Assets/!/UI%20Toolkit/Character%20Stat%20Levels/CharacterStatRow.uxml?fileID=9197481963319205126&amp;guid=f8342c552ba0b8f4ea798325cbaa5742&amp;type=3#CharacterStatRow" header-title="Stats" show-foldout-header="false" reorderable="false" binding-source-selection-mode="AutoAssign" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/RSO_CharacterStatRows.asset?fileID=11400000&amp;guid=1862f2f4b6a526940ba8f1128c84b82f&amp;type=2#RSO_CharacterStatRows" show-add-remove-footer="false" virtualization-method="DynamicHeight" name="CharacterStatsList" selection-type="None" show-bound-collection-size="false" style="width: 400px;">
-                    <Bindings>
-                        <ui:DataBinding property="itemsSource" data-source-path="list"/>
-                    </Bindings>
-                </ui:ListView>
-                <ui:VisualElement name="HoverHintContainer" class="hint">
-                    <ui:Label text="!" name="HoverHintExclamation" class="hintEmphasis"/>
-                    <ui:Label text="Hover for more info" name="HoverHintText"/>
-                </ui:VisualElement>
-            </ui:VisualElement>
-        </ui:VisualElement>
-        <ui:VisualElement name="GameoverMenuContainer" class="submenuContainer" style="visibility: hidden;">
-            <ui:VisualElement name="GameOverTextContainer" class="gameOverTextContainer">
-                <ui:VisualElement name="ScoreBoardContainer" class="scoreBoardContainer">
-                    <ui:VisualElement name="ScoreBoardBackground" class="scoreBoardBackground">
-                        <ui:Label text="Game Over" name="TitleLabel" class="title"/>
-                        <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer">
-                            <ui:Label text="POINTS:" name="FinalScoreLabel"/>
-                            <ui:Label text="[000]" name="FinalScoreValue" class="gameOverStatValue"/>
-                        </ui:VisualElement>
-                        <ui:VisualElement name="FinalLevelContainer" class="gameOverStatContainer">
-                            <ui:Label text="LEVEL:" name="FinalLevelLabel"/>
-                            <ui:Label text="[0]" name="FinalLevelValue" class="gameOverStatValue"/>
-                        </ui:VisualElement>
-                        <ui:VisualElement name="Divider" style="flex-grow: 1; background-image: resource(&quot;Fantasy UI Borders/Default/Divider Fade/divider-fade-002&quot;); height: 20px; -unity-slice-left: 16; -unity-slice-top: 16; -unity-slice-right: 16; -unity-slice-bottom: 16; -unity-slice-scale: 2px; margin-top: 20px; margin-bottom: 20px; -unity-background-image-tint-color: rgba(255, 255, 255, 0.427);"/>
-                        <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer" style="margin-top: 20px;">
-                            <ui:Label text="THE ABYSS:" name="FinalScoreLabel"/>
-                            <ui:Label text="BECKONING" name="FinalScoreValue" class="gameOverStatValue"/>
-                        </ui:VisualElement>
-                        <ui:VisualElement name="HorizontalButtonContainer" style="flex-direction: row; justify-content: space-evenly;">
-                            <ui:VisualElement name="ButtonLeft">
-                                <MenuButton name="RetryButton" text="Retry"/>
+            <ui:VisualElement name="GameoverMenuContainer" class="submenuContainer" style="visibility: hidden;">
+                <ui:VisualElement name="GameOverTextContainer" class="gameOverTextContainer">
+                    <ui:VisualElement name="ScoreBoardContainer" class="scoreBoardContainer">
+                        <ui:VisualElement name="ScoreBoardBackground" class="scoreBoardBackground">
+                            <ui:Label text="Game Over" name="TitleLabel" class="title"/>
+                            <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer">
+                                <ui:Label text="POINTS:" name="FinalScoreLabel"/>
+                                <ui:Label text="[000]" name="FinalScoreValue" class="gameOverStatValue"/>
                             </ui:VisualElement>
-                            <ui:VisualElement name="ButtonRight" style="flex-direction: column;">
-                                <MenuButton name="QuitButton" text="Quit"/>
+                            <ui:VisualElement name="FinalLevelContainer" class="gameOverStatContainer">
+                                <ui:Label text="LEVEL:" name="FinalLevelLabel"/>
+                                <ui:Label text="[0]" name="FinalLevelValue" class="gameOverStatValue"/>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="Divider" style="flex-grow: 1; background-image: resource(&quot;Fantasy UI Borders/Default/Divider Fade/divider-fade-002&quot;); height: 20px; -unity-slice-left: 16; -unity-slice-top: 16; -unity-slice-right: 16; -unity-slice-bottom: 16; -unity-slice-scale: 2px; margin-top: 20px; margin-bottom: 20px; -unity-background-image-tint-color: rgba(255, 255, 255, 0.427);"/>
+                            <ui:VisualElement name="FinalScoreContainer" class="gameOverStatContainer" style="margin-top: 20px;">
+                                <ui:Label text="THE ABYSS:" name="FinalScoreLabel"/>
+                                <ui:Label text="BECKONING" name="FinalScoreValue" class="gameOverStatValue"/>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="HorizontalButtonContainer" style="flex-direction: row; justify-content: space-evenly;">
+                                <ui:VisualElement name="ButtonLeft">
+                                    <MenuButton name="RetryButton" text="Retry"/>
+                                </ui:VisualElement>
+                                <ui:VisualElement name="ButtonRight" style="flex-direction: column;">
+                                    <MenuButton name="QuitButton" text="Quit"/>
+                                </ui:VisualElement>
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-        </ui:VisualElement>
-        <ui:VisualElement name="UpgradeMenuContainer" style="visibility: hidden;">
-            <ui:Label text="Level Up" name="LevelUpLabel" class="title"/>
-            <ui:Instance template="UpgradeButton" name="UpgradeButton" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Upgrade%201.asset?fileID=11400000&amp;guid=f5ef43c874b823f4cb40e8d76d048b0a&amp;type=2#Upgrade 1"/>
-            <ui:Instance template="UpgradeButton" name="UpgradeButton" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Upgrade%202.asset?fileID=11400000&amp;guid=caa74c8aef6f23348973d39589b4fbd3&amp;type=2#Upgrade 2"/>
-            <ui:Instance template="UpgradeButton" name="UpgradeButton" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Upgrade%203.asset?fileID=11400000&amp;guid=6bf788f0c4930c04bb1a355c9982b094&amp;type=2#Upgrade 3"/>
-            <ui:VisualElement name="HoverHintContainer" class="hint">
-                <ui:Label text="!" name="HoverHintExclamation" class="hintEmphasis"/>
-                <ui:Label text="Hover the yellow text for more info" name="HoverHintText"/>
+            <ui:VisualElement name="UpgradeMenuContainer" style="visibility: hidden;">
+                <ui:Label text="Level Up" name="LevelUpLabel" class="title"/>
+                <ui:Instance template="UpgradeButton" name="UpgradeButton" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Upgrade%201.asset?fileID=11400000&amp;guid=f5ef43c874b823f4cb40e8d76d048b0a&amp;type=2#Upgrade 1"/>
+                <ui:Instance template="UpgradeButton" name="UpgradeButton" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Upgrade%202.asset?fileID=11400000&amp;guid=caa74c8aef6f23348973d39589b4fbd3&amp;type=2#Upgrade 2"/>
+                <ui:Instance template="UpgradeButton" name="UpgradeButton" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Upgrade%203.asset?fileID=11400000&amp;guid=6bf788f0c4930c04bb1a355c9982b094&amp;type=2#Upgrade 3"/>
+                <ui:VisualElement name="HoverHintContainer" class="hint">
+                    <ui:Label text="!" name="HoverHintExclamation" class="hintEmphasis"/>
+                    <ui:Label text="Hover the yellow text for more info" name="HoverHintText"/>
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-    </ui:VisualElement>
-    <ui:VisualElement name="SideContainer">
-        <ui:Instance template="WeaponLevel" name="WeaponLevelOne" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Weapon%201.asset?fileID=11400000&amp;guid=27094d05bdb301a49bb24707442f4710&amp;type=2#Weapon 1"/>
-        <ui:Instance template="WeaponLevel" name="WeaponLevelTwo" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Weapon%202.asset?fileID=11400000&amp;guid=ff878a1e2421cf44cb1faaa85b8e09d2&amp;type=2#Weapon 2"/>
-        <ui:Instance template="WeaponLevel" name="WeaponLevelThree" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Weapon%203.asset?fileID=11400000&amp;guid=5d4a005b01516234d9e605f9160c1eba&amp;type=2#Weapon 3"/>
+        <ui:VisualElement name="MiddleHUDContainer" style="flex-direction: row; justify-content: space-between; height: 0;">
+            <ui:VisualElement name="CharacterStatsContainer" style="justify-content: flex-start; opacity: 1; transition-duration: 0.1s; width: 200px; height: 700px;">
+                <ui:VisualElement class="characterStatsToggle" style="display: none;">
+                    <ui:Label text="Stats" name="Stats"/>
+                    <ui:Toggle label="" name="CharacterStatsToggle" value="false" text="" tooltip="Toggle whether stats show during play. "/>
+                </ui:VisualElement>
+                <ui:ListView item-template="project://database/Assets/!/UI%20Toolkit/Character%20Stat%20Levels/CharacterStatRow.uxml?fileID=9197481963319205126&amp;guid=f8342c552ba0b8f4ea798325cbaa5742&amp;type=3#CharacterStatRow" show-foldout-header="false" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/RSO_CharacterStatRows.asset?fileID=11400000&amp;guid=1862f2f4b6a526940ba8f1128c84b82f&amp;type=2#RSO_CharacterStatRows" show-add-remove-footer="false" name="CharacterStatsList" selection-type="None" show-bound-collection-size="false" virtualization-method="DynamicHeight" binding-source-selection-mode="AutoAssign" reorderable="true">
+                    <Bindings>
+                        <ui:DataBinding property="itemsSource" data-source-path="list"/>
+                    </Bindings>
+                </ui:ListView>
+            </ui:VisualElement>
+            <ui:VisualElement name="ScoreContainer" class="infoContainer" style="align-items: center; height: 100px;">
+                <ui:Label text="SCORE" name="ScoreLabel" style="align-self: flex-end;"/>
+                <ui:Label text="0" name="ScoreText" class="infoText"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="LowerHUDContainer" style="flex-direction: row; align-items: flex-end; bottom: 0; position: absolute; left: 0; right: 0; justify-content: space-between; max-height: 70px; padding-top: 12px; padding-right: 12px; padding-bottom: 12px; padding-left: 12px;">
+            <ui:VisualElement name="WeaponLevelContainer" style="flex-direction: column-reverse;">
+                <ui:Instance template="WeaponLevel" name="WeaponLevelOne" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Weapon%201.asset?fileID=11400000&amp;guid=27094d05bdb301a49bb24707442f4710&amp;type=2#Weapon 1"/>
+                <ui:Instance template="WeaponLevel" name="WeaponLevelTwo" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Weapon%202.asset?fileID=11400000&amp;guid=ff878a1e2421cf44cb1faaa85b8e09d2&amp;type=2#Weapon 2"/>
+                <ui:Instance template="WeaponLevel" name="WeaponLevelThree" data-source="project://database/Assets/!/Data/Runtime%20Scriptable/Weapon%203.asset?fileID=11400000&amp;guid=5d4a005b01516234d9e605f9160c1eba&amp;type=2#Weapon 3"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="ControlsContainer" class="hudBar" style="flex-direction: row; justify-content: flex-end;">
+                <ui:VisualElement name="ControllsContainer" class="infoContainer centerText">
+                    <ui:Label text="(ESCAPE)" name="Label"/>
+                    <ui:Label text="PAUSE" name="Text" focusable="true" class="infoText"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="ControllsContainer" class="infoContainer centerText">
+                    <ui:Label text="(SPACE)" name="Label"/>
+                    <ui:Label text="ROLL" name="Text" class="infoText"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:VisualElement>
     <RuntimeTooltip style="display: none;"/>
 </ui:UXML>

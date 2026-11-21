@@ -16,18 +16,15 @@ Label {
     padding-left: 0;
 }
 
-.characterStatRow {
+.character-stat-row {
     color: rgba(255, 255, 255, 0.902);
     -unity-font-definition: resource("Fonts/skeleboom");
     letter-spacing: 7px;
     transition-duration: 0.2s;
     transition-timing-function: ease-out-cubic;
-    margin-top: 4px;
-    height: 72px;
     flex-direction: row;
-    margin-bottom: 4px;
-    margin-right: 4px;
-    margin-left: 4px;
+    margin-bottom: 8px;
+    margin-top: 0;
 }
 
 .spriteBackgroundContainer {
@@ -37,6 +34,7 @@ Label {
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
     overflow: hidden;
+    width: 72px;
 }
 
 .spriteBackgroundContainer:hover {
@@ -64,21 +62,36 @@ Label {
 
 .textContainer {
     text-shadow: 2px 2px 2px rgb(0, 0, 0);
-    justify-content: space-around;
     padding-top: 6px;
     padding-right: 6px;
     padding-bottom: 6px;
-    padding-left: 6px;
+    justify-content: flex-end;
 }
 
 .lvlTextContainer {
     -unity-text-align: upper-right;
     text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    flex-direction: row;
+    justify-content: flex-end;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 2px;
+}
+
+.lvlValueContainer {
+    -unity-text-align: upper-right;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
     margin-bottom: 0;
+    margin-top: 10px;
     flex-direction: row;
 }
 
 .lvlLabel {
+    margin-right: 4px;
+    color: rgb(255, 255, 255);
+}
+
+.valueLabel {
     margin-right: 4px;
     color: rgba(255, 255, 255, 0.627);
 }
@@ -98,4 +111,8 @@ Label {
 
 .valueValue {
     font-size: 16px;
+}
+
+.toggle Label {
+    display: none;
 }

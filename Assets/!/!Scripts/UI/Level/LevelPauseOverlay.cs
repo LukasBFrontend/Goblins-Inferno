@@ -11,7 +11,7 @@ public class LevelPauseOverlayHandler : BaseMenu
     [SerializeField] SubmenuData levelUpgradeData;
     [SerializeField] SubmenuData levelPauseData;
     [SerializeField] SubmenuData gameoverMenuData;
-    VisualElement _hudContainer, _sideContainer;
+    VisualElement _hudContainer;
     PanelRenderer _panelRenderer;
 
     void OnEnable()
@@ -46,7 +46,6 @@ public class LevelPauseOverlayHandler : BaseMenu
         );
 
         _hudContainer = rootElement.Q<VisualElement>("HUDContainer");
-        _sideContainer = rootElement.Q<VisualElement>("SideContainer");
     }
 
     void OnLvlUp(int oldLvl, int newLvl)
@@ -58,7 +57,6 @@ public class LevelPauseOverlayHandler : BaseMenu
     void OnGameOver()
     {
         _hudContainer.visible = false;
-        _sideContainer.style.display = DisplayStyle.None;
     }
 
     void OnGameOverTransitionCompleted()

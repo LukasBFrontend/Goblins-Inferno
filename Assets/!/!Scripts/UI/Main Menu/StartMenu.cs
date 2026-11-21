@@ -51,5 +51,5 @@ public class StartMenu : BaseSubmenu
         Application.Quit();
     }
 
-    public override void OnDisplaySubmenu(){ }
+    public override void OnOpen(){ }
 }

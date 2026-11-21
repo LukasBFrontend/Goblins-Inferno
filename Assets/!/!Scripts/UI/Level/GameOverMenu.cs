@@ -34,7 +34,7 @@ public class GameOverMenu : BaseSubmenu
         GameEvents.RaiseStartLevel();
     }
 
-    public override void OnDisplaySubmenu()
+    public override void OnOpen()
     {
         _finalScoreValue.text = GameSaveState.Score.Current.ToString();
         _finalLevelValue.text = Game.Player.Lvl.ToString();

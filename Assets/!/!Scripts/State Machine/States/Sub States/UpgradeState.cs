@@ -20,7 +20,7 @@ public class UpgradeState : BaseState
         Game.UpgradeOptions.AssignRandom();
         Time.timeScale = 0;
 
-        Game.Input.UIClic.Disable();
+        Game.Input.UIClick.Disable();
         Game.Player.StartCoroutine(DisableUINavigateRoutine());
     }
 
@@ -41,7 +41,7 @@ public class UpgradeState : BaseState
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                Game.Input.UIClic.Enable();
+                Game.Input.UIClick.Enable();
 
                 _mouseMoveThresholdSurpassed = true;
             }
@@ -51,7 +51,7 @@ public class UpgradeState : BaseState
     public override void ExitState()
     {
         GameEvents.GameResumed.RemoveListener(OnGameResumed);
-        Game.Input.UIClic.Enable();
+        Game.Input.UIClick.Enable();
         Game.Input.UINavigate.Enable();
     }
 
